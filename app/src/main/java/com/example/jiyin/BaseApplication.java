@@ -9,6 +9,7 @@ import me.jessyan.autosize.AutoAdaptStrategy;
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
+import me.jessyan.autosize.utils.ScreenUtils;
 
 /**
  * Created by guolei on 2019/10/15.

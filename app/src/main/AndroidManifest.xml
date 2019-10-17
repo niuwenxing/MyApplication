@@ -14,22 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--冷启动-->
+        <!--冷启动-->
         <activity android:name="com.example.jiyin.common.activity.TransparentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.example.jiyin.MainActivity"></activity>
         <activity
             android:name="com.example.jiyin.home.Activity.HomeActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

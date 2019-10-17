@@ -59,10 +59,7 @@ public class MainActivity<v,HomePresenterImpl> extends JiYingActivity {
 
     }
 
-    @Override
-    public void setFunctionForFragment(String tag) {
 
-    }
 
     @Override
     protected void createPresenter() {
