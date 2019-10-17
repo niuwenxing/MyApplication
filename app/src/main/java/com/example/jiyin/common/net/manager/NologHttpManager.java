@@ -1,0 +1,109 @@
+package com.example.jiyin.common.net.manager;
+
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.convertor.JsonConverterFactory;
+import com.example.rootlib.utils.StringUtil;
+
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+
+/**
+ * Created by gray on 2019/10/15.
+ */
+public class NologHttpManager {
+
+    private static OkHttpClient instance;
+    private static Retrofit retrofit;
+    private static NologHttpManager httpManager;
+
+    public static NologHttpManager getInstance() {
+        if (httpManager == null) {
+            synchronized (NologHttpManager.class) {
+                if (httpManager == null) {
+                    if (StringUtil.isEmpty(BaseConfig.ROOT_SERVER_API)) {
+                        throw new RuntimeException("请在Application中初始化RootLib的ApplicationConfig.ROOT_PATH_API");
+                    }
+                    // 初始化Retrofit句柄
+                    initRetrofitHandler();
+                    // 创建单例
+                    httpManager = new NologHttpManager();
+                }
+            }
+        }
+        return httpManager;
+    }
+
+    /**
+     * 确保单例
+     */
+    private NologHttpManager() {}
+
+
+    private static void initRetrofitHandler() {
+        initCertificates();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BaseConfig.ROOT_SERVER_API)
+                .addConverterFactory(JsonConverterFactory.create())
+                .client(instance)
+                .build();
+
+
+    }
+
+    private static void initCertificates() {
+
+        //https证书忽略
+        TrustManager[] trustManager = new TrustManager[]{
+                new X509TrustManager() {
+
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) throws
+                            CertificateException {
+                    }
+
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) throws
+                            CertificateException {
+                    }
+
+                    @Override
+                    public X509Certificate[] getAcceptedIssuers() {
+                        X509Certificate[] x509Certificates = new X509Certificate[0];
+                        return x509Certificates;
+                    }
+                }
+        };
+
+        try {
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustManager, new SecureRandom());
+            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            instance = new OkHttpClient.Builder()
+                    .sslSocketFactory(sslSocketFactory)
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(60, TimeUnit.SECONDS)
+                    .build();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+}
