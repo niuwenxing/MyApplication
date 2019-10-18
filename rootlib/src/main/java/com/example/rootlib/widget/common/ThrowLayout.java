@@ -139,13 +139,13 @@ public class ThrowLayout extends FrameLayout {
      * 加载中 showDialog
      */
     private void showProgress() {
-        //todo ： 未定义
+        //todo ： 加载中 showDialog  未定义
     }
     /**
      * 隐藏showDialog
      */
     private void hideProgress() {
-        //todo ： 未定义
+        //todo ： 隐藏showDialog   未定义
     }
 
     private void inflateLayout(@EmptyStatus int status) {

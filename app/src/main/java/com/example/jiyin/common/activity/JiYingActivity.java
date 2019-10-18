@@ -38,6 +38,7 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
         } catch (Exception e) {
             //异常处理
             Toast.makeText(this, "没有网络权限，请给予相关权限", Toast.LENGTH_LONG).show();
+
         }
 
         if (netIntfo == null) {
@@ -57,6 +58,5 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
         AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources());//如果没有自定义需求用这个方法
         AutoSizeCompat.autoConvertDensity(super.getResources(), 667, false);//如果有自定义需求就用这个方法
         return super.getResources();
-
     }
 }

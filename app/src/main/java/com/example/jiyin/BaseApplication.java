@@ -38,7 +38,6 @@ public class BaseApplication extends Application {
 //                        AutoSizeConfig.getInstance().setScreenHeight(ScreenUtils.getScreenSize(activity)[1]);
                         LogUtils.d(String.format(Locale.ENGLISH, "%s onAdaptBefore!", target.getClass().getName()));
                     }
-
                     @Override
                     public void onAdaptAfter(Object target, Activity activity) {
                         LogUtils.d(String.format(Locale.ENGLISH, "%s onAdaptAfter!", target.getClass().getName()));
@@ -52,7 +51,6 @@ public class BaseApplication extends Application {
 
                     }
                 });
-
         AutoSize.initCompatMultiProcess(this);
 
         initDebugModel();

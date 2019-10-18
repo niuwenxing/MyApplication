@@ -17,7 +17,6 @@ import com.example.jiyin.utils.intefacestruct.FunctionWithParamAndResult;
 import com.example.jiyin.utils.intefacestruct.FunctionsManager;
 import com.example.myapplication.R;
 
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class HomeActivity extends JiYingActivity<HomeView, HomePresenterImpl> implements HomeView {
 
