@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jiyin.common.activity.JiYingActivity;
-import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.myapplication.R;
 
 public class MainActivity<v,HomePresenterImpl> extends JiYingActivity {

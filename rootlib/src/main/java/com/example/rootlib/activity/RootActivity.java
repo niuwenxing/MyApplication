@@ -3,15 +3,24 @@ package com.example.rootlib.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 
 import com.example.rootlib.R;
 import com.example.rootlib.config.AppConfig;
@@ -256,6 +265,103 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
         if (unbinder!=null) {
             unbinder.unbind();
         }
+    }
+
+
+    protected void requestPermission(int id, String[] permissions, RequestPermissionListener listener){
+        if (listener == null || permissions == null || permissions.length == 0) {
+            throw new IllegalArgumentException("permissionListener == null");
+        }
+        permissionListeners.put(id, listener);
+        passedPermissions.clear();
+        unPassedPermissions.clear();
+        int targetSdkVersion = getTargetSdk();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            List<String> pers = new ArrayList<>();    //待申请集合
+
+            for (int i = 0; i < permissions.length; i++) {
+                int checkCallPhonePermission = -1;
+                if (targetSdkVersion >= Build.VERSION_CODES.M) {    //target版本大于等于23
+                    checkCallPhonePermission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                            permissions[i]);
+                }else{
+                    checkCallPhonePermission = PermissionChecker.checkSelfPermission(getApplicationContext(), permissions[i]);
+                }
+
+                if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {        //未通过
+                    pers.add(permissions[i]);
+                } else {                                                                    //已通过
+                    passedPermissions.add(permissions[i]);
+                }
+            }
+
+            if (pers.isEmpty()) {                           //全部都授过权
+                listener.onPass(permissions);
+                listener.onUnPass(null);}
+            else{
+                //弹出对话框接收权限
+                ActivityCompat.requestPermissions(activity, pers.toArray(new String[pers.size()]), id);
+            }
+
+        }
+        else{
+            listener.onPass(permissions);
+            listener.onUnPass(null);
+        }
+
+    }
+//    onRequestPermissionsResult
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        //循环判断
+        for (int i = 0; i < grantResults.length; i++) {
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                passedPermissions.add(permissions[i]);
+            } else {
+                unPassedPermissions.add(permissions[i]);
+            }
+        }
+        //回调
+        if (permissionListeners.get(requestCode) != null) {
+            permissionListeners.get(requestCode).onPass(
+                    passedPermissions.toArray(new String[passedPermissions.size()]));
+            permissionListeners.get(requestCode).onUnPass(
+                    unPassedPermissions.toArray(new String[unPassedPermissions.size()]));
+        }
+
+    }
+
+    /**
+     * 获取targetSdk版本号
+     *
+     * @return
+     */
+    private int getTargetSdk() {
+        int targetSdkVersion = 0;
+        try {
+            final PackageInfo info = activity.getPackageManager().getPackageInfo(
+                    activity.getPackageName(), 0);
+            targetSdkVersion = info.applicationInfo.targetSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return targetSdkVersion;
+    }
+
+    /**
+     * 跳转到权限设置界面
+     *
+     * @return
+     */
+    public Intent getAppDetailSettingIntent() {
+        //启动应用详情页
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        return intent;
     }
 
 

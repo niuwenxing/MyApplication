@@ -17,7 +17,9 @@ public abstract class BaseActivity<V extends IBaseView,P extends BasePresenter<V
         super.onCreate(savedInstanceState);
 
         createPresenter();
-        presenter.attachView((V) this, activity);
+        if(presenter!=null){
+            presenter.attachView((V) this, activity);
+        }
     }
 
     protected abstract void createPresenter();
@@ -33,7 +35,9 @@ public abstract class BaseActivity<V extends IBaseView,P extends BasePresenter<V
 
     @Override
     protected void onDestroy() {
-        presenter.detachView();
+        if (presenter!=null) {
+            presenter.detachView();
+        }
         super.onDestroy();
     }
 

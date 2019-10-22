@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.jiyin.common.widget.DefaultPresenterImpl;
 import com.example.rootlib.mvp.activity.BaseActivity;
 import com.example.rootlib.mvp.presenter.BasePresenter;
 import com.example.rootlib.mvp.view.IBaseView;
@@ -58,5 +59,10 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
         AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources());//如果没有自定义需求用这个方法
         AutoSizeCompat.autoConvertDensity(super.getResources(), 667, false);//如果有自定义需求就用这个方法
         return super.getResources();
+    }
+
+    @Override
+    protected void createPresenter() {
+        presenter = (P) new DefaultPresenterImpl();
     }
 }
