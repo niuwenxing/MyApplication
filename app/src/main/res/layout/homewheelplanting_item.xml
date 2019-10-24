@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="312dp"
+    android:layout_height="304dp"
+    android:layout_margin="50dp"
+    android:background="@drawable/home_roundedge"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        android:src="@mipmap/lunbotu1"
+        />
+
+
+
+</RelativeLayout>

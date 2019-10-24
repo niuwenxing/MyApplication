@@ -38,6 +38,7 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
 public abstract   class RootActivity extends AppCompatActivity implements IBaseView {
 
 
@@ -310,7 +311,6 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
         }
 
     }
-//    onRequestPermissionsResult
 
 
     @Override
@@ -351,6 +351,7 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
         }
         return targetSdkVersion;
     }
+
 
     /**
      * 跳转到权限设置界面

@@ -47,7 +47,7 @@
                 android:bottom="0dp"
                 android:left="0dp"
                 android:right="0dp"
-                android:top="5dp" />
+                android:top="0dp" />
             <solid android:color="#45FFFFFF" />
         </shape>
     </item>

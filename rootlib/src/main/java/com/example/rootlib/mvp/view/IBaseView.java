@@ -170,6 +170,8 @@ public interface IBaseView {
      * @return 返回是否登录
      */
     boolean checkLogin();
+
+
     /**
      * 检验登录，未登录跳转登录
      * @param requestCode 是否要求返回值

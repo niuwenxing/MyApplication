@@ -2,7 +2,7 @@ package com.example.jiyin.common.config;
 
 public interface BaseConfig {
 
-    String ROOT_SERVER_API="http://";
+    String ROOT_SERVER_API="http://www.baidu.com/";
 
     /**
      * 登录超时

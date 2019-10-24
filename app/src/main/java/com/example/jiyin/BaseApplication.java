@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import com.example.rootlib.utils.LogUtils;
 import java.util.Locale;
+
 import butterknife.ButterKnife;
 import me.jessyan.autosize.AutoAdaptStrategy;
 import me.jessyan.autosize.AutoSize;

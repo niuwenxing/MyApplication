@@ -10,5 +10,5 @@ import com.example.rootlib.mvp.view.IBaseView;
 
 public abstract class HomePresenter<V extends IBaseView> extends BasePresenter<V> {
 
-    public abstract void upDateApp();
+
 }

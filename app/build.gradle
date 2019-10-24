@@ -10,7 +10,23 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a"
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'x86_64'
+        }
+
     }
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libnms.so'
+    }
+
+    repositories {
+        flatDir { dirs '../IMLib/libs', 'libs' }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,6 +37,11 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -37,5 +58,12 @@ dependencies {
     api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     implementation "me.jessyan:autosize:${version_autosize}"
 
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+
+//    implementation 'com.shuyu:GSYVideoPlayer:7.1.1'
+    //是否需要ExoPlayer模式
+//    implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.1'
+    //更多ijk的编码支持
+//    implementation 'com.shuyu:gsyVideoPlayer-ex_so:6.0.1'
 
 }

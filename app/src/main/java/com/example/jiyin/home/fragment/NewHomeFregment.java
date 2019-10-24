@@ -1,45 +1,69 @@
 package com.example.jiyin.home.fragment;
 
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.TypefaceSpan;
+import android.view.View;
+import android.widget.TextView;
+
 import com.example.jiyin.common.activity.JiYingFragment;
-import com.example.jiyin.common.net.netunti.BeanNetUnit;
-import com.example.rootlib.mvp.presenter.BasePresenter;
-import com.example.rootlib.mvp.view.IBaseView;
+import com.example.jiyin.home.fragment.view.HomeView;
+import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
+import com.example.myapplication.R;
 
-public class NewHomeFregment extends JiYingFragment<textView,hometextImpl> implements textView {
+import butterknife.BindView;
 
-    public static final String NOSAK=NewHomeFregment.class.getName();
+public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl> implements HomeView {
+
+    public static final String NOSAK = NewHomeFregment.class.getName();
+
+
+    TextView tvHomeTitle;
+    private View layoutFragment;
 
     @Override
     protected int attachLayoutRes() {
-        return 0x001;
+        return R.layout.homefragment_layout;
     }
+
 
     @Override
     protected void init() {
-        super.init();
-        mFunctionsManager.invokeFunction(NOSAK,0);
+        layoutFragment = getLayoutFragment();
+        tvHomeTitle = layoutFragment.findViewById(R.id.tv_homeTitle);
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(tvHomeTitle.getText());
+        spannableStringBuilder.setSpan(new TypefaceSpan("PingFangSC-Semibold"),0,tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)),0,tvHomeTitle.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvHomeTitle.setText(spannableStringBuilder);
     }
 
 
-}
 
-interface textView extends IBaseView{
 
-}
 
-class hometextImpl extends textPresenter<textView> {
-    /**
-     * 网络访问单元
-     */
-    private BeanNetUnit homeUnit;
 
     @Override
-    public void cancelBiz() {
-        cancelRequest(homeUnit);
+    protected void createPresenter() {
+        super.createPresenter();
+        presenter = new HomePresenterImpl();
+    }
+
+    @Override
+    public void onReload() {
 
     }
-}
 
-abstract class textPresenter<V extends IBaseView> extends BasePresenter<V>{
+    @Override
+    public void onLoadFinished() {
 
+    }
+
+    @Override
+    public void onLoadAll() {
+
+    }
 }
