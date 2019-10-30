@@ -25,6 +25,7 @@ import android.view.WindowManager;
 
 
 import com.example.jiyin.R;
+import com.example.jiyin.home.Activity.HomeActivity;
 import com.example.rootlib.permission.RequestPermissionListener;
 
 
@@ -42,11 +43,6 @@ public class SplashActivity extends JiYingActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hideStatusNavigationBar();
-    }
-
-
-    @Override
-    protected void createPresenter() {
         initAuthority();
     }
 
@@ -87,7 +83,7 @@ public class SplashActivity extends JiYingActivity {
                     new Handler(new Handler.Callback() {
                         @Override
                         public boolean handleMessage(Message msg) {
-//                            startActivity(new Intent(SplashActivity.this,HomeActivity.class));
+                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                             finish();
                             return true;
                         }
