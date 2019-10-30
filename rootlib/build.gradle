@@ -40,5 +40,12 @@ dependencies {
     api "com.jakewharton:butterknife:${version_butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${version_butterknife}"
 
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+
+
+//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+//    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+
 
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/dp_109"
+    android:layout_height="@dimen/dp_200"
+    android:background="@drawable/search_graybox"
+    android:paddingBottom="@dimen/dp_10"
+    >
+    <TextView
+        android:id="@+id/tv_FounderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="梁青松"
+        android:textColor="#333333"
+        android:textSize="@dimen/sp_9"
+        android:layout_margin="@dimen/dp_10"
+        android:maxLines="1"
+        android:gravity="left"/>
+
+    <TextView
+        android:id="@+id/tv_Initiation"
+        android:layout_below="@+id/tv_FounderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="栗子工作室创始人"
+        android:textColor="#676767"
+        android:textSize="@dimen/sp_9"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:maxLines="1"
+        android:ellipsize="end"
+
+        />
+
+    <ImageView
+        android:id="@+id/img_portrait"
+        android:layout_below="@+id/tv_Initiation"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="@dimen/dp_99"
+        android:layout_height="@dimen/dp_73"
+        android:src="@mipmap/liangqingsong"
+        />
+    <TextView
+        android:id="@+id/tv_synopsis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_portrait"
+        android:layout_alignRight="@+id/img_portrait"
+        android:layout_alignLeft="@+id/img_portrait"
+        android:text="开展多类型体验及正式课
+程,对传统..."
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="#676767"
+        android:textSize="@dimen/sp_9"/>
+
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/tv_Learnmore_btn"
+            android:layout_below="@+id/tv_synopsis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="了解更多"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_9"
+            android:gravity="left"
+            android:layout_alignLeft="@+id/tv_synopsis"
+            android:background="@drawable/search_graybox"
+            android:padding="@dimen/dp_3"
+            />
+
+
+</RelativeLayout>

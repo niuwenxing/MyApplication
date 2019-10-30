@@ -22,18 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 
-import com.example.jiyin.home.Activity.HomeActivity;
-import com.example.jiyin.utils.PreferenceUtil;
-import com.example.myapplication.R;
+import com.example.jiyin.R;
 import com.example.rootlib.permission.RequestPermissionListener;
 
-import java.io.File;
 
 public class SplashActivity extends JiYingActivity {
 
@@ -42,9 +35,15 @@ public class SplashActivity extends JiYingActivity {
 
     @Override
     protected int attachLayoutRes() {
-        hideStatusNavigationBar();
         return R.layout.activity_splash;
     }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        hideStatusNavigationBar();
+    }
+
 
     @Override
     protected void createPresenter() {
@@ -88,7 +87,7 @@ public class SplashActivity extends JiYingActivity {
                     new Handler(new Handler.Callback() {
                         @Override
                         public boolean handleMessage(Message msg) {
-                            startActivity(new Intent(SplashActivity.this,HomeActivity.class));
+//                            startActivity(new Intent(SplashActivity.this,HomeActivity.class));
                             finish();
                             return true;
                         }

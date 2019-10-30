@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="135dp"
+    android:layout_height="145.5dp">
+    <ImageView
+        android:src="@mipmap/tu1"
+        android:id="@+id/toplist_img"
+        android:layout_width="match_parent"
+        android:layout_height="101.5dp"/>
+
+    <ImageView
+        android:id="@+id/topIcon"
+        android:layout_marginLeft="1.5dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/toplist_img"
+        android:src="@mipmap/reidu"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"/>
+
+    <TextView
+        android:id="@+id/hintop"
+        android:text="热度"
+        android:layout_below="@+id/topIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorNews"
+        android:textSize="8sp"
+        android:gravity="left"
+        android:layout_alignRight="@+id/topIcon"
+        />
+
+    <TextView
+        android:id="@+id/topNumber"
+        android:layout_below="@+id/hintop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.3W"
+        android:textColor="@color/colorNews"
+        android:textSize="6sp"
+        android:gravity="center"
+        android:layout_alignLeft="@+id/hintop"
+        android:layout_alignRight="@+id/hintop"
+        />
+
+    <TextView
+        android:id="@+id/projecttitle"
+        android:layout_marginTop="12.5dp"
+        android:layout_below="@+id/toplist_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="项目标题"
+        android:textColor="@color/colorNews"
+        android:textSize="12sp"
+        android:gravity="left"
+        android:layout_toRightOf="@+id/topIcon"
+        android:layout_marginLeft="9.5dp"
+        />
+    <TextView
+        android:layout_marginLeft="9.5dp"
+        android:layout_toRightOf="@+id/topIcon"
+        android:layout_below="@+id/projecttitle"
+        android:id="@+id/topcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="项目内容"
+        android:textColor="@color/colorNews"
+        android:textSize="9sp"
+        android:gravity="left"
+        android:layout_alignParentBottom="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+
+    
+</RelativeLayout>

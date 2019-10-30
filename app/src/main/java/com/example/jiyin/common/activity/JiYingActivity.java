@@ -4,10 +4,12 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.jiyin.R;
 import com.example.jiyin.common.widget.DefaultPresenterImpl;
 import com.example.rootlib.mvp.activity.BaseActivity;
 import com.example.rootlib.mvp.presenter.BasePresenter;
@@ -18,9 +20,13 @@ import me.jessyan.autosize.AutoSizeCompat;
 public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter<V>> extends BaseActivity<V,P> {
 
     private ConnectivityManager cm;
+    /**
+     * 上次点击退出计时
+     */
+    private long firstClickTime = 0L;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkNetWork();
         init();
@@ -65,4 +71,29 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
     protected void createPresenter() {
         presenter = (P) new DefaultPresenterImpl();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    /**
+     * 两次点击退出
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            if ((System.currentTimeMillis() - firstClickTime) > 2000) {
+                firstClickTime = System.currentTimeMillis();
+                toast(R.string.common_exit_warn);
+                return true;
+            }
+
+//            if (!UserManager.sharedInstance().isAutoLogin(activity)) {
+//                UserManager.sharedInstance().logout(activity);
+//            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

@@ -28,7 +28,7 @@ public class BaseApplication extends Application {
         instance=this;
         super.onCreate();
         AutoSizeConfig.getInstance().setCustomFragment(true)
-                .setExcludeFontScale(true)
+                .setExcludeFontScale(false)
                 //屏幕适配监听器
                 .setOnAdaptListener(new onAdaptListener() {
                     @Override
@@ -43,9 +43,9 @@ public class BaseApplication extends Application {
                     public void onAdaptAfter(Object target, Activity activity) {
                         LogUtils.d(String.format(Locale.ENGLISH, "%s onAdaptAfter!", target.getClass().getName()));
                     }
-                }).setLog(false)
+                }).setLog(true)
                 .setUseDeviceSize(true)
-                .setBaseOnWidth(false)
+                .setBaseOnWidth(true)
                 .setAutoAdaptStrategy(new AutoAdaptStrategy() {
                     @Override
                     public void applyAdapt(Object target, Activity activity) {

@@ -10,6 +10,13 @@ public abstract class BasePresenter<V extends IBaseView> implements IPresenter<V
     public Context context;
     public V v;
 
+
+    @Override
+    public void attachView(V v, Context context) {
+        this.v = v;
+        this.context = context;
+    }
+
     /**
      * 批量取消业务中的网络请求
      * @param bizs 业务bean集合
@@ -22,13 +29,6 @@ public abstract class BasePresenter<V extends IBaseView> implements IPresenter<V
                 }
             }
         }
-    }
-
-
-    @Override
-    public void attachView(V v, Context context) {
-        this.v = v;
-        this.context = context;
     }
 
     @Override

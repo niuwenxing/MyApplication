@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.example.jiyin"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -24,6 +24,7 @@ android {
     }
 
     repositories {
+        jcenter()
         flatDir { dirs '../IMLib/libs', 'libs' }
     }
 
@@ -58,12 +59,19 @@ dependencies {
     api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     implementation "me.jessyan:autosize:${version_autosize}"
 
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    implementation 'com.chenlittleping:recyclercoverflow:1.0.6'
 
-//    implementation 'com.shuyu:GSYVideoPlayer:7.1.1'
-    //是否需要ExoPlayer模式
-//    implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.1'
-    //更多ijk的编码支持
-//    implementation 'com.shuyu:gsyVideoPlayer-ex_so:6.0.1'
+    implementation 'com.azoft.carousellayoutmanager:carousel:1.2.4'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+
+    //底部导航栏
+    implementation 'com.github.forvv231:EasyNavigation:1.0.2'
+    //baseAdapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+
 
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">玑瑛</string>
     <string name="homeTitleble">玑瑛青年创新公社</string>
+    <string name="common_exit_warn">再次点击退出</string>
 </resources>

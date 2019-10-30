@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.jiyin.home.Activity.HomeActivity;
-import com.example.myapplication.R;
+import com.example.jiyin.R;
 
 public class TransparentActivity extends AppCompatActivity {
 

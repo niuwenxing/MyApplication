@@ -11,129 +11,50 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jiyin.common.activity.JiYingActivity;
-import com.example.myapplication.R;
+import com.example.jiyin.R;
+import com.example.rootlib.mvp.presenter.BasePresenter;
+import com.example.rootlib.mvp.view.IBaseView;
 
-public class MainActivity<v,HomePresenterImpl> extends JiYingActivity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TextView viewById = findViewById(R.id.text_btn);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("NOTIFY_USER_TABLE");
-        registerReceiver(receiver, intentFilter);
-        viewById.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("NOTIFY_USER_TABLE");
-                sendBroadcast(intent);
-            }
-        });
-
-
-//        new BeanNetUnit<>()
-//        .setCall(HomeCallManager.getHomeCall("","")).request(new NetBeanListener<>(){
-//            @Override
-//            public void onLoadStart() {
-//            }
-//            @Override
-//            public void onLoadFinished() {
-//            }
-//            @Override
-//            public void onNetErr() {
-//            }
-//            @Override
-//            public void onSysErr(int httpCode, String msg) {
-//            }
-//            @Override
-//            public void onSuc(Object bean) {
-//            }
-//            @Override
-//            public void onFail(String status, String message) {
-//            }
-//        });
-//
-
-
-    }
-
-
-
-    @Override
-    protected void createPresenter() {
-
-    }
+public class MainActivity extends JiYingActivity<Iview,IpImpl> implements Iview {
 
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_main;
     }
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals("NOTIFY_USER_TABLE")) {
-                Log.d("AGE", "shoudao");
-            }
-        }
-    };
+    @Override
+    protected void createPresenter() {
+        presenter =new IpImpl();
+    }
 
     @Override
-    public void toggleSoftInput() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter.getUIM();
+
+    }
+}
+interface Iview extends IBaseView {
+
+}
+
+class IpImpl extends IPrese<Iview>{
+
+    @Override
+    public void cancelBiz() {
 
     }
 
     @Override
-    public void toast(int id) {
-
-    }
-
-    @Override
-    public void toastLong(CharSequence c) {
-
-    }
-
-    @Override
-    public void toastLong(int id) {
-
-    }
-
-    @Override
-    public boolean checkLogin() {
-        return false;
-    }
-
-    @Override
-    public boolean checkLogin(int requestCode) {
-        return false;
-    }
-
-    @Override
-    public void hideExpectionPages() {
+    public void getUIM() {
 
     }
 }
 
+abstract class IPrese<V extends IBaseView> extends BasePresenter<V> {
 
-
-//class HomeCallManager {
-//    public static Call getHomeCall(String city,String activityId){
-//        RequestModelBean requestModelBean = new RequestModelBean();
-//        requestModelBean.putMap("","");
-//
-//        return HttpManager.getInstance().req(homeService.class).getHomeData(requestModelBean.getFinalRequestMap());
-//    }
-
-//}
-
-//interface homeService{
-//    @POST("index")
-//    @FormUrlEncoded
-//    retrofit2.Call<BaseResponseModel<RequestModelBean>> getHomeData(@FieldMap Map<String, String> map);
-//
-//}
-
+    public abstract void getUIM();
+}
 
 
 

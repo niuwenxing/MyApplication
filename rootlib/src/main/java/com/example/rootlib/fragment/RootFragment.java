@@ -96,8 +96,10 @@ public abstract class RootFragment extends Fragment implements IBaseView {
         if (parent != null) {
             parent.removeView(mRootView);
         }
+
         return mRootView;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

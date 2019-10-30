@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.jiyin.home.Activity.SearchpageActivity">
+
+    <include layout="@layout/navigationbar"/>
+    <include layout="@layout/layout_common_throw"></include>
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            android:id="@+id/searchList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:overScrollMode="never"
+            tools:listitem="@android:layout/simple_list_item_2"/>
+<!--    <com.scwang.smartrefresh.layout.header.ClassicsHeader-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:srlFinishDuration="500"-->
+<!--        app:srlEnableLastTime="true"-->
+<!--        app:srlClassicsSpinnerStyle="FixedBehind"-->
+<!--        app:srlTextSizeTitle="16sp"-->
+<!--        app:srlTextSizeTime="10dp"-->
+<!--        app:srlTextTimeMarginTop="2dp"-->
+<!--        app:srlDrawableArrowSize="20dp"-->
+<!--        app:srlDrawableProgressSize="20dp"-->
+<!--        app:srlDrawableMarginRight="20dp"-->
+<!--        app:srlDrawableProgress="@drawable/ic_progress_puzzle"/>-->
+
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/searchList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_margin="20dp"-->
+<!--        />-->
+
+
+<!--    <com.scwang.smartrefresh.layout.footer.ClassicsFooter-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+</LinearLayout>

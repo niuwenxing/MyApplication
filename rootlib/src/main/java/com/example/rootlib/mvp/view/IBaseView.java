@@ -1,6 +1,5 @@
 package com.example.rootlib.mvp.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.example.rootlib.widget.common.ThrowLayout;

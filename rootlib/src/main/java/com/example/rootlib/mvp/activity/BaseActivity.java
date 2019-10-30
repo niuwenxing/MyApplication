@@ -13,13 +13,10 @@ public abstract class BaseActivity<V extends IBaseView,P extends BasePresenter<V
     protected  P presenter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         createPresenter();
-        if(presenter!=null){
-            presenter.attachView((V) this, activity);
-        }
+        presenter.attachView((V) this, activity);
     }
 
     protected abstract void createPresenter();
