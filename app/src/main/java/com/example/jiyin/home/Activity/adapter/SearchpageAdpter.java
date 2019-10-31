@@ -39,7 +39,7 @@ public class SearchpageAdpter extends RecyclerView.Adapter<SearchpageAdpter.Sear
 
     @Override
     public int getItemCount() {
-        return 10;
+        return list.size();
     }
 
     public class SearchpageView extends RecyclerView.ViewHolder {

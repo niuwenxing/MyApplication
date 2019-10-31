@@ -15,6 +15,8 @@ import com.example.rootlib.mvp.activity.BaseActivity;
 import com.example.rootlib.mvp.presenter.BasePresenter;
 import com.example.rootlib.mvp.view.IBaseView;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.jessyan.autosize.AutoSizeCompat;
 
 public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter<V>> extends BaseActivity<V,P> {
@@ -24,18 +26,16 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
      * 上次点击退出计时
      */
     private long firstClickTime = 0L;
+    private Unbinder bind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bind = ButterKnife.bind(this);
         checkNetWork();
-        init();
-    }
-
-    @Override
-    protected void init() {
 
     }
+
 
     public void checkNetWork() {
         NetworkInfo netIntfo = null;
@@ -75,6 +75,7 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        bind.unbind();
     }
 
     /**
@@ -95,5 +96,6 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }

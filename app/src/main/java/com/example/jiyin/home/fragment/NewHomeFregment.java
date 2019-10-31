@@ -24,7 +24,9 @@ import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.azoft.carousellayoutmanager.DefaultChildSelectionListener;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
-import com.example.jiyin.home.Activity.SearchpageActivity;
+import com.example.jiyin.home.Activity.homeview.CheckActivity;
+import com.example.jiyin.home.Activity.homeview.SearchpageActivity;
+import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
 import com.example.jiyin.home.fragment.view.HomeView;
 import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
@@ -34,7 +36,6 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl> implements HomeView {
@@ -221,7 +222,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
     }
 
-    @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.fl_menu_one_btn, R.id.fl_menu_two_btn, R.id.fl_menu_three_btn,
+    @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn, R.id.fl_menu_two_btn, R.id.fl_menu_three_btn,
             R.id.fl_menu_four_btn, R.id.tv_look_btn, R.id.rb_self_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -231,8 +232,10 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             case R.id.tv_news_btn://头条
                 break;
             case R.id.tv_check_btn://查
+                startActivity(new Intent(getContext(), CheckActivity.class));
                 break;
             case R.id.fl_menu_two_btn://商场
+                startActivity(new Intent(getContext(), ShoppingActivity.class));
                 break;
             case R.id.fl_menu_three_btn://投项目
                 break;

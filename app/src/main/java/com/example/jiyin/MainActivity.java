@@ -33,6 +33,8 @@ public class MainActivity extends JiYingActivity<Iview,IpImpl> implements Iview 
         presenter.getUIM();
 
     }
+
+
 }
 interface Iview extends IBaseView {
 

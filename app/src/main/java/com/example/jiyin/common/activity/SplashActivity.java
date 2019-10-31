@@ -47,6 +47,8 @@ public class SplashActivity extends JiYingActivity {
     }
 
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode ==SETTING_CODE){

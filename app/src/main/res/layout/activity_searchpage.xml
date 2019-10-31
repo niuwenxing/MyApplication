@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jiyin.home.Activity.SearchpageActivity">
+    tools:context="com.example.jiyin.home.Activity.homeview.SearchpageActivity">
 
     <include layout="@layout/navigationbar"/>
     <include layout="@layout/layout_common_throw"></include>

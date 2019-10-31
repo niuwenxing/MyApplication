@@ -98,11 +98,9 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
         mInflater = LayoutInflater.from(activity);
         // 初始化异常布局
         initThrowView();
-        init();
 
     }
 
-    protected abstract void init();
 
     /**
      * 初始化异常布局

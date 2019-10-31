@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".home.Activity.homeview.CheckActivity">
+
+    <include layout="@layout/navigationbar"/>
+    <include layout="@layout/layout_common_throw"></include>
+
+    <ScrollView
+        android:id="@+id/checkScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:paddingTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/iv_topimage_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_118"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/banner"
+
+                />
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/titleBarNo"
+                android:layout_below="@+id/iv_topimage_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                >
+                <View
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:id="@+id/line"
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="@dimen/dp_12"
+                    android:background="@color/colorSearch"
+                    android:layout_alignBottom="@+id/tv_checkTitle"
+                    android:layout_alignTop="@+id/tv_checkTitle"
+                    />
+                <TextView
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:layout_toRightOf="@+id/line"
+                    android:id="@+id/tv_checkTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="玑瑛创始人"
+                    android:textColor="@color/colorSearch"
+                    android:textSize="@dimen/sp_15"
+                    android:gravity="left"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_chechViewmore_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
+                    android:text="查看更多"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center_vertical"
+                    android:layout_alignBottom="@+id/tv_checkTitle"
+                    android:layout_alignTop="@+id/tv_checkTitle"
+                    android:drawableRight="@mipmap/gengduo"
+                    />
+
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ry_checkFounderList"
+                android:layout_below="@+id/titleBarNo"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"/>
+
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/titleBarMore"
+                android:layout_below="@+id/ry_checkFounderList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                >
+                <View
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:id="@+id/Moreline"
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="@dimen/dp_12"
+                    android:background="@color/colorSearch"
+                    android:layout_alignBottom="@+id/tv_checkTitleMore"
+                    android:layout_alignTop="@+id/tv_checkTitleMore"
+                    />
+                <TextView
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:layout_toRightOf="@+id/Moreline"
+                    android:id="@+id/tv_checkTitleMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="了解更多"
+                    android:textColor="@color/colorSearch"
+                    android:textSize="@dimen/sp_15"
+                    android:gravity="left"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_chechViewmoreMore_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
+                    android:text="查看更多"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center_vertical"
+                    android:layout_alignBottom="@+id/tv_checkTitleMore"
+                    android:layout_alignTop="@+id/tv_checkTitleMore"
+                    android:drawableRight="@mipmap/gengduo"
+                    />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/titleBarMore"
+                android:id="@+id/ry_checkMoreList"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"/>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

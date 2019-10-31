@@ -54,6 +54,7 @@ public class BaseApplication extends Application {
                 });
         AutoSize.initCompatMultiProcess(this);
 
+
         initDebugModel();
 
     }

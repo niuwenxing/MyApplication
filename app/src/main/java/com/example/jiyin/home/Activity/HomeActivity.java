@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,8 +19,8 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.net.beas.BaseResponseModel;
 import com.example.jiyin.customwidget.NoScrollViewPager;
-import com.example.jiyin.home.Activity.Impl.MainPresenterImpl;
-import com.example.jiyin.home.Activity.view.MainView;
+import com.example.jiyin.home.Activity.presenter.impl.MainPresenterImpl;
+import com.example.jiyin.home.Activity.presenter.view.MainView;
 import com.example.jiyin.home.fragment.MypageFragment;
 import com.example.jiyin.home.fragment.NewHomeFregment;
 import com.example.jiyin.home.fragment.NewsFragment;
@@ -165,10 +164,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
 
     }
 
-    @Override
-    protected void init() {
 
-    }
 
     @Override
     protected void createPresenter() {

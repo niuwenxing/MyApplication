@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".home.Activity.sonview.activity.ShoppingActivity">
+
+    <RelativeLayout
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@mipmap/shoppingdingwei"
+            />
+        <TextView
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_toRightOf="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_LocationText_btn"
+            android:textColor="@color/colorTartextTitle"
+            android:text="天津市河西区"
+            android:textSize="@dimen/sp_12"
+            android:drawableRight="@mipmap/shoppingxiala"
+            />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@mipmap/gouwuche"
+            android:paddingLeft="@dimen/dp_10"
+            android:id="@+id/img_shoppingvehicle_btn"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/navigationbar"        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.example.jiyin.common.widget.banner.BannerLayout
+                android:id="@+id/bl_Bannerrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_150"
+                app:autoPlaying="true"
+                app:centerScale="1.2"
+                app:itemSpace="15"
+                app:showIndicator="false"
+                app:moveSpeed="1.8"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_below="@+id/bl_Bannerrecycler"
+                android:id="@+id/ry_commodityList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_12"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>
