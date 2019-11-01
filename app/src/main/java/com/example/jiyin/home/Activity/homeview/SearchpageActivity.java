@@ -1,5 +1,6 @@
 package com.example.jiyin.home.Activity.homeview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.home.Activity.adapter.ProjectAdapter;
 import com.example.jiyin.home.Activity.presenter.impl.SearchpagePImpl;
 import com.example.jiyin.home.Activity.adapter.SearchpageAdpter;
 import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
+import com.example.jiyin.utils.ConstantUtil;
+import com.example.rootlib.utils.StringUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.util.ArrayList;
@@ -42,6 +46,9 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     ThrowLayout throwLayout;
     private SearchpageAdpter searchpageAdpter;
 
+    private String contextKey;
+    private ProjectAdapter<Object> objectProjectAdapter;
+
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_searchpage;
@@ -52,15 +59,26 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        contextKey = intent.getStringExtra(ConstantUtil.KEY_CODE);
+        searchList.setLayoutManager(new LinearLayoutManager(this));
         List objects = new ArrayList<>();
+        //更多
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)) {
+            searchpageAdpter = new SearchpageAdpter(this, objects);
+            searchList.setAdapter(searchpageAdpter);
+        }
+        //项目
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
+            objectProjectAdapter = new ProjectAdapter<>(this,objects);
+            searchList.setAdapter(objectProjectAdapter);
+        }
+        //短视屏
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_SHORTVIDEO_CODE)) {
 
+        }
         presenter.getData();
 
-
-
-        searchList.setLayoutManager(new LinearLayoutManager(this));
-        searchpageAdpter = new SearchpageAdpter(this, objects);
-        searchList.setAdapter(searchpageAdpter);
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -72,8 +90,13 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                     for (int i = 0; i < length; i++) {
                         objects.add("");
                     }
+                    if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
+                        searchpageAdpter.notifyDataSetChanged();
+                    }
+                    if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
+                        objectProjectAdapter.notifyDataSetChanged();
+                    }
 
-                    searchpageAdpter.notifyDataSetChanged();
                     // 在这里写搜索的操作,一般都是网络请求数据
                     return true;
                 }

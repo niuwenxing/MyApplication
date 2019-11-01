@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".interactive.ContactsActivity">
+
+    <include layout="@layout/navigationbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        >
+        <com.example.jiyin.common.widget.ClearEditText
+            android:id="@+id/searchview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@mipmap/sousu"
+            android:drawablePadding="8dp"
+            android:hint=" 输入关键词"
+            android:maxLines="1"
+            android:paddingHorizontal="15dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#ccc"
+            android:textCursorDrawable="@drawable/chat_edittext_cursour_shape"
+            android:textSize="@dimen/sp_12"
+            />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.example.rootlib.utils.Contacts.IndexableLayout
+            android:id="@+id/indexableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:indexBar_background="#08000000"
+            app:indexBar_layout_height="460dp"
+            app:indexBar_layout_gravity="17"
+            app:indexBar_layout_width="24dp"
+            app:indexBar_textColor="@android:color/black"
+            app:indexBar_selectedTextColor="@color/colorMenu"
+            app:indexBar_textSpace="8dp"/>
+
+        <fragment
+            android:id="@+id/search_fragment"
+            class="com.example.jiyin.home.fragment.SearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/item_city" />
+
+    </FrameLayout>
+
+</LinearLayout>

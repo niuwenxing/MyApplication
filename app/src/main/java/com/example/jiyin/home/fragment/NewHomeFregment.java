@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +27,13 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.jiyin.home.Activity.homeview.CheckActivity;
 import com.example.jiyin.home.Activity.homeview.SearchpageActivity;
+import com.example.jiyin.home.Activity.sonview.activity.HeadlinesActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
 import com.example.jiyin.home.fragment.view.HomeView;
 import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
+import com.example.jiyin.interactive.ContactsActivity;
+import com.example.jiyin.utils.ConstantUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +80,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     FrameLayout flMenuFourBtn;
     @BindView(R.id.tv_look_btn)
     TextView tvLookBtn;
-    @BindView(R.id.fl_menu_five_btn)
+    @BindView(R.id.ppppppp)
     FrameLayout flMenuFiveBtn;
     @BindView(R.id.ly_searchbar)
     LinearLayout lySearchbar;
@@ -223,11 +227,13 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     }
 
     @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn, R.id.fl_menu_two_btn, R.id.fl_menu_three_btn,
-            R.id.fl_menu_four_btn, R.id.tv_look_btn, R.id.rb_self_btn})
+            R.id.fl_menu_four_btn, R.id.tv_look_btn,R.id.ppppppp, R.id.rb_self_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_searchbar_btn://搜索
-                startActivity(new Intent(getContext(), SearchpageActivity.class));
+                Intent intentSearchpage = new Intent(getContext(), SearchpageActivity.class);
+                intentSearchpage.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_MORE_CODE);
+                startActivity(intentSearchpage);
                 break;
             case R.id.tv_news_btn://头条
                 break;
@@ -238,10 +244,16 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 startActivity(new Intent(getContext(), ShoppingActivity.class));
                 break;
             case R.id.fl_menu_three_btn://投项目
+                Intent intentProject = new Intent(getContext(), SearchpageActivity.class);
+                intentProject.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_PROJECT_CODE);
+                startActivity(intentProject);
                 break;
             case R.id.fl_menu_four_btn://览头条
+//                Intent intent = new Intent(getContext(), HeadlinesActivity.class);
+//                startActivity(intent);
+                startActivity(new Intent(getContext(), ContactsActivity.class));
                 break;
-            case R.id.fl_menu_five_btn://看社群
+            case R.id.ppppppp://看社群
                 break;
             case R.id.rb_self_btn:
                 break;

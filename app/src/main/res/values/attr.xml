@@ -34,4 +34,11 @@
         <attr name="centerScale" format="float"/>
         <attr name="moveSpeed" format="float"/>
     </declare-styleable>
+
+
+    <declare-styleable name="ClearEditText">
+        <!-- 清除按钮的图标 -->
+        <attr name="iconClear" format="reference" />
+        <attr name="isLogin" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -40,10 +40,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 
-//import com.luck.picture.lib.PictureSelector;
-//import com.luck.picture.lib.config.PictureConfig;
-//import com.luck.picture.lib.config.PictureMimeType;
-//import com.luck.picture.lib.entity.LocalMedia;
 
 public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> implements MainView, RadioGroup.OnCheckedChangeListener {
 

@@ -9,7 +9,6 @@ import com.example.rootlib.mvp.view.IBaseView;
 
 public abstract class JiYingFragment<V extends IBaseView,P extends BasePresenter<V>> extends BaseFragment<V,P> {
 
-
     @Override
     protected void createPresenter() {
         presenter=(P) new DefaultPresenterImpl();

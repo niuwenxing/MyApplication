@@ -41,8 +41,10 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${version_butterknife}"
 
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
-
+    api 'com.github.promeg:tinypinyin:2.0.3'
+    api 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 
 //    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
 //    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'

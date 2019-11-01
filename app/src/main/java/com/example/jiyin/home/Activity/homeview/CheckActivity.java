@@ -21,6 +21,7 @@ import com.example.jiyin.home.Activity.adapter.SearchpageAdpter;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.presenter.impl.CheckPresenterImpl;
 import com.example.jiyin.home.Activity.presenter.view.CheckView;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.util.ArrayList;
@@ -115,17 +116,22 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
             case R.id.gobank_btn:
                 finish();
                 break;
-            case R.id.searchText:
-                startActivity(new Intent(this, SearchpageActivity.class));
-                finish();
+            case R.id.searchText://搜索页面
+                Intent intentSearchpage = new Intent(this, SearchpageActivity.class);
+                intentSearchpage.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_MORE_CODE);
+                startActivity(intentSearchpage);
                 break;
             case R.id.searech_news_btn:
+
                 break;
             case R.id.iv_topimage_btn:
+
                 break;
             case R.id.tv_chechViewmore_btn:
+
                 break;
             case R.id.tv_chechViewmoreMore_btn:
+
                 break;
         }
     }

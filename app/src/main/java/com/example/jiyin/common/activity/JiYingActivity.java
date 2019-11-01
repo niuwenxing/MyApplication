@@ -27,6 +27,10 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
      */
     private long firstClickTime = 0L;
     private Unbinder bind;
+    /**
+     * 标记是否是首页
+     */
+    private boolean isHome = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,20 +83,25 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
     }
 
     /**
+     * 设置当前是首页
+     * @param home
+     */
+    public void setHome(boolean home) {
+        isHome = home;
+    }
+
+    /**
      * 两次点击退出
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && isHome ) {
             if ((System.currentTimeMillis() - firstClickTime) > 2000) {
                 firstClickTime = System.currentTimeMillis();
                 toast(R.string.common_exit_warn);
                 return true;
             }
 
-//            if (!UserManager.sharedInstance().isAutoLogin(activity)) {
-//                UserManager.sharedInstance().logout(activity);
-//            }
         }
         return super.onKeyDown(keyCode, event);
     }
