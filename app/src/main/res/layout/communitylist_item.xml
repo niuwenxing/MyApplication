@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:id="@+id/tv_communityTitile"
+        android:gravity="center_vertical"
+        android:text="北科大基地"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorMenu"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f4f4"
+        >
+        <LinearLayout
+            android:id="@+id/communityview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/iv_imageLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/dp_6"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/shangpintupian4" />
+
+            <ImageView
+                android:id="@+id/iv_imageRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:layout_margin="@dimen/dp_6"
+                app:srcCompat="@mipmap/shangpintupian3"
+
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_commiunityContext"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/sp_10"
+            android:layout_marginTop="@dimen/sp_10"
+            android:layout_below="@+id/communityview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="为合作院校及各团队进行创业服务方便对接，包括各创业大
+赛对接、团队开发打磨、一站式创业服务、成果转化对接等。"
+            android:textColor="@color/colorlightgray"
+            android:textSize="@dimen/sp_12"
+            android:gravity="left"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/dp_6"
+            />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -36,7 +36,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".interactive.ContactsActivity"></activity>
+        <activity android:name=".home.Activity.homeview.ForgetPasswordActivity"></activity>
+        <activity android:name=".home.Activity.homeview.SigninActivity">
+
+        </activity>
+        <activity android:name=".home.Activity.sonview.activity.ProduceActivity" />
+        <activity android:name=".home.Activity.sonview.activity.CommunityActivity" />
+        <activity android:name=".interactive.ContactsActivity" />
         <activity android:name=".home.Activity.sonview.activity.HeadlinesActivity" />
         <activity android:name=".home.Activity.sonview.activity.ShopCategoryActivity" />
         <activity android:name=".home.Activity.sonview.activity.ShoppingActivity" />
@@ -54,7 +60,8 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider> <!-- 入口 -->
+        </provider>
+        <!-- 入口 -->
         <activity android:name=".common.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

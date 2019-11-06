@@ -58,6 +58,14 @@ public class PhoneUtil {
         public String getTelPhone() {
             return telPhone;
         }
+        public String getPinyin() {
+            return pinyin;
+        }
+
+        public void setPinyin(String pinyin) {
+            this.pinyin = pinyin;
+        }
+
 
         public void setTelPhone(String telPhone) {
             this.telPhone = telPhone;

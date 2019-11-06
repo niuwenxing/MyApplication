@@ -49,7 +49,6 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
         } catch (Exception e) {
             //异常处理
             Toast.makeText(this, "没有网络权限，请给予相关权限", Toast.LENGTH_LONG).show();
-
         }
 
         if (netIntfo == null) {

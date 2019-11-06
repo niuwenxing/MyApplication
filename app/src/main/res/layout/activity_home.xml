@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <com.example.jiyin.customwidget.NoScrollViewPager
         android:id="@+id/vp_main"
@@ -17,65 +18,45 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_80"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@mipmap/dibubeijing"
         android:orientation="vertical"
         >
-        <View
-            android:layout_marginTop="@dimen/dp_9"
-            android:layout_width="@dimen/dp_77"
-            android:layout_height="4dp"
-            android:background="@drawable/searchbar"
-            android:layout_gravity="center"
-            />
+
         <RadioGroup
             android:id="@+id/rg_main"
-            android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_5"
             android:orientation="horizontal">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:gravity="center|bottom"
-                android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_6"
-                android:drawableTop="@drawable/home_newhome_select"
-                android:textSize="@dimen/dp_10" />
+                android:gravity="center"
+                android:textColor="@drawable/home_newhome_select"
+                android:text="首页"
+                android:textSize="@dimen/dp_16" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:gravity="center|bottom"
-                android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_6"
-                android:drawableTop="@drawable/home_workshop_select"
-                android:textSize="@dimen/dp_10" />
+                android:gravity="center"
+                android:text="圈子"
+                android:textColor="@drawable/home_newhome_select"
+                android:textSize="@dimen/dp_16" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:gravity="center|bottom"
-                android:paddingTop="@dimen/dp_6"
-                android:paddingBottom="@dimen/dp_6"
-                android:drawableTop="@mipmap/fabu"
-                android:textSize="@dimen/dp_10" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:button="@null"
-                android:gravity="center|bottom"
-                android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_6"
-                android:drawableTop="@drawable/home_news_select"
-                android:textSize="@dimen/dp_10" />
+                android:id="@+id/fabu"
+                android:gravity="center"
+                android:drawableBottom="@mipmap/fabu"
+                />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -83,10 +64,19 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:paddingTop="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_6"
-                android:drawableTop="@drawable/home_newhome_select"
-                android:textSize="@dimen/dp_10" />
+                android:text="消息"
+                android:textColor="@drawable/home_newhome_select"
+                android:textSize="@dimen/dp_16" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="我的"
+                android:textColor="@drawable/home_newhome_select"
+                android:textSize="@dimen/dp_16" />
         </RadioGroup>
     </LinearLayout>
     

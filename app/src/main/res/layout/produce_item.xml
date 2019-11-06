@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/dibujuxing"
+    android:padding="@dimen/dp_5"
+    >
+    <ImageView
+        android:id="@+id/img_produceImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/dibujuxing"
+        android:maxHeight="@dimen/dp_90"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:id="@+id/tv_produceTitie"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="项目名称展示区"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        android:textColor="@color/colorLigyel"/>
+    <TextView
+        android:id="@+id/tv_produceBrief"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="副标题处 简介"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorBrightgray"/>
+
+    <TextView
+        android:id="@+id/tv_produceTime"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="活动时间：2019-09-01 至 019-10-30"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorlightgray"
+        android:layout_marginBottom="@dimen/dp_16"
+        />
+
+
+</LinearLayout>

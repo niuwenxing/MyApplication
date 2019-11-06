@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
@@ -25,11 +26,14 @@ import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.azoft.carousellayoutmanager.DefaultChildSelectionListener;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
+import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.CheckActivity;
 import com.example.jiyin.home.Activity.homeview.SearchpageActivity;
+import com.example.jiyin.home.Activity.sonview.activity.CommunityActivity;
 import com.example.jiyin.home.Activity.sonview.activity.HeadlinesActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
+import com.example.jiyin.home.fragment.adapter.TopModularAdapter;
 import com.example.jiyin.home.fragment.view.HomeView;
 import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
 import com.example.jiyin.interactive.ContactsActivity;
@@ -80,22 +84,14 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     FrameLayout flMenuFourBtn;
     @BindView(R.id.tv_look_btn)
     TextView tvLookBtn;
-    @BindView(R.id.ppppppp)
-    FrameLayout flMenuFiveBtn;
+
     @BindView(R.id.ly_searchbar)
     LinearLayout lySearchbar;
     @BindView(R.id.home_bananrlist)
     RecyclerView homeBananrlist;
     @BindView(R.id.tv_tvTop)
     TextView tvTvTop;
-    @BindView(R.id.rb_self_btn)
-    RadioButton rbSelfBtn;
-    @BindView(R.id.rb_shortVideo)
-    RadioButton rbShortVideo;
-    @BindView(R.id.rb_recommend)
-    RadioButton rbRecommend;
-    @BindView(R.id.home_btnGroup)
-    RadioGroup homeBtnGroup;
+
     @BindView(R.id.home_top)
     LinearLayout homeTop;
     @BindView(R.id.home_topList)
@@ -140,6 +136,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 //        tvHomeTitles = layoutFragment.findViewById(R.id.tv_homeTitles);
 
 
+
         SpannableStringBuilder HomeTitle = new SpannableStringBuilder(tvHomeTitle.getText());
         HomeTitle.setSpan(new TypefaceSpan("PingFangSC-Semibold"), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         HomeTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -172,6 +169,13 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         initRecyclerView(recyclerView, layoutManager, mCoverFlowAdapter);
         recyclerView.setAdapter(mCoverFlowAdapter);
         recyclerView.smoothScrollToPosition(1);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        homeTopList.setLayoutManager(linearLayoutManager);
+        TopModularAdapter<Object> topModularAdapter = new TopModularAdapter(getContext(),objects);
+        homeTopList.addItemDecoration(new SpaceItemDecoration((int) getResources().getDimension(R.dimen.dp_10), 0));
+        homeTopList.setAdapter(topModularAdapter);
 
     }
 
@@ -226,8 +230,8 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
     }
 
-    @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn, R.id.fl_menu_two_btn, R.id.fl_menu_three_btn,
-            R.id.fl_menu_four_btn, R.id.tv_look_btn,R.id.ppppppp, R.id.rb_self_btn})
+    @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn,
+            R.id.fl_menu_two_btn, R.id.fl_menu_three_btn, R.id.fl_menu_four_btn, R.id.tv_look_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_searchbar_btn://搜索
@@ -249,14 +253,16 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 startActivity(intentProject);
                 break;
             case R.id.fl_menu_four_btn://览头条
-//                Intent intent = new Intent(getContext(), HeadlinesActivity.class);
-//                startActivity(intent);
-                startActivity(new Intent(getContext(), ContactsActivity.class));
+                Intent intent = new Intent(getContext(), HeadlinesActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.ppppppp://看社群
+            case R.id.tv_look_btn://看社群
+                startActivity(new Intent(getContext(),CommunityActivity.class));
                 break;
-            case R.id.rb_self_btn:
-                break;
+
         }
     }
 }
+/***
+ *   startActivity(new Intent(getContext(), ContactsActivity.class)); //联系人
+ */

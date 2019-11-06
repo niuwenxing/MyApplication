@@ -8,7 +8,7 @@
     >
 
     <ImageView
-        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_5"
         android:layout_width="@dimen/dp_104"
         android:layout_height="@dimen/dp_70"
         android:src="@mipmap/xiangmutupian"

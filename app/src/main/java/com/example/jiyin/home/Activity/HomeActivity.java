@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -21,6 +22,7 @@ import com.example.jiyin.common.net.beas.BaseResponseModel;
 import com.example.jiyin.customwidget.NoScrollViewPager;
 import com.example.jiyin.home.Activity.presenter.impl.MainPresenterImpl;
 import com.example.jiyin.home.Activity.presenter.view.MainView;
+import com.example.jiyin.home.fragment.MoreWindow;
 import com.example.jiyin.home.fragment.MypageFragment;
 import com.example.jiyin.home.fragment.NewHomeFregment;
 import com.example.jiyin.home.fragment.NewsFragment;
@@ -53,6 +55,9 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     private MypageFragment mypageFragment;
     private Fragment[] fragments1;
     private static RadioButton[] RadioButtons;
+    private MoreWindow mMoreWindow;
+    private View viewById;
+    private MoreWindow popWindow;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +86,14 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
             RadioButtons[i] = (RadioButton) rgMain.getChildAt(i);
         }
         RadioButtons[0].setChecked(true);
+        //菜单
+        viewById = findViewById(R.id.fabu);
+        viewById.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     int anInt=0;
@@ -97,7 +109,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
                     case 1:
                     case 2:
                     case 3:
-                        StatusBarUtil.setStatusBarMode(this,true,R.color.white);
+                        statusBarhight();
                     break;
                     case 0:
                     case 4:
@@ -105,11 +117,23 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
                         break;
 
                 }
+
+//
             }
         }
         RadioButtons[anInt].setChecked(true);
     }
-//    private void upDataFile() {
+
+    private void statusBarhight() {
+        StatusBarUtil.setStatusBarMode(this,true,R.color.white);
+
+
+    }
+
+
+
+
+    //    private void upDataFile() {
 //        requestPermission(0x1301, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
 //                Manifest.permission.WRITE_EXTERNAL_STORAGE
 //        }, new RequestPermissionListener() {
@@ -182,7 +206,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     }
 
     public static void statusBarHide(Activity activity) {
-        // 代表 5.0 及以上
+        // 代表 5.0 及.以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View decorView = activity.getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;

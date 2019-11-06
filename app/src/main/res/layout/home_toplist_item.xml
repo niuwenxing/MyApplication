@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="135dp"
-    android:layout_height="145.5dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="@dimen/dp_5"
+    android:id="@+id/rl_TopItemView"
+    >
     <ImageView
         android:src="@mipmap/tu1"
-        android:id="@+id/toplist_img"
-        android:layout_width="match_parent"
-        android:layout_height="101.5dp"/>
+        android:id="@+id/img_toplist_img"
+        android:layout_width="@dimen/dp_135"
+        android:layout_height="@dimen/dp_101"
+        android:scaleType="fitXY"/>
 
     <ImageView
         android:id="@+id/topIcon"
         android:layout_marginLeft="1.5dp"
-        android:layout_marginTop="7dp"
-        android:layout_below="@+id/toplist_img"
+        android:layout_marginTop="@dimen/dp_7"
+        android:layout_below="@+id/img_toplist_img"
         android:src="@mipmap/reidu"
-        android:layout_width="17.5dp"
-        android:layout_height="17.5dp"/>
+        android:layout_width="@dimen/dp_17"
+        android:layout_height="@dimen/dp_17"/>
 
     <TextView
         android:id="@+id/hintop"
@@ -25,53 +30,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorNews"
-        android:textSize="8sp"
-        android:gravity="left"
-        android:layout_alignRight="@+id/topIcon"
+        android:textSize="@dimen/sp_8"
+        android:gravity="center"
         />
 
     <TextView
-        android:id="@+id/topNumber"
+        android:id="@+id/tv_topNumber"
         android:layout_below="@+id/hintop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1.3W"
+        android:text="5000"
         android:textColor="@color/colorNews"
-        android:textSize="6sp"
+        android:textSize="@dimen/sp_9"
         android:gravity="center"
         android:layout_alignLeft="@+id/hintop"
-        android:layout_alignRight="@+id/hintop"
         />
 
     <TextView
-        android:id="@+id/projecttitle"
-        android:layout_marginTop="12.5dp"
-        android:layout_below="@+id/toplist_img"
+        android:id="@+id/tv_projecttitle"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_below="@+id/img_toplist_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="项目标题"
         android:textColor="@color/colorNews"
-        android:textSize="12sp"
+        android:textSize="@dimen/sp_16"
         android:gravity="left"
         android:layout_toRightOf="@+id/topIcon"
-        android:layout_marginLeft="9.5dp"
+        android:layout_marginLeft="@dimen/sp_9"
+        android:maxLines="1"
+        android:ellipsize="end"
         />
     <TextView
-        android:layout_marginLeft="9.5dp"
-        android:layout_toRightOf="@+id/topIcon"
-        android:layout_below="@+id/projecttitle"
-        android:id="@+id/topcontent"
+        android:layout_marginLeft="@dimen/dp_9"
+        android:layout_toRightOf="@+id/tv_topNumber"
+        android:layout_below="@+id/tv_projecttitle"
+        android:id="@+id/tv_topcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="项目内容"
         android:textColor="@color/colorNews"
-        android:textSize="9sp"
+        android:textSize="@dimen/sp_12"
         android:gravity="left"
-        android:layout_alignParentBottom="true"
         android:maxLines="1"
         android:ellipsize="end"
         />
 
 
-    
 </RelativeLayout>

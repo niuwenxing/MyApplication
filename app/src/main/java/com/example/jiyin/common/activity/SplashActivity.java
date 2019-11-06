@@ -133,7 +133,7 @@ public class SplashActivity extends JiYingActivity {
 //            handler.postDelayed(timerRunnable, delayTime);
 //        }
 //    };
-//    private Activity parent;
+//    private ProduceActivity parent;
 //
 //    private void dismissSplashView(boolean initiativeDismiss) {
 //        handler.removeCallbacks(timerRunnable);

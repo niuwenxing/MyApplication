@@ -65,6 +65,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
+    //刷新
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 
@@ -73,5 +74,10 @@ dependencies {
     //baseAdapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 
+    //红点指示器
+    implementation 'com.bupt.edison.magicreddot:magicreddot:1.0.0'
+    //Rx
+    implementation 'io.reactivex:rxjava:1.1.6'
+    implementation 'io.reactivex:rxandroid:1.2.1'
 
 }

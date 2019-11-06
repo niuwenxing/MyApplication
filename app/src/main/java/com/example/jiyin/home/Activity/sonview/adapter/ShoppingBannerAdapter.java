@@ -17,11 +17,13 @@ import java.util.List;
 public class ShoppingBannerAdapter<T> extends RecyclerView.Adapter<ShoppingBannerAdapter.BannerView> {
     private Context context;
     private List<T> urlList;
+    private int Layout;
     private BannerLayout.OnBannerItemClickListener onBannerItemClickListener;
-
-    public ShoppingBannerAdapter(Context context, List<T> urlList) {
+//    R.layout.item_image
+    public ShoppingBannerAdapter(Context context, List<T> urlList,int Layout) {
         this.context = context;
         this.urlList = urlList;
+        this.Layout= Layout;
     }
 
     public void setOnBannerItemClickListener(BannerLayout.OnBannerItemClickListener onBannerItemClickListener) {
@@ -31,7 +33,7 @@ public class ShoppingBannerAdapter<T> extends RecyclerView.Adapter<ShoppingBanne
     @NonNull
     @Override
     public ShoppingBannerAdapter.BannerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new BannerView(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false));
+        return new BannerView(LayoutInflater.from(parent.getContext()).inflate(Layout, parent, false));
     }
 
     @Override

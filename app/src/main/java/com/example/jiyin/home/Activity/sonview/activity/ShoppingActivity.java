@@ -69,7 +69,7 @@ public class ShoppingActivity extends JiYingActivity<ShoppingView, ShoppingPrese
 
         List<String> objit=new ArrayList<>();
 
-        ShoppingBannerAdapter<Object> objectShoppingBannerAdapter = new ShoppingBannerAdapter(this,objit);
+        ShoppingBannerAdapter<Object> objectShoppingBannerAdapter = new ShoppingBannerAdapter(this,objit,R.layout.item_image);
         blBannerrecycler.setAdapter(objectShoppingBannerAdapter);
         LinearLayoutManager ShopingManager = new LinearLayoutManager(this);
         ryCommodityList.setLayoutManager(ShopingManager);

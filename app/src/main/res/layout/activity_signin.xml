@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.Activity.homeview.SigninActivity">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/logo"
+            android:layout_marginLeft="@dimen/dp_83"
+            android:layout_marginRight="@dimen/dp_83"
+            android:layout_marginTop="@dimen/dp_100"
+            android:layout_marginBottom="@dimen/dp_100"
+            />
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/dp_53"
+            android:layout_marginRight="@dimen/dp_53"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/shouji"
+                android:id="@+id/iconPhone_image"
+                />
+            <EditText
+                android:layout_toRightOf="@+id/iconPhone_image"
+                android:padding="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/xet_login_phone"
+                android:background="@null"
+                android:digits="1234567890"
+                android:hint="请输入手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="@dimen/sp_14"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/green_eyes_selector"
+                android:id="@+id/img_show"
+                />
+            <View
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorbotline"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/dp_53"
+            android:layout_marginRight="@dimen/dp_53"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_40"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/mima"
+                android:id="@+id/iconPsd_image"
+                />
+            <EditText
+                android:layout_toRightOf="@+id/iconPsd_image"
+                android:padding="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/xet_login_password"
+                android:background="@null"
+                android:hint="请输入密码"
+                android:maxLength="20"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="@dimen/sp_14"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/green_password_selector"
+                android:id="@+id/img_passWord"
+                />
+
+            <View
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorbotline"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_Landingbutton"
+            android:layout_marginLeft="@dimen/dp_53"
+            android:layout_marginRight="@dimen/dp_53"
+            android:padding="@dimen/dp_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登陆"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_16"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:background="@drawable/landingbutton_bg"
+            />
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_53"
+            android:layout_marginRight="@dimen/dp_53"
+            >
+            <TextView
+                android:id="@+id/tv_ForgetPassword_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="忘记密码"
+                android:textColor="@color/colorBrightgray"
+                android:textSize="@dimen/sp_14"
+                android:gravity="center"
+                android:padding="@dimen/dp_5"
+                />
+            <TextView
+                android:id="@+id/tv_registerAccount_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册"
+                android:textColor="@color/colorBrightgray"
+                android:textSize="@dimen/sp_14"
+                android:gravity="center"
+                android:padding="@dimen/dp_5"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>
