@@ -218,6 +218,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
     }
 
 

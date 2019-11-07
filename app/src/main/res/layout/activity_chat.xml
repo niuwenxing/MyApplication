@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.Activity.sonview.activity.ChatActivity">
+
+    <include layout="@layout/navigationbar" android:id="@+id/toptitle"/>
+
+    <include layout="@layout/layout_common_throw"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_below="@+id/toptitle"
+        android:layout_above="@id/relativeLayout"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:fadeScrollbars="false"
+        android:overScrollMode="never"
+        android:scaleY="-1"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        tools:itemCount="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never"
+            android:scaleY="-1"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="1"
+            />
+<!--        tools:listitem="@layout/item_practice_instant"-->
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:scaleY="-1"
+            app:srlTextPulling="下拉加载更多" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_49"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        >
+
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorTbar"
+            android:ems="10"
+            android:hint="留下你的看法"
+            android:inputType="textPersonName"
+            android:paddingLeft="@dimen/dp_16"
+            android:textSize="@dimen/sp_14"
+            android:layout_toLeftOf="@+id/send_comment"
+            />
+
+        <TextView
+            android:id="@+id/send_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/dp_13"
+            android:gravity="center"
+            android:text="发送" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

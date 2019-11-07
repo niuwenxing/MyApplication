@@ -20,7 +20,6 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
 
-        
     }
 }
 
@@ -31,6 +30,7 @@ task clean(type: Delete) {
 ext{
     version_retrofit = "2.2.0"
     version_fastjson = '1.1.67'
+    version_eventbus = '3.0.0'
 
     version_butterknife = '8.4.0'
     version_autosize = '1.1.2'

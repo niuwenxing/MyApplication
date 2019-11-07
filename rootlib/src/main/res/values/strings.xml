@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RootLib</string>
+    <string name="common_token_invalidate">登录超时，请重新登录</string>
+
 </resources>

@@ -13,6 +13,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -38,6 +39,9 @@ dependencies {
     api "com.alibaba:fastjson:${version_fastjson}.android"
     //butterknife   组件注入
     api "com.jakewharton:butterknife:${version_butterknife}"
+    // eventbus     事件广播
+    api "org.greenrobot:eventbus:${version_eventbus}"
+
     annotationProcessor "com.jakewharton:butterknife-compiler:${version_butterknife}"
 
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'

@@ -151,7 +151,7 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
 
     @Override
     public void toastLong(CharSequence c) {
-
+        CToast.showLong(activity,c.toString());
     }
 
     @Override

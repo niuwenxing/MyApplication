@@ -76,4 +76,7 @@
         <attr name="badgeNumPre" format="string"/>
     </declare-styleable>
 
+
+
+
 </resources>

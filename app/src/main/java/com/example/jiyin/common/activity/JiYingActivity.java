@@ -1,19 +1,29 @@
 package com.example.jiyin.common.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.jiyin.R;
+import com.example.jiyin.common.bean.EventNoticeBean;
+import com.example.jiyin.common.utils.EventBusUtil;
 import com.example.jiyin.common.widget.DefaultPresenterImpl;
+import com.example.jiyin.home.Activity.homeview.SigninActivity;
 import com.example.rootlib.mvp.activity.BaseActivity;
 import com.example.rootlib.mvp.presenter.BasePresenter;
 import com.example.rootlib.mvp.view.IBaseView;
+import com.example.rootlib.utils.StringUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,6 +41,10 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
      * 标记是否是首页
      */
     private boolean isHome = false;
+    /**
+     * 是否在前台显示
+     */
+    private boolean isFront = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +117,40 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
 
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventNotify(EventNoticeBean notice) {
+        if (notice != null) {
+            switch (notice.getTypeId()) {
+                case EventBusUtil.EVENT_TOKEN_INVALIDATE:              // 登录过时 - 重新登录
+                    if (isFront) {
+                        String message = StringUtil.isEmpty(notice.getMsg()) ?
+                                getString(R.string.common_token_invalidate) : notice.getMsg();
+                        toastLong(message);
+                        new Handler(new Handler.Callback() {
+                            @Override
+                            public boolean handleMessage(Message msg) {
+                                startActivity(new Intent(activity, SigninActivity.class));
+                                return true;
+                            }
+                        }).sendEmptyMessageDelayed(0x1001, 400);
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isFront = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isFront = false;
     }
 
 

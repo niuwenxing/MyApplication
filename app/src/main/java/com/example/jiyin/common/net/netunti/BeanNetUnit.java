@@ -2,10 +2,12 @@ package com.example.jiyin.common.net.netunti;
 
 import android.util.Log;
 
+import com.example.jiyin.common.bean.EventNoticeBean;
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.beas.BaseResponseModel;
 import com.example.jiyin.common.net.callback.BeanCallBack;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
+import com.example.jiyin.common.utils.EventBusUtil;
 import com.example.rootlib.mvp.presenter.biz.IBaseAPIBiz;
 import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.utils.StringUtil;
@@ -14,7 +16,6 @@ import retrofit2.Response;
 
 /**
  * 基础网络访问单元
- *
  * @param <T> 网络响应成功bean类型
  */
 public class BeanNetUnit<T> implements IBaseAPIBiz<NetBeanListener> {
@@ -34,6 +35,7 @@ public class BeanNetUnit<T> implements IBaseAPIBiz<NetBeanListener> {
         call.enqueue(new BeanCallBack<BaseResponseModel<T>>(listener) {
             @Override
             public void onSuc(Response<BaseResponseModel<T>> response) {
+
                 listener.onSuc(response.body().data);
             }
 
@@ -44,7 +46,7 @@ public class BeanNetUnit<T> implements IBaseAPIBiz<NetBeanListener> {
                 if (!StringUtil.isEmpty(status) && (status.equals(BaseConfig.SERVER_ERR_TOKEN_INVALIDATE)
                         || status.equals(BaseConfig.SERVER_ERR_LOGIN_EXCEPTION))) {
                     // 发送通知关闭页面
-//                    EventBusUtil.post(new EventNoticeBean(EventBusUtil.EVENT_TOKEN_INVALIDATE, message));
+                    EventBusUtil.post(new EventNoticeBean(EventBusUtil.EVENT_TOKEN_INVALIDATE, message));
                 } else {
                     listener.onFail(status, message);
                 }

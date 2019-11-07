@@ -80,4 +80,10 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.1.6'
     implementation 'io.reactivex:rxandroid:1.2.1'
 
+    //聊天界面
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+
+
 }

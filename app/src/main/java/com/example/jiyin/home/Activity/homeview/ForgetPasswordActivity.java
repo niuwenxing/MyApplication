@@ -11,10 +11,12 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +27,14 @@ import androidx.annotation.NonNull;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.home.Activity.homeview.base.CodeBase;
+import com.example.jiyin.home.Activity.homeview.base.LoginData;
+import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.impl.EntrancePreImpl;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.MobileCheckUtil;
+import com.example.rootlib.utils.StringUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -107,12 +113,6 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
             tvImmediatelyBtn.setText(spanColor);
         }
 
-
-
-
-
-
-
         initView();
 
     }
@@ -166,17 +166,26 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
 
     //提交
     private void Landingbutton() {
+        if (StringUtil.isEmpty(etForgetPhone.getText().toString())){
+            toast("手机号不能空"); return;
+        }
+
+        if(StringUtil.isEmpty(etForgetCode.getText().toString())){
+            toast("验证码不能空"); return;
+        }
+
+        if(!etForPassword.getText().toString().trim().equals(etForgetPassword.getText().toString().trim())&&etForgetPassword.getText().toString().length()==etForPassword.getText().toString().length()) {
+            toast("密码不否,请重新输入");
+            etForPassword.setText(null);
+            etForgetPassword.setText(null);
+            return;
+        }
+
+
         if(intent.getStringExtra(ConstantUtil.KEY_CODE).equals(ConstantUtil.KEY_REGISTERED_CODE)){
-            //注册
-
+            presenter.userRegister(etForgetPhone.getText().toString(),etForgetCode.getText().toString(),etForgetPassword.getText().toString().trim());
         }else{//忘记密码
-            if(etForPassword.getText().toString().trim().equals(etForgetPassword.getText().toString().trim())){
-
-            }else{
-                toast("两次密码不否,请重新输入");
-                etForPassword.setText(null);
-                etForgetPassword.setText(null);
-            }
+            presenter.userRetrieve(etForgetPhone.getText().toString(),etForgetCode.getText().toString(),etForgetPassword.getText().toString().trim());
         }
     }
 
@@ -186,6 +195,8 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
             return;
         }else{
             resetTimer();
+            presenter.getCode(etForgetPhone.getText().toString().trim());
+
         }
 
     }
@@ -219,6 +230,33 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
         }.start();
     }
 
+    @Override
+    public void Code(CodeBase bean) {//
+            toast(bean.getMsg());
+    }
+
+    @Override
+    public void sucRegister(RegisterBase bean) {//注册
+            toast(bean.getMsg());
+        if (bean.getCode()==1) {
+            finish();
+        }
+    }
+
+    @Override
+    public void err(String status, String message) {
+        toastLong(message.toString());
+    }
+
+
+    @Override
+    public void retrieve(CodeBase bean) {//忘记密码
+        toast(bean.getMsg());
+        if (bean.getCode()==1) {
+            finish();
+        }
+    }
+
     public class MyClickableSpan extends ClickableSpan {
         @Override
         public void onClick(@NonNull View widget) {
@@ -227,4 +265,9 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
         }
     }
 
+
+    @Override
+    public void logindata(LoginData bean) {//忽略
+
+    }
 }

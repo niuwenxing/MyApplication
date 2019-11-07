@@ -15,11 +15,15 @@ import android.widget.Toast;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.home.Activity.homeview.base.CodeBase;
+import com.example.jiyin.home.Activity.homeview.base.LoginData;
+import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.impl.EntrancePreImpl;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.MobileCheckUtil;
 import com.example.rootlib.utils.StatusBarUtil;
+import com.example.rootlib.utils.StringUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -69,7 +73,6 @@ public class SigninActivity extends JiYingActivity<EntranceView, EntrancePreImpl
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);
         font = Typeface.create("sans-serif-smallcaps", Typeface.NORMAL);
         init();
-        presenter.login();
 
     }
 
@@ -106,7 +109,6 @@ public class SigninActivity extends JiYingActivity<EntranceView, EntrancePreImpl
         xetLoginPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 String s = charSequence.toString();
@@ -163,7 +165,39 @@ public class SigninActivity extends JiYingActivity<EntranceView, EntrancePreImpl
             toast("请输入正确的手机号");
             return;
         }
+        if(StringUtil.isEmpty(xetLoginPassword.getText().toString())){
+            toast("请输入密码");
+            return;
+        }
+        presenter.login(xetLoginPhone.getText().toString().trim(),xetLoginPassword.getText().toString());
 
+
+    }
+
+    @Override
+    public void logindata(LoginData bean) {//登陆成功返回
+        toast(bean.getMsg());
+        if(bean.getCode()==1){
+            finish();
+        }
+    }
+
+
+    @Override
+    public void Code(CodeBase bean) {
+        toast(bean.getMsg().toString());
+    }
+
+    @Override
+    public void sucRegister(RegisterBase bean) {
+    }
+
+    @Override
+    public void err(String status, String message) {
+    }
+
+    @Override
+    public void retrieve(CodeBase bean) {
 
     }
 
