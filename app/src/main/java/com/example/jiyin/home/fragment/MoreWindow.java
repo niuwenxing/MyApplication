@@ -1,6 +1,7 @@
 package com.example.jiyin.home.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -29,6 +30,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.jiyin.R;
+import com.example.jiyin.home.Activity.homeview.ReleaseCirclesActivity;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.FastBlur;
 import com.example.jiyin.utils.KickBackAnimator;
 import com.example.rootlib.utils.ScreenUtils;
@@ -55,6 +58,11 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rootView = inflater.inflate(R.layout.pop_more_window, null);
+        LinearLayout mReleaseCircle = rootView.findViewById(R.id.ll_ReleaseCircle_window);
+        LinearLayout mReleaseVideo = rootView.findViewById(R.id.ll_ReleaseVideo_window);
+        mReleaseCircle.setOnClickListener(this);
+        mReleaseVideo.setOnClickListener(this);
+
         int h = mContext.getWindowManager().getDefaultDisplay().getHeight();
         int w = mContext.getWindowManager().getDefaultDisplay().getWidth();
         setContentView(rootView);
@@ -147,7 +155,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
                     });
 
 
-            if (child.getId() == R.id.weblink_window) {
+            if (child.getId() == R.id.linear) {
                 Observable.timer((layout.getChildCount() - i) * 30 + 80, TimeUnit.MILLISECONDS)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -165,8 +173,14 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.photo_window:
-            case R.id.weblink_window:
+            case R.id.ll_ReleaseCircle_window://圈子
+                mContext.startActivity(new Intent(mContext, ReleaseCirclesActivity.class)
+                                        .putExtra(ConstantUtil.KEY_CODE,ConstantUtil.CIRCLES));
+                goCreate();
+                break;
+            case R.id.ll_ReleaseVideo_window://视频
+                mContext.startActivity(new Intent(mContext, ReleaseCirclesActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,ConstantUtil.VIDEO));
                 goCreate();
                 break;
             case R.id.ll_close:

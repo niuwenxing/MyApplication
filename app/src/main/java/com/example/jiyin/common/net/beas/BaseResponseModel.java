@@ -1,10 +1,8 @@
 package com.example.jiyin.common.net.beas;
 
-/**
- * Created by gray on 2018/5/16.
- */
-public class BaseResponseModel<T> extends RootResponseModel {
 
+public class BaseResponseModel<T> extends RootResponseModel {
+//
     /**
      * 数据对象
      */

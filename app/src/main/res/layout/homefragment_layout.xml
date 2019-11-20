@@ -440,7 +440,7 @@
                         android:textSize="@dimen/sp_22"
                         android:textStyle="bold"
                         android:textColor="@color/colorNews"
-                        android:text="琢璞时间"                    />
+                        android:text="Box"                    />
 
                     <RelativeLayout
                         android:id="@+id/view_abb"
@@ -476,6 +476,7 @@
                                 android:textColor="#ffffff"
                                 android:textSize="@dimen/sp_16"
                                 android:gravity="left"
+                                android:includeFontPadding="false"
                                 />
                             <TextView
                                 android:id="@+id/a2"
@@ -533,6 +534,8 @@
                                 android:textColor="#ffffff"
                                 android:textSize="@dimen/sp_16"
                                 android:gravity="left"
+                                android:includeFontPadding="false"
+
                                 />
                             <TextView
                                 android:id="@+id/b2"
@@ -593,6 +596,8 @@
                                 android:textColor="#ffffff"
                                 android:textSize="@dimen/sp_16"
                                 android:gravity="left"
+                                android:includeFontPadding="false"
+
                                 />
                             <TextView
                                 android:id="@+id/bb2"
@@ -653,6 +658,7 @@
                                 android:textColor="#ffffff"
                                 android:textSize="@dimen/sp_16"
                                 android:gravity="left"
+                                android:includeFontPadding="false"
                                 />
                             <TextView
                                 android:id="@+id/a2_personnel"
@@ -715,6 +721,8 @@
                                 android:textColor="#ffffff"
                                 android:textSize="@dimen/sp_16"
                                 android:gravity="left"
+                                android:includeFontPadding="false"
+
                                 />
                             <TextView
                                 android:id="@+id/a2_Carvetime"

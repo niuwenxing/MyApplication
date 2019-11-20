@@ -18,6 +18,7 @@ import com.example.rootlib.config.AppConfig;
 import com.example.rootlib.mvp.view.IBaseView;
 import com.example.rootlib.utils.CToast;
 import com.example.rootlib.utils.StringUtil;
+import com.example.rootlib.widget.common.CommonNoticeDialog;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import butterknife.ButterKnife;
@@ -375,7 +376,9 @@ public abstract class RootFragment extends Fragment implements IBaseView {
     }
 
 
+    @Override
+    public CommonNoticeDialog dialogShowRemind(int resId, String title, String msg, String positiveText, String cancelText, DialogInterface.OnClickListener positiveOnClickListener, DialogInterface.OnClickListener cancelOnClickListener) {
 
-
-
+        return null;
+    }
 }

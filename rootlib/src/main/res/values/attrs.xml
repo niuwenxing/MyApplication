@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--ForceClickImageView-->
+    <declare-styleable name="ForceClickImageView">
+        <attr name="foregroundColor" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CommonItem">
+        <attr name="img_src" format="reference" />
+        <attr name="img_vis" format="integer"></attr>
+        <attr name="title_text" format="string" />
+        <attr name="dividerVis" format="integer" />
+        <attr name="title_vis" format="integer"></attr>
+        <attr name="hint_text" format="string" />
+        <attr name="hint_vis" format="integer" />
+        <attr name="right_img" format="reference" />
+        <attr name="right_text" format="string" />
+        <attr name="right_switch_vis" format="integer" />
+        <attr name="right_text_vis" format="integer" />
+        <attr name="right_img_vis" format="integer" />
+        <attr name="right_txt_line" format="integer" />
+        <attr name="title_size" format="integer" />
+        <attr name="hint_size" format="integer" />
+        <attr name="right_size" format="integer" />
+        <attr name="title_color" format="color" />
+        <attr name="hint_color" format="color" />
+        <attr name="right_color" format="color" />
+    </declare-styleable>
+
+</resources>

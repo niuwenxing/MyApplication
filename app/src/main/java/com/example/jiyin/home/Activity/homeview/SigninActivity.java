@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +22,23 @@ import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.impl.EntrancePreImpl;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.MobileCheckUtil;
 import com.example.rootlib.utils.StatusBarUtil;
 import com.example.rootlib.utils.StringUtil;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 登录页面
@@ -171,13 +183,15 @@ public class SigninActivity extends JiYingActivity<EntranceView, EntrancePreImpl
         }
         presenter.login(xetLoginPhone.getText().toString().trim(),xetLoginPassword.getText().toString());
 
-
     }
+
+
 
     @Override
     public void logindata(LoginData bean) {//登陆成功返回
         toast(bean.getMsg());
         if(bean.getCode()==1){
+            PreferenceUtil.put(ConstantUtil.KEY_TOKEN,bean.getData());
             finish();
         }
     }

@@ -1,13 +1,13 @@
 package com.example.jiyin.interactive;
 
-import com.example.jiyin.common.net.beas.BaseJsonRequestModel;
+//import com.example.jiyin.common.net.beas.BaseJsonRequestModel;
 import com.example.rootlib.utils.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class JiYingRequestModel extends BaseJsonRequestModel {
-
+public class JiYingRequestModel  {
+//extends BaseJsonRequestModel
     private HashMap<String, String> map;
 
     public JiYingRequestModel(){
@@ -23,8 +23,8 @@ public class JiYingRequestModel extends BaseJsonRequestModel {
 
 
 
-    @Override
-    public Map<String, String> getFinalRequestMap() {
-        return map;
-    }
+//    @Override
+//    public Map<String, String> getFinalRequestMap() {
+//        return map;
+//    }
 }

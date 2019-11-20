@@ -23,5 +23,7 @@
 
 
     <color name="colorTextContent">#444444</color>
+    <color name="colorTextFans">#343439</color>
+    <color name="hint_text_color">#7f7f7f</color>
 
 </resources>

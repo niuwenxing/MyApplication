@@ -1,16 +1,28 @@
 package com.example.jiyin.interactive;
 
-import com.example.jiyin.common.net.beas.BaseResponseModel;
+import androidx.annotation.NonNull;
+
+import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
+import com.example.jiyin.home.Activity.homeview.base.ImageArr;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * Call 类
@@ -23,8 +35,7 @@ public interface UserService {
      */
     @POST("Auth/regCode")
     @FormUrlEncoded
-    Call<BaseResponseModel<RegisterBase>> register(@FieldMap Map<String, String> map);
-
+    Call<RegisterBase> register(@FieldMap Map<String, String> map);
 
     /**
      * 获取验证码
@@ -33,7 +44,7 @@ public interface UserService {
      */
     @POST("Auth/send")
     @FormUrlEncoded
-    Call<BaseResponseModel<CodeBase>> getcode(@FieldMap Map<String, String> finalRequestMap);
+    Call<CodeBase> getcode(@FieldMap Map<String, String> finalRequestMap);
 
 
     /**
@@ -43,7 +54,7 @@ public interface UserService {
      */
     @POST("Auth/modifyPass")
     @FormUrlEncoded
-    Call<BaseResponseModel<CodeBase>> getUserRetrieve(@FieldMap Map<String, String> finalRequestMap);
+    Call<CodeBase> getUserRetrieve(@FieldMap Map<String, String> finalRequestMap);
 
     /**
      * 登陆
@@ -53,6 +64,42 @@ public interface UserService {
 
     @POST("Auth/loginCode")
     @FormUrlEncoded
-    Call<BaseResponseModel<LoginData>> getlogin(@FieldMap Map<String, String> finalRequestMap);
+    Call<LoginData> getlogin(@FieldMap Map<String, String> finalRequestMap);
+
+
+    /**
+     * 圈子标签
+     * @return
+     */
+    @POST("Index/circlesLable")
+    Call<CirclelabelBean> circle();
+
+
+    /**
+     * 上传一张图片
+     * @param part
+     * @return
+     */
+    @Multipart
+    @POST("Common/uploadImg")
+    Call<String> Upimage(@Part MultipartBody.Part part);
+
+
+    /**
+     * 上传图片
+     //     * @param map
+     //     * @param parts
+     * @return
+     */
+    @Multipart
+    @POST("Common/uploadMultiPic")
+//    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> map);
+    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> args,@Part List<MultipartBody.Part> parts);
+
+
+//    @Multipart
+//    @POST("{" + PATH + "}")
+//    Observable<String> uploadFilesII(@Path(value = PATH, encoded = true) String path, @Part() List<MultipartBody.Part> parts);
 
 }
+

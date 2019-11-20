@@ -25,15 +25,15 @@
 
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_above="@+id/ll_close"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         >
 
         <LinearLayout
-            android:id="@+id/weblink_window"
+            android:id="@+id/ll_ReleaseCircle_window"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="80dp"
@@ -43,14 +43,14 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@mipmap/qiyexuqiu" />
+                android:src="@mipmap/fabuquanzi" />
 
             <TextView
                 android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="企业需求"
+                android:text="发布圈子"
                 android:textColor="#606060" />
         </LinearLayout>
 
@@ -58,10 +58,10 @@
 
 
         <LinearLayout
-            android:id="@+id/photo_window"
+            android:id="@+id/ll_ReleaseVideo_window"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/weblink_window"
+            android:layout_toRightOf="@+id/ll_ReleaseCircle_window"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
             android:layout_marginLeft="40dp"
@@ -71,14 +71,14 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@mipmap/qiyexuqiu" />
+                android:src="@mipmap/fashipin" />
 
             <TextView
                 android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="发布圈子"
+                android:text="发视频"
                 android:textColor="#606060" />
         </LinearLayout>
 

@@ -80,7 +80,8 @@ public class ContactsActivity extends JiYingActivity {
         check();
         mSearchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.search_fragment);
         indexableLayout.setLayoutManager(new LinearLayoutManager(this));
-        mSearchFragment.bindDatas(phoneUtil.getPhone());
+//        mSearchFragment.bindDatas(phoneUtil.getPhone());
+        mSearchFragment.bindDatas(phoneDtos);
         // 多音字处理
         Pinyin.init(Pinyin.newConfig().with(CnCityDict.getInstance(this)));
         // 快速排序。  排序规则设置为：只按首字母  （默认全拼音排序）  效率很高，是默认的10倍左右。  按需开启～
@@ -88,7 +89,8 @@ public class ContactsActivity extends JiYingActivity {
 
         CityAdapter adapter = new CityAdapter(this);
         indexableLayout.setAdapter(adapter);
-        adapter.setDatas(phoneUtil.getPhone());
+//        adapter.setDatas(phoneUtil.getPhone());
+        adapter.setDatas(phoneDtos);
 
         indexableLayout.setOverlayStyle_Center();
         adapter.setOnItemContentClickListener(new IndexableAdapter.OnItemContentClickListener<PhoneUtil.PhoneDto>() {
@@ -97,7 +99,6 @@ public class ContactsActivity extends JiYingActivity {
                 Toast.makeText(ContactsActivity.this, "" + entity.getName() + "---" + entity.getTelPhone(), Toast.LENGTH_SHORT).show();
             }
         });
-
         initSearch();
 
     }
@@ -110,7 +111,6 @@ public class ContactsActivity extends JiYingActivity {
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 if (charSequence.toString().trim().length() > 0) {
@@ -145,8 +145,6 @@ public class ContactsActivity extends JiYingActivity {
     private void initViews() {
         phoneUtil = new PhoneUtil(this);
         phoneDtos = phoneUtil.getPhone();
-
-
     }
 
     @Override

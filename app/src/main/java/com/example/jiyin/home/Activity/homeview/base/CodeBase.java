@@ -1,8 +1,12 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
+import com.example.jiyin.common.bean.BaseModel;
+import com.example.jiyin.common.net.netunti.callcode;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class CodeBase {
+public class CodeBase extends callcode {
 
     /**
      * code : 1
@@ -11,18 +15,18 @@ public class CodeBase {
      * time : 1573090651
      */
 
-    private int code;
+//    private int code;
     private String msg;
     private int time;
     private List<?> data;
 
-    public int getCode() {
-        return code;
-    }
+//    public int getCode() {
+//        return code;
+//    }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
+//    public void setCode(int code) {
+//        this.code = code;
+//    }
 
     public String getMsg() {
         return msg;

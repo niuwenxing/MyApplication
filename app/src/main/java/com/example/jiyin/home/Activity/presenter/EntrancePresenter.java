@@ -5,7 +5,6 @@ import com.example.rootlib.mvp.view.IBaseView;
 
 public abstract class EntrancePresenter<V extends IBaseView> extends BasePresenter<V> {
 
-    public abstract void login();
 
     public abstract void userRegister(String toString, String toString1, String trim);
 

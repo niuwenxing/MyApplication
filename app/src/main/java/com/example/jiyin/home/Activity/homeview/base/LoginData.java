@@ -1,9 +1,12 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
+import com.example.jiyin.common.net.netunti.callcode;
+
+
 /**
  * 登录
  */
-public class LoginData {
+public class LoginData extends callcode {
 
 
     /**
@@ -13,18 +16,11 @@ public class LoginData {
      * time : 1573116973
      */
 
-    private int code;
     private String msg;
     private String data;
     private int time;
 
-    public int getCode() {
-        return code;
-    }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public String getMsg() {
         return msg;

@@ -5,12 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
     >
+    <View
+        android:id="@+id/status_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:id="@+id/newtbar"
+        android:fitsSystemWindows="true"
         >
         <TextView
             android:layout_width="match_parent"

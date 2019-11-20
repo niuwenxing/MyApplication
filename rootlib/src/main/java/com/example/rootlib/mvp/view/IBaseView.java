@@ -1,7 +1,9 @@
 package com.example.rootlib.mvp.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.example.rootlib.widget.common.CommonNoticeDialog;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 public interface IBaseView {
@@ -139,10 +141,10 @@ public interface IBaseView {
      * @param positiveOnClickListener 确定按钮监听器
      * @param cancelOnClickListener   取消按钮监听器
      */
-//    CommonNoticeDialog dialogShowRemind(int resId,String title, String msg,
-//                                        String positiveText, String cancelText,
-//                                        DialogInterface.OnClickListener positiveOnClickListener,
-//                                        DialogInterface.OnClickListener cancelOnClickListener);
+    CommonNoticeDialog dialogShowRemind(int resId, String title, String msg,
+                                        String positiveText, String cancelText,
+                                        DialogInterface.OnClickListener positiveOnClickListener,
+                                        DialogInterface.OnClickListener cancelOnClickListener);
 
     /**
      * 使用对话框显示提醒，需要点击确定或取消选择

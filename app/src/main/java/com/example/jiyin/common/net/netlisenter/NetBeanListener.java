@@ -15,7 +15,10 @@ public interface NetBeanListener<T> extends IBaseListener {
     /**
      * 失败回调
      * @param status
+     * @param canceled
      * @param message
      */
-    void onFail(String status, String message);
+    void onFail(String status, boolean canceled, String message);
+
+    void onFail(int status, String message);
 }

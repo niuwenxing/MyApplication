@@ -1,6 +1,8 @@
 package com.example.jiyin.home.fragment;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -120,6 +122,10 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     RelativeLayout collection;
     @BindView(R.id.view_abb)
     RelativeLayout viewAbb;
+    @BindView(R.id.a1_personnel)
+    TextView a1Personnel;
+    @BindView(R.id.a1_Carvetime)
+    TextView a1Carvetime;
     private View layoutFragment;
 
     @Override
@@ -134,37 +140,38 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 //        tvHomeTitle = layoutFragment.findViewById(R.id.tv_homeTitle);
 //        tvtop = layoutFragment.findViewById(R.id.tv_tvTop);
 //        tvHomeTitles = layoutFragment.findViewById(R.id.tv_homeTitles);
-
-
+        AssetManager mgr = getContext().getAssets();
+        Typeface tf = Typeface.createFromAsset(mgr, "fonts/SOURCEHANSANSCN.otf");
+        a1.setTypeface(tf);
+        bb1.setTypeface(tf);
+        b1.setTypeface(tf);
+        a1Personnel.setTypeface(tf);
+        a1Carvetime.setTypeface(tf);
+//        tvHomeTitles.setTypeface(tf);
 
         SpannableStringBuilder HomeTitle = new SpannableStringBuilder(tvHomeTitle.getText());
         HomeTitle.setSpan(new TypefaceSpan("PingFangSC-Semibold"), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         HomeTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvHomeTitle.setText(HomeTitle);
 
-        SpannableStringBuilder homeTitles = new SpannableStringBuilder(tvHomeTitles.getText());
-        homeTitles.setSpan(new TypefaceSpan("Arial-BoldMT"), 0, tvHomeTitles.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvHomeTitles.setText(homeTitles);
 
         SpannableStringBuilder tvTop = new SpannableStringBuilder(tvTvTop.getText());
         tvTop.setSpan(new TypefaceSpan("San-Francisco-Text-Heavy"), 0, tvTvTop.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvTvTop.setText(tvTop);
 
 
-        CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, true);
+        //首页轮播
+        CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = layoutFragment.findViewById(R.id.home_bananrlist);
         layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
         recyclerView.addOnScrollListener(new CenterScrollListener());
-
         List objects = new ArrayList<>();
         objects.add("1");
         objects.add("1");
         objects.add("1");
         objects.add("1");
         objects.add("1");
-
         CoverFlowAdapter mCoverFlowAdapter = new CoverFlowAdapter(objects, getContext());
-
         recyclerView.setLayoutManager(new CoverFlowAdapter.MyLayoutManager(getContext()));
         initRecyclerView(recyclerView, layoutManager, mCoverFlowAdapter);
         recyclerView.setAdapter(mCoverFlowAdapter);
@@ -263,6 +270,6 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         }
     }
 }
-/***
+/**
  *   startActivity(new Intent(getContext(), ContactsActivity.class)); //联系人
  */

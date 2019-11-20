@@ -15,6 +15,9 @@ import com.example.jiyin.home.Activity.sonview.activity.ChatActivity;
 import com.example.jiyin.home.fragment.adapter.SlideRecyAdapter;
 import com.example.jiyin.home.presenter.Impl.NewsPreImpl;
 import com.example.jiyin.home.presenter.view.NewsView;
+import com.example.jiyin.interactive.ContactsActivity;
+import com.example.rootlib.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,8 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
     RelativeLayout rlNewsJiYingOfficialBtn;
     @BindView(R.id.oneview)
     LinearLayout oneview;
+    @BindView(R.id.status_bar_view)
+    View view;
     @BindView(R.id.ry_Chatlist)
     SlideRecyclerView ryChatlist;
 
@@ -65,6 +70,7 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
 
     @Override
     protected void init() {
+        ImmersionBar.setStatusBarView(this, view);
         ryChatlist.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         List<Integer> objects = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -119,6 +125,7 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_contacts_btn:
+                startActivity(new Intent(getContext(), ContactsActivity.class));
                 break;
             case R.id.rl_NewsFans_btn:
                 break;

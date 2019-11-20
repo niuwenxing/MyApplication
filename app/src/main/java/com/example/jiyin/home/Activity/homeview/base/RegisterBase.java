@@ -1,33 +1,25 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
-import com.example.jiyin.common.bean.BaseModel;
+import com.example.jiyin.common.net.netunti.callcode;
+
+import java.util.List;
 
 /**
  * 注册
  */
 
-public class RegisterBase extends BaseModel {
+public class RegisterBase extends callcode {
 
 
     /**
-     * code : 1
-     * msg : 注册 成功
-     * data : 5ea76fffc3a01b4d00e326ced1d4b422
-     * time : 1573091668
+     * msg : 账号已存在,请登录
+     * data : []
+     * time : 1573528818
      */
 
-    private int code;
     private String msg;
-    private String data;
     private int time;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
+    private List<?> data;
 
     public String getMsg() {
         return msg;
@@ -37,19 +29,19 @@ public class RegisterBase extends BaseModel {
         this.msg = msg;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public int getTime() {
         return time;
     }
 
     public void setTime(int time) {
         this.time = time;
+    }
+
+    public List<?> getData() {
+        return data;
+    }
+
+    public void setData(List<?> data) {
+        this.data = data;
     }
 }

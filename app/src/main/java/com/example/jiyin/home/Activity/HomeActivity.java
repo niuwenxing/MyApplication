@@ -28,6 +28,7 @@ import com.example.jiyin.home.fragment.NewHomeFregment;
 import com.example.jiyin.home.fragment.NewsFragment;
 import com.example.jiyin.home.fragment.WorkshopFragment;
 import com.example.rootlib.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.Serializable;
 import java.util.List;
@@ -63,9 +64,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        //沉浸式状态栏适配
-//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        statusBarHide(this);
+        ImmersionBar.with(this).navigationBarColor(R.color.colorMenu).init();
         initFragment();
 
 
@@ -86,12 +85,13 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
             RadioButtons[i] = (RadioButton) rgMain.getChildAt(i);
         }
         RadioButtons[0].setChecked(true);
-        //菜单
+        //
+        MoreWindow moreWindow = new MoreWindow(this);
         viewById = findViewById(R.id.fabu);
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                moreWindow.showMoreWindow(v);
             }
         });
     }
@@ -113,7 +113,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
                     break;
                     case 0:
                     case 4:
-                        statusBarHide(this);
+                        statusBarhightfalse();
                         break;
 
                 }
@@ -124,10 +124,12 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         RadioButtons[anInt].setChecked(true);
     }
 
+    private void statusBarhightfalse() {
+        ImmersionBar.with(this).keyboardEnable(false).statusBarDarkFont(false).navigationBarColor(R.color.colorMenu).init();
+
+    }
     private void statusBarhight() {
-        StatusBarUtil.setStatusBarMode(this,true,R.color.white);
-
-
+        ImmersionBar.with(this).keyboardEnable(false).statusBarDarkFont(true, 0.2f).navigationBarColor(R.color.colorMenu).init();
     }
 
 

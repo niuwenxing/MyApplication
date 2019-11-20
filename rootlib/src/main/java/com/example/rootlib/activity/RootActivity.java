@@ -2,6 +2,7 @@ package com.example.rootlib.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,6 +34,7 @@ import com.example.rootlib.mvp.view.IBaseView;
 import com.example.rootlib.permission.RequestPermissionListener;
 import com.example.rootlib.utils.CToast;
 import com.example.rootlib.utils.StringUtil;
+import com.example.rootlib.widget.common.CommonNoticeDialog;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.util.ArrayList;
@@ -73,6 +76,11 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
     private Map<Integer, RequestPermissionListener> permissionListeners = new HashMap<>();
 
     private ThrowLayout throwLayout;
+
+    /**
+     * 提示对话框
+     */
+    CommonNoticeDialog dialog;
 
     /**
      * 绑定布局文件
@@ -431,5 +439,82 @@ public abstract   class RootActivity extends AppCompatActivity implements IBaseV
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    /**
+     *  异常dog
+     * @param resId                   图片资源，小于0时不显示
+     * @param title                   标题
+     * @param msg                     提醒内容
+     * @param positiveText            取消按钮文本
+     * @param cancelText              确定按钮文本
+     * @param positiveOnClickListener 确定按钮监听器
+     * @param cancelOnClickListener   取消按钮监听器
+     * @return
+     */
+    @Override
+    public CommonNoticeDialog dialogShowRemind(int resId, String title, String msg,
+                                               String positiveText, String cancelText,
+                                               DialogInterface.OnClickListener positiveOnClickListener,
+                                               DialogInterface.OnClickListener cancelOnClickListener) {
+
+        return dialogShowRemind(resId, title, msg, positiveText, cancelText, positiveOnClickListener, cancelOnClickListener,
+                Gravity.CENTER, true, false);
+    }
+
+
+
+
+    private CommonNoticeDialog dialogShowRemind(int resId, String title, String msg,
+                                                String positiveText, String cancelText,
+                                                DialogInterface.OnClickListener positiveOnClickListener,
+                                                DialogInterface.OnClickListener cancelOnClickListener,
+                                                int positionId, boolean canCancel, boolean canTouchOutside) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
+        dialog = new CommonNoticeDialog(activity);
+        //图片
+        dialog.setIcon(resId);
+        //标题
+        dialog.setTitle(title);
+        //正文
+        dialog.setMessage(msg);
+        //积极按钮
+        dialog.setPosiText(positiveText);
+        //消极按钮
+        dialog.setNegText(cancelText);
+        //正文位置
+        dialog.setContentPosi(positionId);
+        //积极监听
+        if (positiveOnClickListener != null) {
+            dialog.setPositiveBtnListener(positiveOnClickListener);
+        } else {
+            dialog.setPositiveBtnListener(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        //消极监听
+        if (cancelOnClickListener != null) {
+            dialog.setCancelBtnListener(cancelOnClickListener);
+        } else {
+            dialog.setCancelBtnListener(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        //其他方式是否消失
+        dialog.setCancelable(canCancel);
+        dialog.setCanceledOnTouchOutside(canTouchOutside);
+
+        dialog.show();
+        return dialog;
+    }
+
 
 }

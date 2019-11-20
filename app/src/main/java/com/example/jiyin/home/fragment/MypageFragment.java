@@ -8,7 +8,6 @@ public class MypageFragment extends JiYingFragment {
     protected int attachLayoutRes() {
         return R.layout.mypagefragment_layout;
     }
-
     @Override
     protected void init() {
 

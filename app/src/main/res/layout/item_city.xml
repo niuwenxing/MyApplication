@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dp_12"
             android:paddingTop="@dimen/dp_12"
-            tools:text="合肥市"
             android:textSize="@dimen/sp_13" />
     </LinearLayout>
     <ImageView

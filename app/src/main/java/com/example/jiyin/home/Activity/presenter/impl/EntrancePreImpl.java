@@ -2,6 +2,8 @@ package com.example.jiyin.home.Activity.presenter.impl;
 
 import android.util.Log;
 
+import com.example.jiyin.common.net.beas.BaseResponseModel;
+import com.example.jiyin.common.net.manager.HttpManager;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
@@ -9,23 +11,26 @@ import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.EntrancePresenter;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
-import com.example.jiyin.interactive.UserCallManager;
+//import com.example.jiyin.interactive.UserCallManager;
+import com.example.jiyin.home.UserCallManager;
+import com.example.jiyin.interactive.UserService;
 import com.example.rootlib.utils.LogUtils;
+
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
     /**
      * 网络访问单元
      */
-    private BeanNetUnit loginUnit;
+    private BeanNetUnit loginUnit=null;
 
     @Override
     public void cancelBiz() {//批量取消网络请求
         cancelRequest(loginUnit);
-    }
-
-    @Override
-    public void login() {
-
     }
 
     /**
@@ -36,19 +41,22 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
      */
     @Override
     public void userRegister(String phone, String code, String psd) {
+
         loginUnit=new BeanNetUnit<RegisterBase>()
                 .setCall(UserCallManager.getRegister(phone,code,psd))
                 .request(new NetBeanListener<RegisterBase>() {
                     @Override
                     public void onSuc(RegisterBase bean) {
-                        if(bean!=null){
-                            v.sucRegister(bean);
-                        }
-
+                        v.sucRegister(bean);
                     }
                     @Override
-                    public void onFail(String status, String message) {
-                        v.err(status,message);
+                    public void onFail(String status, boolean canceled, String message) {
+
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+
                     }
 
                     @Override
@@ -72,6 +80,8 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     }
                 });
 
+
+
     }
 
     /**
@@ -80,41 +90,37 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
      */
     @Override
     public void getCode(String phone) {
-        loginUnit = new BeanNetUnit<CodeBase>()
-                .setCall(UserCallManager.getCode(phone))
+
+        loginUnit=new BeanNetUnit<CodeBase>()
+                .setCall(UserCallManager.getCodedata(phone))
                 .request(new NetBeanListener<CodeBase>() {
                     @Override
                     public void onSuc(CodeBase bean) {
                         v.Code(bean);
-
+                    }
+                    @Override
+                    public void onFail(String status, boolean canceled, String message) {
                     }
 
                     @Override
-                    public void onFail(String status, String message) {
-                        Log.d("123456", "onFail: "+message.toString()+"+++"+status);
-
+                    public void onFail(int status, String message) {
                     }
 
                     @Override
                     public void onLoadStart() {
-
                     }
 
                     @Override
                     public void onLoadFinished() {
-
                     }
 
                     @Override
                     public void onNetErr() {
-
                     }
 
                     @Override
                     public void onSysErr(int httpCode, String msg) {
-                        Log.d("123456", "onFail: "+msg.toString()+"+++"+httpCode);
                     }
-
                 });
     }
 
@@ -126,19 +132,23 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
      */
     @Override
     public void userRetrieve(String phone, String code, String psd) {
-        loginUnit = new BeanNetUnit<CodeBase>()
-                .setCall(UserCallManager.getUserRetrieve(phone,code,psd))
+
+        loginUnit=new BeanNetUnit<CodeBase>()
+                .setCall(UserCallManager.getRetrieve(phone,code,psd))
                 .request(new NetBeanListener<CodeBase>() {
                     @Override
                     public void onSuc(CodeBase bean) {
-                        if(bean!=null){
-                            v.retrieve(bean);
-                        }
+                        v.retrieve(bean);
                     }
 
                     @Override
-                    public void onFail(String status, String message) {
+                    public void onFail(String status, boolean canceled, String message) {
+                        LogUtils.d(status+"***"+message);
+                    }
 
+                    @Override
+                    public void onFail(int status, String message) {
+                        LogUtils.d(status+"***"+message);
                     }
 
                     @Override
@@ -160,9 +170,8 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     public void onSysErr(int httpCode, String msg) {
 
                     }
-
-
                 });
+
     }
 
     /**
@@ -171,42 +180,32 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
      * @param psd
      */
     public void login(String phone, String psd) {
+
         loginUnit=new BeanNetUnit<LoginData>()
                 .setCall(UserCallManager.getlogin(phone,psd))
                 .request(new NetBeanListener<LoginData>() {
+                    @Override
+                    public void onLoadStart() { }
+
+                    @Override
+                    public void onLoadFinished() {  }
+
+                    @Override
+                    public void onNetErr() { }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {  }
 
                     @Override
                     public void onSuc(LoginData bean) {
-                        if(bean!=null){
-                            v.logindata(bean);
-                        }
+                        v.logindata(bean);
                     }
 
                     @Override
-                    public void onFail(String status, String message) {
-                        v.err(status,message);
-                    }
-                    @Override
-                    public void onLoadStart() {
-
-                    }
+                    public void onFail(String status, boolean canceled, String message) { }
 
                     @Override
-                    public void onLoadFinished() {
-
-                    }
-
-                    @Override
-                    public void onNetErr() {
-
-                    }
-
-                    @Override
-                    public void onSysErr(int httpCode, String msg) {
-                        LogUtils.d(httpCode+"--"+msg);
-                    }
-
-
+                    public void onFail(int status, String message) { }
                 });
     }
 }

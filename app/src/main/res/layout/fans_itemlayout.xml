@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--粉丝-->
+    <com.example.jiyin.common.widget.MLImageView
+        android:layout_margin="@dimen/dp_17"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        app:ml_shape_type="round"
+        android:src="@mipmap/touxiang"
+        android:id="@+id/ml_heraitImg"
+        />
+
+    <TextView
+        android:layout_toRightOf="@+id/ml_heraitImg"
+        android:layout_alignTop="@+id/ml_heraitImg"
+        android:id="@+id/tv_fans_name_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="天津迅飞科技"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorTextFans"
+        />
+
+    <TextView
+        android:id="@+id/tv_fans_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10-11   7:25"
+        android:textColor="@color/colorTextFans"
+        android:layout_toRightOf="@+id/ml_heraitImg"
+        android:layout_alignBottom="@+id/ml_heraitImg"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_alignTop="@+id/ml_heraitImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@drawable/fansbutton_bg"
+        android:padding="@dimen/dp_5"
+        android:text="互相关注"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>

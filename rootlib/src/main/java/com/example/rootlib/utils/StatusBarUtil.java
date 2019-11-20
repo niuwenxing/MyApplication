@@ -9,6 +9,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -50,7 +51,7 @@ public class  StatusBarUtil {
             window.setStatusBarColor(activity.getResources().getColor(colorId));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //使用SystemBarTint库使4.4版本状态栏变色，需要先将状态栏设置为透明
-            setTranslucentStatus(activity);
+//            setTranslucentStatus(activity);
             //设置状态栏颜色
             SystemBarTintManager tintManager = new SystemBarTintManager(activity);
             tintManager.setStatusBarTintEnabled(true);
@@ -180,6 +181,26 @@ public class  StatusBarUtil {
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         int height = resources.getDimensionPixelSize(resourceId);
         return height;
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static void initAfterSetContentView(Activity activity,
+                                               View titleViewGroup) {
+        if (activity == null){ return;}
+
+        if (titleViewGroup == null){ return; }
+
+        if (Build.VERSION.SDK_INT >Build.VERSION_CODES.KITKAT) {
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 设置头部控件ViewGroup的PaddingTop,防止界面与状态栏重叠
+            int statusBarHeight = getStatusBarHeight(activity);
+            titleViewGroup.setPadding(0, statusBarHeight, 0, 0);
+        }else {
+            LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) titleViewGroup.getLayoutParams();
+            params.height = 70;
+            titleViewGroup.setLayoutParams(params);
+        }
     }
 
 }

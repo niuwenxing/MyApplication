@@ -1,5 +1,6 @@
 package com.example.jiyin.home.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.jiyin.utils.PhoneUtil;
+import com.example.rootlib.widget.common.CommonNoticeDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +41,12 @@ public class SearchFragment extends JiYingFragment {
 
     private SearchAdapter mAdapter;
     private List<PhoneUtil.PhoneDto> mDatas;
-
-
     @Override
     protected int attachLayoutRes() {
         return R.layout.searchfragment_layout;
     }
-
     @Override
-    protected void init() {
-
-    }
+    protected void init() {}
 
     public void bindDatas(List<PhoneUtil.PhoneDto> datas){
         this.mDatas = datas;
@@ -83,6 +80,8 @@ public class SearchFragment extends JiYingFragment {
                 break;
         }
     }
+
+
 
     private class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.VH> implements Filterable {
         private List<PhoneUtil.PhoneDto> items = new ArrayList<>();
