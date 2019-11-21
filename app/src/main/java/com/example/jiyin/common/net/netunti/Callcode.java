@@ -4,7 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
 
-public class callcode implements Serializable {
+public class Callcode implements Serializable {
     @JSONField(name = "code")
     int code;
     public int getCode() {

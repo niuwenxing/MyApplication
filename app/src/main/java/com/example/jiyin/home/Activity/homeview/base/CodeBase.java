@@ -1,12 +1,10 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
-import com.example.jiyin.common.bean.BaseModel;
-import com.example.jiyin.common.net.netunti.callcode;
+import com.example.jiyin.common.net.netunti.Callcode;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class CodeBase extends callcode {
+public class CodeBase extends Callcode {
 
     /**
      * code : 1

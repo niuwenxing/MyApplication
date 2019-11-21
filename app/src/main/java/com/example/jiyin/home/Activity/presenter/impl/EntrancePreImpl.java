@@ -49,10 +49,7 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     public void onSuc(RegisterBase bean) {
                         v.sucRegister(bean);
                     }
-                    @Override
-                    public void onFail(String status, boolean canceled, String message) {
 
-                    }
 
                     @Override
                     public void onFail(int status, String message) {
@@ -98,9 +95,7 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     public void onSuc(CodeBase bean) {
                         v.Code(bean);
                     }
-                    @Override
-                    public void onFail(String status, boolean canceled, String message) {
-                    }
+
 
                     @Override
                     public void onFail(int status, String message) {
@@ -141,10 +136,6 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                         v.retrieve(bean);
                     }
 
-                    @Override
-                    public void onFail(String status, boolean canceled, String message) {
-                        LogUtils.d(status+"***"+message);
-                    }
 
                     @Override
                     public void onFail(int status, String message) {
@@ -201,8 +192,6 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                         v.logindata(bean);
                     }
 
-                    @Override
-                    public void onFail(String status, boolean canceled, String message) { }
 
                     @Override
                     public void onFail(int status, String message) { }

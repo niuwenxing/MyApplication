@@ -1,6 +1,8 @@
 package com.example.jiyin.common.utils;
 
 
+//import org.greenrobot.eventbus.EventBus;
+
 import org.greenrobot.eventbus.EventBus;
 
 /**

@@ -8,4 +8,6 @@ import java.util.List;
 
 public abstract class ReleaseCirclesPresenter<V extends IBaseView> extends BasePresenter<V> {
     public abstract void UpImages(List<LocalMedia> selectList);
+
+    public abstract void releaseCircles(String circle_title, int ification_id, int circle_type, String data);
 }

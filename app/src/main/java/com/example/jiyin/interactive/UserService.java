@@ -2,13 +2,16 @@ package com.example.jiyin.interactive;
 
 import androidx.annotation.NonNull;
 
+import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
 import com.example.jiyin.home.Activity.homeview.base.ImageArr;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
+import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,14 +95,25 @@ public interface UserService {
      * @return
      */
     @Multipart
-    @POST("Common/uploadMultiPic")
+//    @POST("Common/uploadMultiPic")
+    @POST("Common/uploadImg")
 //    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> map);
-    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> args,@Part List<MultipartBody.Part> parts);
+    Call<ImageArr> getimgarr(@Part List<MultipartBody.Part> parts);
+
+
 
 
 //    @Multipart
 //    @POST("{" + PATH + "}")
 //    Observable<String> uploadFilesII(@Path(value = PATH, encoded = true) String path, @Part() List<MultipartBody.Part> parts);
 
+
+    @POST("User/circlesRelease")
+    @FormUrlEncoded
+    Call<ReleaseBean> getUpRelease(@FieldMap Map<String, String> finalRequestMap);
+
+    @POST("User/circle")
+    @FormUrlEncoded
+    Call<CircleListBean> circleList(@FieldMap HashMap<String, String> params);
 }
 

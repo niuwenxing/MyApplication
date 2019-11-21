@@ -1,12 +1,12 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
-import com.example.jiyin.common.net.netunti.callcode;
+import com.example.jiyin.common.net.netunti.Callcode;
 
 
 /**
  * 登录
  */
-public class LoginData extends callcode {
+public class LoginData extends Callcode {
 
 
     /**

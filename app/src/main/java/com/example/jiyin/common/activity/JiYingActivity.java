@@ -50,6 +50,7 @@ public abstract class JiYingActivity<V extends IBaseView,P extends BasePresenter
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind = ButterKnife.bind(this);
+        EventBusUtil.register(this);
         checkNetWork();
 
     }

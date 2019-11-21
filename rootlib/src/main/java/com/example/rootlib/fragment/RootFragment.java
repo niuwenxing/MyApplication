@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,7 @@ public abstract class RootFragment extends Fragment implements IBaseView {
         if (parent != null) {
             parent.removeView(mRootView);
         }
-
+        init();
         return mRootView;
     }
 
@@ -105,7 +106,6 @@ public abstract class RootFragment extends Fragment implements IBaseView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         // 初始化fragment，由子fragment具体实现
-        init();
         super.onActivityCreated(savedInstanceState);
     }
 

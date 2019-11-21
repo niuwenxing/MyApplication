@@ -1,12 +1,12 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
-import com.example.jiyin.common.net.netunti.callcode;
+import com.example.jiyin.common.net.netunti.Callcode;
 
 /**
  * 多图上传
  */
 
-public class ImageArr extends callcode {
+public class ImageArr extends Callcode {
 
     /**
      * code : 1

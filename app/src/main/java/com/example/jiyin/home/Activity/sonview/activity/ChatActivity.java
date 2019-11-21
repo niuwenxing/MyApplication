@@ -295,7 +295,5 @@ public class ChatActivity extends JiYingActivity<NewsView, NewsPreImpl> implemen
                 holder.text(R.id.chatting_tv_sendtime, format.format(model.Time));
             }
         }
-
-
     }
 }

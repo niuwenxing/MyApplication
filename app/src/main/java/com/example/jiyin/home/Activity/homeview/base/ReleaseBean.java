@@ -5,16 +5,16 @@ import com.example.jiyin.common.net.netunti.Callcode;
 import java.util.List;
 
 /**
- * 注册
+ * 发布圈子 实体类
  */
 
-public class RegisterBase extends Callcode {
+public class ReleaseBean extends Callcode {
 
 
     /**
-     * msg : 账号已存在,请登录
+     * msg : 发布成功
      * data : []
-     * time : 1573528818
+     * time : 1573203965
      */
 
     private String msg;

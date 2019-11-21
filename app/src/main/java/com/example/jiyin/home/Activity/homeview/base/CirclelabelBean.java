@@ -2,12 +2,11 @@ package com.example.jiyin.home.Activity.homeview.base;
 
 import android.widget.Checkable;
 
-import com.example.jiyin.common.net.netunti.callcode;
-import com.example.jiyin.home.Activity.presenter.view.CheckView;
+import com.example.jiyin.common.net.netunti.Callcode;
 
 import java.util.List;
 
-public class CirclelabelBean extends callcode {
+public class CirclelabelBean extends Callcode {
 
 
     /**
@@ -49,6 +48,10 @@ public class CirclelabelBean extends callcode {
          * ification_title : 王者荣耀
          * ification_id : 1
          */
+
+        public DataBean(int ification_id,String ification_title){
+
+        }
 
         private String ification_title;
         private int ification_id;

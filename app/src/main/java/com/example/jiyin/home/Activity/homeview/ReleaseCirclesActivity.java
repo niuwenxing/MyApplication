@@ -20,6 +20,7 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.FullyGridLayoutManager;
 import com.example.jiyin.home.Activity.adapter.GridImageAdapter;
+import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.presenter.impl.ReleaseCirclesImpl;
 import com.example.jiyin.home.Activity.presenter.view.ReleaseCirclesView;
 import com.example.jiyin.home.Activity.view.CircleActivity;
@@ -66,8 +67,10 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
      */
     private List<LocalMedia> selectList = new ArrayList<>();
     private CharSequence str;
-    private int id;
+    private int ification_id=0;
     private String title=null;
+
+    private int circle_type;//发布类型
 
 
     @Override
@@ -87,8 +90,10 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
         type = getIntent().getStringExtra(ConstantUtil.KEY_CODE);
         if (type.equals(ConstantUtil.CIRCLES)) {
             tvReleaseTitle.setText("发布圈子");
+            circle_type=0;
         } else {
             tvReleaseTitle.setText("发布视频");
+            circle_type=1;
         }
         initView();
 
@@ -203,8 +208,8 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
         if(requestCode==123){
             if(resultCode==00056){
                 title = data.getStringExtra("title");
-                id = data.getIntExtra("id", 0);
-                if (title==null||id==0) return;
+                ification_id = data.getIntExtra("id", 0);
+                if (title==null||ification_id==0) return;
                 mCirclelabel_btn.setText(StringUtil.isEmpty(title)?"请选择": title);
             }
         }
@@ -257,10 +262,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
     }
 
 
-
-
-
-    @OnClick({R.id.Circlelabel_btn,R.id.tv_ReleaseBtn})
+    @OnClick({R.id.Circlelabel_btn,R.id.tv_ReleaseBtn,R.id.iv_goback})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.Circlelabel_btn:  //选择标签页
@@ -268,9 +270,12 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
                 startActivityForResult(new Intent(this, CircleActivity.class),123);
                 break;
             case R.id.tv_ReleaseBtn:
-                if (title==null||id==0){toast("请选择 圈子标签");
-                    return;}
+                if (title==null||ification_id==0){toast("请选择 圈子标签");
+                    return; }
                 UpRelease();
+                break;
+            case R.id.iv_goback:
+                finish();
                 break;
         }
     }
@@ -279,9 +284,43 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
      * 上传图片
      */
     private void UpRelease() {
+        if (selectList != null && selectList.size() != 0)
         presenter.UpImages(selectList);
+        else
+        if (StringUtil.isEmpty(edContent.getText().toString().trim())) {
+                toast("请填写圈子内容");
+        }else{
+            presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,"");
+        }
+        return;
+    }
+    //发布圈子
+    @Override
+    public void setImageUrl(String data) {
+        if(StringUtil.isEmpty(edContent.getText().toString().trim())||StringUtil.isEmpty(data)){
+            toast("请填写圈子内容");
+            return;
+        }
+        if (ification_id==0) {
+            toast("请选择圈子类型");
+            return;
+        }
+        presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,data);
+    }
+
+    @Override
+    public void releasedSuccessfully(ReleaseBean bean) {
+        if (bean.getCode()==-1) {
+            toastLong(bean.getMsg());
+        }else{
+            toastLong(bean.getMsg());
+            finish();
+        }
 
     }
 
-
+    @Override
+    public void releaseFail(String mge, String s) {
+        toastLong(mge+s);
+    }
 }

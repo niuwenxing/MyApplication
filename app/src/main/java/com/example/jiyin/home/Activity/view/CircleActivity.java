@@ -99,6 +99,7 @@ public class CircleActivity extends JiYingActivity implements IBaseView {
      * 获取圈子标签
      */
     public void getCircle(){
+
         BeanNetUnit loginUnit=new BeanNetUnit<CirclelabelBean>()
                 .setCall(UserCallManager.getCircle())
                 .request(new NetBeanListener<CirclelabelBean>() {
@@ -111,15 +112,6 @@ public class CircleActivity extends JiYingActivity implements IBaseView {
                             }
                         }
 
-                    @Override
-                    public void onFail(String status, boolean canceled, String message) {
-                        showSysErrLayout(message, new ThrowLayout.OnRetryListener() {
-                            @Override
-                            public void onRetry() {
-                                getCircle();
-                            }
-                        });
-                    }
 
                     @Override
                     public void onFail(int status, String message) {

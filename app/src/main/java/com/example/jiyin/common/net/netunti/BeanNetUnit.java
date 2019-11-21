@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BeanNetUnit<T extends callcode> extends RootResponseModel implements IBaseAPIBiz<NetBeanListener>, BaseConfig {
+public class BeanNetUnit<T extends Callcode> extends RootResponseModel implements IBaseAPIBiz<NetBeanListener>, BaseConfig {
     protected Call<T> call;
 
     @Override
@@ -34,7 +34,7 @@ public class BeanNetUnit<T extends callcode> extends RootResponseModel implement
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                LogUtils.d("网络请求成功"+response.body());
+                LogUtils.d("网络请求成功"+response.body()+"***"+response);
                 callBackFinished(listener);
                 if(response.raw().code()==200){
                     if (response.body().code== BaseConfig.SERVER_ERR_LOGIN_OBSOLETE) {
@@ -63,9 +63,9 @@ public class BeanNetUnit<T extends callcode> extends RootResponseModel implement
                         t instanceof SocketException ||     //套接字异常
                         t instanceof UnknownHostException) { //未知主机异常
                     listener.onNetErr();//网络错误
-                    LogUtils.d("网络错误");
+                    LogUtils.e("网络错误");
                 }else{
-                    LogUtils.d("数据解析错误");
+                    LogUtils.e("错误"+t.getMessage());
                     listener.onSysErr(999, t.getMessage()+"未知错误");//未知错误
                 }
 //                listener.onFail(call.toString(),call.isCanceled(),t.getMessage().toString());
