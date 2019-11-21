@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_common_dialog"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dip">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_notice_dialog_title"
+            style="@style/text_black_18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dip"
+            android:gravity="center"
+            android:text=""
+            android:visibility="gone" />
+
+        <!-- 图标 -->
+        <ImageView
+            android:id="@+id/iv_notice_dialog_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dip"
+            android:src="@mipmap/icon_common_wifi_dialog"
+            android:visibility="gone" />
+
+        <!-- 内容 -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_marginBottom="40dip"
+            android:layout_marginTop="15dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_notice_dialog_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:text=""
+                android:textColor="#323232"
+                android:textSize="15sp" />
+        </ScrollView>
+
+
+        <!-- 按钮容器 -->
+        <LinearLayout
+            android:id="@+id/ll_notice_dialog_btnbox"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/common_alert_button_height"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_notice_dialog_cancel"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_white_round_shadow"
+                android:gravity="center"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="13dp"
+                android:singleLine="true"
+                android:textColor="#666"
+                android:textSize="13sp"
+                android:visibility="visible" />
+
+
+            <Button
+                android:id="@+id/btn_notice_dialog_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/bg_green_round_shadow"
+                android:gravity="center"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="13dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

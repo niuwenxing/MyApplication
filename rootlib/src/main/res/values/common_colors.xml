@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Google I/O APP Colors Start -->
+    <color name="transparent">#00000000</color>
+    <color name="body_text_1">#de000000</color> <!-- 透明度87% -->
+    <color name="body_text_2">#8a000000</color> <!-- 透明度54% -->
+    <color name="body_text_3">#60000000</color> <!-- 透明度26% -->
+
+</resources>

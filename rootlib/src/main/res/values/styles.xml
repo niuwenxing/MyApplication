@@ -1,0 +1,216 @@
+<resources>
+
+
+
+
+
+    <!-- 表单每行 -->
+    <style name="common_form_item">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+
+
+
+
+
+    <!-- 首页导航图标样式 -->
+    <style name="home_nav_container">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="home_nav_im">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="home_nav_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+
+    <style name="course_sort_image">
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+
+
+
+
+
+
+
+    <!--timmer-->
+    <style name="CountDownTimerViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!--timmer-->
+    <style name="CountDownTimerViewHomeStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <!--tag标签-->
+    <declare-styleable name="Lable">
+        <attr name="lable_textSize" format="dimension"></attr>
+        <attr name="lable_opttextColor" format="color"></attr>
+        <attr name="lable_notextColor" format="color"></attr>
+        <attr name="lable_padding" format="integer"></attr>
+        <attr name="lable_item_padding" format="integer"></attr>
+        <attr name="lable_margin" format="integer"></attr>
+        <attr name="lable_ismultiple" format="boolean"></attr>
+        <attr name="lable_isclick" format="boolean"></attr>
+        <attr name="lable_selectedDrawable" format="reference"></attr>
+    </declare-styleable>
+
+    <style name="second_text_style">
+        <item name="android:textColor">#656565</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="main_text_style">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#1b2d25</item>
+    </style>
+
+    <style name="item_img_style">
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">15dp</item>
+    </style>
+
+
+    <style name="SignDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <!--对话框弹出window背景变暗-->
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        //对话框无标题
+        <item name="android:windowIsTranslucent">false</item>
+        //对话框是否透明
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <!-- 支付密码对话框样式 -->
+    <style name="StyleDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    　　
+    　　
+    　　
+    　　
+    　　
+    　<!-- Text style "" -->
+    <!-- Add this snippet to styles.xml. -->
+    <style name="tv_item_event_green_12">
+        <item name="android:textColor">#00ae66</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_item_event_green_15">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColor">#00ae66</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- Text style "out" -->
+    <!-- Add this snippet to styles.xml. -->
+    <style name="table_text">
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+
+    <!-- <style name="appalertdialog" parent="Base.V7.Theme.AppCompat.Dialog">
+         <item name="buttonStyle">@style/appalertdialogbuttonstyle </item>
+     </style>
+
+     &lt;!&ndash;按钮样式&ndash;&gt;
+     <style name="appalertdialogbuttonstyle" parent="android:Widget">
+         <item name="android:background">@drawable/abc_btn_default_mtrl_shape</item>
+         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
+         <item name="android:minHeight">48dip</item>
+         <item name="android:minWidth">88dip</item>
+         <item name="android:focusable">true</item>
+         <item name="android:clickable">true</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+     </style>-->
+
+
+
+
+
+    <!--对话框弹出window背景变暗-->
+    <style name="Dialog_team" parent="android:style/Theme.Dialog">
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--//对话框无标题-->
+        <!--<item name="android:windowIsTranslucent">false</item>-->
+        <!--//对话框是否透明-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+    <!--//valuse-->
+
+
+    <!-- 对话框样式 -->
+    <style name="DialogStyle">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimAmount">0.7</item>
+    </style>
+
+    <style name="text_black_18">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">@dimen/large_x</item>
+    </style>
+
+
+</resources>

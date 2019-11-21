@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 标题栏高度 -->
+    <dimen name="common_titerBar_height">50dp</dimen>
+
+    <dimen name="small_x">10sp</dimen>
+    <dimen name="small_xx">11sp</dimen>
+
+    <dimen name="normal_x">13sp</dimen>
+    <dimen name="normal_xx">15sp</dimen>
+
+    <dimen name="large_x">18sp</dimen>
+    <dimen name="large_xx">20sp</dimen>
+
+    <!-- 图标间距 -->
+    <dimen name="common_icon_horizontal_margin">10dip</dimen>
+    <!-- 页面水平以及垂直方向的边距 -->
+    <dimen name="activity_horizontal_margin">15dp</dimen>
+    <!-- 图标和文字间距 -->
+    <dimen name="common_icon_horizontal_dis">7dip</dimen>
+    <!-- 公共异常页面图片位置 -->
+    <dimen name="common_error_image_margin_top">120dp</dimen>
+    <!--相邻组件之间的间距-->
+    <dimen name="common_unit_dis">15dp</dimen>
+    <!-- 公共对话框 -->
+    <dimen name="common_alert_button_height">45dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+</resources>
