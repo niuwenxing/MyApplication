@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_3"
         android:background="#f4f4f4"/>
-
+    <include layout="@layout/layout_common_throw"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_WorkshopView"
         android:layout_width="match_parent"

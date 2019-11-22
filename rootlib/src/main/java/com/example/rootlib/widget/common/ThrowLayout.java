@@ -153,6 +153,7 @@ public class ThrowLayout extends FrameLayout {
             ViewStub temp = (ViewStub) findViewById(R.id.stub_throw);
             throwStubView = temp.inflate();
 
+        }
             textView = findViewById(R.id.btn_net_again);
             switch (status) {
                 case STATUS_NO_DATA:       //空数据异常加载布局
@@ -175,7 +176,6 @@ public class ThrowLayout extends FrameLayout {
                 }
             });
 
-        }
 
     }
 

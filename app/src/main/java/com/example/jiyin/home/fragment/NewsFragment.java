@@ -1,6 +1,7 @@
 package com.example.jiyin.home.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,6 +71,9 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
 
     @Override
     protected void init() {
+
+        Log.i("jian","asbfojsabofhbosahfbjhabpfjaspfb");
+
         ImmersionBar.setStatusBarView(this, view);
         ryChatlist.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         List<Integer> objects = new ArrayList<>();

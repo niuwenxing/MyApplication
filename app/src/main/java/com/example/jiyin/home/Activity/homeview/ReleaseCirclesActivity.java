@@ -297,7 +297,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
     //发布圈子
     @Override
     public void setImageUrl(String data) {
-        if(StringUtil.isEmpty(edContent.getText().toString().trim())||StringUtil.isEmpty(data)){
+        if(StringUtil.isEmpty(edContent.getText().toString().trim())&StringUtil.isEmpty(data)){
             toast("请填写圈子内容");
             return;
         }

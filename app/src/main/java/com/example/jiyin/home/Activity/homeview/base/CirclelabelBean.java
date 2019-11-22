@@ -49,13 +49,14 @@ public class CirclelabelBean extends Callcode {
          * ification_id : 1
          */
 
-        public DataBean(int ification_id,String ification_title){
-
-        }
 
         private String ification_title;
         private int ification_id;
 
+        public DataBean(int ification_id,String ification_title){
+            this.ification_id=ification_id;
+            this.ification_title=ification_title;
+        }
 
         private boolean mChecked = false;
 
@@ -70,7 +71,7 @@ public class CirclelabelBean extends Callcode {
         public void toggle() {
             setChecked(!mChecked);
         }
-/********/
+        /********/
         public String getIfication_title() {
             return ification_title;
         }

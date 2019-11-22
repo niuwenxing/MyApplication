@@ -21,4 +21,5 @@ public interface NetBeanListener<T> extends IBaseListener {
 //    void onFail(String status, boolean canceled, String message);
 
     void onFail(int status, String message);
+
 }

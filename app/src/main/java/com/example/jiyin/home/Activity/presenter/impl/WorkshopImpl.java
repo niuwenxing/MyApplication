@@ -7,6 +7,7 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.presenter.WorkshopPresenter;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
 import com.example.jiyin.home.UserCallManager;
+import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 /**
@@ -64,6 +65,8 @@ public  class WorkshopImpl extends WorkshopPresenter<WorkshopView> {
 
                     @Override
                     public void onNetErr() {
+                        LogUtils.e("网络错误++");
+
                         v. showNetErrorLayout(new ThrowLayout.OnRetryListener() {
                             @Override
                             public void onRetry() {

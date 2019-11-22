@@ -136,6 +136,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
     @Override
     protected void init() {
+        Log.i("HomeFragment","a4a8465e41w6fa8496wef65awe6f846ewa5f16a5s4df6es165f1d854as6ef46584d98");
         layoutFragment = getLayoutFragment();
 //        tvHomeTitle = layoutFragment.findViewById(R.id.tv_homeTitle);
 //        tvtop = layoutFragment.findViewById(R.id.tv_tvTop);

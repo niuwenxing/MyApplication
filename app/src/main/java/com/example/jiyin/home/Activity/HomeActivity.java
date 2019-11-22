@@ -26,6 +26,7 @@ import com.example.jiyin.home.fragment.MoreWindow;
 import com.example.jiyin.home.fragment.MypageFragment;
 import com.example.jiyin.home.fragment.NewHomeFregment;
 import com.example.jiyin.home.fragment.NewsFragment;
+import com.example.jiyin.home.fragment.Publishpage;
 import com.example.jiyin.home.fragment.WorkshopFragment;
 import com.example.rootlib.utils.StatusBarUtil;
 import com.gyf.immersionbar.ImmersionBar;
@@ -75,7 +76,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         workshopFragment = new WorkshopFragment();
         newsFragment = new NewsFragment();
         mypageFragment = new MypageFragment();
-        fragments1 = new Fragment[]{newHomeFregment, workshopFragment,new WorkshopFragment(), newsFragment,mypageFragment};
+        fragments1 = new Fragment[]{newHomeFregment, workshopFragment,new Publishpage(), newsFragment,mypageFragment};
 
         vpMain.setOffscreenPageLimit(fragments1.length);
         vpMain.setAdapter(new HomeFragmentAdapter(getSupportFragmentManager(), fragments1));
