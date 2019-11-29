@@ -7,6 +7,7 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.presenter.WorkshopPresenter;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
 import com.example.jiyin.home.UserCallManager;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 
@@ -102,7 +103,17 @@ public  class WorkshopImpl extends WorkshopPresenter<WorkshopView> {
                     @Override
                     public void onSuc(CircleListBean bean) {
                         if (bean!=null) {
-                            v.ReturnCircle(bean);
+                            if (CollectionUtil.isEmpty(bean.getData())) {
+                                v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
+                                    @Override
+                                    public void onRetry() {
+                                        circle(pages,mType);
+                                    }
+                                });
+                            }else{
+                                v.hideExpectionPages();
+                                v.ReturnCircle(bean);
+                            }
                         }
                     }
 
@@ -119,15 +130,24 @@ public  class WorkshopImpl extends WorkshopPresenter<WorkshopView> {
                     public void onLoadFinished() {
 
                     }
-
                     @Override
                     public void onNetErr() {
-
+                        v.showNetErrorLayout(new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                circle(pages,mType);
+                            }
+                        });
                     }
 
                     @Override
                     public void onSysErr(int httpCode, String msg) {
-
+                        v.showSysErrLayout(msg, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                circle(pages,mType);
+                            }
+                        });
                     }
 
 

@@ -1,6 +1,7 @@
 package com.example.jiyin.common.net.netunti;
 
 
+import com.alibaba.fastjson.JSON;
 import com.example.jiyin.common.bean.EventNoticeBean;
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.beas.RootResponseModel;
@@ -9,6 +10,7 @@ import com.example.jiyin.common.utils.EventBusUtil;
 import com.example.rootlib.mvp.presenter.biz.IBaseAPIBiz;
 import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.utils.StringUtil;
+import com.google.gson.Gson;
 
 import java.net.ConnectException;
 import java.net.SocketException;
@@ -46,6 +48,7 @@ public class BeanNetUnit<T extends Callcode> extends RootResponseModel implement
                     }
                     if (!StringUtil.isEmpty(response.body().toString())) {
                         listener.onSuc(response.body());
+                        LogUtils.w("json"+new Gson().toJson(response.body()));
                     }else{
                         listener.onFail(response.code(), response.message());
                     }

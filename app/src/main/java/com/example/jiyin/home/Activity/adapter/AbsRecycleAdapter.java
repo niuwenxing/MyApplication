@@ -25,8 +25,8 @@ import java.util.List;
 public abstract class AbsRecycleAdapter<T> extends RecyclerView.Adapter<AbsRecycleAdapter.VH> {
 
     public static final int CHOICE_MODE_NONE = 0;
-    public static final int CHOICE_MODE_SINGLE = 1;
-    public static final int CHOICE_MODE_MULTIPLE = 2;
+    public static final int CHOICE_MODE_SINGLE = 1; //单选
+    public static final int CHOICE_MODE_MULTIPLE = 2; //多选
     public static final int INVALID_POSITION = -1;
 
     private SparseBooleanArray mCheckStates;

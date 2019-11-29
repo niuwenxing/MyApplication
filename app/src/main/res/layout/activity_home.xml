@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <com.example.jiyin.customwidget.NoScrollViewPager
+<!--    <com.example.jiyin.customwidget.NoScrollViewPager-->
+<!--        android:id="@+id/"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@id/rg_main"-->
+<!--        android:layout_weight="1"-->
+<!--        >-->
+
+<!--    </com.example.jiyin.customwidget.NoScrollViewPager>-->
+    <FrameLayout
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/rg_main"
-        android:layout_weight="1"
-        >
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </com.example.jiyin.customwidget.NoScrollViewPager>
-    
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@mipmap/dibubeijing"
         android:orientation="vertical"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
 
         <RadioGroup
             android:id="@+id/rg_main"
@@ -30,15 +40,17 @@
             android:layout_height="@dimen/dp_50"
             android:layout_marginBottom="@dimen/dp_5"
             android:orientation="horizontal">
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/home_newhome_select"
                 android:text="首页"
+                android:textColor="@drawable/home_newhome_select"
                 android:textSize="@dimen/dp_16" />
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -48,15 +60,15 @@
                 android:text="圈子"
                 android:textColor="@drawable/home_newhome_select"
                 android:textSize="@dimen/dp_16" />
+
             <RadioButton
+                android:id="@+id/fabu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
-                android:id="@+id/fabu"
-                android:gravity="center"
                 android:drawableBottom="@mipmap/fabu"
-                />
+                android:gravity="center" />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -94,4 +106,4 @@
 <!--    <include layout="@layout/layout_common_throw" />-->
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

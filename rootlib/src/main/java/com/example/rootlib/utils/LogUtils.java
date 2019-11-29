@@ -121,7 +121,6 @@ public class LogUtils {
         if (!allowE) return;
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
-
         if (customLogger != null) {
             customLogger.e(tag, content);
         } else {

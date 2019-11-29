@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
     <!-- 网络异常布局 -->
-    <View
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/imagesThow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btn_net_again"
+        android:layout_alignEnd="@+id/btn_net_again"
+        android:src="@drawable/zanwufabu" />
 
     <TextView
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/imagesThow"
         android:id="@+id/btn_net_again"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="您当前的网络好像不是很好哦"
         android:padding="10dp"
         />
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
-</LinearLayout>
+
+</RelativeLayout>

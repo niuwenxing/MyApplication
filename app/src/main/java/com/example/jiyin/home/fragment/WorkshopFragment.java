@@ -1,60 +1,74 @@
 package com.example.jiyin.home.fragment;
 
-import android.os.Bundle;
-import android.os.Parcelable;
+
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
+import com.example.jiyin.home.Activity.adapter.AbsRecycleAdapter;
+import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
-import com.google.android.material.tabs.TabLayout;
+import com.example.jiyin.home.fragment.adapter.CircleAdapter;
+import com.example.jiyin.home.fragment.adapter.WorkShopAdapter;
+import com.example.rootlib.widget.common.ThrowLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 圈子
  */
 
-public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl> implements WorkshopView,View.OnClickListener {
+public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl> implements WorkshopView {
 
-    @BindView(R.id.tb_WorkshopTitle)
-    TabLayout tbWorkshopTitle;
-    @BindView(R.id.vp_WorkshopView)
-    ViewPager vpWorkshopView;
     @BindView(R.id.status_bar_view)
-    View view;
+    View statusBarView;
     @BindView(R.id.img_xiaoxi_btn)
-    ImageView imgXiaoxi_btn;
+    ImageView imgXiaoxiBtn;
+    @BindView(R.id.newtbar)
+    RelativeLayout newtbar;
+    @BindView(R.id.throw_layout)
+    ThrowLayout throwLayout;
+    @BindView(R.id.mLabeltable)
+    RecyclerView mLabeltable;
+    @BindView(R.id.mCirclelist)
+    RecyclerView mCirclelist;
 
-    private List<CirclelabelBean.DataBean> qdata ;
 
-    private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private MyPagerAdapter mAdapter;
-    private final String[] mTitles = {
-            "全部", "关注", "电竞类"
-            , "投资类", "工艺类", "原创类"
-    };
+    //刷新
+    @BindView(R.id.refreshLayout)
+    RefreshLayout refreshLayout;
+
+    @BindView(R.id.footer)
+    ClassicsFooter footer;
+
+
+    private CircleAdapter circleAdapter;
+    private List<CirclelabelBean.DataBean> dataList=new ArrayList<>();//标签数据集
+    private List<CircleListBean.DataBean> listdata=new ArrayList<>();//列表 数据集
+    private int CirclelabeType=0,pages=0;
+    private WorkShopAdapter workShopAdapter;
+
     @Override
     protected int attachLayoutRes() {
         return R.layout.workshopfragment_layout;
@@ -68,132 +82,110 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
 
     @Override
     protected void init() {
-
-        imgXiaoxi_btn.setOnClickListener(this);
-        ImmersionBar.setStatusBarView(this, view);
+        ImmersionBar.setStatusBarView(this, statusBarView);
+        //获取圈子标签
         presenter.getCircle();
+        //标签布局
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mLabeltable.setNestedScrollingEnabled(false);
+        mLabeltable.setLayoutManager(linearLayoutManager);
+        circleAdapter = new CircleAdapter(getContext());
+        circleAdapter.setData(dataList);
+        circleAdapter.setChoiceMode(AbsRecycleAdapter.CHOICE_MODE_SINGLE);//适配器模式
+        mLabeltable.setAdapter(circleAdapter);
+        mLabeltable.addItemDecoration(
+                new SpaceItemDecoration((int)getActivity().getResources().getDimension(R.dimen.dp_7),
+                (int)getActivity().getResources().getDimension(R.dimen.dp_10)));
+        initView();
+        workShopAdapter = new WorkShopAdapter(activity,listdata);//点击事件内部处理
+        mCirclelist.setAdapter(workShopAdapter);
 
-        qdata =new ArrayList<>();
-
-        tbWorkshopTitle.setupWithViewPager(vpWorkshopView);
-        vpWorkshopView.setOffscreenPageLimit(2);
-        mAdapter = new MyPagerAdapter(getFragmentManager(),qdata);
-
-        vpWorkshopView.setAdapter(mAdapter);
     }
 
+    private void initView() {
+        circleAdapter.setOnItemClickListener(new AbsRecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                CirclelabeType=position;
+                //加载标签数据
+                if (pages!=0) {
+                    pages=0;
+                }
+                initData(pages,dataList.get(position).getIfication_id());
+            }
+        });
+        refreshLayout();
+    }
+    //刷新系统
+    private void refreshLayout() {
+        if(refreshLayout==null)return;
+        refreshLayout.setEnableLoadMoreWhenContentNotFull(false);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                //刷新
+                refreshLayout.getLayout().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        refreshLayout.finishRefresh();
+                    }
+                },1000);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                //加载
 
-    @Override
-    public void onClick(View v) {
+                refreshLayout.getLayout().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        refreshLayout.finishLoadMore();
+                    }
+                },1000);
+            }
+        });
 
     }
 
     /**
      * 返回标签数据集
+     *
      * @param data
      */
     @Override
     public void returnLabel(List<CirclelabelBean.DataBean> data) {
-        qdata.clear();qdata.addAll(data);
-        qdata.add(0,new CirclelabelBean.DataBean(001,"关注"));
-        qdata.add(0,new CirclelabelBean.DataBean(0,"全部"));
-
-        mAdapter.updateData(qdata);
-
+        this.dataList=data;
+        data.add(0,new CirclelabelBean.DataBean("关注",001));
+        data.add(0,new CirclelabelBean.DataBean("全部",000));
+        circleAdapter.setData(data);
+        circleAdapter.notifyDataSetChanged();
+        circleAdapter.setItemChecked(CirclelabeType,true);//默认选择第一个
+        initData(0,000);
 
     }
 
+    /**    列表数据
+     * @param pages 页数
+     * @param mType 数据类型
+     */
+    private void initData(int pages ,int mType) {
+        presenter.circle(pages,mType);
+    }
+
     @Override
-    public void ReturnCircle(CircleListBean bean) {}
+    public void ReturnCircle(CircleListBean bean) {
+        workShopAdapter.setNewsDate(bean.getData());
 
-    private class MyPagerAdapter extends FragmentPagerAdapter {
-        /**
-         * fragments容器
-         */
-        Map<String, Fragment> fragments;
-        private FragmentTransaction mCurTransaction = null;
+    }
 
-        private FragmentManager fragmentManager = null;
 
-        private List<CirclelabelBean.DataBean> datas = new ArrayList<>();
-
-        public MyPagerAdapter(@NonNull FragmentManager fm,List<CirclelabelBean.DataBean> awd) {
-            super(fm);
-            fragmentManager = fm;
-            fragments = new HashMap<>();
-            datas.clear();
-            datas.addAll(awd);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            if (position < 0 || position > (datas.size())) {
-                return null;
-            } else {
-                return new WorkshopCardFragment();
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return datas.size();
-        }
-
-        @Override
-        public int getItemPosition(@NonNull Object object) {
-            return PagerAdapter.POSITION_NONE;
-        }
-
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            Fragment f= (WorkshopCardFragment)super.instantiateItem(container, position);
-            Bundle titleBundle = new Bundle();
-            titleBundle.putInt("type", datas.get(position).getIfication_id());
-            f.setArguments(titleBundle);
-            return f;
-        }
-
-        @Override
-        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            super.destroyItem(container, position, object);
-            if(mCurTransaction == null){
-                mCurTransaction = fragmentManager.beginTransaction();
-            }
-            mCurTransaction.remove((Fragment) object);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return datas.get(position).getIfication_id();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return datas.get(position).getIfication_title();
-        }
-        public void updateData(List<CirclelabelBean.DataBean> datatitle){
-            if (mCurTransaction!=null) {
-                mCurTransaction = fragmentManager.beginTransaction();
-            }
-            datas.clear();
-            datas.addAll(datatitle);
-            notifyDataSetChanged();
-        }
+    @OnClick(R.id.img_xiaoxi_btn)
+    public void onViewClicked() {
 
     }
 
 }
-
-/**
- *
- * Fragment instance = WorkshopCardFragment.getInstance(position + "");
- *                  int type = datas.get(titles.get(position));
- *                Bundle titleBundle = new Bundle();
- *                titleBundle.putInt("type",qdata.get(position).getIfication_id());
- *                instance.setArguments(titleBundle);
- *                return instance;
- */

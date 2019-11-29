@@ -85,13 +85,13 @@ public class BannerLayout extends FrameLayout {
 
     protected void initView(Context context, AttributeSet attrs) {
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout);
-        showIndicator = a.getBoolean(R.styleable.BannerLayout_showIndicator, true);
-        autoPlayDuration = a.getInt(R.styleable.BannerLayout_interval, 4000);
-        isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_autoPlaying, true);
-        itemSpace = a.getInt(R.styleable.BannerLayout_itemSpace, 20);
-        centerScale = a.getFloat(R.styleable.BannerLayout_centerScale, 1.2f);
-        moveSpeed = a.getFloat(R.styleable.BannerLayout_moveSpeed, 1.0f);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayouts);
+        showIndicator = a.getBoolean(R.styleable.BannerLayouts_showIndicator, true);
+        autoPlayDuration = a.getInt(R.styleable.BannerLayouts_interval, 4000);
+        isAutoPlaying = a.getBoolean(R.styleable.BannerLayouts_autoPlaying, true);
+        itemSpace = a.getInt(R.styleable.BannerLayouts_itemSpace, 20);
+        centerScale = a.getFloat(R.styleable.BannerLayouts_centerScale, 1.2f);
+        moveSpeed = a.getFloat(R.styleable.BannerLayouts_moveSpeed, 1.0f);
         if (mSelectedDrawable == null) {
             //绘制默认选中状态图形
             GradientDrawable selectedGradientDrawable = new GradientDrawable();
@@ -116,7 +116,7 @@ public class BannerLayout extends FrameLayout {
         int marginRight = dp2px(0);
         int marginBottom = dp2px(11);
         int gravity = GravityCompat.START;
-        int o = a.getInt(R.styleable.BannerLayout_orientation, 0);
+        int o = a.getInt(R.styleable.BannerLayouts_orientation, 0);
         int orientation = 0;
         if (o == 0) {
             orientation = OrientationHelper.HORIZONTAL;

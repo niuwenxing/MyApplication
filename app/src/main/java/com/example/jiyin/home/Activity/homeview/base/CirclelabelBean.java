@@ -53,7 +53,7 @@ public class CirclelabelBean extends Callcode {
         private String ification_title;
         private int ification_id;
 
-        public DataBean(int ification_id,String ification_title){
+        public DataBean(String ification_title,int ification_id){
             this.ification_id=ification_id;
             this.ification_title=ification_title;
         }

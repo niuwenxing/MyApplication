@@ -7,6 +7,7 @@
     <color name="white">#FFFFFF</color>
     <color name="colorNews">#383838</color>
     <color name="colorGray">#666666</color>
+    <color name="colorCel">#656565</color>
     <color name="colorBrightgray">#999999</color>
     <color name="colorbotline">#dddddd</color>
     <color name="colorTbar">#99ffffff</color>
@@ -14,6 +15,7 @@
     <color name="colorTartextTitle">#333333</color>
     <color name="colorScribe">#676767</color>
     <color name="colorlightgray">#4d4d4d</color>
+    <color name="colorline">#f4f4f4</color>
     <color name="colorMenu">#f77700</color>
     <color name="colorShop">#f97800</color>
     <color name="colorSearch">#ed7600</color>

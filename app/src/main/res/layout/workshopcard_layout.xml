@@ -12,36 +12,7 @@
 
 
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:srlEnableOverScrollDrag="true"
-        app:srlAccentColor="@android:color/white"
-        app:srlPrimaryColor="@color/colorPrimary"
-        app:srlEnableFooterFollowWhenNoMoreData="true"
-        >
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="#aaa"
-            app:srlPrimaryColor="#FFFFFF"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:scrollbars="none"
-            android:id="@+id/fragment_circle"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="2"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.recyclerview.widget.RecyclerView>
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:id="@+id/footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 
 

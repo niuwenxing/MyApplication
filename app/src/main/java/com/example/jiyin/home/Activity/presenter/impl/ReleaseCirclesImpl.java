@@ -39,7 +39,8 @@ public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesVi
                 .request(new NetBeanListener<ImageArr>() {
                     @Override
                     public void onSuc(ImageArr bean) {
-                        v.setImageUrl(bean.getData());
+
+                        v.setImageUrl(bean);
                     }
                     @Override
                     public void onFail(int status, String message) {

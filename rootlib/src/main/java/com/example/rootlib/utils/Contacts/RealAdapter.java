@@ -101,7 +101,7 @@ class RealAdapter<T extends IndexableEntity> extends RecyclerView.Adapter<Recycl
             holder = adapter.onCreateContentViewHolder(parent);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();

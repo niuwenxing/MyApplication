@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
@@ -48,7 +50,7 @@ import retrofit2.http.PartMap;
 public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> implements MainView, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.vp_main)
-    NoScrollViewPager vpMain;
+    FrameLayout vpMain;
     @BindView(R.id.rg_main)
     RadioGroup rgMain;
     private NewHomeFregment newHomeFregment;
@@ -60,6 +62,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     private MoreWindow mMoreWindow;
     private View viewById;
     private MoreWindow popWindow;
+    private Publishpage publishpage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,17 +79,15 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         workshopFragment = new WorkshopFragment();
         newsFragment = new NewsFragment();
         mypageFragment = new MypageFragment();
-        fragments1 = new Fragment[]{newHomeFregment, workshopFragment,new Publishpage(), newsFragment,mypageFragment};
+        publishpage = new Publishpage();
+        fragments1 = new Fragment[]{newHomeFregment, workshopFragment,publishpage, newsFragment,mypageFragment};
 
-        vpMain.setOffscreenPageLimit(fragments1.length);
-        vpMain.setAdapter(new HomeFragmentAdapter(getSupportFragmentManager(), fragments1));
         rgMain.setOnCheckedChangeListener(this);
         RadioButtons = new RadioButton[fragments1.length];
         for (int i = 0; i < RadioButtons.length; i++) {
             RadioButtons[i] = (RadioButton) rgMain.getChildAt(i);
         }
         RadioButtons[0].setChecked(true);
-        //
         MoreWindow moreWindow = new MoreWindow(this);
         viewById = findViewById(R.id.fabu);
         viewById.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +105,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
             if (checkedId == RadioButtons[i].getId()) {
                 if(i!=2){
                     anInt=i;
-                    vpMain.setCurrentItem(i);
+                    switchFragment(fragments1[i]).commit();
                 }
                 switch (i){
                     case 1:
@@ -123,6 +124,24 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
             }
         }
         RadioButtons[anInt].setChecked(true);
+    }
+
+    private Fragment currentFragment = new Fragment();
+    private FragmentTransaction switchFragment(Fragment targetFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction.add(R.id.vp_main, targetFragment, targetFragment.getClass().getName());
+        } else {
+            if (currentFragment != targetFragment) {
+                transaction.hide(currentFragment).show(targetFragment);
+            }
+        }
+        currentFragment = targetFragment;
+        return transaction;
     }
 
     private void statusBarhightfalse() {
@@ -277,17 +296,9 @@ class MomentCallManager {
 
 
 
-interface MomentService {
-    @Multipart
-    @POST("image/imgFile")
-    retrofit2.Call<BaseResponseModel<Ponse>> getFabuData(@PartMap Map<String, RequestBody> map, @Part List<MultipartBody.Part> parts);
-
-}
-
-class Ponse implements Serializable {
 
 
-}
+
 
 
 // button.setOnClickListener(new View.OnClickListener() {

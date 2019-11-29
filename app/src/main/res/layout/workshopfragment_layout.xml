@@ -34,7 +34,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:id="@+id/img_xiaoxi_btn"
-            android:src="@mipmap/xiaoxi"/>
+            android:src="@mipmap/xiaoxi"
+            />
 
         <View
             android:layout_alignParentBottom="true"
@@ -45,28 +46,51 @@
     </RelativeLayout>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_WorkshopTitle"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mLabeltable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tl:tabBackground="@drawable/choice"
-        tl:tabIndicatorHeight="0dp"
-        tl:tabMode="scrollable"
-        tl:tabTextColor="#656565"
-        tl:tabSelectedTextColor="#ffffff"
-        tl:tabGravity="center"
-        tl:tabRippleColor="@android:color/transparent"
-        >
-<!--        tl:tabTextAppearance="@style/MyTabLayoutTextAppearance"-->
-    </com.google.android.material.tabs.TabLayout>
+        android:layout_height="@dimen/dp_45"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_3"
-        android:background="#f4f4f4"/>
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/colorline"
+        />
     <include layout="@layout/layout_common_throw"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_WorkshopView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:background="@android:color/white"
+        app:srlEnableOverScrollDrag="true"
+        app:srlAccentColor="@android:color/white"
+        app:srlPrimaryColor="@color/colorPrimary"
+        app:srlEnableFooterFollowWhenNoMoreData="true"
+        >
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="#aaa"
+            app:srlPrimaryColor="#FFFFFF"/>
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:scrollbars="none"-->
+<!--            android:id="@+id/fragment_circle"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            tools:itemCount="2"-->
+<!--            android:orientation="vertical"-->
+<!--            android:overScrollMode="never"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mCirclelist"
+            tl:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

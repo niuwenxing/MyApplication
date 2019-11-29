@@ -20,6 +20,7 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.FullyGridLayoutManager;
 import com.example.jiyin.home.Activity.adapter.GridImageAdapter;
+import com.example.jiyin.home.Activity.homeview.base.ImageArr;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.presenter.impl.ReleaseCirclesImpl;
 import com.example.jiyin.home.Activity.presenter.view.ReleaseCirclesView;
@@ -183,12 +184,13 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
                 .previewVideo(true)
                 .enablePreviewAudio(true)
                 .isCamera(true)//
+                .compress(true)
                 .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
                 .isZoomAnim(false)// 图片列表点击 缩放效果 默认true
                 .selectionMedia(selectList)// 是否传入已选图片 List<LocalMedia> list
-                .videoMaxSecond(16)// 显示多少秒以内的视频or音频也可适用 int
+                .videoMaxSecond(20)// 显示多少秒以内的视频or音频也可适用 int
                 .videoMinSecond(1)// 显示多少秒以内的视频or音频也可适用 int
-                .recordVideoSecond(15)//默视频秒数录制 认60s int
+                .recordVideoSecond(60)//默视频秒数录制 认60s int
                 .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
@@ -296,8 +298,12 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
     }
     //发布圈子
     @Override
-    public void setImageUrl(String data) {
-        if(StringUtil.isEmpty(edContent.getText().toString().trim())&StringUtil.isEmpty(data)){
+    public void setImageUrl(ImageArr data) {
+        if (data.getCode()==-1) {
+            toast(data.getMsg());
+            return;
+        }
+        if(StringUtil.isEmpty(edContent.getText().toString().trim())&StringUtil.isEmpty(data.getData())){
             toast("请填写圈子内容");
             return;
         }
@@ -305,7 +311,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
             toast("请选择圈子类型");
             return;
         }
-        presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,data);
+        presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,data.getData());
     }
 
     @Override

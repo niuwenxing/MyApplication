@@ -119,76 +119,10 @@ public class UserCallManager {
      * @return//        Map<String, RequestBody> params = new HashMap<>();
      */
     public static Call upimages(List<LocalMedia> selectList) {
-        Map<String, Object> map = new HashMap<>();
-        for (LocalMedia imgStr : selectList) {
-//            File file = new File(imgStr.getPath());
-//            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//            facePart = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-//            parts.add(facePart);
-//            params.put("image", RequestBody.create(MediaType.parse("text/plain"), "image"));
-            map.put("image",imgStr.getPath());
-//            params.put("image\";filename=\""+file.getName(),requestFile);
-        }
-
-        List<MultipartBody.Part> parts = generateFilesform(map);
-//
-        return HttpManager.getInstance().rep(UserService.class).getimgarr(parts);
-
-        /****/
-//        Map<String, RequestBody> params = new HashMap<>();
-//        List<MultipartBody.Part>   parts = new ArrayList<>();
-//        for (LocalMedia imgStr : selectList) {
-//            File file = new File(imgStr.getPath());
-//            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
-//            facePart = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-//            parts.add(facePart);
-//
-//            Log.i("tupian",""+ file.getPath());
-//
-//
-//        }
-//        RequestBody i = RequestBody.create(MediaType.parse("multipart/form-data"), "image");
-//        params.put("image\"; filename=\""+file.getName(),i);
-
-//        return HttpManager.getInstance().rep(UserService.class).getimgarr(params,parts);
-//        List<MultipartBody.Part> photos = new ArrayList();
-
-//        File file1 = new File("/storage/emulated/0/DCIM/Screenshots/Screenshot_2019_1117_183252.png");
-//        File file2 = new File("/storage/emulated/0/DCIM/Screenshots/Screenshot_2019_1117_182916.png");
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .build();
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file1);
-//        RequestBody requestBody1 = RequestBody.create(MediaType.parse("image/png"), file2);
-//        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-//                .addFormDataPart("image", file1.getName(), requestBody)
-//                .addFormDataPart("image", file2.getName(), requestBody1)
-//                .build();
-//        builder.addFormDataPart()
-//        builder.addFormDataPart("image[]",null, requestBody);
 
 
 
-//        Request request = new Request.Builder()
-//                .url(BaseConfig.ROOT_SERVER_API + "Common/uploadMultiPic")
-//                .post(builder.build())
-//                .build();
-//        okhttp3.Call call = client.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(okhttp3.Call call, IOException e) {
-//                Log.d("string",e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(okhttp3.Call call, Response response) throws IOException {
-//                String string = response.body().string();
-//                Log.d("string",string);
-//            }
-//        });
-
-
-//        return null;
+        return null;
     }
 
     public static List<MultipartBody.Part> generateFilesform(Map<String, Object> map) {
@@ -229,19 +163,40 @@ public class UserCallManager {
      */
     public static Call uprelease(String circle_title, int ification_id, int circle_type, String data) {
         HashMap<String, String> params=new  HashMap<>();
+        List<String> pictureList=new ArrayList<>();//图片集合
         params.put("token", PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
         params.put("circle_title",circle_title);
         params.put("ification_id",String.valueOf(ification_id));
         params.put("circle_type",String.valueOf(circle_type));
-        if (!StringUtil.isEmpty(data)) {
+
+//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
+//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
+//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
+
+        if (!StringUtil.isEmpty(data)|circle_type==0) {
+            String[] split = data.split(",");
+            if (split.length==1|split.length>0) {
+                pictureList.add(split[0]);
+            }else{
+                for (int i = 0; i < split.length; i++) {
+                    pictureList.add(split[i]);
+                }
+            }
+        }
+        if(circle_type==1){
             params.put("path",data);
         }
         Log.d("网", "uprelease: "+params.toString());
-        params.put("picture","");
-
-        return HttpManager.getInstance().rep(UserService.class).getUpRelease(params);
+//        params.put("picture","[/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png]");
+        return HttpManager.getInstance().rep(UserService.class).getUpRelease(params,pictureList);
     }
 
+    /**
+     * 圈子列表
+     * @param pages
+     * @param mType
+     * @return
+     */
     public static Call getcircleList(int pages, int mType) {
         HashMap<String, String> params=new HashMap<>();
         params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));

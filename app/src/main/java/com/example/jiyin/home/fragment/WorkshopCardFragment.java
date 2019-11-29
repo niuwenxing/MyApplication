@@ -37,8 +37,8 @@ import cn.jzvd.JZVideoPlayerStandard;
  */
 public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopImpl> implements WorkshopView {
 
-    @BindView(R.id.fragment_circle)
-    RecyclerView mfragment_circle;
+//    @BindView(R.id.fragment_circle)
+//    RecyclerView mfragment_circle;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
@@ -82,7 +82,8 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
     @Override
     protected void createPresenter() {
         super.createPresenter();
-        presenter=new WorkshopImpl(); }
+        presenter=new WorkshopImpl();
+    }
 
     @Override
     protected void init() {
@@ -97,10 +98,10 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
 
     //实例化view
     private void initView() {
-        mType = getArguments().getInt("type", 0);
+//        mType = getArguments().getInt("type", 0);
         workShopAdapter = new WorkShopAdapter(activity, o);
-        mfragment_circle.setAdapter(workShopAdapter);
-        ScrollListener(mfragment_circle);//滑动监听
+//        mfragment_circle.setAdapter(workShopAdapter);
+//        ScrollListener(mfragment_circle);//滑动监听
         refreshLayout();
 
     }
@@ -120,15 +121,13 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
 
                             refreshLayout.finishRefresh();
                         }
-                    },1000);
-                }
+                    },1000);}
             });
 
             refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
                 @Override
                 public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                     //加载
-
                     refreshLayout.getLayout().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -138,9 +137,6 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
                     },1000);
                 }
             });
-
-
-
         }
 
 //        footer.setNoMoreData(false); //设置加载更多
@@ -211,31 +207,42 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
         mReenterState = new Bundle(data.getExtras());
         int startingPosition = mReenterState.getInt(ImagePreviewActivity.P.CURRENT_ITEM_POSITION);
         if (startingPosition != itemPosition) {//如果不是同一个item就滚动到指定的item
-            mfragment_circle.scrollToPosition(itemPosition); }
-        postponeEnterTransition();
-        mfragment_circle.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                mfragment_circle.getViewTreeObserver().removeOnPreDrawListener(this);
-                mfragment_circle.requestLayout();
-                startPostponedEnterTransition();
-                return true;
-            }
-        });
+//            mfragment_circle.scrollToPosition(itemPosition); }
+            postponeEnterTransition();
+//        mfragment_circle.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @Override
+//            public boolean onPreDraw() {
+//                mfragment_circle.getViewTreeObserver().removeOnPreDrawListener(this);
+//                mfragment_circle.requestLayout();
+//                startPostponedEnterTransition();
+//                return true;
+//            }
+//        });
+        }
     }
 
+//    @Override
+//    public void returnLabel(List<CirclelabelBean.DataBean> data) {
+//
+//    }
+//
+//    @Override
+//    public void ReturnCircle(CircleListBean bean) {
+//
+//    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        JZVideoPlayer.releaseAllVideos();
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        JZVideoPlayer.releaseAllVideos();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//    }
+//
     @Override
     public void returnLabel(List<CirclelabelBean.DataBean> data) {}
 
@@ -243,6 +250,6 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
     public void ReturnCircle(CircleListBean bean) {
 
     }
+    }
 
 
-}

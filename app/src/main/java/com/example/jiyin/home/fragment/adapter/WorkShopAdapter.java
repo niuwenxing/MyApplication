@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.jiyin.R;
 import com.example.jiyin.common.widget.jiugong.NineGridTestLayout;
 import com.example.jiyin.common.widget.jiugong.OnItemPictureClickListener;
+import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.view.ImagePreviewActivity;
 import com.example.rootlib.view.ForceClickImageView;
 import com.example.rootlib.view.photo.PhotoBrowseInfo;
@@ -26,17 +27,19 @@ import java.util.List;
 import cn.jzvd.JZVideoPlayerStandard;
 import razerdp.github.com.widget.PhotoContents;
 import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
+//import razerdp.github.com.widget.PhotoContents;
+//import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
 public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkShopView>  {
 
-    private List listdata;
+    private List<CircleListBean.DataBean> listdata=new ArrayList<>();
     private Context activity;
 
     private OnItemPictureClickListener listener;
     private InnerContainerAdapter innerContainerAdapter;
     private List<String> urlList;
 
-    public WorkShopAdapter(Activity activity, List data) {
+    public WorkShopAdapter(Context activity,List<CircleListBean.DataBean> data) {
         this.activity=activity;
         this.listdata=data;
 
@@ -79,15 +82,18 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
 
                 }
             }); }
-
-
     }
 
-
+    //跟新的数据
+    public void setNewsDate(List<CircleListBean.DataBean> data){
+        listdata.clear();
+        listdata.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
-        return listdata.size()+5;
+        return listdata.size();
     }
 
 
@@ -125,7 +131,7 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
     /**
      * 多图视图
      * */
-    private class InnerContainerAdapter extends PhotoContentsBaseAdapter{
+    private class InnerContainerAdapter extends PhotoContentsBaseAdapter {
         private Context context;
         private List<String> datas;
         InnerContainerAdapter(Context context, List<String> urlList){

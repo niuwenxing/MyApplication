@@ -2,6 +2,8 @@ package com.example.jiyin;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
+
 import com.example.rootlib.utils.LogUtils;
 import java.util.Locale;
 
@@ -37,6 +39,7 @@ public class BaseApplication extends Application {
                         //系统会重绘当前的页面, 经测试在某些机型, 某些情况下系统不会重绘当前页面, ScreenUtils.getScreenSize(activity) 的参数一定要不要传 Application!!!
 //                        AutoSizeConfig.getInstance().setScreenWidth(ScreenUtils.getScreenSize(activity)[0]);
 //                        AutoSizeConfig.getInstance().setScreenHeight(ScreenUtils.getScreenSize(activity)[1]);
+
                         LogUtils.d(String.format(Locale.ENGLISH, "%s onAdaptBefore!", target.getClass().getName()));
                     }
                     @Override

@@ -87,18 +87,20 @@ public interface UserService {
     @POST("Common/uploadImg")
     Call<String> Upimage(@Part MultipartBody.Part part);
 
-
     /**
      * 上传图片
      //     * @param map
      //     * @param parts
      * @return
      */
+
+//    @POST("Common/uploadImg")
     @Multipart
-//    @POST("Common/uploadMultiPic")
-    @POST("Common/uploadImg")
+    @POST("Common/uploadMultiPic")
+    Call<ImageArr> getimgarr(@Part("image[]") List<MultipartBody.Part> parts);
 //    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> map);
-    Call<ImageArr> getimgarr(@Part List<MultipartBody.Part> parts);
+
+
 
 
 
@@ -107,10 +109,15 @@ public interface UserService {
 //    @POST("{" + PATH + "}")
 //    Observable<String> uploadFilesII(@Path(value = PATH, encoded = true) String path, @Part() List<MultipartBody.Part> parts);
 
-
+    /**
+     * 发布圈子
+     * @param finalRequestMap
+     * @param picturelist
+     * @return
+     */
     @POST("User/circlesRelease")
     @FormUrlEncoded
-    Call<ReleaseBean> getUpRelease(@FieldMap Map<String, String> finalRequestMap);
+    Call<ReleaseBean> getUpRelease(@FieldMap Map<String, String> finalRequestMap,@Field("picture[]") List<String> picturelist);
 
     @POST("User/circle")
     @FormUrlEncoded
