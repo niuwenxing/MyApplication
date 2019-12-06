@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:src="@mipmap/fanhui"
             android:paddingRight="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_15"
+            android:paddingLeft="@dimen/dp_10"
             />
 
         <LinearLayout

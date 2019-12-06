@@ -6,9 +6,13 @@ package com.example.jiyin.common.config;
 public interface BaseConfig {
 
     String ROOT_SERVER_API="http://a.gensbox.cn/api/";
+    String ROOT_IMAGES_API="http://a.gensbox.cn";
 //    String ROOT_SERVER_API="http://d.lepinxiao.com/api/";
 //    String ROOT_SERVER_API="http://192.168.2.83";
 
+
+    //多图上传
+    String imgArr=BaseConfig.ROOT_SERVER_API+"Common/uploadMultiPic";
 
     /**
      * 原因多种

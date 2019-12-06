@@ -1,22 +1,23 @@
 package com.example.jiyin.home.Activity.presenter.impl;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.KeyEvent;
-
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.manager.HttpManager;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.homeview.base.ImageArr;
+import com.example.jiyin.home.Activity.homeview.base.ImageBase;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.presenter.ReleaseCirclesPresenter;
 import com.example.jiyin.home.Activity.presenter.view.ReleaseCirclesView;
 import com.example.jiyin.home.UserCallManager;
-import com.example.jiyin.interactive.JiYingRequestModel;
-import com.example.jiyin.utils.ConstantUtil;
-import com.example.jiyin.utils.PreferenceUtil;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesView> {
 
@@ -27,43 +28,6 @@ public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesVi
     }
 
 
-    /**
-     *  上传图片
-     * @param selectList 图片路径
-     *                   /upload/app/20191121/e25e83c7220589aac9b10103347f3993.png
-     */
-    @Override
-    public void UpImages(List<LocalMedia> selectList) {
-        release=new BeanNetUnit<ImageArr>()
-                .setCall(UserCallManager.upimages(selectList))
-                .request(new NetBeanListener<ImageArr>() {
-                    @Override
-                    public void onSuc(ImageArr bean) {
-
-                        v.setImageUrl(bean);
-                    }
-                    @Override
-                    public void onFail(int status, String message) {
-
-                    }
-                    @Override
-                    public void onLoadStart() {
-
-                    }
-                    @Override
-                    public void onLoadFinished() {
-
-                    }
-                    @Override
-                    public void onNetErr() {
-
-                    }
-                    @Override
-                    public void onSysErr(int httpCode, String msg) {
-
-                    }
-                });
-    }
 
     /**
      * 发布圈子
@@ -73,7 +37,7 @@ public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesVi
      * @param data
      */
     @Override
-    public void releaseCircles(String circle_title, int ification_id, int circle_type, String data) {
+    public void releaseCircles(String circle_title, int ification_id, int circle_type, List<String> data) {
         release=new BeanNetUnit<ReleaseBean>()
                 .setCall(UserCallManager.uprelease(circle_title,ification_id,circle_type,data))
                 .request(new NetBeanListener<ReleaseBean>() {
@@ -111,7 +75,38 @@ public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesVi
                     }
                 });
 
+    }
+
+
+
+    /**
+     * 上传图片
+     * @return
+     */
+    public Call UpImages(List<LocalMedia> list) {
+        MultipartBody okhttpImage = HttpManager.getInstance().getOkhttpImage(list);
+        final Request request = new Request.Builder()
+                .url(BaseConfig.imgArr)
+                .post(okhttpImage)
+                .build();
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        return mOkHttpClient.newCall(request);
 
     }
 
+    /**
+     * 上传视频
+     * @param list
+     * @return
+     */
+    public Call UpVoide(List<LocalMedia> list) {
+        MultipartBody okhttpImage = HttpManager.getInstance().getOkhttpVoide(list);
+        final Request request = new Request.Builder()
+                .url(BaseConfig.imgArr)
+                .post(okhttpImage)
+                .build();
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        return mOkHttpClient.newCall(request);
+
+    }
 }

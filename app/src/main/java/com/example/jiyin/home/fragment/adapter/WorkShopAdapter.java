@@ -27,8 +27,6 @@ import java.util.List;
 import cn.jzvd.JZVideoPlayerStandard;
 import razerdp.github.com.widget.PhotoContents;
 import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
-//import razerdp.github.com.widget.PhotoContents;
-//import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
 public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkShopView>  {
 

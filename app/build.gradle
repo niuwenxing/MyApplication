@@ -83,7 +83,7 @@ dependencies {
     //底部导航栏
     implementation 'com.github.forvv231:EasyNavigation:1.0.2'
     //baseAdapter
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
 
     //红点指示器
     implementation 'com.bupt.edison.magicreddot:magicreddot:1.0.0'
@@ -103,13 +103,15 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     //饺子播放器
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
-
+    //九宫格
     implementation 'com.github.razerdp:PhotoContents:1.4.5'
     implementation 'org.apmem.tools:layouts:1.10'
     //沉浸式状态栏
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     //图片选择器
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
-
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.5'
+    implementation 'com.contrarywind:wheelview:4.1.0'
 
 }

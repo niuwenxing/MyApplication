@@ -6,8 +6,12 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.List;
 
-public abstract class ReleaseCirclesPresenter<V extends IBaseView> extends BasePresenter<V> {
-    public abstract void UpImages(List<LocalMedia> selectList);
+import okhttp3.Call;
 
-    public abstract void releaseCircles(String circle_title, int ification_id, int circle_type, String data);
+public abstract class ReleaseCirclesPresenter<V extends IBaseView> extends BasePresenter<V> {
+    public abstract Call UpImages(List<LocalMedia> selectList);
+
+    public abstract void releaseCircles(String circle_title, int ification_id, int circle_type,  List<String> data);
+
+//    public abstract void relVoideCircles(String trim, int ification_id, int circle_type, String data);
 }

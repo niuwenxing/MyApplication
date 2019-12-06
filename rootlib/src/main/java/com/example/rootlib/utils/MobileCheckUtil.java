@@ -20,11 +20,23 @@ public class MobileCheckUtil {
      * @param str
      * @return
      * @throws PatternSyntaxException
+     *
+     *REGEX_MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
      */
     public static boolean isChinaPhoneLegal(String str) throws PatternSyntaxException {
-        String PHONE_NUMBER_REG = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
-        Pattern p = Pattern.compile(PHONE_NUMBER_REG);
+//        String PHONE_NUMBER_REG = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+        /**
+         * 判断字符串是否符合手机号码格式
+         * 移动号段: 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+         * 联通号段: 130,131,132,145,155,156,170,171,175,176,185,186
+         * 电信号段: 133,149,153,170,173,177,180,181,189
+         * @param str
+         * @return 待检测的字符串
+         */
+        String telRegex = "^((1[0-9]))\\d{9}$";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        Pattern p = Pattern.compile(telRegex);
         Matcher m = p.matcher(str);
+
         return m.matches();
     }
 
@@ -88,5 +100,20 @@ public class MobileCheckUtil {
     public static boolean checkHanZi(String content) {
         String regex = "^[a-zA-Z\\u4e00-\\u9fa5 ]*$";
         return Pattern.matches(regex, content);
+    }
+
+
+    /**
+     * 校验邮箱
+     * @param email
+     * @return 校验通过返回true，否则返回false
+     */
+    public static boolean isEmail(String email) {
+        /**
+         * 正则表达式:验证邮箱
+         */
+        String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+
+        return Pattern.matches(REGEX_EMAIL, email);
     }
 }

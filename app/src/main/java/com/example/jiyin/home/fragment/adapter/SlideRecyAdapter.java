@@ -65,4 +65,5 @@ public class SlideRecyAdapter<T> extends BaseRecyclerViewAdapter<T> {
     public interface OnClickLister {
         void onClick(View view, int position);
     }
+
 }

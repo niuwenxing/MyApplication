@@ -28,12 +28,19 @@ import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.azoft.carousellayoutmanager.DefaultChildSelectionListener;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
+import com.example.jiyin.common.widget.MLImageView;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.CheckActivity;
 import com.example.jiyin.home.Activity.homeview.SearchpageActivity;
+import com.example.jiyin.home.Activity.sonview.activity.CallOccupationalActivity;
+import com.example.jiyin.home.Activity.sonview.activity.CarveouttimeActivity;
 import com.example.jiyin.home.Activity.sonview.activity.CommunityActivity;
+import com.example.jiyin.home.Activity.sonview.activity.CreationcollectionActivity;
 import com.example.jiyin.home.Activity.sonview.activity.HeadlinesActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
+import com.example.jiyin.home.Activity.sonview.activity.StudyAgencyActivity;
+import com.example.jiyin.home.Activity.sonview.activity.TopActivity;
+import com.example.jiyin.home.Activity.sonview.activity.WorkshopActivity;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
 import com.example.jiyin.home.fragment.adapter.TopModularAdapter;
 import com.example.jiyin.home.fragment.view.HomeView;
@@ -114,6 +121,8 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     TextView b2;
     @BindView(R.id.workshops)
     RelativeLayout workshops;
+    @BindView(R.id.workshops_img)
+    MLImageView workshopsImg;
     @BindView(R.id.bb1)
     TextView bb1;
     @BindView(R.id.bb2)
@@ -126,13 +135,22 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     TextView a1Personnel;
     @BindView(R.id.a1_Carvetime)
     TextView a1Carvetime;
+    @BindView(R.id.img_Occupational_btn)
+    MLImageView img_Occupational_btn;
+    @BindView(R.id.ml_Creationcollection_btn)
+    MLImageView mlCreationcollection_btn;
+    @BindView(R.id.img_carvetime)
+    MLImageView imgCarvetime;
+
+    //top 更多
+    @BindView(R.id.tv_topHedo_btn)
+    TextView tvTopHedo_btn;
     private View layoutFragment;
 
     @Override
     protected int attachLayoutRes() {
         return R.layout.homefragment_layout;
     }
-
 
     @Override
     protected void init() {
@@ -239,7 +257,9 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     }
 
     @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn,
-            R.id.fl_menu_two_btn, R.id.fl_menu_three_btn, R.id.fl_menu_four_btn, R.id.tv_look_btn})
+            R.id.fl_menu_two_btn, R.id.fl_menu_three_btn, R.id.fl_menu_four_btn, R.id.tv_look_btn,
+            R.id.tv_topHedo_btn,R.id.img_zhoupu_img,R.id.workshops,R.id.workshops_img,R.id.img_Occupational_btn
+    })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_searchbar_btn://搜索
@@ -266,6 +286,24 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 break;
             case R.id.tv_look_btn://看社群
                 startActivity(new Intent(getContext(),CommunityActivity.class));
+                break;
+            case R.id.tv_topHedo_btn:
+                startActivity(new Intent(getContext(), TopActivity.class));
+                break;
+            case R.id.img_zhoupu_img://工作坊
+                startActivity(new Intent(getContext(), WorkshopActivity.class));
+                break;
+            case R.id.workshops_img:
+                startActivity(new Intent(getContext(), StudyAgencyActivity.class));
+                break;
+            case R.id.ml_Creationcollection_btn://造物集
+                startActivity(new Intent(getContext(), CreationcollectionActivity.class));
+                break;
+            case R.id.img_Occupational_btn://职呼
+                startActivity(new Intent(getContext(), CallOccupationalActivity.class));
+                break;
+            case R.id.img_carvetime://琢璞时间
+                startActivity(new Intent(getContext(), CarveouttimeActivity.class));
                 break;
 
         }

@@ -2,40 +2,24 @@ package com.example.jiyin.home;
 
 
 
-import android.util.Log;
 
-import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.manager.HttpManager;
-import com.example.jiyin.interactive.JiYingRequestModel;
 import com.example.jiyin.interactive.UserService;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.PreferenceUtil;
-import com.example.rootlib.utils.StringUtil;
+import com.example.rootlib.utils.CollectionUtil;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import retrofit2.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by guolei on 2017/11/24.
@@ -44,7 +28,8 @@ import retrofit2.Retrofit;
 
 public class UserCallManager {
 
-    private static MultipartBody.Part facePart;
+
+    private static MultipartBody.Part body;
 
     /**
      * 登陆
@@ -115,14 +100,16 @@ public class UserCallManager {
     }
 
     /**
-     * 上传图片
+     * 上传视频
      * @return//        Map<String, RequestBody> params = new HashMap<>();
      */
     public static Call upimages(List<LocalMedia> selectList) {
-
-
-
-        return null;
+        Map<String, Object> map = new HashMap<>();
+        for (LocalMedia localMedia : selectList) {
+            map.put("image",localMedia.getPath());
+        }
+        List<MultipartBody.Part> parts = generateFilesform(map);
+        return HttpManager.getInstance().rep(UserService.class).Upimage(parts);
     }
 
     public static List<MultipartBody.Part> generateFilesform(Map<String, Object> map) {
@@ -155,41 +142,47 @@ public class UserCallManager {
 
     /**
      * 发布圈子
-     * @param circle_title
+     * @param circle_title Upimage
      * @param ification_id
      * @param circle_type
      * @param data
      * @return
      */
-    public static Call uprelease(String circle_title, int ification_id, int circle_type, String data) {
+    public static Call uprelease(String circle_title, int ification_id, int circle_type, List<String> data) {
         HashMap<String, String> params=new  HashMap<>();
-        List<String> pictureList=new ArrayList<>();//图片集合
         params.put("token", PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
         params.put("circle_title",circle_title);
         params.put("ification_id",String.valueOf(ification_id));
         params.put("circle_type",String.valueOf(circle_type));
 
-//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
-//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
-//        pictureList.add("/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png");
-
-        if (!StringUtil.isEmpty(data)|circle_type==0) {
-            String[] split = data.split(",");
-            if (split.length==1|split.length>0) {
-                pictureList.add(split[0]);
-            }else{
-                for (int i = 0; i < split.length; i++) {
-                    pictureList.add(split[i]);
-                }
+        if (circle_type==1) {
+            if (!CollectionUtil.isEmpty(data)) {
+                params.put("path",data.get(0).toString());
+                data.clear();
             }
         }
-        if(circle_type==1){
-            params.put("path",data);
-        }
-        Log.d("网", "uprelease: "+params.toString());
-//        params.put("picture","[/upload/app/20191125/d7c200c89d5cc26c043bb43a23f6e195.png]");
-        return HttpManager.getInstance().rep(UserService.class).getUpRelease(params,pictureList);
+
+        return HttpManager.getInstance().rep(UserService.class).getUpRelease(params,data);
     }
+
+//    /**
+//     * 发布圈子视频
+//     * @param circle_title
+//     * @param ification_id
+//     * @param circle_type
+//     * @param data
+//     * @return
+//     */
+//    public static Call upreleaseVoide(String circle_title, int ification_id, int circle_type, String data) {
+//        HashMap<String, String> params=new  HashMap<>();
+//        params.put("token", PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+//        params.put("circle_title",circle_title);
+//        params.put("ification_id",String.valueOf(ification_id));
+//        params.put("circle_type",String.valueOf(circle_type));
+//        params.put("path",data);
+//        List<String> dataa=new ArrayList<>();
+//        return HttpManager.getInstance().rep(UserService.class).getUpRelease(params,dataa);
+//    }
 
     /**
      * 圈子列表
@@ -204,4 +197,145 @@ public class UserCallManager {
         params.put("ification_id",String.valueOf(mType));
         return HttpManager.getInstance().rep(UserService.class).circleList(params);
     }
+
+    /**
+     * <p>
+     *     获取工作坊标签
+     * </p>
+     * @return
+     */
+    public static Call getWorkroom() {
+        return HttpManager.getInstance().rep(UserService.class).getWorkroomtable();
+    }
+
+
+    /**
+     * <p>获取工作坊首页数据</p>
+     * @param pages
+     * @param ification_id
+     * @return
+     */
+    public static Call getWorkshopMainCall(int pages, int ification_id) {
+        HashMap<String, String> params=new HashMap<>();
+        params.put("page",String.valueOf(pages));
+        params.put("ification_id",String.valueOf(ification_id));
+
+        return HttpManager.getInstance().rep(UserService.class).getWorkshopMainData(params);
+    }
+
+    public static Call getWorkShenQing(int workId, String etTeamnameEditStr, String etYourschoolEditStr,
+                                       String etTeamsizeEditStr, String etEstablishTimeEditStr,
+                                       String etProjectTypeEditStr,String isregistereds, String etTeamleaderEditStr,
+                                       String etTelephoneEditStr, String etWorkMailboxEditStr,
+                                       String etPersonalEditStr) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("work_id",String.valueOf(workId));
+        params.put("team_name",etTeamnameEditStr);
+        params.put("school",etYourschoolEditStr);
+        params.put("people_num",etTeamsizeEditStr);
+        params.put("establish_time",etEstablishTimeEditStr);
+        params.put("project_type",etProjectTypeEditStr);
+        params.put("is_reg",isregistereds);
+        params.put("team_people",etTeamleaderEditStr);
+        params.put("tel",etTelephoneEditStr);
+        params.put("email",etWorkMailboxEditStr);
+        params.put("text",etPersonalEditStr);
+
+        return HttpManager.getInstance().rep(UserService.class).getWorkShenQing(params);
+    }
+
+
+    //工作坊 项目类型
+    public static Call getStudioLabel(int workId) {
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("work_id",String.valueOf(workId));
+        return HttpManager.getInstance().rep(UserService.class).getStudioLabel(params);
+    }
+
+
+    /**
+     * 研习社 首页数据
+     * @param page
+     * @return
+     */
+    public static Call getIndex (int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getIndexData(params);
+    }
+
+    /**
+     * 获取线下培训
+     * @param page
+     * @return
+     */
+    public static Call getOfflineTraining(int page) {
+        return HttpManager.getInstance().rep(UserService.class).getOfflineTraining();
+    }
+
+    /**
+     * 获取线下培训详情
+     * @return
+     */
+    public static Call getUnderDetail(int under_id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("under_id",String.valueOf(under_id));
+
+        return HttpManager.getInstance().rep(UserService.class).getUnderDetail(params);
+    }
+
+
+    private void uploadImages(List<LocalMedia> list){
+        //String str = "http://app.quanquanerapp.com/api/Common/uploadMultiPic";
+//        String str = BaseConfig.ROOT_SERVER_API+"Common/uploadMultiPic";
+//        imagePaths.clear();
+//        for(LocalMedia path:list)
+//        {
+//            imagePaths.add(path.getPath());
+//        }
+//        MultipartBody.Builder builder = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM);
+//        for (int i = 0; i < imagePaths.size(); i++) {
+//            builder.addPart(
+//                    Headers.of("Content-Disposition", "form-data; name=\"image[]\"; filename=\"" + i + ".png\""),
+//                    RequestBody.create(MEDIA_TYPE_PNG, new File(imagePaths.get(i))));
+//        }
+//        final MultipartBody requestBody = builder.build();
+//        final Request request = new Request.Builder()
+//                .url(str)
+//                .post(requestBody)
+//                .build();
+//        OkHttpClient mOkHttpClient = new OkHttpClient();
+//        mOkHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
+//            @Override
+//            public void onFailure(okhttp3.Call call, IOException e) {
+//                Log.e("","1231313123123123");
+//            }
+//            @Override
+//            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+//                if(response.isSuccessful()) {
+//                    String json = response.body().string();
+//                    Log.e("成功",json);
+//                }
+//            }
+//        });
+    }
+
+
+    /**
+     * 工作坊详细信息
+     * @param workshop_id
+     * @return
+     */
+    public static Call getFormation(int workshop_id) {
+        HashMap<String, String> params=new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("work_id",String.valueOf(workshop_id));
+
+        return HttpManager.getInstance().rep(UserService.class).getFotmat(params);
+    }
+
 }

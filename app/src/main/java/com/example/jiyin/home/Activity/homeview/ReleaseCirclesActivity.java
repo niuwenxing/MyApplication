@@ -20,24 +20,32 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.FullyGridLayoutManager;
 import com.example.jiyin.home.Activity.adapter.GridImageAdapter;
+import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.base.ImageArr;
+import com.example.jiyin.home.Activity.homeview.base.ImageBase;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.presenter.impl.ReleaseCirclesImpl;
 import com.example.jiyin.home.Activity.presenter.view.ReleaseCirclesView;
 import com.example.jiyin.home.Activity.view.CircleActivity;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.permission.RequestPermissionListener;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.StringUtil;
+import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * 发布圈子 / 发布视频
@@ -105,6 +113,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
         gvPhoto.setLayoutManager(manager);
         adapter = new GridImageAdapter(this, onAddPicClickListener);
         adapter.setList(selectList);
+        gvPhoto.addItemDecoration(new SpaceItemDecoration(3,3));
         gvPhoto.setAdapter(adapter);
 
 
@@ -287,12 +296,40 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
      */
     private void UpRelease() {
         if (selectList != null && selectList.size() != 0)
-        presenter.UpImages(selectList);
+            if (type.equals(ConstantUtil.CIRCLES)) {
+                presenter.UpImages(selectList).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {}
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if(response.isSuccessful()) {
+                            ImageArr imageArr = new Gson().fromJson(response.body().string(), ImageArr.class);
+                            setImageUrl(imageArr);
+                        }
+                    }
+                });
+            }else{
+                presenter.UpVoide(selectList).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {}
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if(response.isSuccessful()) {
+                            ImageArr imageArr = new Gson().fromJson(response.body().string(), ImageArr.class);
+                            if(imageArr.getCode()==-1){
+                                toast(imageArr.getMsg());
+                                return;
+                            }
+                            setImageUrl(imageArr);
+                        }
+                    }
+                });
+            }
         else
         if (StringUtil.isEmpty(edContent.getText().toString().trim())) {
                 toast("请填写圈子内容");
         }else{
-            presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,"");
+            presenter.releaseCircles(edContent.getText().toString().trim(),ification_id,circle_type,new ArrayList<>());
         }
         return;
     }
@@ -303,7 +340,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
             toast(data.getMsg());
             return;
         }
-        if(StringUtil.isEmpty(edContent.getText().toString().trim())&StringUtil.isEmpty(data.getData())){
+        if(StringUtil.isEmpty(edContent.getText().toString().trim())& CollectionUtil.isEmpty(data.getData())){
             toast("请填写圈子内容");
             return;
         }
@@ -329,4 +366,6 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
     public void releaseFail(String mge, String s) {
         toastLong(mge+s);
     }
+
+
 }

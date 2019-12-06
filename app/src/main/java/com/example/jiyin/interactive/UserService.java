@@ -6,9 +6,18 @@ import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
 import com.example.jiyin.home.Activity.homeview.base.ImageArr;
+import com.example.jiyin.home.Activity.homeview.base.ImageBase;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
+import com.example.jiyin.home.Activity.sonview.activity.WorkSurfaceActivity;
+import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.WorkDetailsBase;
+import com.example.jiyin.home.Activity.sonview.base.WorkProjectbase;
+import com.example.jiyin.home.Activity.sonview.base.WorkshopLabelBase;
+import com.example.jiyin.home.Activity.sonview.base.WorkshopMainBase;
 
 import java.io.File;
 import java.util.HashMap;
@@ -79,35 +88,13 @@ public interface UserService {
 
 
     /**
-     * 上传一张图片
-     * @param part
+     * 上传一视频
      * @return
      */
     @Multipart
     @POST("Common/uploadImg")
-    Call<String> Upimage(@Part MultipartBody.Part part);
+    Call<ImageBase> Upimage(@Part List<MultipartBody.Part> parts);
 
-    /**
-     * 上传图片
-     //     * @param map
-     //     * @param parts
-     * @return
-     */
-
-//    @POST("Common/uploadImg")
-    @Multipart
-    @POST("Common/uploadMultiPic")
-    Call<ImageArr> getimgarr(@Part("image[]") List<MultipartBody.Part> parts);
-//    Call<ImageArr> getimgarr(@PartMap Map<String, RequestBody> map);
-
-
-
-
-
-
-//    @Multipart
-//    @POST("{" + PATH + "}")
-//    Observable<String> uploadFilesII(@Path(value = PATH, encoded = true) String path, @Part() List<MultipartBody.Part> parts);
 
     /**
      * 发布圈子
@@ -119,8 +106,86 @@ public interface UserService {
     @FormUrlEncoded
     Call<ReleaseBean> getUpRelease(@FieldMap Map<String, String> finalRequestMap,@Field("picture[]") List<String> picturelist);
 
+
+    /**
+     * 圈子
+     * @param params
+     * @return
+     */
     @POST("User/circle")
     @FormUrlEncoded
     Call<CircleListBean> circleList(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 工作坊标签
+     * @return
+     */
+    @POST("Workshop/ification")
+    Call<WorkshopLabelBase> getWorkroomtable();
+
+
+    /**
+     * 工作坊首页数据
+     * @param params
+     * @return
+     */
+    @POST("Workshop/index")
+    @FormUrlEncoded
+    Call<WorkshopMainBase> getWorkshopMainData(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 工作坊详情数据
+     * @param params
+     * @return
+     */
+    @POST("Workshop/detail")
+    @FormUrlEncoded
+    Call<WorkDetailsBase> getFotmat(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 工作坊 申请提交
+     * @param params
+     * @return
+     */
+    @POST("Workshop/enroll")
+    @FormUrlEncoded
+    Call<WorkSurfaceActivity.breakCode> getWorkShenQing(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 工作坊  项目类型
+     * @param params
+     * @return
+     */
+    @POST("Workshop/workProject")
+    @FormUrlEncoded
+    Call<WorkProjectbase> getStudioLabel(@FieldMap  HashMap<String, String> params);
+
+
+    /**
+     * 研习社 首页数据
+     * @param params
+     * @return
+     */
+    @POST("Agency/index")
+    @FormUrlEncoded
+    Call<StudyAgencyIndexBean> getIndexData(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 研习社 线下培训
+     *
+     * @return
+     */
+    @POST("Agency/under")
+    Call<OfflineTrainingBean> getOfflineTraining();
+
+
+    @POST("Agency/underDetail")
+    @FormUrlEncoded
+    Call<String> getUnderDetail(@FieldMap HashMap<String, String> params);
 }
 

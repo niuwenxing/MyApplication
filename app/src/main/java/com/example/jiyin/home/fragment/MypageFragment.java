@@ -57,7 +57,6 @@ public class MypageFragment extends JiYingFragment {
     protected void init() {
         ImmersionBar.setStatusBarView(this, view);
 
-
     }
 
     @OnClick({R.id.img_myImage_btn, R.id.tv_Setup_btn, R.id.tv_Myorder_btn, R.id.tv_ShoppingCart_btn, R.id.tv_Collection_btn, R.id.tv_Fabulous_btn, R.id.Applicationrecord_btn, R.id.Myrelease_btn, R.id.MyCustomer_btn, R.id.Aboutus_btn})

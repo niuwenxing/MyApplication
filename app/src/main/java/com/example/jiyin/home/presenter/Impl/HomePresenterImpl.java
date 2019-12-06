@@ -17,7 +17,6 @@ public class HomePresenterImpl extends HomePresenter<HomeView> {
     @Override
     public void cancelBiz() {
         cancelRequest(beanNetUnit);
-        cancelRequest(beanNetUnit);
     }
 
 

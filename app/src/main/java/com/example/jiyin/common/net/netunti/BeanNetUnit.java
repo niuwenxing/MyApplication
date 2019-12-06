@@ -53,7 +53,7 @@ public class BeanNetUnit<T extends Callcode> extends RootResponseModel implement
                         listener.onFail(response.code(), response.message());
                     }
                 }else{
-                    listener.onSysErr(response.raw().code(), response.raw().message());
+                    listener.onSysErr(response.raw().code(), response.errorBody().toString());
                 }
             }
 

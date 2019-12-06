@@ -6,9 +6,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -20,8 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
-import com.example.jiyin.common.net.beas.BaseResponseModel;
-import com.example.jiyin.customwidget.NoScrollViewPager;
 import com.example.jiyin.home.Activity.presenter.impl.MainPresenterImpl;
 import com.example.jiyin.home.Activity.presenter.view.MainView;
 import com.example.jiyin.home.fragment.MoreWindow;
@@ -30,22 +28,15 @@ import com.example.jiyin.home.fragment.NewHomeFregment;
 import com.example.jiyin.home.fragment.NewsFragment;
 import com.example.jiyin.home.fragment.Publishpage;
 import com.example.jiyin.home.fragment.WorkshopFragment;
-import com.example.rootlib.utils.StatusBarUtil;
 import com.gyf.immersionbar.ImmersionBar;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.http.Multipart;
-import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 
+/**
+ * <p>
+ *     主页页面
+ * </p>
+ */
 
 public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> implements MainView, RadioGroup.OnCheckedChangeListener {
 
@@ -53,16 +44,19 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     FrameLayout vpMain;
     @BindView(R.id.rg_main)
     RadioGroup rgMain;
-    private NewHomeFregment newHomeFregment;
-    private WorkshopFragment workshopFragment;
-    private NewsFragment newsFragment;
-    private MypageFragment mypageFragment;
-    private Fragment[] fragments1;
+    private Fragment currentFragment = new Fragment();
+
+    private NewHomeFregment newHomeFregment = new NewHomeFregment() ;
+    private WorkshopFragment workshopFragment =new WorkshopFragment() ;
+    private NewsFragment newsFragment =new NewsFragment();
+    private MypageFragment mypageFragment =new MypageFragment();
+    private Publishpage publishpage = new Publishpage();
+
+    private Fragment[]  fragments1;
     private static RadioButton[] RadioButtons;
     private MoreWindow mMoreWindow;
     private View viewById;
     private MoreWindow popWindow;
-    private Publishpage publishpage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,13 +69,8 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     }
 
     private void initFragment() {
-        newHomeFregment = new NewHomeFregment();
-        workshopFragment = new WorkshopFragment();
-        newsFragment = new NewsFragment();
-        mypageFragment = new MypageFragment();
-        publishpage = new Publishpage();
-        fragments1 = new Fragment[]{newHomeFregment, workshopFragment,publishpage, newsFragment,mypageFragment};
 
+        fragments1  = new Fragment[]{newHomeFregment, workshopFragment,publishpage, newsFragment,mypageFragment};
         rgMain.setOnCheckedChangeListener(this);
         RadioButtons = new RadioButton[fragments1.length];
         for (int i = 0; i < RadioButtons.length; i++) {
@@ -126,7 +115,6 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         RadioButtons[anInt].setChecked(true);
     }
 
-    private Fragment currentFragment = new Fragment();
     private FragmentTransaction switchFragment(Fragment targetFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (!targetFragment.isAdded()) {
@@ -145,8 +133,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
     }
 
     private void statusBarhightfalse() {
-        ImmersionBar.with(this).keyboardEnable(false).statusBarDarkFont(false).navigationBarColor(R.color.colorMenu).init();
-
+        ImmersionBar.with(this).navigationBarColor(R.color.colorMenu).init();
     }
     private void statusBarhight() {
         ImmersionBar.with(this).keyboardEnable(false).statusBarDarkFont(true, 0.2f).navigationBarColor(R.color.colorMenu).init();
@@ -155,43 +142,6 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
 
 
 
-    //    private void upDataFile() {
-//        requestPermission(0x1301, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE
-//        }, new RequestPermissionListener() {
-//            @Override
-//            public void onPass(String[] strings) {
-//                for (int i = 0; i < strings.length; i++) {
-//                    if (strings[i].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//                        PictureSelector.create(activity)
-//                                .openGallery(PictureMimeType.ofVideo())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-//                                .theme(R.style.picture_default_style)//主题样式(不设置为默认样式) 也可参考demo values/styles下 例如：R.style.picture.white.style
-//                                .imageSpanCount(4)// 每行显示个数 int
-//                                .selectionMode(PictureConfig.SINGLE)
-//                                .previewVideo(true)
-//                                .enablePreviewAudio(true)
-//                                .isCamera(true)//
-//                                .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
-//                                .isZoomAnim(false)// 图片列表点击 缩放效果 默认true
-//                                .selectionMedia(selectList)// 是否传入已选图片 List<LocalMedia> list
-//                                .videoMaxSecond(16)// 显示多少秒以内的视频or音频也可适用 int
-//                                .videoMinSecond(1)// 显示多少秒以内的视频or音频也可适用 int
-//                                .recordVideoSecond(15)//视频秒数录制 默认60s int
-//                                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onUnPass(String[] uPas) {
-//
-//            }
-//        });
-//
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -223,9 +173,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
      *
      * @param tag
      */
-    public void setFunctionForFragment(String tag) {
-
-    }
+    public void setFunctionForFragment(String tag) { }
 
     public static void statusBarHide(Activity activity) {
         // 代表 5.0 及.以上
@@ -240,126 +188,7 @@ public class HomeActivity extends JiYingActivity<MainView, MainPresenterImpl> im
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
-    }
-
-
-
-
-}
-
-class MomentCallManager {
-
-//    public static Call<BaseResponseModel<Ponse>> getReplyCall(String content, List<LocalMedia> paths, Map<String, String> map) {
-//        Map<String, RequestBody> params = new HashMap<>();
-//        List<MultipartBody.Part> parts = new ArrayList<>();
-//        String pictureType = null;
-//        for (LocalMedia imgStr : paths) {
-//            pictureType = imgStr.getPictureType();
-//            File file;
-//            try {
-//                if (imgStr.getPath().endsWith(".gif")) {
-//                    file = new File(imgStr.getPath());
-//                } else {
-//                    if (imgStr.getPictureType().equals("image/webp")) {
-//                        file = new File(imgStr.getPath());
-//                    } else {
-//                        file = new File(imgStr.getPath());
-//                    }
-//                }
-//
-//                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//                MultipartBody.Part facePart;
-//                if (pictureType.equals("image/webp")) {
-//                    facePart = MultipartBody.Part.createFormData("issueDynamicFile", file.getName().replace(".jpg", ".webp"), requestFile);
-//                } else {
-//                    facePart = MultipartBody.Part.createFormData("issueDynamicFile", file.getName(), requestFile);
-//                }
-//
-//                parts.add(facePart);
-//                Log.e("---", "img --- " + imgStr.getWidth() + "  " + imgStr.getHeight());
-//                Log.e("---", "imgsss --- " + imgStr.toString());
-//            } catch (Exception e) {
-//            }
-//            params.put("mediaSize", SunriseUtils.convertToRequestBody(imgStr.getWidth() + "," + imgStr.getHeight()));
-//
-//        }
-//
-//        return HttpManager.getInstance().req(MomentService.class).getFabuData(params, parts);
-//    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// button.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-////                if(selectList!=null)return;
-//        BeanNetUnit<Object> mypublish = new BeanNetUnit<>()
-//        .setCall(MomentCallManager.getReplyCall("123",selectList,null))
-//        .request(new NetBeanListener() {
-//@Override
-//public void onSuc(Object bean) {
-//        Log.d("7895","上传成功");
-//        }
-//
-//@Override
-//public void onFail(String status, String message) {
-//        Log.d("7895","上传失败");
-//        }
-//
-//@Override
-//public void onLoadStart() {
-//
-//        }
-//
-//@Override
-//public void onLoadFinished() {
-//
-//        }
-//
-//@Override
-//public void onNetErr() {
-//        Log.d("7895","err");
-//        }
-//
-//@Override
-//public void onSysErr(int httpCode, String msg) {
-//
-//        }
-//        });
-//
-//
-//        }
-//        });
- class HomeFragmentAdapter extends FragmentPagerAdapter {
-    private Fragment[] fragments1;
-
-    public HomeFragmentAdapter(FragmentManager fm, Fragment[] fragments) {
-        super(fm);
-        this.fragments1 = fragments;
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        if (fragments1[position]!=null) {
-            return fragments1[position];
-        }
-        return null;
-    }
-
-    @Override
-    public int getCount() {
-        return fragments1.length;
     }
 }
+
+

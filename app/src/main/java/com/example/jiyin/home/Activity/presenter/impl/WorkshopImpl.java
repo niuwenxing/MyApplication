@@ -112,8 +112,8 @@ public  class WorkshopImpl extends WorkshopPresenter<WorkshopView> {
                                 });
                             }else{
                                 v.hideExpectionPages();
-                                v.ReturnCircle(bean);
                             }
+                            v.ReturnCircle(bean);
                         }
                     }
 

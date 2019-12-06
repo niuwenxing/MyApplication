@@ -68,7 +68,6 @@ public class BaseApplication extends Application {
         // 组件注入模块调试
         ButterKnife.setDebug(DEVELOP_DEBUG_MODE);
         //
-
     }
 
     public static synchronized BaseApplication getInstance() {

@@ -2,11 +2,20 @@ package com.example.jiyin.common.net.manager;
 
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.convertor.HttpLogInterceptor;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.StringUtil;
+import com.luck.picture.lib.entity.LocalMedia;
 
+import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -71,4 +80,39 @@ public class HttpManager {
 //                 throw new RuntimeException("initCertificates 异常");
 //             }
     }
+
+
+    //多图上传
+    public MultipartBody  getOkhttpImage(List<LocalMedia> listimg){
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+        if (!CollectionUtil.isEmpty(listimg)) {
+            for (int i = 0; i < listimg.size(); i++) {
+                builder.addPart(
+                        Headers.of("Content-Disposition", "form-data; name=\"image[]\"; filename=\"" + i + ".png\""),
+                        RequestBody.create(MediaType.parse("image/png"), new File(listimg.get(i).getPath())));
+            }
+            return builder.build();
+        }
+        return null;
+    }
+    public MultipartBody  getOkhttpVoide(List<LocalMedia> listimg){
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+        if (!CollectionUtil.isEmpty(listimg)) {
+            for (int i = 0; i < listimg.size(); i++) {
+                builder.addPart(
+                        Headers.of("Content-Disposition", "form-data; name=\"image[]\"; filename=\"" + i + ".mp4\""),
+                        RequestBody.create(MediaType.parse("image/png"), new File(listimg.get(i).getPath())));
+            }
+            return builder.build();
+        }
+        return null;
+    }
+
+
+
+
+
+
 }

@@ -522,6 +522,7 @@
                                 android:src="@mipmap/yanxishe"
                                 android:scaleType="fitXY"
                                 app:ml_radius="@dimen/dp_10"
+                                android:id="@+id/workshops_img"
                                 />
 
                             <TextView
@@ -584,6 +585,7 @@
                                 android:src="@mipmap/zaowuji"
                                 android:scaleType="fitXY"
                                 app:ml_radius="@dimen/dp_10"
+                                android:id="@+id/ml_Creationcollection_btn"
 
                                 />
                             <TextView
@@ -644,9 +646,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:id="@+id/img_personnel"
+                                android:id="@+id/img_Occupational_btn"
                                 android:src="@mipmap/zhuopushijian"
                                 app:ml_radius="@dimen/dp_10"
+
                                 />
                             <TextView
                                 android:id="@+id/a1_personnel"

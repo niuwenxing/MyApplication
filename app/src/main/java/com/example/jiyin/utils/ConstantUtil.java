@@ -42,4 +42,9 @@ public final class ConstantUtil {
     public static final String CIRCLES="circles"; //圈子
     public static final String VIDEO="video"; //视频
 
+    /**
+     * 工作坊 详情
+     */
+    public static final String WORKSHOPKEY="WorkShopKey";
+
 }
