@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RootFilelibs</string>
+    <string name="file">文件</string>
+    <string name="jmui_loading">正在加载</string>
+</resources>

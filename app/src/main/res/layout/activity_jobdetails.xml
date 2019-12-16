@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/navigationbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:layout_constraintBottom_toTopOf="@+id/tv_Submission_btn"
+        app:layout_constraintTop_toBottomOf="@+id/include2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            app:layout_constraintBottom_toTopOf="@+id/tv_Submission_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include2">
+
+            <include  layout="@layout/layout_common_throw" />
+
+            <TextView
+                android:id="@+id/tv_JobTable_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left"
+                android:maxLines="1"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_salary_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:gravity="left"
+                android:textColor="#ed7600"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_JobTable_str"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_JobTable_str" />
+
+            <TextView
+                android:id="@+id/tv_CorporateName_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/tv_JobTable_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_JobTable_str" />
+
+            <TextView
+                android:id="@+id/tv_Address_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:drawableLeft="@mipmap/weizhi"
+                android:drawablePadding="@dimen/dp_5"
+                android:textSize="@dimen/sp_12"
+                android:maxLines="1"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="@+id/tv_CorporateName_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_CorporateName_str" />
+
+            <TextView
+                android:id="@+id/tv_Education_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:textSize="@dimen/sp_12"
+                android:drawableLeft="@mipmap/xueli"
+                android:drawablePadding="@dimen/dp_5"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Address_str"
+                app:layout_constraintStart_toEndOf="@+id/tv_Address_str"
+                app:layout_constraintTop_toTopOf="@+id/tv_Address_str" />
+
+            <TextView
+                android:id="@+id/tv_Jobdescription_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_40"
+                android:text="职位描述"
+                android:textStyle="bold"
+                android:textColor="@color/colorTartextTitle"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintStart_toStartOf="@+id/tv_Address_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Address_str" />
+
+
+            <com.example.rootlib.view.CollapsibleTextView
+                android:id="@+id/tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_salary_str"
+                app:layout_constraintStart_toStartOf="@+id/tv_Jobdescription_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Jobdescription_str"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_LabelTag_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                app:layout_constraintEnd_toEndOf="@+id/tv"
+                app:layout_constraintStart_toStartOf="@+id/tv"
+                app:layout_constraintTop_toBottomOf="@+id/tv"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="公司介绍"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_15"
+                android:gravity="left"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/re_LabelTag_list"
+                app:layout_constraintTop_toBottomOf="@+id/re_LabelTag_list" />
+
+            <TextView
+                android:id="@+id/tv_IntRoduce_str"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:textColor="#4b4b4b"
+                android:textSize="@dimen/sp_12"
+                android:gravity="left"
+                app:layout_constraintEnd_toEndOf="@+id/re_LabelTag_list"
+                app:layout_constraintStart_toStartOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <TextView
+        android:id="@+id/tv_Submission_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_11"
+        android:layout_marginEnd="@dimen/dp_11"
+        android:background="@drawable/fromsubmission"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="报名申请"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

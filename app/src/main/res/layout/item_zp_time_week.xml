@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_5"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.example.jiyin.common.widget.MLImageView
+        android:id="@+id/ml_CarveimageView"
+        android:layout_width="@dimen/dp_104"
+        android:layout_height="@dimen/dp_70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:ml_shape_type="rectangle"
+        app:ml_radius="@dimen/dp_5"
+         />
+
+    <TextView
+        android:id="@+id/tv_CarveTextstr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_12"
+        android:maxLines="2"
+        android:text="公开课名称展示处公开课名称展示处公开课 名称展示处"
+        android:textColor="#ed7600"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ml_CarveimageView"
+        app:layout_constraintTop_toTopOf="@+id/ml_CarveimageView" />
+
+    <TextView
+        android:id="@+id/tv_CarveoutTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="活动时间：2019.11.01-2.09.11.11"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintStart_toStartOf="@+id/tv_CarveTextstr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_CarveTextstr" />
+
+    <TextView
+        android:id="@+id/tv_CarveBtn"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_18"
+        android:background="@drawable/btn_cor_5dp_solid_orange"
+        android:text="去报名"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toBottomOf="@+id/ml_CarveimageView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_CarveTextstr" />
+</androidx.constraintlayout.widget.ConstraintLayout>
