@@ -2,11 +2,14 @@ package com.example.jiyin.common.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import com.example.rootlib.utils.StringUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.net.URL;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

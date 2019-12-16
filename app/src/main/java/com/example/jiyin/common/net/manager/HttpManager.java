@@ -1,5 +1,7 @@
 package com.example.jiyin.common.net.manager;
 
+import androidx.annotation.NonNull;
+
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.convertor.HttpLogInterceptor;
 import com.example.rootlib.utils.CollectionUtil;
@@ -25,6 +27,7 @@ public class HttpManager {
     private static HttpManager httpManager;
     private static Retrofit retrofit;
     private static OkHttpClient instance;
+    private String pathfile;
 
 
     public HttpManager(){}
@@ -109,7 +112,29 @@ public class HttpManager {
         }
         return null;
     }
-
+    //上传文件
+    public MultipartBody getOkhttpFile(@NonNull String filepath){
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (!StringUtil.isEmpty(filepath)) {
+            if(filepath.contains(".doc")){
+                pathfile = "form-data; name=\"image\"; filename=\"" + 8 + ".doc\"";
+            }
+            if(filepath.contains(".docx")){
+                pathfile = "form-data; name=\"image\"; filename=\"" + 8 + ".docx\"";
+            }
+            if(filepath.contains(".ppt")){
+                pathfile = "form-data; name=\"image\"; filename=\"" + 8 + ".ppt\"";
+            }
+            if(filepath.contains(".doc")){
+                pathfile = "form-data; name=\"image\"; filename=\"" + 8 + ".pptx\"";
+            }
+                builder.addPart(
+                        Headers.of("Content-Disposition",pathfile),
+                        RequestBody.create(MediaType.parse("image/png"), new File(filepath)));
+            return builder.build();
+        }
+        return null;
+    }
 
 
 

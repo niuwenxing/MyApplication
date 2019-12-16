@@ -10,17 +10,19 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.home.Activity.sonview.adapter.OfflinetingAdapter;
 import com.example.jiyin.home.Activity.sonview.adapter.StudyAgencyApdpter;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderThLine;
@@ -82,6 +84,7 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
     List<OfflineTrainingBean.DataBean.OclassBean> oclassArr =new  ArrayList<>();
     List<OfflineTrainingBean.DataBean.OclassBean> tcampArr = new ArrayList<>();
     private RadioButton[] radioButtons;
+    private List<StudyAgencyIndexBean.DataBean.OnlineBean> online;
     //公开课数据集
 //    List<UnderThLine.StudyBean.DataBean> gongkaikeData=new ArrayList<>();
     //训练营数据集
@@ -109,9 +112,7 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
         searchView.setVisibility(View.GONE);
         tvSearchTextTitle.setVisibility(View.VISIBLE);
         tvSearchTextTitle.setText("研习社");
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-
         rvStudylist.setLayoutManager(linearLayoutManager);
         studyAgencyApdpter = new StudyAgencyApdpter(onlin);//线上课堂
         rvStudylist.setAdapter(studyAgencyApdpter);
@@ -130,13 +131,15 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
     //事件初始化
     private void initCHlck() {
         //点击事件
-        studyAgencyApdpter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        studyAgencyApdpter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                TopVideoDetailsActivity.startTopVideo(activity,online.get(position).getOnline_id(),
+                        online.get(position).getOnline_path());
 
             }
         });
+
 
 
     }
@@ -169,11 +172,12 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
             toast(bean.getMsg());
             return;
         }
-        GlideImageLoader.load(this,bean.getData().getMaintain().getMaintain_path(),studyImage);
+        GlideImageLoader.load(this,BaseConfig.ROOT_IMAGES_API+bean.getData().getMaintain().getMaintain_path(),studyImage);
         studyTextHtml.setText(Html.fromHtml(bean.getData().getMaintain().getMaintain_text()));
         onlin = bean.getData().getOnline();
         rvStudylist.setAdapter(studyAgencyApdpter);
-        studyAgencyApdpter.setNewData(bean.getData().getOnline());
+        online = bean.getData().getOnline();
+        studyAgencyApdpter.setNewData(online);
 
 
     }
@@ -199,14 +203,15 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
     public void retUnderDetailData(UnderDetailBean bean) {}//废弃
 
     @Override
+    public void retScreationEnroll(ScreationEnrollBean bean) { }//废弃
+
+    @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
             if (checkedId == R.id.rb_OnlineClass_bt) {//线下培训
                 //获取线上培训
                 presenter.getIndex(page);
-
             }
             if(checkedId == R.id.rb_Underline_btn){//线上课堂
-                Toast.makeText(activity, "xianxia ", Toast.LENGTH_SHORT).show();
                 presenter.getofflineTraining(page);
             }
 

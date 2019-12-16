@@ -1,11 +1,14 @@
 package com.example.rootlib.utils;
 
+import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.rootlib.config.AppConfig;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -149,4 +152,7 @@ public class StringUtil {
         //截取字符
         return str.substring(0, length) + "…";
     }
+
+
+
 }

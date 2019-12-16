@@ -3,6 +3,7 @@ package com.example.jiyin.home;
 
 
 
+import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.manager.HttpManager;
 import com.example.jiyin.interactive.UserService;
 import com.example.jiyin.utils.ConstantUtil;
@@ -285,6 +286,249 @@ public class UserCallManager {
         params.put("under_id",String.valueOf(under_id));
 
         return HttpManager.getInstance().rep(UserService.class).getUnderDetail(params);
+    }
+
+    /**
+     * 获取Top视频列表
+     * @param pages
+     * @param ificationId
+     * @param name
+     * @return
+     */
+    public static Call getVideoindex(int pages, int ificationId, String name) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(pages));
+        params.put("ification_id",String.valueOf(ificationId));
+        params.put("name",String.valueOf(name));
+
+        return HttpManager.getInstance().rep(UserService.class).getVideoindex(params);
+    }
+
+    /**
+     * 获取首页数据
+     * @return
+     */
+    public static Call getIndexindex() {
+        return HttpManager.getInstance().rep(UserService.class).getIndexindex();
+    }
+
+
+    /**
+     *
+     * @param page
+     * @return
+     */
+    public static Call getScreationIndex(int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+
+        return HttpManager.getInstance().rep(UserService.class).getScreation(params);
+    }
+
+    /**
+     *
+     * @param creationId
+     * @return
+     */
+    public static Call getScreation(int creationId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("creation_id",String.valueOf(creationId));
+        return HttpManager.getInstance().rep(UserService.class).getScreationDetails(params);
+    }
+
+    /**
+     * 造物集 申请
+     * @param creationId
+     * @param toString
+     * @param toString1
+     * @param toString2
+     * @param toString3
+     * @param toString4
+     * @param isregistereds
+     * @param toString5
+     * @param toString6
+     * @param toString7
+     * @param s
+     * @return
+     */
+    public static Call getScreationEnrolls(int creationId, String toString, String toString1, String toString2, String toString3, String toString4, String isregistereds, String toString5, String toString6, String toString7, String s) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("creation_id",String.valueOf(creationId));
+        params.put("tname",toString);
+        params.put("pnum",toString1);
+        params.put("ctime",toString2);
+        params.put("ptype",toString3);
+        params.put("school",toString4);
+        params.put("is_reg",isregistereds);
+        params.put("tpeople",toString5);
+        params.put("tel",toString6);
+        params.put("email",toString7);
+        params.put("tcontent",s);
+
+
+
+        return HttpManager.getInstance().rep(UserService.class).getScreationEnrolls(params);
+    }
+
+    /**
+     * 职呼 首页
+     * @param page
+     * @param gificationId
+     * @param xificationId
+     * @param zificationId
+     * @return
+     */
+    public static Call getPositionIndexData(int page, int gificationId, int xificationId, int zificationId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+        params.put("gification_id",String.valueOf(gificationId));
+        params.put("xification_id",String.valueOf(xificationId));
+        params.put("zification_id",String.valueOf(zificationId));
+
+
+        return HttpManager.getInstance().rep(UserService.class).getPositionIndex(params);
+    }
+
+    /**
+     * 职呼筛选 菜单数据
+     * @return
+     */
+    public static Call getPositionIfications() {
+
+        return HttpManager.getInstance().rep(UserService.class).getPositionIfications();
+    }
+
+    /**
+     * 详情
+     * PositionDetailBean
+     * @param positionId
+     * @return
+     */
+    public static Call getPositionDetailData(int positionId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("position_id",String.valueOf(positionId));
+        return HttpManager.getInstance().rep(UserService.class).getPositionDetail(params);
+    }
+
+    /**
+     * 职呼 申请
+     * @param positionId
+     * @param toString
+     * @param isGender_btn
+     * @param toString1
+     * @param toString2
+     * @param toString3
+     * @param toString4
+     * @param toString5
+     * @param toString6
+     * @param toString7
+     * @param toString8
+     * @param toString9
+     * @return
+     */
+    public static Call getPositionEnrollData(int positionId, String toString, String isGender_btn,
+                                             String toString1, String toString2, String toString3,
+                                             String toString4, String toString5, String toString6,
+                                             String toString7, String toString8, String toString9) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("position_id",String.valueOf(positionId));
+        params.put("name",toString);
+        params.put("sex",isGender_btn);
+        params.put("age",toString1);
+        params.put("education",toString2);
+        params.put("school",toString3);
+        params.put("intention_duty",toString4);
+        params.put("tel",toString5);
+        params.put("email",toString6);
+        params.put("id_card",toString7);
+        params.put("resume",toString8);
+        params.put("text",toString9);
+        return HttpManager.getInstance().rep(UserService.class).getPositionEnroll(params);
+    }
+
+    /**
+     *
+     * @param page
+     * @return
+     */
+
+    public static Call getZtimeIndex(int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+
+        return HttpManager.getInstance().rep(UserService.class).getZtimeIndex(params);
+    }
+
+    /**
+     * 琢璞 时间详情
+     * @param mZid
+     * @return
+     */
+    public static Call getZtimedetail(int mZid) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("zid",String.valueOf(mZid));
+        return HttpManager.getInstance().rep(UserService.class).getZtimedetail(params);
+    }
+
+    /**
+     *  琢璞时间 申请
+     * @param mZid
+     * @param toString
+     * @param toString1
+     * @param toString2
+     * @param toString3
+     * @param toString4
+     * @param toString5
+     * @param toString6
+     * @param trim
+     * @param trim1
+     * @param toString7
+     * @param toString8
+     * @param toString9
+     * @param toString10
+     * @return
+     */
+    public static Call getZtimeenroll(int mZid, String toString, String toString1, String toString2,
+                                      String toString3, String toString4, String toString5,
+                                      String toString6, String trim, String trim1, String toString7,
+                                      String toString8, String toString9, String toString10) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("zid",String.valueOf(mZid));
+        params.put("tname",toString);
+        params.put("pnum",toString1);
+        params.put("ctime",toString2);
+        params.put("ptype",toString3);
+        params.put("school",toString4);
+        params.put("is_reg",toString5);
+        params.put("tpeople",toString6);
+        params.put("tel",trim);
+        params.put("email",trim1);
+        params.put("path",toString7);
+        params.put("is_financing",toString8);
+        params.put("tcontent",toString9);
+        params.put("pcontent",toString10);
+
+        return HttpManager.getInstance().rep(UserService.class).Ztimeenroll(params);
+    }
+
+    /**
+     * top voide 详情
+     * @param page
+     * @param videoId
+     * @return
+     */
+    public static Call getVideoDetail(int page, int videoId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("page",String.valueOf(page));
+        params.put("video_id",String.valueOf(videoId));
+        return HttpManager.getInstance().rep(UserService.class).getVideoDetail(params);
     }
 
 

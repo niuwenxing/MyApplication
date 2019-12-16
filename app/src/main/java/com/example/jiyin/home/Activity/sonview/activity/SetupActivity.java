@@ -51,6 +51,7 @@ public class SetupActivity extends JiYingActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back_btn:
+                finish();
                 break;
             case R.id.genduoportrait_btn:
                 break;

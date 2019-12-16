@@ -57,13 +57,13 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     }
 
                     @Override
-                    public void onLoadStart() {
+                    public void onLoadStart() {v.showProgress();
 
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+v.hideProgress();
                     }
 
                     @Override
@@ -102,11 +102,11 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     }
 
                     @Override
-                    public void onLoadStart() {
+                    public void onLoadStart() {v.showProgress();
                     }
 
                     @Override
-                    public void onLoadFinished() {
+                    public void onLoadFinished() {v.hideProgress();
                     }
 
                     @Override
@@ -143,13 +143,12 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                     }
 
                     @Override
-                    public void onLoadStart() {
+                    public void onLoadStart() {v.showProgress();
 
                     }
 
                     @Override
-                    public void onLoadFinished() {
-
+                    public void onLoadFinished() {v.hideProgress();
                     }
 
                     @Override
@@ -176,10 +175,10 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
                 .setCall(UserCallManager.getlogin(phone,psd))
                 .request(new NetBeanListener<LoginData>() {
                     @Override
-                    public void onLoadStart() { }
+                    public void onLoadStart() { v.showProgress();}
 
                     @Override
-                    public void onLoadFinished() {  }
+                    public void onLoadFinished() {v.hideProgress();  }
 
                     @Override
                     public void onNetErr() { }

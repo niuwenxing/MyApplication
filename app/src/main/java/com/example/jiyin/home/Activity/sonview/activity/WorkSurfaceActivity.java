@@ -140,7 +140,7 @@ public class WorkSurfaceActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
         searchView.setVisibility(View.GONE);
         searechNewsBtn.setVisibility(View.INVISIBLE);
         tvSearchTextTitle.setVisibility(View.VISIBLE);
-        tvSearchTextTitle.setText("报名申请表");
+        tvSearchTextTitle.setText("报名申请");
         tvSearchTextTitle.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         workId = getIntent().getIntExtra(ConstantUtil.WORKSHOPKEY, 253);
 
@@ -162,16 +162,13 @@ public class WorkSurfaceActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
     }
 
     @Override
-    public void returnDatalabel(WorkshopLabelBase data) {
-    }//废弃
+    public void returnDatalabel(WorkshopLabelBase data) { }//废弃
 
     @Override
-    public void retWorkShopMainData(WorkshopMainBase bean) {
-    } //废弃
+    public void retWorkShopMainData(WorkshopMainBase bean) { } //废弃
 
     @Override
-    public void retDataWorkDetails(WorkDetailsBase bean) {
-    }//废弃
+    public void retDataWorkDetails(WorkDetailsBase bean) { }//废弃
 
     //请求返回结果
     @Override
@@ -213,7 +210,6 @@ public class WorkSurfaceActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
                 break;
             case R.id.tv_ProjectType_btn://项目类型
                 presenter.studioLabel(workId);
-
                 break;
             case R.id.tv_Submission_btn://提交申请
                 rtSubmission();

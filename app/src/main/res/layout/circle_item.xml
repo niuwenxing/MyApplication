@@ -74,14 +74,14 @@
             android:layout_marginTop="8dp"
             />
 
-        <cn.jzvd.JZVideoPlayerStandard
+        <cn.jzvd.JzvdStd
             android:id="@+id/jz_JZVideo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_300"
             android:visibility="gone"
             >
 
-        </cn.jzvd.JZVideoPlayerStandard>
+        </cn.jzvd.JzvdStd>
     </FrameLayout>
     <RelativeLayout
         android:paddingTop="@dimen/dp_10"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.StudyAgencyImpl;
@@ -59,7 +61,7 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
     @BindView(R.id.tv_CustomerPhone_btn)
     TextView tv_CustomerPhone_btn;
     @BindView(R.id.lpk)
-    TextView lpk;
+    WebView lpk;
     private int underId;
     private int underType;
     private int under_id;
@@ -104,6 +106,7 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
         tvSearchTextTitle.setVisibility(View.VISIBLE);
         tvSearchTextTitle.setText("研习社详情...");
         under_id = getIntent().getIntExtra("under_id", 1252);
+
         presenter.getUnderDetail(under_id);//研习社详情
     }
 
@@ -127,7 +130,7 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
             return;
         }
         tvSearchTextTitle.setText(bean.getData().getUnder_title()+"");
-        lpk.setText(Html.fromHtml(bean.getData().getUnder_text()));
+
         participateBtn.setEnabled(bean.getData().getEnroll()==1?false:true);
         participateBtn.setBackgroundColor(bean.getData().getEnroll()==1?
                 getResources().getColor(R.color.colorcbcbcb):
@@ -140,6 +143,9 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
 
     }
 
+    @Override
+    public void retScreationEnroll(ScreationEnrollBean bean) { } //废弃
+
     @OnClick({R.id.gobank_btn, R.id.participate_btn,R.id.tv_CustomerPhone_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -147,8 +153,11 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
                 finish();
                 break;
             case R.id.participate_btn:
+
+
                 break;
             case R.id.tv_CustomerPhone_btn://联系客服
+
 
                 break;
         }

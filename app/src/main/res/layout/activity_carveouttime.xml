@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".home.Activity.sonview.activity.CarveouttimeActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/navigationbar"/>
+
+    <include layout="@layout/layout_common_throw"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/iv_CarveoutTimeImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="@dimen/dp_140"
+                android:src="@mipmap/lunbotu1"
+                android:scaleType="centerCrop"
+                />
+            <TextView
+                android:layout_marginTop="@dimen/dp_15"
+                android:padding="@dimen/dp_10"
+                android:id="@+id/tv_CarveoutTimeTextHtml"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RadioGroup
+                android:id="@+id/rg_CarveoutTimeGroup"
+                android:paddingLeft="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/rb_NewestWeekly_bt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:text="每周推荐"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:checked="true"
+                    android:textColor="@drawable/rtudyagency_rgbtn"
+                    />
+                <RadioButton
+                    android:id="@+id/rb_Pastperiod_btn"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="往期展示"
+                    android:textColor="@drawable/rtudyagency_rgbtn"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"/>
+
+            </RadioGroup>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:id="@+id/rv_CarveoutTimeList"
+                android:layout_width="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

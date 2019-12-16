@@ -13,6 +13,8 @@ public interface BaseConfig {
 
     //多图上传
     String imgArr=BaseConfig.ROOT_SERVER_API+"Common/uploadMultiPic";
+    //单图上传
+    String imgFile=BaseConfig.ROOT_SERVER_API+"Common/uploadImg";
 
     /**
      * 原因多种

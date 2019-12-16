@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import cn.jzvd.JZVideoPlayer;
-import cn.jzvd.JZVideoPlayerStandard;
+import cn.jzvd.JzvdStd;
 
 /**
  * 圈子 子页面
@@ -192,7 +191,7 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
              */
             public void GCView(View gcView) {
                 if (gcView != null && gcView.findViewById(R.id.jz_JZVideo) != null) {
-                    JZVideoPlayerStandard  video = activity.findViewById(R.id.jz_JZVideo);
+                    JzvdStd video = activity.findViewById(R.id.jz_JZVideo);
                     video.releaseAllVideos();
 
                 }

@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/layout_common_throw"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +16,6 @@
                     android:layout_height="535dp"
                     android:src="@mipmap/beijing"
                     android:scaleType="fitXY" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
@@ -102,7 +102,7 @@
                         <LinearLayout
                             android:layout_marginTop="@dimen/dp_12"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_44"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             >
                             <RelativeLayout
@@ -117,6 +117,7 @@
                                     android:textColor="@android:color/white"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textStyle="bold"
 
                                     />
                                 <TextView
@@ -128,7 +129,9 @@
                                     android:textSize="@dimen/sp_15"
                                     android:textColor="@android:color/white"
                                     android:layout_width="wrap_content"
+                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"/>
+
                             </RelativeLayout>
                             <View
                                 android:layout_width="1dp"
@@ -146,7 +149,6 @@
                                 android:textColor="@color/colorNews"
                                 android:maxLines="2"
                                 android:ellipsize="end"
-                                android:text="击败80%餐饮行业，日料为何越跑越快呢？想找机器人教育项目的看过来，史上最......."
                                 android:lineSpacingExtra="@dimen/dp_7"
                                 />
                         </LinearLayout>
@@ -392,7 +394,7 @@
                         android:layout_height="@dimen/dp_100"
                         android:src="@mipmap/zhuopushijian"
                         app:ml_border_color="@color/colorTop"
-                        app:ml_border_width="@dimen/dp_2"
+                        app:ml_border_width="@dimen/dp_1"
                         app:ml_shape_type="rectangle"
                         app:ml_radius="@dimen/dp_10"
                         />
@@ -491,6 +493,7 @@
                                 android:gravity="left"
                                 />
                             <TextView
+                                android:id="@+id/a3"
                                 android:layout_alignLeft="@+id/a2"
                                 android:layout_marginTop="@dimen/dp_3"
                                 android:layout_below="@+id/a2"
@@ -551,6 +554,7 @@
                                 android:gravity="left"
                                 />
                             <TextView
+                                android:id="@+id/b3"
                                 android:layout_alignLeft="@+id/b2"
                                 android:layout_marginTop="@dimen/dp_3"
                                 android:layout_below="@+id/b2"
@@ -614,6 +618,7 @@
                                 android:gravity="left"
                                 />
                             <TextView
+                                android:id="@+id/bb3"
                                 android:layout_alignLeft="@+id/bb2"
                                 android:layout_marginTop="@dimen/dp_3"
                                 android:layout_below="@+id/bb2"
@@ -676,6 +681,7 @@
                                 android:gravity="left"
                                 />
                             <TextView
+                                android:id="@+id/a3_personnel"
                                 android:layout_alignLeft="@+id/a2_personnel"
                                 android:layout_marginTop="@dimen/dp_3"
                                 android:layout_below="@+id/a2_personnel"
@@ -740,6 +746,7 @@
                                 android:gravity="left"
                                 />
                             <TextView
+                                android:id="@+id/a3_Carvetime"
                                 android:layout_alignLeft="@+id/a2_Carvetime"
                                 android:layout_marginTop="@dimen/dp_3"
                                 android:layout_below="@+id/a2_Carvetime"

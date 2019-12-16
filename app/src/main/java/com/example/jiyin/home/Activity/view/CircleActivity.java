@@ -41,6 +41,7 @@ public class CircleActivity extends JiYingActivity implements IBaseView {
     private int ification_id=0x012;
     private Intent intent;
     private CirclelabelBean data =new CirclelabelBean();
+    private BeanNetUnit loginUnit;
 
 
     @Override
@@ -100,7 +101,7 @@ public class CircleActivity extends JiYingActivity implements IBaseView {
      */
     public void getCircle(){
 
-        BeanNetUnit loginUnit=new BeanNetUnit<CirclelabelBean>()
+        loginUnit = new BeanNetUnit<CirclelabelBean>()
                 .setCall(UserCallManager.getCircle())
                 .request(new NetBeanListener<CirclelabelBean>() {
                     @Override

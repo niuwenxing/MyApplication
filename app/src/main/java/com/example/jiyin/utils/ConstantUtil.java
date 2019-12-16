@@ -46,5 +46,10 @@ public final class ConstantUtil {
      * 工作坊 详情
      */
     public static final String WORKSHOPKEY="WorkShopKey";
-
+    /**
+     * 职呼 筛选
+     */
+    public static final String GIFICATIONID="gificationId0";
+    public static final String XIFICATIONID="xificationId0";
+    public static final String ZIFICATIONID="zificationId0";
 }

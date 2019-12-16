@@ -8,7 +8,7 @@
     tools:context=".home.Activity.sonview.activity.WorkSurfaceActivity">
 
     <include layout="@layout/navigationbar"/>
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -369,5 +369,5 @@
                 android:textSize="@dimen/sp_14"
                 />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

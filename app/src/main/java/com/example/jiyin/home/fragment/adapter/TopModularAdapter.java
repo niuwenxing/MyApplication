@@ -1,75 +1,32 @@
 package com.example.jiyin.home.fragment.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
-import com.example.jiyin.home.Activity.sonview.activity.ProduceActivity;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
+import com.example.jiyin.utils.GlideImageLoader;
 
 import java.util.List;
 
-public class TopModularAdapter<T> extends RecyclerView.Adapter<TopModularAdapter.TopModularView> {
+public class TopModularAdapter  extends BaseQuickAdapter<IndexindexBean.DataBean.VideoBean, BaseViewHolder> {
 
-    private  Context context;
-    private  List<T> objects;
-
-    public TopModularAdapter(Context context, List<T> objects) {
-        this.context=context;
-        this.objects=objects;
-    }
-
-    @NonNull
-    @Override
-    public TopModularAdapter.TopModularView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TopModularView(LayoutInflater.from(parent.getContext()).inflate(R.layout.home_toplist_item,parent,false));
-
+    public TopModularAdapter(@Nullable List<IndexindexBean.DataBean.VideoBean> data) {
+        super(R.layout.home_toplist_item, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopModularAdapter.TopModularView holder, int position) {
-        holder.rlTopItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ProduceActivity.class);
-                context.startActivity(intent);
-            }
-        });
-
-
+    protected void convert(@NonNull BaseViewHolder helper, IndexindexBean.DataBean.VideoBean item) {
+        GlideImageLoader.load(mContext, BaseConfig.ROOT_IMAGES_API+item.getVideo_path(),(ImageView)helper.getView(R.id.img_toplist_img));
+        Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getVideo_path()).into((ImageView)helper.getView(R.id.img_toplist_img));
+        helper.setText(R.id.tv_projecttitle,item.getVideo_title());
+        helper.setText(R.id.tv_topcontent,item.getVideo_label());
+        helper.setText(R.id.tv_topNumber,mContext.getResources().getString(R.string.reduStr)+item.getVideo_num()+"");
     }
 
-    @Override
-    public int getItemCount() {
-        return objects.size()+5;
-    }
-
-    public class TopModularView extends RecyclerView.ViewHolder {
-
-        private final ImageView imgToplistimg;
-        private final TextView tvTopNumber;
-        private final TextView tvProjecttitle;
-        private final TextView tvTopcontent;
-        private final RelativeLayout rlTopItemView;
-
-        public TopModularView(@NonNull View itemView) {
-            super(itemView);
-
-            imgToplistimg = itemView.findViewById(R.id.img_toplist_img);
-            tvTopNumber=itemView.findViewById(R.id.tv_topNumber);
-            tvProjecttitle=itemView.findViewById(R.id.tv_projecttitle);
-            tvTopcontent=itemView.findViewById(R.id.tv_topcontent);
-            rlTopItemView=itemView.findViewById(R.id.rl_TopItemView);
-
-
-        }
-    }
 }

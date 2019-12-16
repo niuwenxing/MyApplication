@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
@@ -207,7 +208,8 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
             toast(bean.getMsg().toString());
             return;
         }
-        GlideImageLoader.load(this, BaseConfig.ROOT_IMAGES_API+bean.getData().getMaintain().getMaintain_path(),mLableimage);
+//        GlideImageLoader.load(this, BaseConfig.ROOT_IMAGES_API+bean.getData().getMaintain().getMaintain_path(),mLableimage);
+        Glide.with(this).load(BaseConfig.ROOT_IMAGES_API+"/upload/default/20191028/9a88a60cc598683752a6fb1adfd593b5.jpg").into(mLableimage);
         mTextHtml.setText(Html.fromHtml(bean.getData().getMaintain().getMaintain_text()));
         this.workshopListdata.clear();
         this.workshopListdata.addAll(bean.getData().getWorkshop());

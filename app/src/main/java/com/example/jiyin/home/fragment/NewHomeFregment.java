@@ -3,20 +3,13 @@ package com.example.jiyin.home.fragment;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +21,7 @@ import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.azoft.carousellayoutmanager.DefaultChildSelectionListener;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
+import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.widget.MLImageView;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.CheckActivity;
@@ -41,12 +35,14 @@ import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
 import com.example.jiyin.home.Activity.sonview.activity.StudyAgencyActivity;
 import com.example.jiyin.home.Activity.sonview.activity.TopActivity;
 import com.example.jiyin.home.Activity.sonview.activity.WorkshopActivity;
+import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
 import com.example.jiyin.home.fragment.adapter.TopModularAdapter;
 import com.example.jiyin.home.fragment.view.HomeView;
 import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
 import com.example.jiyin.interactive.ContactsActivity;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.GlideImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,12 +109,16 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     TextView a1;
     @BindView(R.id.a2)
     TextView a2;
+    @BindView(R.id.a3)
+    TextView a3;
     @BindView(R.id.view_workshop)
     RelativeLayout viewWorkshop;
     @BindView(R.id.b1)
     TextView b1;
     @BindView(R.id.b2)
     TextView b2;
+    @BindView(R.id.b3)
+    TextView b3;
     @BindView(R.id.workshops)
     RelativeLayout workshops;
     @BindView(R.id.workshops_img)
@@ -127,25 +127,52 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     TextView bb1;
     @BindView(R.id.bb2)
     TextView bb2;
+    @BindView(R.id.bb3)
+    TextView bb3;
     @BindView(R.id.collection)
     RelativeLayout collection;
     @BindView(R.id.view_abb)
     RelativeLayout viewAbb;
     @BindView(R.id.a1_personnel)
     TextView a1Personnel;
+    @BindView(R.id.a2_personnel)
+    TextView a2Personnel;
     @BindView(R.id.a1_Carvetime)
     TextView a1Carvetime;
+    @BindView(R.id.a2_Carvetime)
+    TextView a2Carvetime;
+    @BindView(R.id.a3_Carvetime)
+    TextView a3Carvetime;
+    @BindView(R.id.a3_personnel)
+    TextView a3personnel;
     @BindView(R.id.img_Occupational_btn)
     MLImageView img_Occupational_btn;
     @BindView(R.id.ml_Creationcollection_btn)
     MLImageView mlCreationcollection_btn;
     @BindView(R.id.img_carvetime)
     MLImageView imgCarvetime;
+    @BindView(R.id.tv_ProduceTitie)
+    TextView tvProduceTitie;
+    @BindView(R.id.tv_ProduceContext)
+    TextView tvProduceContext;
+    @BindView(R.id.img_Produceimage_btn)
+    MLImageView imgProduceimage;
 
     //top 更多
     @BindView(R.id.tv_topHedo_btn)
     TextView tvTopHedo_btn;
     private View layoutFragment;
+    //新闻ID
+    private int new_id= BaseConfig.SERVER_ERR_LOGIN_OBSOLETE;
+
+    //轮播数据
+    private List<IndexindexBean.DataBean.ProjectBean> project=new ArrayList<>();
+    //top 数据集
+    private List<IndexindexBean.DataBean.VideoBean> videolist=new ArrayList<>();
+
+    private CoverFlowAdapter mCoverFlowAdapter;
+    private TopModularAdapter topModularAdapter;
+    private IndexindexBean.DataBean.AdvertBean advert;
 
     @Override
     protected int attachLayoutRes() {
@@ -154,7 +181,6 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
     @Override
     protected void init() {
-        Log.i("HomeFragment","a4a8465e41w6fa8496wef65awe6f846ewa5f16a5s4df6es165f1d854as6ef46584d98");
         layoutFragment = getLayoutFragment();
 //        tvHomeTitle = layoutFragment.findViewById(R.id.tv_homeTitle);
 //        tvtop = layoutFragment.findViewById(R.id.tv_tvTop);
@@ -168,15 +194,6 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         a1Carvetime.setTypeface(tf);
 //        tvHomeTitles.setTypeface(tf);
 
-        SpannableStringBuilder HomeTitle = new SpannableStringBuilder(tvHomeTitle.getText());
-        HomeTitle.setSpan(new TypefaceSpan("PingFangSC-Semibold"), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        HomeTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), 0, tvHomeTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvHomeTitle.setText(HomeTitle);
-
-
-        SpannableStringBuilder tvTop = new SpannableStringBuilder(tvTvTop.getText());
-        tvTop.setSpan(new TypefaceSpan("San-Francisco-Text-Heavy"), 0, tvTvTop.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvTvTop.setText(tvTop);
 
 
         //首页轮播
@@ -184,13 +201,8 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         RecyclerView recyclerView = layoutFragment.findViewById(R.id.home_bananrlist);
         layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
         recyclerView.addOnScrollListener(new CenterScrollListener());
-        List objects = new ArrayList<>();
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
-        CoverFlowAdapter mCoverFlowAdapter = new CoverFlowAdapter(objects, getContext());
+
+        mCoverFlowAdapter = new CoverFlowAdapter(project, getContext());
         recyclerView.setLayoutManager(new CoverFlowAdapter.MyLayoutManager(getContext()));
         initRecyclerView(recyclerView, layoutManager, mCoverFlowAdapter);
         recyclerView.setAdapter(mCoverFlowAdapter);
@@ -199,11 +211,20 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         homeTopList.setLayoutManager(linearLayoutManager);
-        TopModularAdapter<Object> topModularAdapter = new TopModularAdapter(getContext(),objects);
+        //top
+        topModularAdapter = new TopModularAdapter(videolist);
         homeTopList.addItemDecoration(new SpaceItemDecoration((int) getResources().getDimension(R.dimen.dp_10), 0));
         homeTopList.setAdapter(topModularAdapter);
 
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getIndexindex();//获取首页数据
+    }
+
 
     private void initRecyclerView(RecyclerView recyclerView, final CarouselLayoutManager layoutManager, final CoverFlowAdapter adapter) {
         layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
@@ -256,9 +277,11 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
     }
 
+
     @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn,R.id.fl_menu_one_btn,
             R.id.fl_menu_two_btn, R.id.fl_menu_three_btn, R.id.fl_menu_four_btn, R.id.tv_look_btn,
-            R.id.tv_topHedo_btn,R.id.img_zhoupu_img,R.id.workshops,R.id.workshops_img,R.id.img_Occupational_btn
+            R.id.tv_topHedo_btn,R.id.img_zhoupu_img,R.id.workshops,R.id.workshops_img,R.id.img_Occupational_btn,
+            R.id.ml_Creationcollection_btn,R.id.img_carvetime,R.id.img_Produceimage_btn
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -268,6 +291,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 startActivity(intentSearchpage);
                 break;
             case R.id.tv_news_btn://头条
+                tvnewsbtn();
                 break;
             case R.id.tv_check_btn://查
                 startActivity(new Intent(getContext(), CheckActivity.class));
@@ -305,7 +329,89 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             case R.id.img_carvetime://琢璞时间
                 startActivity(new Intent(getContext(), CarveouttimeActivity.class));
                 break;
+            case R.id.img_Produceimage_btn://玑瑛出品
 
+                break;
+        }
+    }
+
+    private void tvnewsbtn() {
+        if (new_id==BaseConfig.SERVER_ERR_LOGIN_OBSOLETE){
+            return;
+        }else{
+            // TODO: 2019/12/9 goto 新闻
+        }
+
+    }
+
+    //返回 首页数据接口
+    @Override
+    public void retIndexindex(IndexindexBean bean) {
+        // 设置 新闻
+        new_id = bean.getData().getNewX().getNew_id();
+        tvNewsBtn.setText(bean.getMsg());
+
+        //轮播
+        project.clear();
+        project.addAll(bean.getData().getProject());
+        mCoverFlowAdapter.notifyDataSetChanged();
+
+        //top视频
+        videolist.clear();
+        videolist.addAll(bean.getData().getVideo());
+        topModularAdapter.notifyDataSetChanged();
+
+        //出品
+        advert = bean.getData().getAdvert();
+        tvProduceTitie.setText(advert.getAdvert_title());
+        tvProduceContext.setText(advert.getAdvert_text());
+        GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+advert.getAdvert_path(),imgProduceimage);
+
+        //box
+
+        List<IndexindexBean.DataBean.BoxBean> box = bean.getData().getBox();
+
+        if (box.size()!=0) {
+            if (box.size()>=1) {
+                IndexindexBean.DataBean.BoxBean boxBean = box.get(0);
+                a1.setText(boxBean.getBox_title());
+                a2.setText(boxBean.getBox_text());
+                a3.setText(boxBean.getBox_num()+"参与");
+//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgZhoupuImg);
+            }if(box.size()>=2){
+                IndexindexBean.DataBean.BoxBean boxBean = box.get(1);
+                b1.setText(boxBean.getBox_title());
+                b2.setText(boxBean.getBox_text());
+                b3.setText(boxBean.getBox_num()+"参与");
+//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),workshopsImg);
+
+
+            }if(box.size()>=3){
+                IndexindexBean.DataBean.BoxBean boxBean = box.get(2);
+                bb1.setText(boxBean.getBox_title());
+                bb2.setText(boxBean.getBox_text());
+                bb3.setText(boxBean.getBox_num()+"参与");
+//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),mlCreationcollection_btn);
+
+
+            }if(box.size()>=4){
+
+                IndexindexBean.DataBean.BoxBean boxBean = box.get(3);
+                a1Personnel.setText(boxBean.getBox_title());
+                a2Personnel.setText(boxBean.getBox_text());
+                a3personnel.setText(boxBean.getBox_num()+"参与");
+//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),img_Occupational_btn);
+
+
+            }if(box.size()>=5){
+                IndexindexBean.DataBean.BoxBean boxBean = box.get(4);
+                a1Carvetime.setText(boxBean.getBox_title());
+                a2Carvetime.setText(boxBean.getBox_text());
+                a3Carvetime.setText(boxBean.getBox_num()+"参与");
+//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgCarvetime);
+            }
+        }else{
+            viewAbb.setVisibility(View.GONE);
         }
     }
 }

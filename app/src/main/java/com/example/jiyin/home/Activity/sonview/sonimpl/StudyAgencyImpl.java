@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
 import com.example.jiyin.home.Activity.sonview.impl.StudyAgencyPresenter;
@@ -54,12 +55,12 @@ public class StudyAgencyImpl extends StudyAgencyPresenter<StudyAgencyView> {
                         });
                     }
                     @Override
-                    public void onLoadStart() {
+                    public void onLoadStart() {v.showProgress();
 
                     }
 
                     @Override
-                    public void onLoadFinished() {
+                    public void onLoadFinished() {v.hideProgress();
 
                     }
 
@@ -121,12 +122,12 @@ public class StudyAgencyImpl extends StudyAgencyPresenter<StudyAgencyView> {
 
                     @Override
                     public void onLoadStart() {
-
+v.showProgress();
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+v.hideProgress();
                     }
 
                     @Override
@@ -159,16 +160,15 @@ public class StudyAgencyImpl extends StudyAgencyPresenter<StudyAgencyView> {
      */
     @Override
     public void getUnderDetail(int under_id) {
-        studyagency=new BeanNetUnit()
+        studyagency=new BeanNetUnit<UnderDetailBean>()
                 .setCall(UserCallManager.getUnderDetail(under_id))
-                .request(new NetBeanListener<String>() {
+                .request(new NetBeanListener<UnderDetailBean>() {
                     @Override
-                    public void onSuc(String bean) {
+                    public void onSuc(UnderDetailBean bean) {
                         if (bean!=null) {
                             v.hideExpectionPages();
-//                            v.retUnderDetailData(bean);
-                            Log.d("as", "onSuc: "
-                            );
+                            v.retUnderDetailData(bean);
+                            Log.d("as", "onSuc: " );
                         }else{
                             v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
                                 @Override
@@ -191,12 +191,12 @@ public class StudyAgencyImpl extends StudyAgencyPresenter<StudyAgencyView> {
                     }
 
                     @Override
-                    public void onLoadStart() {
+                    public void onLoadStart() {v.showProgress();
 
                     }
 
                     @Override
-                    public void onLoadFinished() {
+                    public void onLoadFinished() {v.hideProgress();
 
                     }
 

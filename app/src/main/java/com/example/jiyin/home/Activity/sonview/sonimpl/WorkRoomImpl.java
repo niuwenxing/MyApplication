@@ -54,12 +54,12 @@ public class WorkRoomImpl extends WorkRoomPresenter<WorkRoomView> {
 
                     @Override
                     public void onLoadStart() {
-
+                        v.showProgress();
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+                        v.hideProgress();
                     }
 
                     @Override
@@ -116,11 +116,11 @@ public class WorkRoomImpl extends WorkRoomPresenter<WorkRoomView> {
                     }
                     @Override
                     public void onLoadStart() {
-
+                        v.showProgress();
                     }
                     @Override
                     public void onLoadFinished() {
-
+                        v.hideProgress();
                     }
                     @Override
                     public void onNetErr() {
@@ -170,12 +170,12 @@ public class WorkRoomImpl extends WorkRoomPresenter<WorkRoomView> {
 
                     @Override
                     public void onLoadStart() {
-
+                        v.showProgress();
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+                        v.hideProgress();
                     }
 
                     @Override
@@ -225,12 +225,12 @@ public class WorkRoomImpl extends WorkRoomPresenter<WorkRoomView> {
 
                     @Override
                     public void onLoadStart() {
-
+v.showProgress();
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+v.hideProgress();
                     }
 
                     @Override
@@ -269,11 +269,11 @@ public class WorkRoomImpl extends WorkRoomPresenter<WorkRoomView> {
                     }
                     @Override
                     public void onLoadStart() {
-
+v.showProgress();
                     }
                     @Override
                     public void onLoadFinished() {
-
+v.hideProgress();
                     }
                     @Override
                     public void onNetErr() {

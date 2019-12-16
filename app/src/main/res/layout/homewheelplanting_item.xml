@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="@dimen/dp_186"
     android:layout_height="@dimen/dp_183"
     android:background="@mipmap/juxing"
-    android:paddingRight="5dp"
-    >
-    <ImageView
+    android:paddingRight="@dimen/dp_6"
+    android:paddingLeft="@dimen/dp_3">
+    <com.example.jiyin.common.widget.MLImageView
+        android:layout_marginTop="@dimen/dp_3"
         android:id="@+id/iv_homeimg"
+        app:ml_shape_type="rectangle"
+        app:ml_radius="@dimen/dp_6"
+        app:ml_border_width="@dimen/dp_0"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_94"
-        android:src="@mipmap/lunbotu1"
         android:scaleType="fitXY"
         />
     <TextView
@@ -22,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorNews"
-        android:text="PLAY GAME"
         android:textSize="@dimen/sp_10"
         android:gravity="left"/>
 
@@ -31,7 +34,6 @@
         android:layout_width="@dimen/dp_124"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_8"
-        android:text="Better than the first perspective"
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="#383838"
@@ -48,7 +50,6 @@
         android:layout_width="@dimen/dp_121"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_height="wrap_content"
-        android:text="未来已来，是墨守陈规还是突破自我？"
         android:textColor="#383838"
         android:textSize="@dimen/sp_9"
         android:gravity="left"
@@ -73,25 +74,11 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="热度"
         android:textColor="#383838"
         android:textSize="@dimen/sp_8"
-        android:gravity="left"
-        />
-    <TextView
-        android:layout_below="@+id/textString"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_5"
-        android:layout_alignRight="@+id/textString"
-        android:layout_alignLeft="@+id/textString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1.3W"
-        android:textColor="@color/colorNews"
-        android:textSize="@dimen/dp_6"
         android:gravity="center"
-        android:maxLines="1"
         />
+
 
 
 

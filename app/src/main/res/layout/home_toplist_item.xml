@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,74 +9,86 @@
     android:layout_margin="@dimen/dp_5"
     android:id="@+id/rl_TopItemView"
     >
-    <ImageView
-        android:src="@mipmap/tu1"
+    <com.example.jiyin.common.widget.MLImageView
         android:id="@+id/img_toplist_img"
         android:layout_width="@dimen/dp_135"
         android:layout_height="@dimen/dp_101"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"
+        app:ml_shape_type="rectangle"
+        app:ml_radius="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/topIcon"
-        android:layout_marginLeft="1.5dp"
-        android:layout_marginTop="@dimen/dp_7"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
         android:layout_below="@+id/img_toplist_img"
+        android:layout_marginTop="7dp"
         android:src="@mipmap/reidu"
-        android:layout_width="@dimen/dp_17"
-        android:layout_height="@dimen/dp_17"/>
+        app:layout_constraintTop_toBottomOf="@+id/img_toplist_img"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/hintop"
-        android:text="热度"
-        android:layout_below="@+id/topIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/topIcon"
+        android:gravity="center"
         android:textColor="@color/colorNews"
         android:textSize="@dimen/sp_8"
-        android:gravity="center"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_topcontent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topIcon" />
 
     <TextView
         android:id="@+id/tv_topNumber"
-        android:layout_below="@+id/hintop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5000"
+        android:layout_below="@+id/hintop"
+        android:layout_alignLeft="@+id/hintop"
+        android:gravity="center"
+        android:text="热度"
         android:textColor="@color/colorNews"
         android:textSize="@dimen/sp_9"
-        android:gravity="center"
-        android:layout_alignLeft="@+id/hintop"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_topcontent"
+        app:layout_constraintTop_toBottomOf="@+id/topIcon"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_projecttitle"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_below="@+id/img_toplist_img"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/img_toplist_img"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@+id/topIcon"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:maxLines="1"
         android:text="项目标题"
         android:textColor="@color/colorNews"
-        android:textSize="@dimen/sp_16"
-        android:gravity="left"
-        android:layout_toRightOf="@+id/topIcon"
-        android:layout_marginLeft="@dimen/sp_9"
-        android:maxLines="1"
-        android:ellipsize="end"
-        />
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/topIcon"
+        app:layout_constraintTop_toBottomOf="@+id/img_toplist_img" />
+
     <TextView
-        android:layout_marginLeft="@dimen/dp_9"
-        android:layout_toRightOf="@+id/tv_topNumber"
-        android:layout_below="@+id/tv_projecttitle"
         android:id="@+id/tv_topcontent"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_projecttitle"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tv_topNumber"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:maxLines="1"
         android:text="项目内容"
         android:textColor="@color/colorNews"
-        android:textSize="@dimen/sp_12"
-        android:gravity="left"
-        android:maxLines="1"
-        android:ellipsize="end"
-        />
+        android:textSize="@dimen/sp_9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_projecttitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_projecttitle" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

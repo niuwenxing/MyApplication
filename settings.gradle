@@ -1,2 +1,3 @@
-include ':app', ':rootlib'
-rootProject.name='My Application'
+include ':app', ':rootlib', ':rootfilelibs',
+        rootProject.name = 'My Application'
+//':DFileSelector'

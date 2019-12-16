@@ -1,5 +1,6 @@
 package com.example.rootlib.widget.common;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -43,6 +44,17 @@ public class ThrowLayout extends FrameLayout {
     private TextView textView;
 
     private OnRetryListener mOnRetryListener;
+
+
+    /**
+     * Loading框--暂用
+     */
+    protected Dialog loadingDialog;
+    /**
+     * 自定义loading获取器
+     */
+    private CustomerProgressCreator progressCreator;
+
 
     public ThrowLayout(@NonNull Context context) {
         super(context);
@@ -139,13 +151,28 @@ public class ThrowLayout extends FrameLayout {
      * 加载中 showDialog
      */
     private void showProgress() {
-        //todo ： 加载中 showDialog  未定义
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            return;
+        } else {
+            if (progressCreator != null) {
+                loadingDialog = progressCreator.getPrgressDialog();
+            }
+            if (loadingDialog == null) {
+                loadingDialog = CommonProgressDialog.create(mContext, mContext.getString(R.string.app_name));
+                loadingDialog.setCancelable(true);
+                loadingDialog.setCanceledOnTouchOutside(false);
+            }
+
+            loadingDialog.show();
+        }
     }
     /**
      * 隐藏showDialog
      */
     private void hideProgress() {
-        //todo ： 隐藏showDialog   未定义
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
     }
 
     private void inflateLayout(@EmptyStatus int status) {
@@ -181,6 +208,17 @@ public class ThrowLayout extends FrameLayout {
 
     public void setRetryListener(OnRetryListener retryListener) {
         this.mOnRetryListener = retryListener;
+    }
+
+    /**
+     * 获取用户自定义dialog
+     */
+    public interface CustomerProgressCreator {
+        Dialog getPrgressDialog();
+    }
+
+    public void setProgressCreator(CustomerProgressCreator progressCreator) {
+        this.progressCreator = progressCreator;
     }
 
 

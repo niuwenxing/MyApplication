@@ -24,7 +24,7 @@ import com.example.rootlib.view.photo.PhotoBrowseInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayerStandard;
+import cn.jzvd.JzvdStd;
 import razerdp.github.com.widget.PhotoContents;
 import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
@@ -58,8 +58,8 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
 //        urlList.add("http://img1.imgtn.bdimg.com/it/u=3356331771,2093090619&fm=214&gp=0.jpg");
 //        urlList.add("http://desk.fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/03/ChMkJlbKx2qIGStWAAePuU7wk_cAALHzQF9mKIAB4_R763.jpg");
 
-        holder.jzVideoPlayerStandard.setUp("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4",
-                JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,"");
+//        holder.jzVideoPlayerStandard.setUp("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4",
+//                ,"");
 
         Glide.with(activity).load("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4").into(holder.jzVideoPlayerStandard.thumbImageView);
 
@@ -103,7 +103,7 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
         private final TextView tvcontent;
         private final TextView circleFollow;
         private final ImageView ivImgHead;
-        private final JZVideoPlayerStandard jzVideoPlayerStandard;
+        private final JzvdStd jzVideoPlayerStandard;
         private final PhotoContents circle_image_container;
 
 

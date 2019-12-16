@@ -212,7 +212,11 @@
         <item name="android:textSize">@dimen/large_x</item>
     </style>
 
-
+    <!-- Loading样式 -->
+    <style name="CommonProgressDialog" parent="@style/DialogStyle">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
 
 
 </resources>

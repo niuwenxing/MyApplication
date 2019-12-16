@@ -123,12 +123,12 @@ public  class WorkshopImpl extends WorkshopPresenter<WorkshopView> {
                     }
                     @Override
                     public void onLoadStart() {
-
+v.showProgress();
                     }
 
                     @Override
                     public void onLoadFinished() {
-
+v.hideProgress();
                     }
                     @Override
                     public void onNetErr() {

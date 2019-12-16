@@ -7,6 +7,8 @@ public abstract class CreationcollPresenter<V extends IBaseView> extends BasePre
 
     public abstract void getScreationIndex(int page); //造物季
 
+    public abstract void getScreationData(int creationId);//造物集详情
 
-
+    //造物集 申请
+    public abstract void getScreationEnroll(int creationId, String toString, String toString1, String toString2, String toString3, String toString4, String isregistereds, String toString5, String toString6, String toString7, String s);
 }
