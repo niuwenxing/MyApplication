@@ -22,8 +22,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_contextText"
             android:maxLines="2"
-            android:text="新闻名称展示处新闻名称展示处新闻名
-称展示处"
             android:textColor="@color/colorSearch"
             android:textSize="@dimen/sp_12"
             android:gravity="left"
@@ -57,11 +55,11 @@
             android:id="@+id/tv_contextTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2019-10-16"
             android:layout_alignParentBottom="true"
             android:textColor="#999999"
             android:textSize="@dimen/sp_12"
             android:gravity="left"
+            android:maxLines="1"
             android:layout_toRightOf="@+id/appTitle"
             />
 
@@ -70,7 +68,6 @@
             android:id="@+id/tv_contextNumer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="评论131"
             android:layout_alignParentBottom="true"
             android:textColor="#999999"
             android:textSize="@dimen/sp_12"
@@ -88,9 +85,14 @@
         android:id="@+id/img_headlineImage"
         android:layout_width="@dimen/dp_113"
         android:layout_height="@dimen/dp_86"
-        android:src="@mipmap/xiangmutupian"
         android:scaleType="centerCrop"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f4f4f4"
+        android:layout_alignParentBottom="true"
+/>
 
 </RelativeLayout>

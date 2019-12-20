@@ -44,8 +44,9 @@ public class HomePresenterImpl extends HomePresenter<HomeView> {
                             });
                         }else{
                             v.hideExpectionPages();
+                            v.retIndexindex(bean);
                         }
-                        v.retIndexindex(bean);
+
                     }
 
                     @Override

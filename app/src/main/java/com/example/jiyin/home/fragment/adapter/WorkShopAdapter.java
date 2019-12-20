@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.widget.jiugong.NineGridTestLayout;
 import com.example.jiyin.common.widget.jiugong.OnItemPictureClickListener;
@@ -28,7 +29,7 @@ import cn.jzvd.JzvdStd;
 import razerdp.github.com.widget.PhotoContents;
 import razerdp.github.com.widget.adapter.PhotoContentsBaseAdapter;
 
-public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkShopView>  {
+public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkShopView>   {
 
     private List<CircleListBean.DataBean> listdata=new ArrayList<>();
     private Context activity;
@@ -61,25 +62,25 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
 //        holder.jzVideoPlayerStandard.setUp("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4",
 //                ,"");
 
-        Glide.with(activity).load("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4").into(holder.jzVideoPlayerStandard.thumbImageView);
+//        Glide.with(activity).load("https://gslb.miaopai.com/stream/P4DnrjGZ7PzC2LfQK9k2cAKEIw39GiixIBpIHA__.mp4").into(holder.jzVideoPlayerStandard.thumbImageView);
 
         innerContainerAdapter = new InnerContainerAdapter(activity, urlList);
-        holder.circle_image_container.setAdapter(innerContainerAdapter);
-
-        if (holder.circle_image_container.getmOnItemClickListener()==null) {
-            holder.circle_image_container.setmOnItemClickListener(new PhotoContents.OnItemClickListener() {
-                @Override
-                public void onItemClick(ImageView view, int position) {
-                    Intent intent = new Intent(activity, ImagePreviewActivity.class);
-                    intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
-                    intent.putExtra(ImagePreviewActivity.P.START_ITEM_POSITION, position);
-                    intent.putExtra(ImagePreviewActivity.P.START_IAMGE_POSITION, position);
-                    activity.startActivity(intent);
-                    //禁用动画
-                    ((Activity) activity).overridePendingTransition(0, 0);
-
-                }
-            }); }
+//        holder.circle_image_container.setAdapter(innerContainerAdapter);
+//
+//        if (holder.circle_image_container.getmOnItemClickListener()==null) {
+//            holder.circle_image_container.setmOnItemClickListener(new PhotoContents.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(ImageView view, int position) {
+//                    Intent intent = new Intent(activity, ImagePreviewActivity.class);
+//                    intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
+//                    intent.putExtra(ImagePreviewActivity.P.START_ITEM_POSITION, position);
+//                    intent.putExtra(ImagePreviewActivity.P.START_IAMGE_POSITION, position);
+//                    activity.startActivity(intent);
+//                    //禁用动画
+//                    ((Activity) activity).overridePendingTransition(0, 0);
+//
+//                }
+//            }); }
     }
 
     //跟新的数据
@@ -103,13 +104,11 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
         private final TextView tvcontent;
         private final TextView circleFollow;
         private final ImageView ivImgHead;
-        private final JzvdStd jzVideoPlayerStandard;
-        private final PhotoContents circle_image_container;
+//        private final PhotoContents circle_image_container;
 
 
         public WorkShopView(@NonNull View itemView) {
             super(itemView);
-            jzVideoPlayerStandard = itemView.findViewById(R.id.jz_JZVideo);
 
             ivImgHead = itemView.findViewById(R.id.iv_imgHead);
 
@@ -120,7 +119,7 @@ public class WorkShopAdapter extends RecyclerView.Adapter<WorkShopAdapter.WorkSh
             tvCommentstr = itemView.findViewById(R.id.tv_comment_str);
             tvSharestr = itemView.findViewById(R.id.tv_share_str);
 
-            circle_image_container = itemView.findViewById(R.id.circle_image_container); //九宫图
+//            circle_image_container = itemView.findViewById(R.id.circle_image_container); //九宫图
 
         }
     }

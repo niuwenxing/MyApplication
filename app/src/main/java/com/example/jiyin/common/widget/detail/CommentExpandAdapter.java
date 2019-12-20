@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jiyin.R;
+import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,12 @@ import java.util.List;
 
 public class CommentExpandAdapter extends BaseExpandableListAdapter {
     private static final String TAG = "CommentExpandAdapter";
-    private List<CommentDetailBean> commentBeanList;
+    private List<VideoDetailBean.DataBean.StoriesBean> commentBeanList;
     private List<ReplyDetailBean> replyBeanList;
     private Context context;
     private int pageIndex = 1;
     private ItemIdClickListener itemClickListener;
-    public CommentExpandAdapter(Context context, List<CommentDetailBean> commentBeanList) {
+    public CommentExpandAdapter(Context context, List<VideoDetailBean.DataBean.StoriesBean> commentBeanList) {
         this.context = context;
         this.commentBeanList = commentBeanList;
     }
@@ -45,11 +46,11 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        if(commentBeanList.get(i).getReplyList() == null){
+//        if(commentBeanList.get(i).getReplyList() == null){
             return 0;
-        }else {
-            return commentBeanList.get(i).getReplyList().size()>0 ? commentBeanList.get(i).getReplyList().size():0;
-        }
+//        }else {
+//            return commentBeanList.get(i).getReplyList().size()>0 ? commentBeanList.get(i).getReplyList().size():0;
+//        }
 
     }
 
@@ -60,7 +61,7 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-        return commentBeanList.get(i).getReplyList().get(i1);
+        return "";
     }
 
     @Override
@@ -94,15 +95,18 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).error(R.mipmap.ic_launcher).centerCrop())
                 .into(groupHolder.logo);
         groupHolder.tv_name.setText(commentBeanList.get(groupPosition).getUsername());
-        groupHolder.tv_content.setText(commentBeanList.get(groupPosition).getContent());
-        groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getTime());
+
+
+
+//        groupHolder.tv_content.setText(commentBeanList.get(groupPosition).getContent());
+//        groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getTime());
         //是否点赞
 //        if(commentBeanList.get(groupPosition).getIfzan().equals("1")){
 //            groupHolder.iv_like.setImageResource(R.mipmap.ic_launcher);
 //        }else {
 //            groupHolder.iv_like.setImageResource(R.mipmap.ic_launcher);
 //        }
-        groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getZan());
+//        groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getZan());
         groupHolder.iv_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +120,7 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
 //                    commentBeanList.get(groupPosition).setIfzan("1");
 //                    commentBeanList.get(groupPosition).setZan(Integer.valueOf(commentBeanList.get(groupPosition).getZan())+1+"");
 //                }
-                itemClickListener.onclick(view,commentBeanList.get(groupPosition).getCid()+"");
+//                itemClickListener.onclick(view,commentBeanList.get(groupPosition).getCid()+"");
             }
         });
 
@@ -147,22 +151,22 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
                 }
                  */
 
-                String replyUser = commentBeanList.get(groupPosition).getReplyList().get(childPosition).getUsername();
-                if(!TextUtils.isEmpty(replyUser)){
-                    childHolder.tv_name.setText(replyUser + ":");
-                }else {
-                    childHolder.tv_name.setText(""+":");
-                }
-                if(childPosition == 0&&childPosition+1==getChildrenCount(groupPosition)){
-                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_top_bottom));
-                }else if(childPosition==0){
-                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_top));
-                }else if(childPosition>0&&childPosition<getChildrenCount(groupPosition)-1){
-                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_mid));
-                }else {
-                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_bottom));
-                }
-                childHolder.tv_content.setText(commentBeanList.get(groupPosition).getReplyList().get(childPosition).getContent());
+//                String replyUser = commentBeanList.get(groupPosition).getReplyList().get(childPosition).getUsername();
+//                if(!TextUtils.isEmpty(replyUser)){
+//                    childHolder.tv_name.setText(replyUser + ":");
+//                }else {
+//                    childHolder.tv_name.setText(""+":");
+//                }
+//                if(childPosition == 0&&childPosition+1==getChildrenCount(groupPosition)){
+//                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_top_bottom));
+//                }else if(childPosition==0){
+//                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_top));
+//                }else if(childPosition>0&&childPosition<getChildrenCount(groupPosition)-1){
+//                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_mid));
+//                }else {
+//                    childHolder.bg.setBackground(context.getDrawable(R.drawable.remake_bg_bottom));
+//                }
+//                childHolder.tv_content.setText(commentBeanList.get(groupPosition).getReplyList().get(childPosition).getContent());
                // break;
             //case "2":
                 /*
@@ -239,7 +243,7 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
      * func:评论成功后插入一条数据
      * @param commentDetailBean 新的评论数据
      */
-    public void addTheCommentData(CommentDetailBean commentDetailBean){
+    public void addTheCommentData(VideoDetailBean.DataBean.StoriesBean commentDetailBean){
         if(commentDetailBean!=null){
             commentBeanList.add(commentDetailBean);
             notifyDataSetChanged();
@@ -257,13 +261,13 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
     public void addTheReplyData(ReplyDetailBean replyDetailBean, int groupPosition){
         if(replyDetailBean!=null){
             Log.e(TAG, "addTheReplyData: >>>>该刷新回复列表了:"+replyDetailBean.toString() );
-            if(commentBeanList.get(groupPosition).getReplyList() != null ){
-                commentBeanList.get(groupPosition).getReplyList().add(replyDetailBean);
-            }else {
-                List<ReplyDetailBean> replyList = new ArrayList<>();
-                replyList.add(replyDetailBean);
-                commentBeanList.get(groupPosition).setReplyList(replyList);
-            }
+//            if(commentBeanList.get(groupPosition).getReplyList() != null ){
+//                commentBeanList.get(groupPosition).getReplyList().add(replyDetailBean);
+//            }else {
+//                List<ReplyDetailBean> replyList = new ArrayList<>();
+//                replyList.add(replyDetailBean);
+//                commentBeanList.get(groupPosition).setReplyList(replyList);
+//            }
             notifyDataSetChanged();
         }else {
             throw new IllegalArgumentException("回复数据为空!");
@@ -278,13 +282,13 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
      * @param groupPosition 当前的评论
      */
     private void addReplyList(List<ReplyDetailBean> replyBeanList, int groupPosition){
-        if(commentBeanList.get(groupPosition).getReplyList() != null ){
-            commentBeanList.get(groupPosition).getReplyList().clear();
-            commentBeanList.get(groupPosition).getReplyList().addAll(replyBeanList);
-        }else {
-
-            commentBeanList.get(groupPosition).setReplyList(replyBeanList);
-        }
+//        if(commentBeanList.get(groupPosition).getReplyList() != null ){
+//            commentBeanList.get(groupPosition).getReplyList().clear();
+//            commentBeanList.get(groupPosition).getReplyList().addAll(replyBeanList);
+//        }else {
+//
+//            commentBeanList.get(groupPosition).setReplyList(replyBeanList);
+//        }
 
         notifyDataSetChanged();
     }

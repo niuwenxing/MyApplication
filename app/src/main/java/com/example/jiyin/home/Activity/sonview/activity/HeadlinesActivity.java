@@ -11,9 +11,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.sonview.adapter.HeadlinesAdapter;
+import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.HeadlinesImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.HeadlinesView;
 import com.example.rootlib.widget.common.ThrowLayout;
@@ -49,10 +52,23 @@ public class HeadlinesActivity extends JiYingActivity<HeadlinesView, HeadlinesIm
     @BindView(R.id.ry_headlineList)
     RecyclerView ryHeadlineList;
 
+    private  int page=1;
+    private List<NewIndexBean.DataBean> data=new ArrayList<>();
+    private HeadlinesAdapter stringHeadlinesAdapter;
+
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_headlines;
     }
+
+    @Override
+    protected void createPresenter() {
+        super.createPresenter();
+        presenter=new HeadlinesImpl();
+
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +78,40 @@ public class HeadlinesActivity extends JiYingActivity<HeadlinesView, HeadlinesIm
         tvSearchTextTitle.setText("头条");
 
         ryHeadlineList.setLayoutManager(new LinearLayoutManager(this));
-        List<String>  list=new ArrayList<>();
-        HeadlinesAdapter<String> stringHeadlinesAdapter = new HeadlinesAdapter<>(this, list);
+        stringHeadlinesAdapter = new HeadlinesAdapter(data);
         ryHeadlineList.setAdapter(stringHeadlinesAdapter);
+
+        stringHeadlinesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                HeadlinesDetailsActivity.startheadActivity(activity,data.get(position).getNew_id());
+            }
+        });
+
 
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.getNewIndex(page);
+    }
+
+    @Override
+    public void retNewIndex(NewIndexBean bean) {
+        data.clear();
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }
+        data.addAll(bean.getData());
+        stringHeadlinesAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void retNewDetail(NewdetailBean bean) {}//废弃
 
     @OnClick({R.id.gobank_btn, R.id.searech_news_btn, R.id.searech_Shopping_btn})
     public void onViewClicked(View view) {

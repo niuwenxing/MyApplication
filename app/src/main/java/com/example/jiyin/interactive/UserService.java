@@ -1,22 +1,27 @@
 package com.example.jiyin.interactive;
 
-import androidx.annotation.NonNull;
 
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
-import com.example.jiyin.home.Activity.homeview.base.ImageArr;
 import com.example.jiyin.home.Activity.homeview.base.ImageBase;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.sonview.activity.WorkSurfaceActivity;
+import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
+import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
 import com.example.jiyin.home.Activity.sonview.base.PositionDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.PositionIficationBean;
 import com.example.jiyin.home.Activity.sonview.base.PositionIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.ProduceDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.ProduceIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationBeans;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
@@ -31,22 +36,18 @@ import com.example.jiyin.home.Activity.sonview.base.WorkshopMainBase;
 import com.example.jiyin.home.Activity.sonview.base.ZtimeIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.ZtimedetailBean;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 
 /**
  * Call 类
@@ -319,5 +320,66 @@ public interface UserService {
     @POST("Video/detail")
     @FormUrlEncoded
     Call<VideoDetailBean> getVideoDetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     *玑瑛出品 列表
+     * @param params
+     * @return
+     */
+    @POST("Produce/index")
+    @FormUrlEncoded
+    Call<ProduceIndexBean> getProduceIndex(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 玑瑛出品详情
+     * @param params
+     * @return
+     */
+    @POST("Produce/detail")
+    @FormUrlEncoded
+    Call<ProduceDetailBean> getProduceDetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 头条
+     * @param params
+     * @return
+     */
+    @POST("New/index")
+    @FormUrlEncoded
+    Call<NewIndexBean> getNewIndex(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 头条详情
+     * @param params
+     * @return
+     */
+    @POST("New/detail")
+    @FormUrlEncoded
+    Call<NewdetailBean> getNewDetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 项目列表
+     * @param params
+     * @return
+     */
+    @POST("Classify/index")
+    @FormUrlEncoded
+    Call<ClassifyIndexBean> getClassifyDetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 项目详情
+     * @param params
+     * @return
+     */
+    @POST("Classify/detail")
+    @FormUrlEncoded
+    Call<ClassifyDetailBean> getClassifyDetailNew(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 红人
+     * @return
+     */
+    @POST("founder/founder")
+    Call<FounderfounderBean> getFounderfounder();
 }
 

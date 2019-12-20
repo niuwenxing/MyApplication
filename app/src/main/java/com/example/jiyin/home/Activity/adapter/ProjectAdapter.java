@@ -1,49 +1,30 @@
 package com.example.jiyin.home.Activity.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.widget.MLImageView;
+import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
 
 import java.util.List;
 
-public class ProjectAdapter<T> extends RecyclerView.Adapter<ProjectAdapter.ProjectView> {
+public class ProjectAdapter extends BaseQuickAdapter<ClassifyIndexBean.DataBean, BaseViewHolder> {
 
-    private Context context;
-    List<T> list;
-
-    public ProjectAdapter(Context context, List<T> list) {
-        this.context = context;
-        this.list = list;
+    public ProjectAdapter( @Nullable List<ClassifyIndexBean.DataBean> data) {
+        super(R.layout.project_item, data);
     }
-
-    @NonNull
     @Override
-    public ProjectAdapter.ProjectView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_item, parent, false);
-        return new ProjectView(inflate);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ProjectAdapter.ProjectView holder, int position) {
+    protected void convert(@NonNull BaseViewHolder helper, ClassifyIndexBean.DataBean item) {
+        helper.setText(R.id.tv_projectContext,item.getNew_title());
+        helper.setText(R.id.tv_projectTime,item.getNew_time());
+        Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getPath()).into((MLImageView) helper.getView(R.id.img_projectImage));
 
     }
-
-    @Override
-    public int getItemCount() {
-        return list.size()+5;
-    }
-
-    class ProjectView extends RecyclerView.ViewHolder{
-        public ProjectView(@NonNull View itemView) {
-            super(itemView);
-
-        }
-    }
-
 }

@@ -1,47 +1,31 @@
 package com.example.jiyin.home.Activity.sonview.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
+import com.example.jiyin.utils.GlideImageLoader;
 
 import java.util.List;
+public class HeadlinesAdapter extends BaseQuickAdapter<NewIndexBean.DataBean, BaseViewHolder> {
 
-public class HeadlinesAdapter<T> extends RecyclerView.Adapter<HeadlinesAdapter.HeadlinesView>{
 
-    private Context  context;
-    private List<T> list;
-    public HeadlinesAdapter(Context context, List<T> list){
-        this.context=context;
-        this.list=list;
-    }
-
-    @NonNull
-    @Override
-    public HeadlinesView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.headlines_item, parent, false);
-        return new HeadlinesView(inflate);
+    public HeadlinesAdapter(@Nullable List<NewIndexBean.DataBean> data) {
+        super(R.layout.headlines_item, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HeadlinesAdapter.HeadlinesView holder, int position) {
-
+    protected void convert(@NonNull BaseViewHolder helper, NewIndexBean.DataBean item) {
+        helper.setText(R.id.tv_contextText,item.getNew_title());
+        helper.setText(R.id.tv_contextTime,item.getNew_time());
+        GlideImageLoader.load(mContext, BaseConfig.ROOT_IMAGES_API+item.getPath(),helper.getView(R.id.img_headlineImage));
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
 
-    public class HeadlinesView extends RecyclerView.ViewHolder {
-        public HeadlinesView(@NonNull View itemView) {
-            super(itemView);
 
-        }
-    }
 }

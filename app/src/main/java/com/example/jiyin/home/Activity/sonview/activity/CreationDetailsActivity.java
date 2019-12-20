@@ -54,9 +54,9 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
     WebView lpk;
     @BindView(R.id.image)
     ImageView image;
-    @BindView(R.id.tv_CreationsPhone_btn)
+    @BindView(R.id.tv_ProducePhone_btn)
     TextView tvCreationsPhoneBtn;
-    @BindView(R.id.creationpate_btn)
+    @BindView(R.id.tv_Producepate_btn)
     TextView creationpateBtn;
     @BindView(R.id.relativeLayout2)
     RelativeLayout relativeLayout2;
@@ -149,7 +149,7 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
     @Override
     public void retScreationEnroll(ScreationEnrollBean bean) {  } //废弃
 
-    @OnClick({R.id.gobank_btn, R.id.searech_news_btn,R.id.tv_CreationsPhone_btn})
+    @OnClick({R.id.gobank_btn, R.id.searech_news_btn,R.id.tv_ProducePhone_btn,R.id.tv_Producepate_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.gobank_btn:
@@ -158,10 +158,10 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
             case R.id.searech_news_btn:
 
                 break;
-            case R.id.tv_CreationsPhone_btn: //客服
+            case R.id.tv_ProducePhone_btn: //客服
 
                 break;
-            case R.id.creationpate_btn:
+            case R.id.tv_Producepate_btn:
                 CreationapplyforActivity.startActivity(this,creation_id,tvSearchTextTitle.getText().toString());
                 break;
         }

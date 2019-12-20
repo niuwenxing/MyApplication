@@ -49,12 +49,13 @@ public class ReleaseCirclesImpl extends ReleaseCirclesPresenter<ReleaseCirclesVi
                     }
 
                     @Override
-                    public void onLoadStart() {v.showProgress();
+                    public void onLoadStart() {//v.showProgress();
 
                     }
 
                     @Override
-                    public void onLoadFinished() {v.hideProgress();
+                    public void onLoadFinished() {
+                        //v.hideProgress();
 
                     }
 

@@ -6,13 +6,12 @@
     android:layout_height="wrap_content">
 
 
-    <com.example.jiyin.common.widget.MLImageView
+    <com.example.jiyin.common.widget.NiceImageView
         android:layout_width="@dimen/dp_150"
         android:layout_height="@dimen/dp_95"
-        app:ml_shape_type="rectangle"
-        app:ml_border_width="@dimen/dp_2"
-        app:ml_border_color="#ff9898"
-        app:ml_radius="@dimen/dp_3"
+        app:border_width="@dimen/dp_1"
+        app:border_color="#ff9898"
+        app:corner_radius="@dimen/dp_3"
         android:src="@mipmap/shansiqi"
         android:id="@+id/ml_topImg"
         android:scaleType="centerCrop"

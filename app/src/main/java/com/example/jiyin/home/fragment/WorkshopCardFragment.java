@@ -190,11 +190,11 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
              *回收播放器
              */
             public void GCView(View gcView) {
-                if (gcView != null && gcView.findViewById(R.id.jz_JZVideo) != null) {
-                    JzvdStd video = activity.findViewById(R.id.jz_JZVideo);
-                    video.releaseAllVideos();
-
-                }
+//                if (gcView != null && gcView.findViewById(R.id.jz_JZVideo) != null) {
+//                    JzvdStd video = activity.findViewById(R.id.jz_JZVideo);
+//                    video.releaseAllVideos();
+//
+//                }
             }
 
         });

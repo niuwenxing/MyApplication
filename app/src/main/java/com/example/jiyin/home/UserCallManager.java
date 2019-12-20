@@ -531,6 +531,90 @@ public class UserCallManager {
         return HttpManager.getInstance().rep(UserService.class).getVideoDetail(params);
     }
 
+    /**
+     * 玑瑛出品列表
+     * @param page
+     * @param searchStr
+     * @return
+     */
+    public static Call getProduceIndex(int page, String searchStr) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+        params.put("name",searchStr);
+
+        return HttpManager.getInstance().rep(UserService.class).getProduceIndex(params);
+    }
+
+    /**
+     * 玑瑛出品 详情
+     * @param produceId
+     * @return
+     */
+    public static Call getProduceDetail(int produceId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("produce_id",String.valueOf(produceId));
+        return HttpManager.getInstance().rep(UserService.class).getProduceDetail(params);
+    }
+
+    /**
+     * 头条 列表
+     * @param page
+     * @return
+     */
+    public static Call getNewIndex(int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+
+
+        return HttpManager.getInstance().rep(UserService.class).getNewIndex(params);
+    }
+
+    /**
+     * 头条详情
+     * @param page
+     * @param newId
+     * @return
+     */
+    public static Call getNewDetail(int page,int newId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("new_id",String.valueOf(newId));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getNewDetail(params);
+    }
+
+    /**
+     * 项目列表
+     * @param nameStr
+     * @param page
+     * @return
+     */
+    public static Call getClassifyDetail(String nameStr, int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("name",nameStr+"");
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getClassifyDetail(params);
+    }
+
+    /**
+     * 项目详情
+     * @param newId
+     * @return
+     */
+    public static Call getClassifyDetailNew(int newId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("new_id",String.valueOf(newId));
+        return HttpManager.getInstance().rep(UserService.class).getClassifyDetailNew(params);
+    }
+
+    /**
+     * 红人
+     * @return
+     */
+    public static Call getFounderfounder() {
+        return HttpManager.getInstance().rep(UserService.class).getFounderfounder();
+    }
+
 
     private void uploadImages(List<LocalMedia> list){
         //String str = "http://app.quanquanerapp.com/api/Common/uploadMultiPic";

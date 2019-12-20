@@ -6,8 +6,7 @@ import com.example.rootlib.mvp.view.IBaseView;
 
 public abstract class HeadlinesPresenter<V extends IBaseView> extends BasePresenter<V> {
 
-    @Override
-    public void cancelBiz() {
+    public abstract void getNewIndex(int page);//头条列表
 
-    }
+    public abstract void getNewDetail(int page,int newId);//头条详情
 }

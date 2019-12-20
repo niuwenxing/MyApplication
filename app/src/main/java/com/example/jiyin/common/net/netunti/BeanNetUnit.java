@@ -1,7 +1,6 @@
 package com.example.jiyin.common.net.netunti;
 
 
-import com.alibaba.fastjson.JSON;
 import com.example.jiyin.common.bean.EventNoticeBean;
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.beas.RootResponseModel;
@@ -36,7 +35,7 @@ public class BeanNetUnit<T extends Callcode> extends RootResponseModel implement
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                LogUtils.d("网络请求成功"+response.body()+"***"+response);
+                LogUtils.d("网络请求成功"+response.body()+"***"+response+"json"+new Gson().toJson(response.body()));
                 callBackFinished(listener);
                 if(response.raw().code()==200){
                     if (response.body().code== BaseConfig.SERVER_ERR_LOGIN_OBSOLETE) {

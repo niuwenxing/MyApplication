@@ -1,62 +1,34 @@
 package com.example.jiyin.home.Activity.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
+
 import java.util.List;
 
+public class SearchpageAdpter extends BaseQuickAdapter<FounderfounderBean.DataBean.FounderBean, BaseViewHolder> {
 
-public class SearchpageAdpter extends RecyclerView.Adapter<SearchpageAdpter.SearchpageView> {
 
-    private Context context;
-    private List list;
-
-    public SearchpageAdpter(Context context, List list) {
-        this.context = context;
-        this.list = list;
-    }
-
-    @NonNull
-    @Override
-    public SearchpageView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item, parent, false);
-        return new SearchpageView(view);
+    public SearchpageAdpter( @Nullable List<FounderfounderBean.DataBean.FounderBean> data) {
+        super(R.layout.search_item, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchpageView holder, int position) {
+    protected void convert(@NonNull BaseViewHolder helper, FounderfounderBean.DataBean.FounderBean item) {
+        Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getFounder_head()).into((ImageView) helper.getView(R.id.iv_imagesearch));
+        helper.setText(R.id.tv_textsearch,item.getFounder_name());
+        helper.setText(R.id.tv_Culturebelongs,item.getFounder_job());
+        helper.setText(R.id.tv_Culturedescribe,item.getFounder_brief());
 
-    }
 
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    public class SearchpageView extends RecyclerView.ViewHolder {
-
-        private final ImageView ivImagesearch;
-        private final TextView tvTextsearch;
-        private final TextView tvCulturebelongs;
-        private final TextView tvCulturedescribe;
-        private final TextView tvBtnMore;
-
-        public SearchpageView(@NonNull View itemView) {
-            super(itemView);
-            ivImagesearch = itemView.findViewById(R.id.iv_imagesearch);
-            tvTextsearch = itemView.findViewById(R.id.tv_textsearch);
-            tvCulturebelongs = itemView.findViewById(R.id.tv_Culturebelongs);
-            tvCulturedescribe = itemView.findViewById(R.id.tv_Culturedescribe);
-            tvBtnMore = itemView.findViewById(R.id.tv_btnMore);
-        }
     }
 }

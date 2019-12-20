@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--项目item-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_95"
-    android:gravity="center_vertical"
-    >
+    android:gravity="center_vertical">
 
-    <ImageView
+    <com.example.jiyin.common.widget.MLImageView
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_width="@dimen/dp_104"
         android:layout_height="@dimen/dp_70"
-        android:src="@mipmap/xiangmutupian"
         android:scaleType="centerCrop"
         android:id="@+id/img_projectImage"
+        app:ml_border_color="#00000000"
+        app:ml_border_width="@dimen/dp_0"
+        app:ml_radius="@dimen/dp_6"
         />
     <RelativeLayout
         android:layout_marginLeft="@dimen/dp_15"
@@ -32,8 +34,7 @@
             android:textColor="@color/colorSearch"
             android:ellipsize="end"
             android:textSize="@dimen/sp_12"
-            android:text="项目名称展示处项目名称展示处项目名
-称展示处"/>
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:textSize="@dimen/sp_10"
             android:id="@+id/tv_projectTime"
             android:text="2019-10-12"
-            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_5"
             />
 
 

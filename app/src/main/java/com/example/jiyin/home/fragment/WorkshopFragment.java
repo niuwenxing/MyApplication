@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.jiyin.home.Activity.adapter.AbsRecycleAdapter;
@@ -22,7 +23,9 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
 import com.example.jiyin.home.fragment.adapter.CircleAdapter;
+import com.example.jiyin.home.fragment.adapter.WorkShopASAdapter;
 import com.example.jiyin.home.fragment.adapter.WorkShopAdapter;
+import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -66,9 +69,9 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
 
     private CircleAdapter circleAdapter;
     private List<CirclelabelBean.DataBean> dataList=new ArrayList<>();//标签数据集
-    private List<CircleListBean.DataBean> listdata=new ArrayList<>();//列表 数据集
-    private int CirclelabeType=0,pages=0;
-    private WorkShopAdapter workShopAdapter;
+    private int CirclelabeType=0,pages=1;
+    private WorkShopASAdapter workShopAdapter;
+    private List<CircleListBean.DataBean> data=new ArrayList<>();//列表
 
     @Override
     protected int attachLayoutRes() {
@@ -91,6 +94,7 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mLabeltable.setNestedScrollingEnabled(false);
         mLabeltable.setLayoutManager(linearLayoutManager);
+        //标签数据集
         circleAdapter = new CircleAdapter(getContext());
         circleAdapter.setData(dataList);
         circleAdapter.setChoiceMode(AbsRecycleAdapter.CHOICE_MODE_SINGLE);//适配器模式
@@ -99,7 +103,26 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
                 new SpaceItemDecoration((int)getActivity().getResources().getDimension(R.dimen.dp_7),
                 (int)getActivity().getResources().getDimension(R.dimen.dp_10)));
         initView();
-        workShopAdapter = new WorkShopAdapter(activity,listdata);//点击事件内部处理
+        //列表数据
+        workShopAdapter = new WorkShopASAdapter(data);//点击事件内部处理
+        workShopAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.iv_Likes_img:
+
+                        break;
+                    case R.id.iv_comment_img:
+
+                        break;
+                    case R.id.iv_share_img:
+
+                        break;
+
+                }
+            }
+        });
+
         mCirclelist.setAdapter(workShopAdapter);
 
     }
@@ -110,10 +133,11 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
             public void onItemClick(int position, View v) {
                 CirclelabeType=position;
                 //加载标签数据
-                if (pages!=0) {
-                    pages=0;
+                if (pages!=1) {
+                    pages=1;
                 }
-                initData(pages,dataList.get(position).getIfication_id());
+                data.clear();
+                initData(1,dataList.get(position).getIfication_id());
             }
         });
         refreshLayout();
@@ -179,7 +203,10 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
 
     @Override
     public void ReturnCircle(CircleListBean bean) {
-        workShopAdapter.setNewsDate(bean.getData());
+        data.clear();
+        data.addAll(bean.getData());
+        LogUtils.d("Wai1"+data.size());
+        workShopAdapter.notifyDataSetChanged();
 
     }
 

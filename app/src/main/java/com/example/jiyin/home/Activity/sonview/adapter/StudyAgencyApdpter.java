@@ -19,7 +19,6 @@ public class StudyAgencyApdpter extends BaseQuickAdapter<StudyAgencyIndexBean.Da
 
     public StudyAgencyApdpter( @Nullable List<StudyAgencyIndexBean.DataBean.OnlineBean> data) {
         super(R.layout.studyageny_item, data);
-
     }
 
     @Override

@@ -384,7 +384,7 @@
                         </RelativeLayout>
                     </LinearLayout>
 
-                    <com.example.jiyin.common.widget.MLImageView
+                    <com.example.jiyin.common.widget.NiceImageView
                         android:layout_marginTop="@dimen/dp_15"
                         android:layout_marginLeft="@dimen/sp_10"
                         android:layout_marginRight="@dimen/sp_10"
@@ -393,10 +393,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_100"
                         android:src="@mipmap/zhuopushijian"
-                        app:ml_border_color="@color/colorTop"
-                        app:ml_border_width="@dimen/dp_1"
-                        app:ml_shape_type="rectangle"
-                        app:ml_radius="@dimen/dp_10"
+                        app:border_color="@color/colorTop"
+                        app:border_width="@dimen/dp_1"
+                        app:corner_radius="@dimen/dp_10"
+                        android:scaleType="centerCrop"
                         />
 
                     <TextView

@@ -3,19 +3,20 @@ package com.example.jiyin.home.Activity.sonview.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.danikula.videocache.HttpProxyCacheServer;
+import com.example.jiyin.BaseApplication;
 import com.example.jiyin.R;
-import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.common.activity.JiYingActivityASS;
 import com.example.jiyin.common.config.BaseConfig;
-import com.example.jiyin.common.widget.StandardGSYNewVideoPlayer;
 import com.example.jiyin.common.widget.detail.CommentDetailBean;
 import com.example.jiyin.common.widget.detail.CommentExpandAdapter;
 import com.example.jiyin.common.widget.detail.CommentExpandableListView;
@@ -30,19 +31,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 
 /**
  * Top 详情
  */
 
-public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl> implements TopView {
+//public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl> implements TopView {
+public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewImpl> implements TopView {
 
 
     @BindView(R.id.video_player)
-    StandardGSYNewVideoPlayer videoPlayer;
+    JzvdStd videoPlayer;
     @BindView(R.id.Video_title)
     TextView VideoTitle;
+
+    @BindView(R.id.tv_Degreeofheat_str)
+    TextView tvDegreeofheatStr;
+    @BindView(R.id.tv_Label_str)
+    TextView tvLabelStr;
+    @BindView(R.id.tv_videoContent_str)
+    TextView tvVideoContentStr;
+
+
     private int page = 1; //默认页数
 
     private CommentExpandableListView expandableListView;
@@ -59,6 +71,9 @@ public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl
     //评论
     private List<VideoDetailBean.DataBean.StoriesBean> storiesList = new ArrayList<>();
     private String video_path;
+
+    private boolean isPlay;
+    private boolean isPause;
 
     @Override
     protected int attachLayoutRes() {
@@ -111,25 +126,28 @@ public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl
         video_content = data.getVideo_content();//内容
         heat_num = data.getHeat_num();//热度
         video_num = data.getVideo_num();//播放量
-
-//        videoPlayer.setUp(BaseConfig.ROOT_IMAGES_API+video_path,video_title);
-
-        videoPlayer.setUp(BaseConfig.ROOT_IMAGES_API+video_path,true,video_title);
+        storiesList.addAll(data.getStories());
 
 
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         try {
-            Glide.with(activity).load(BaseConfig.ROOT_IMAGES_API+video_path).into(imageView);
+            Glide.with(activity).load(BaseConfig.ROOT_IMAGES_API + video_path).into(videoPlayer.thumbImageView);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        videoPlayer.setThumbImageView(imageView);
 
-        storiesList.addAll(data.getStories());
+        HttpProxyCacheServer proxy = BaseApplication.getProxy(activity);
+        String proxyUrl = proxy.getProxyUrl(BaseConfig.ROOT_IMAGES_API + video_path);
+        videoPlayer.setUp(proxyUrl, video_title, JzvdStd.SCREEN_NORMAL);//视频
+        VideoTitle.setText(video_title);//标题
+        tvDegreeofheatStr.setText(getString(R.string.reduStr)+heat_num);
+        tvLabelStr.setText(video_label);
+        tvVideoContentStr.setText(video_content);
 
 
     }
+
 
     private void initData() {
         for (int i = 0; i < 10; i++) {
@@ -156,12 +174,14 @@ public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl
 
     private void initView() {
         expandableListView = findViewById(R.id.expandableListView);
+
+
     }
 
     private void initExpandableListView() {
         expandableListView.setGroupIndicator(null);
         //默认展开所有回复
-        adapter = new CommentExpandAdapter(this, commentsList);
+        adapter = new CommentExpandAdapter(this, storiesList);
         adapter.setOnClick(new ItemIdClickListener() {
             @Override
             public void onclick(View v, String id) {
@@ -208,4 +228,40 @@ public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Jzvd.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        Jzvd.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
+
+        //Change these two variables back
+        Jzvd.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
+        Jzvd.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

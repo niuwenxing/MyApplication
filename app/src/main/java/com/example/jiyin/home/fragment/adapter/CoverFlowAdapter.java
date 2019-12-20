@@ -61,12 +61,11 @@ public class CoverFlowAdapter extends RecyclerView.Adapter<CoverFlowAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivhomeimg = itemView.findViewById(R.id.iv_homeimg);
+            ivhomeimg = (ImageView)itemView.findViewById(R.id.iv_homeimg);
             tv_textTitle = itemView.findViewById(R.id.tv_textTitle);
             tv_introduce = itemView.findViewById(R.id.tv_introduce);
             textString = itemView.findViewById(R.id.textString);
             tv_contextText = itemView.findViewById(R.id.tv_ContextText);
-
 
         }
     }

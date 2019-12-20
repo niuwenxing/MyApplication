@@ -10,7 +10,7 @@
         android:id="@+id/img_produceImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/dibujuxing"
+        android:background="@mipmap/dibujuxing"
         android:maxHeight="@dimen/dp_90"
         android:scaleType="fitXY"
         />
@@ -43,7 +43,7 @@
         android:layout_marginLeft="@dimen/dp_13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="活动时间：2019-09-01 至 019-10-30"
+        android:text="2019-09-01 至 019-10-30"
         android:maxLines="1"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/colorlightgray"

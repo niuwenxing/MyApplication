@@ -43,7 +43,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_CreationsPhone_btn"
+                    android:id="@+id/tv_ProducePhone_btn"
                     android:paddingLeft="@dimen/dp_10"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:textColor="#FFF"
                 android:textSize="@dimen/sp_16"
-                android:id="@+id/creationpate_btn"
+                android:id="@+id/tv_Producepate_btn"
                 android:layout_alignParentRight="true"
                 android:layout_width="@dimen/dp_130"
                 android:layout_height="match_parent"/>

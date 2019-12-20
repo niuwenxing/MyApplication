@@ -53,7 +53,6 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
     @BindView(R.id.tv_CustomerPhone_btn)
     TextView tv_CustomerPhone_btn;
 
-
     private int workshop_id;
 
     @Override

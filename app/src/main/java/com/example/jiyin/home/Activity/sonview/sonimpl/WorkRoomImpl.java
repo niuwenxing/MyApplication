@@ -1,7 +1,10 @@
 package com.example.jiyin.home.Activity.sonview.sonimpl;
 
+import com.example.jiyin.common.bean.EventNoticeBean;
+import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
+import com.example.jiyin.common.utils.EventBusUtil;
 import com.example.jiyin.home.Activity.sonview.activity.WorkSurfaceActivity;
 import com.example.jiyin.home.Activity.sonview.base.WorkDetailsBase;
 import com.example.jiyin.home.Activity.sonview.base.WorkProjectbase;
@@ -10,8 +13,23 @@ import com.example.jiyin.home.Activity.sonview.base.WorkshopMainBase;
 import com.example.jiyin.home.Activity.sonview.impl.WorkRoomPresenter;
 import com.example.jiyin.home.Activity.sonview.sonview.WorkRoomView;
 import com.example.jiyin.home.UserCallManager;
+import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.CollectionUtil;
+import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 工作坊 网络层
@@ -288,5 +306,10 @@ v.hideProgress();
 
     }
 
+    public class aa{
+        String token;
+        String work_id;
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.jiyin.home.Activity.homeview.base;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.jiyin.common.net.netunti.Callcode;
 
 import java.util.List;
@@ -7,11 +8,9 @@ import java.util.List;
 //圈子列表
 
 public class CircleListBean extends Callcode {
-
-
     /**
      * msg : success
-     * data : [{"circle_id":18,"circle_up":0,"circle_share":0,"circle_hot":0,"path":"/upload/admin/timg.jpg","ification_id":1,"circle_type":1,"circle_time":"2019-11-08 16:55:49","ification_title":"王者荣耀","uid":7,"avatar":"/upload/admin/timg.jpg","username":"111","comment":1,"files":[],"follow":1,"up":1,"time":"2天前"},{"circle_id":1,"circle_up":1,"circle_share":2,"circle_hot":0,"path":null,"ification_id":1,"circle_type":0,"circle_time":"2019-11-11 16:13:12","ification_title":"王者荣耀","uid":3,"avatar":"/upload/admin/timg.jpg","username":"11","comment":2,"files":[{"file_id":1,"circle_id":1,"file":"/upload/admin/timg.jpg"}],"follow":1,"up":1,"time":"5小时前"}]
+     * data : [{"circle_id":1,"circle_up":1,"circle_share":2,"circle_hot":0,"path":null,"ification_id":1,"circle_type":0,"circle_time":"2019-11-11 16:13:12","ification_title":"王者荣耀","uid":3,"avatar":"/upload/admin/timg.jpg","username":"11","comment":2,"files":[{"file_id":1,"circle_id":1,"file":"/upload/admin/timg.jpg"}],"follow":1,"up":1,"time":"5小时前"}]
      * time : 1573440532
      */
 
@@ -43,32 +42,32 @@ public class CircleListBean extends Callcode {
         this.data = data;
     }
 
-    public static class DataBean {
+    public  class DataBean implements MultiItemEntity {
         /**
-         * circle_id : 18
-         * circle_up : 0
-         * circle_share : 0
+         * circle_id : 1
+         * circle_up : 1
+         * circle_share : 2
          * circle_hot : 0
-         * path : /upload/admin/timg.jpg
+         * path : null
          * ification_id : 1
-         * circle_type : 1
-         * circle_time : 2019-11-08 16:55:49
+         * circle_type : 0
+         * circle_time : 2019-11-11 16:13:12
          * ification_title : 王者荣耀
-         * uid : 7
+         * uid : 3
          * avatar : /upload/admin/timg.jpg
-         * username : 111
-         * comment : 1
-         * files : []
+         * username : 11
+         * comment : 2
+         * files : [{"file_id":1,"circle_id":1,"file":"/upload/admin/timg.jpg"}]
          * follow : 1
          * up : 1
-         * time : 2天前
+         * time : 5小时前
          */
 
         private int circle_id;
         private int circle_up;
         private int circle_share;
         private int circle_hot;
-        private String path;
+        private Object path;
         private int ification_id;
         private int circle_type;
         private String circle_time;
@@ -80,7 +79,10 @@ public class CircleListBean extends Callcode {
         private int follow;
         private int up;
         private String time;
-        private List<?> files;
+        private List<FilesBean> files;
+
+        public int imageType=0;
+        public int voideType=1;
 
         public int getCircle_id() {
             return circle_id;
@@ -114,11 +116,11 @@ public class CircleListBean extends Callcode {
             this.circle_hot = circle_hot;
         }
 
-        public String getPath() {
+        public Object getPath() {
             return path;
         }
 
-        public void setPath(String path) {
+        public void setPath(Object path) {
             this.path = path;
         }
 
@@ -210,12 +212,54 @@ public class CircleListBean extends Callcode {
             this.time = time;
         }
 
-        public List<?> getFiles() {
+        public List<FilesBean> getFiles() {
             return files;
         }
 
-        public void setFiles(List<?> files) {
+        public void setFiles(List<FilesBean> files) {
             this.files = files;
         }
+
+        @Override
+        public int getItemType() {
+            return circle_type;
+        }
+
+        public class FilesBean {
+            /**
+             * file_id : 1
+             * circle_id : 1
+             * file : /upload/admin/timg.jpg
+             */
+
+            private int file_id;
+            private int circle_id;
+            private String file;
+
+            public int getFile_id() {
+                return file_id;
+            }
+
+            public void setFile_id(int file_id) {
+                this.file_id = file_id;
+            }
+
+            public int getCircle_id() {
+                return circle_id;
+            }
+
+            public void setCircle_id(int circle_id) {
+                this.circle_id = circle_id;
+            }
+
+            public String getFile() {
+                return file;
+            }
+
+            public void setFile(String file) {
+                this.file = file;
+            }
+        }
     }
+
 }

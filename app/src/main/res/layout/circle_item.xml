@@ -12,10 +12,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.example.jiyin.common.widget.MLImageView
             android:id="@+id/iv_imgHead"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/lunbotu1"
+            app:ml_shape_type="round"
             />
         <TextView
             android:id="@+id/tv_userName"
@@ -27,6 +30,7 @@
             android:textColor="#4d4d4d"
             android:textSize="@dimen/sp_14"
             android:gravity="left"
+            android:maxLines="1"
             />
         <TextView
             android:layout_toRightOf="@+id/iv_imgHead"
@@ -39,6 +43,7 @@
             android:textColor="#4d4d4d"
             android:textSize="@dimen/sp_10"
             android:gravity="left"
+            android:maxLines="1"
             />
         <TextView
             android:layout_alignTop="@+id/tv_userName"
@@ -62,26 +67,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:textColor="#4d4d4d"
+        android:textSize="@dimen/sp_10"
         />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <razerdp.github.com.widget.PhotoContents
-            android:id="@+id/circle_image_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            />
+<!--        <razerdp.github.com.widget.PhotoContents-->
+<!--            android:id="@+id/circle_image_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            />-->
 
-        <cn.jzvd.JzvdStd
-            android:id="@+id/jz_JZVideo"
+        <com.example.jiyin.common.widget.NineGVIew.NineGridView
+            android:id="@+id/nineGrid"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_300"
-            android:visibility="gone"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_8"
+            app:ngv_gridSpacing="@dimen/dp_3"
+            app:ngv_maxSize="9"
+            app:ngv_mode="grid"
+            app:ngv_singleImageRatio="1"
+            app:ngv_singleImageSize="@dimen/dp_250"/>
 
-        </cn.jzvd.JzvdStd>
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/longhsu"/>-->
     </FrameLayout>
     <RelativeLayout
         android:paddingTop="@dimen/dp_10"
@@ -94,7 +108,6 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="热度\n13w"
             android:textColor="#666666"
             android:textSize="@dimen/sp_12"
             />
@@ -142,7 +155,7 @@
                 android:id="@+id/iv_Likes_img"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@mipmap/zan_weidian"
+                android:src="@drawable/home_new_select"
                 />
             <TextView
                 android:paddingLeft="@dimen/dp_5"

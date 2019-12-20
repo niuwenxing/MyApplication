@@ -1,62 +1,31 @@
 package com.example.jiyin.home.Activity.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 
 import java.util.List;
 
-public class FounderAdapter<T> extends RecyclerView.Adapter<FounderAdapter.FounderView> {
+public class FounderAdapter extends BaseQuickAdapter<FounderfounderBean.DataBean.RecommendBean, BaseViewHolder> {
 
-    private Context mContext;
-    private List<T> mList;
 
-    public FounderAdapter(Context context, List<T> list){
-        this.mContext=context;
-        this.mList=list;
+    public FounderAdapter( @Nullable List<FounderfounderBean.DataBean.RecommendBean> data) {
+        super(R.layout.searchdetailed_item , data);
     }
-
-    @NonNull
     @Override
-    public FounderAdapter.FounderView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.searchdetailed_item, parent, false);
-        return new FounderView(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull FounderAdapter.FounderView holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
-    }
-
-    public class FounderView extends RecyclerView.ViewHolder {
-
-        private final TextView tvFounderName;
-        private final TextView tvInitiation;
-        private final ImageView imgPortrait;
-        private final TextView tvSynopsis;
-        private final TextView tvLearnmore_btn;
-
-        public FounderView(@NonNull View itemView) {
-            super(itemView);
-            tvFounderName = itemView.findViewById(R.id.tv_FounderName);
-            tvInitiation = itemView.findViewById(R.id.tv_Initiation);
-            imgPortrait = itemView.findViewById(R.id.img_portrait);
-            tvSynopsis = itemView.findViewById(R.id.tv_synopsis);
-            tvLearnmore_btn = itemView.findViewById(R.id.tv_Learnmore_btn);
-
-        }
+    protected void convert(@NonNull BaseViewHolder helper, FounderfounderBean.DataBean.RecommendBean item) {
+        Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getFounder_head()).into((ImageView) helper.getView(R.id.img_portrait));
+        helper.setText(R.id.tv_FounderName,item.getFounder_name());
+        helper.setText(R.id.tv_Initiation,item.getFounder_job());
+        helper.setText(R.id.tv_synopsis,item.getFounder_brief());
     }
 }

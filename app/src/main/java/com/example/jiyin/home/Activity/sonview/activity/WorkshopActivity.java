@@ -209,7 +209,7 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
             return;
         }
 //        GlideImageLoader.load(this, BaseConfig.ROOT_IMAGES_API+bean.getData().getMaintain().getMaintain_path(),mLableimage);
-        Glide.with(this).load(BaseConfig.ROOT_IMAGES_API+"/upload/default/20191028/9a88a60cc598683752a6fb1adfd593b5.jpg").into(mLableimage);
+        Glide.with(this).load(BaseConfig.ROOT_IMAGES_API+bean.getData().getMaintain().getMaintain_path()).into(mLableimage);
         mTextHtml.setText(Html.fromHtml(bean.getData().getMaintain().getMaintain_text()));
         this.workshopListdata.clear();
         this.workshopListdata.addAll(bean.getData().getWorkshop());

@@ -89,5 +89,9 @@
         <item name="android:textCursorDrawable">@drawable/edittext_cursor_color</item>
     </style>
 
+    <style name="mycheckbox"  parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/home_new_select</item>
+    </style>
+
 
 </resources>

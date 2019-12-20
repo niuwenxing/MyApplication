@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public abstract   class RootActivity extends AppCompatActivity implements IBaseView {
+public abstract class RootActivity extends AppCompatActivity implements IBaseView {
 
 
 

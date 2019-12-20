@@ -13,12 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.ProjectAdapter;
 import com.example.jiyin.home.Activity.presenter.impl.SearchpagePImpl;
 import com.example.jiyin.home.Activity.adapter.SearchpageAdpter;
 import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
+import com.example.jiyin.home.Activity.sonview.activity.ProduceDetailsActivity;
+import com.example.jiyin.home.Activity.sonview.activity.ProjectDetailsActivity;
+import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.StringUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
@@ -29,6 +34,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+/**
+ * 搜索页面
+ *
+ */
 
 public class SearchpageActivity extends JiYingActivity<SearchpageView, SearchpagePImpl> implements SearchpageView {
 
@@ -47,7 +57,11 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     private SearchpageAdpter searchpageAdpter;
 
     private String contextKey;
-    private ProjectAdapter<Object> objectProjectAdapter;
+    private ProjectAdapter objectProjectAdapter;
+    private List objects;
+    private String nameStr="";
+    private int page=1;
+    private List<ClassifyIndexBean.DataBean> data=new ArrayList<>();
 
     @Override
     protected int attachLayoutRes() {
@@ -62,22 +76,12 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
         Intent intent = getIntent();
         contextKey = intent.getStringExtra(ConstantUtil.KEY_CODE);
         searchList.setLayoutManager(new LinearLayoutManager(this));
-        List objects = new ArrayList<>();
-        //更多
-        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)) {
-            searchpageAdpter = new SearchpageAdpter(this, objects);
-            searchList.setAdapter(searchpageAdpter);
-        }
-        //项目
-        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
-            objectProjectAdapter = new ProjectAdapter<>(this,objects);
-            searchList.setAdapter(objectProjectAdapter);
-        }
+        objects = new ArrayList<>();
+
         //短视屏
         if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_SHORTVIDEO_CODE)) {
 
         }
-        presenter.getData();
 
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -86,15 +90,13 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                     //点击搜索的时候隐藏软键盘
                     searchText.clearFocus();
                     hideKeyboard(searchText);
-                    int length = searchText.getText().toString().length();
-                    for (int i = 0; i < length; i++) {
-                        objects.add("");
-                    }
                     if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
                         searchpageAdpter.notifyDataSetChanged();
+
                     }
                     if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
-                        objectProjectAdapter.notifyDataSetChanged();
+                        nameStr=searchText.getText().toString();
+                        presenter.getClassifyDetail(nameStr,page);
                     }
 
                     // 在这里写搜索的操作,一般都是网络请求数据
@@ -105,6 +107,34 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //更多
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)) {
+//            searchpageAdpter = new SearchpageAdpter(this, objects);
+//            searchList.setAdapter(searchpageAdpter);
+
+
+        }
+        //项目
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
+            objectProjectAdapter = new ProjectAdapter(data); //
+            searchList.setAdapter(objectProjectAdapter);
+            presenter.getClassifyDetail(nameStr,page);//网络请求
+            objectProjectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ProjectDetailsActivity.startProjectDetails(activity,data.get(position).getNew_id());
+                }
+            });
+        }
+
+
+
+
+
+    }
 
     @Override
     protected void createPresenter() {
@@ -125,7 +155,17 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
 
 
     @Override
-    public void upData(String shuju_yihui) {
-        searchpageAdpter.notifyDataSetChanged();
+    public void retClassifyDetail(ClassifyIndexBean bean) {
+        data.clear();
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }
+        data.addAll(bean.getData());
+        objectProjectAdapter.notifyDataSetChanged();
+
     }
+
+    @Override
+    public void retClassifyDetailNew(ClassifyDetailBean bean) { } //废弃
 }

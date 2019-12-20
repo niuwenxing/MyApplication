@@ -61,8 +61,8 @@ public class HttpManager {
         initCertificates();
         retrofit = new Retrofit.Builder()
                 .baseUrl(BaseConfig.ROOT_SERVER_API) //设置网络请求的Url地址
-//                .addConverterFactory(GsonConverterFactory.create()) //设置数据解析器
-                .addConverterFactory(GsonConverterFactory.create()) //设置数据解析器
+                .addConverterFactory(GsonConverterFactoryS.create()) //设置数据解析器
+//                .addConverterFactory(JsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(instance)
                 .build();

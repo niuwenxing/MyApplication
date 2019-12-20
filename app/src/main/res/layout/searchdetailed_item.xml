@@ -39,6 +39,7 @@
         android:layout_width="@dimen/dp_99"
         android:layout_height="@dimen/dp_73"
         android:src="@mipmap/liangqingsong"
+        android:scaleType="centerCrop"
         />
     <TextView
         android:id="@+id/tv_synopsis"

@@ -192,8 +192,8 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
         }
         List<OfflineTrainingBean.DataBean.OclassBean> oclass = bean.getData().getOclass();
         List<OfflineTrainingBean.DataBean.OclassBean> tcamp = bean.getData().getTcamp();
-        data.add(tcamp);
         data.add(oclass);
+        data.add(tcamp);
         rvStudylist.setAdapter(offlineting);
         offlineting.notifyDataSetChanged();
     }

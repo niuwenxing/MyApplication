@@ -1,5 +1,7 @@
 package com.example.jiyin.home.fragment.adapter;
 
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,11 +24,12 @@ public class TopModularAdapter  extends BaseQuickAdapter<IndexindexBean.DataBean
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, IndexindexBean.DataBean.VideoBean item) {
-        GlideImageLoader.load(mContext, BaseConfig.ROOT_IMAGES_API+item.getVideo_path(),(ImageView)helper.getView(R.id.img_toplist_img));
+//        GlideImageLoader.load(mContext, BaseConfig.ROOT_IMAGES_API+item.getVideo_path(),(ImageView)helper.getView(R.id.img_toplist_img));
         Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getVideo_path()).into((ImageView)helper.getView(R.id.img_toplist_img));
         helper.setText(R.id.tv_projecttitle,item.getVideo_title());
         helper.setText(R.id.tv_topcontent,item.getVideo_label());
         helper.setText(R.id.tv_topNumber,mContext.getResources().getString(R.string.reduStr)+item.getVideo_num()+"");
+        ImageView view = helper.getView(R.id.img_toplist_img);
     }
 
 }

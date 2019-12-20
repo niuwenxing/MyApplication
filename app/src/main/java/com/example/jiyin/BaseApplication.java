@@ -2,8 +2,10 @@ package com.example.jiyin;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.example.rootlib.utils.LogUtils;
 import java.util.Locale;
 
@@ -72,5 +74,18 @@ public class BaseApplication extends Application {
 
     public static synchronized BaseApplication getInstance() {
         return instance;
+    }
+
+    private HttpProxyCacheServer proxy;
+
+    public static HttpProxyCacheServer getProxy(Context context) {
+        BaseApplication app = (BaseApplication) context.getApplicationContext();
+        return app.proxy == null ? (app.proxy = app.newProxy()) : app.proxy;
+    }
+    //
+    private HttpProxyCacheServer newProxy() {
+        return new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(1024 * 1024 * 1024 )       // 2 Gb for cache
+                .build();
     }
 }
