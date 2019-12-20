@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF"
+    tools:context=".home.Activity.sonview.activity.HeadlinesDetailsActivity">
+
+    <include layout="@layout/navigationbar" />
+
+    <include layout="@layout/layout_common_throw"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent">
+                    <WebView
+                        android:id="@+id/webviewwhity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="MissingConstraints"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                    <com.example.jiyin.common.widget.detail.CommentExpandableListView
+                        android:id="@+id/expandableListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/webviewwhity"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_46"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="Orientation">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_comment_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="评论"
+                    android:drawableLeft="@mipmap/newpinglun"
+                    android:textColor="@color/colorMenu"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_width="@dimen/dp_1"
+                android:layout_height="match_parent"
+                android:background="#f0f0f0"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/cb_headlineCheck_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    style="@style/mycheckbox"
+                    android:text="点赞"
+                    android:textColor="#4d4d4d"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
