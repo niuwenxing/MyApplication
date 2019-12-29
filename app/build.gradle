@@ -121,4 +121,5 @@ dependencies {
     implementation project(path: ':rootfilelibs')
     //播放器
     implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

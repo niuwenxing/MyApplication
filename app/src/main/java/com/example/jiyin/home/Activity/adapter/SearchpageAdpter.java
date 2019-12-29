@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.List;
 public class SearchpageAdpter extends BaseQuickAdapter<FounderfounderBean.DataBean.FounderBean, BaseViewHolder> {
 
 
-    public SearchpageAdpter( @Nullable List<FounderfounderBean.DataBean.FounderBean> data) {
-        super(R.layout.search_item, data);
+    public SearchpageAdpter( @Nullable List<FounderfounderBean.DataBean.FounderBean> dataa) {
+        super(R.layout.search_item, dataa);
     }
 
     @Override

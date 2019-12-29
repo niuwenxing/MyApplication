@@ -615,6 +615,229 @@ public class UserCallManager {
         return HttpManager.getInstance().rep(UserService.class).getFounderfounder();
     }
 
+    /**
+     * 圈子点赞
+     * @param circleid
+     * @return
+     */
+    public static Call getUsercircleUp(int circleid) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("circle_id",String.valueOf(circleid));
+        return HttpManager.getInstance().rep(UserService.class).getUsercircleUp(params);
+    }
+
+    /**
+     * 圈子关注
+     * @param follow_uid
+     * @return
+     */
+    public static Call getUserfollow(int follow_uid) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("follow_uid",String.valueOf(follow_uid));
+
+        return HttpManager.getInstance().rep(UserService.class).getUserfollow(params);
+
+    }
+
+    /**
+     * 圈子分享
+     * @param circle_id
+     * @return
+     */
+    public static Call getUsercircleShare(int circle_id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("circle_id",String.valueOf(circle_id));
+        return HttpManager.getInstance().rep(UserService.class).getUsercircleShare(params);
+    }
+
+    /**
+     * 圈子个人详情
+     * @param circleid
+     * @return
+     */
+    public static Call getUsercircleDetail(int circleid) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("circle_id",String.valueOf(circleid));
+        return HttpManager.getInstance().rep(UserService.class).getUsercircleDetail(params);
+    }
+
+
+    /**
+     * 圈子评论
+     * @param circle_id
+     * @param to_uId
+     * @param fid
+     * @param commentStr UserReplyBean
+     * @return
+     */
+    public static Call getUserReply(int circle_id, int to_uId, int fid, String commentStr) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("circle_id",String.valueOf(circle_id));
+        params.put("comment",commentStr);
+        params.put("to_uid",String.valueOf(to_uId));
+        params.put("fid",String.valueOf(fid));
+
+        return HttpManager.getInstance().rep(UserService.class).getUserReply(params);
+    }
+
+    /**
+     * 个人中心 数据
+     * @return
+     */
+    public static Call getUserInfo() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        return HttpManager.getInstance().rep(UserService.class).getUserInfo(params);
+    }
+
+    /**
+     * 修改头像
+     * @param s
+     * @return
+     */
+    public static Call getUserAvatarEdit(String s) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("avatar",s);
+
+        return HttpManager.getInstance().rep(UserService.class).getUserAvatarEdit(params);
+    }
+
+    /**
+     * 修改昵称
+     * @param name
+     * @return
+     */
+    public static Call getUserReplyBean(String name) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("name",name);
+        return HttpManager.getInstance().rep(UserService.class).getUserReplyBean(params);
+    }
+
+    /**
+     * 设置手机号
+     * @param phone
+     * @param code
+     * @return
+     */
+    public static Call getUserTelEdit(String phone, String code) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("tel",phone);
+        params.put("code",code);
+
+        return HttpManager.getInstance().rep(UserService.class).getUserTelEdit(params);
+    }
+
+    /**
+     * 修改密码
+     * @param oldPass
+     * @param pass
+     * @param password
+     * @return
+     */
+    public static Call getUserPassEdit(String oldPass, String pass, String password) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("oldPass",oldPass);
+        params.put("pass",pass);
+        params.put("password",password);
+
+        return HttpManager.getInstance().rep(UserService.class).getUserPassEdit(params);
+    }
+
+    /**
+     * 申请记录
+     * @return
+     */
+    public static Call getMineApplyDos() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        return HttpManager.getInstance().rep(UserService.class).getMineApplyDos(params);
+    }
+
+    /**
+     * 我的赞
+     * @param page
+     * @return
+     */
+    public static Call gettMinemyUp(int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getMinemyUp(params);
+    }
+
+    /**
+     * 我的发布 列表
+     * @param page
+     * @return
+     */
+    public static Call getMinemyUp(int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getMinEmyUp(params);
+    }
+
+    /**
+     * 圈子删除
+     * @param circle_id
+     * @return
+     */
+    public static Call getUserCircleDel(int circle_id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("id",String.valueOf(circle_id));
+        return HttpManager.getInstance().rep(UserService.class).getUserCircleDel(params);
+    }
+
+    /**
+     * 红人更多
+     * @param page
+     * @param nameStr
+     * @return
+     */
+    public static Call getFounderList(int page, String nameStr) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("page",String.valueOf(page));
+        params.put("name",nameStr);
+        return HttpManager.getInstance().rep(UserService.class).getFounderList(params);
+    }
+
+    /**
+     * 研习社 视频详情
+     * @param page
+     * @param videoId
+     * @return
+     */
+    public static Call getAgencydetail(int page, int videoId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("online_id",String.valueOf(videoId));
+        params.put("page",String.valueOf(page));
+        return HttpManager.getInstance().rep(UserService.class).getAgencydetail(params);
+    }
+
+    /**
+     * 头条详情评论
+     * @param newId
+     * @param toString
+     * @return
+     */
+    public static Call getNewdetail(int newId, String toString) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("new_id",String.valueOf(newId));
+        params.put("stories_text",String.valueOf(toString));
+        return HttpManager.getInstance().rep(UserService.class).getNewdetail(params);
+    }
 
     private void uploadImages(List<LocalMedia> list){
         //String str = "http://app.quanquanerapp.com/api/Common/uploadMultiPic";

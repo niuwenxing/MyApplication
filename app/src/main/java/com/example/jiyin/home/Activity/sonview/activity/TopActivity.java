@@ -20,6 +20,7 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.AbsRecycleAdapter;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
+import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.TopViewImpl;
@@ -187,4 +188,7 @@ public class TopActivity extends JiYingActivity<TopView, TopViewImpl> implements
 
     @Override
     public void retVideoDetailData(VideoDetailBean bean) { } //废弃
+
+    @Override
+    public void retAgencydetail(AgencyDetailBean bean) { }//废弃
 }

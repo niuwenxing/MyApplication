@@ -1,10 +1,14 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.ProduceDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ProduceIndexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.ProduceImpl;
@@ -90,10 +95,43 @@ public class ProduceDetailsActivity extends JiYingActivity<ProduceView, ProduceI
 
     }
 
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void onStart() {
         super.onStart();
         presenter.getProduceDetail(produceId);
+
+
+        startWebView(lpk);
+        lpk.loadUrl("http://a.gensbox.cn/jyH5/detailPage.html?produce_id="+produceId);
+        lpk.addJavascriptInterface(new android() {
+            @Override
+            public void btn_seekCooperation() {
+                
+            }
+
+            @Override
+            public void btn_collect() {
+
+            }
+
+            @Override
+            public void btn_application() {
+
+            }
+
+            @Override
+            public void ipt_application() {
+
+            }
+
+            @Override
+            public void btn_overdue() {
+
+            }
+        }, "android");
+
+
 
 
     }
@@ -126,4 +164,21 @@ public class ProduceDetailsActivity extends JiYingActivity<ProduceView, ProduceI
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.clearCache(true);
+        webView.clearHistory();
+        webView.destroy();
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && lpk.canGoBack()) {
+            lpk.goBack();//返回上个页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);//退出H5界面
+    }
+
 }

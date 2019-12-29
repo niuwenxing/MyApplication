@@ -16,8 +16,11 @@ import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
+import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
+import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
+import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.Activity.view.ImagePreviewActivity;
 import com.example.jiyin.home.fragment.adapter.WorkShopAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -61,10 +64,6 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
     private int pages=0;
 
 
-    //
-    //recyclerView = this.findViewById(R.id.recyclerView);
-    //        refreshLayout = this.findViewById(R.id.refreshLayout);
-//
 
 
     public static Fragment getInstance(String title) {
@@ -153,52 +152,6 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
         }
     }
 
-    //滑动监听
-    private void ScrollListener(RecyclerView mfragment_circle) {
-        mfragment_circle.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                //判断是当前layoutManager是否为LinearLayoutManager
-                // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
-                if (layoutManager instanceof LinearLayoutManager) {
-                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-                    //获取最后一个可见view的位置
-                    int lastItemPosition = linearManager.findLastVisibleItemPosition();
-                    //获取第一个可见view的位置
-                    int firstItemPosition = linearManager.findFirstVisibleItemPosition();
-                    //获取可见view的总数
-                    int visibleItemCount = linearManager.getChildCount();
-
-                    if (_firstItemPosition < firstItemPosition) {
-                        _firstItemPosition = firstItemPosition;
-                        _lastItemPosition = lastItemPosition;
-                        GCView(fistView);
-                        fistView = recyclerView.getChildAt(0);
-                        lastView = recyclerView.getChildAt(visibleItemCount - 1);
-                    } else if (_lastItemPosition > lastItemPosition) {
-                        _firstItemPosition = firstItemPosition;
-                        _lastItemPosition = lastItemPosition;
-                        GCView(lastView);
-                        fistView = recyclerView.getChildAt(0);
-                        lastView = recyclerView.getChildAt(visibleItemCount - 1);
-                    }
-                }
-            }
-            /**
-             *回收播放器
-             */
-            public void GCView(View gcView) {
-//                if (gcView != null && gcView.findViewById(R.id.jz_JZVideo) != null) {
-//                    JzvdStd video = activity.findViewById(R.id.jz_JZVideo);
-//                    video.releaseAllVideos();
-//
-//                }
-            }
-
-        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -246,9 +199,33 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
     public void returnLabel(List<CirclelabelBean.DataBean> data) {}
 
     @Override
-    public void ReturnCircle(CircleListBean bean) {
+    public void ReturnCircle(CircleListBean bean) { }
 
+    @Override
+    public void retUsercircleUp(UserCircleUpBean bean,boolean a) {  }//废弃
+
+    @Override
+    public void retUserfollow(UserCircleUpBean bean) {  } //废弃
+
+    @Override
+    public void retUsercircleShare(UserCircleUpBean bean) { }//废弃
+
+    @Override
+    public void retUsercircleDetail(UsercircleDetailBean bean) { }//废弃
+
+    @Override
+    public void retNetErr(String err) {
+        toast(err);
     }
-    }
+
+    @Override
+    public void retUserReply(UserReplyBean bean) { } //废弃
+
+    @Override
+    public void retMinemyUprelease(CircleListBean bean) { }//废弃
+
+    @Override
+    public void retUserCircleDel(UserReplyBean bean) { }//废弃
+}
 
 

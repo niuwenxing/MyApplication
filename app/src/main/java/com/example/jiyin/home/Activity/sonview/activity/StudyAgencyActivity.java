@@ -134,14 +134,11 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
         studyAgencyApdpter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                TopVideoDetailsActivity.startTopVideo(activity,online.get(position).getOnline_id(),
+                OnlineVideodetailsActivity.startOnlineVideo(activity,online.get(position).getOnline_id(),
                         online.get(position).getOnline_path());
 
             }
         });
-
-
-
     }
 
     @Override

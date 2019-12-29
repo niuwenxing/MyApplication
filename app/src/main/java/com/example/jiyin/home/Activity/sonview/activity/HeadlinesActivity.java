@@ -17,6 +17,8 @@ import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.sonview.adapter.HeadlinesAdapter;
 import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
+import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.HeadlinesImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.HeadlinesView;
 import com.example.rootlib.widget.common.ThrowLayout;
@@ -112,6 +114,9 @@ public class HeadlinesActivity extends JiYingActivity<HeadlinesView, HeadlinesIm
 
     @Override
     public void retNewDetail(NewdetailBean bean) {}//废弃
+
+    @Override
+    public void retNewdetails(Toutiao bean) { }//废弃
 
     @OnClick({R.id.gobank_btn, R.id.searech_news_btn, R.id.searech_Shopping_btn})
     public void onViewClicked(View view) {

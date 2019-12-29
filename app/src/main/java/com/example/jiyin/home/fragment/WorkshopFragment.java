@@ -1,18 +1,13 @@
 package com.example.jiyin.home.fragment;
 
 
-import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
@@ -20,11 +15,17 @@ import com.example.jiyin.home.Activity.adapter.AbsRecycleAdapter;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
+import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
+import com.example.jiyin.home.Activity.sonview.activity.WorkPoldetailsActivity;
+import com.example.jiyin.home.Activity.sonview.activity.WorkshopdetailsActivity;
+import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
+import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.fragment.adapter.CircleAdapter;
 import com.example.jiyin.home.fragment.adapter.WorkShopASAdapter;
-import com.example.jiyin.home.fragment.adapter.WorkShopAdapter;
+import com.example.jiyin.utils.ConstantUtil;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 import com.gyf.immersionbar.ImmersionBar;
@@ -40,7 +41,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 圈子
+ * 圈子首页
  */
 
 public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl> implements WorkshopView {
@@ -105,25 +106,39 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
         initView();
         //列表数据
         workShopAdapter = new WorkShopASAdapter(data);//点击事件内部处理
-        workShopAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mCirclelist.setAdapter(workShopAdapter);
+        workShopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
-                    case R.id.iv_Likes_img:
-
-                        break;
-                    case R.id.iv_comment_img:
-
-                        break;
-                    case R.id.iv_share_img:
-
-                        break;
-
-                }
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(activity,WorkshopdetailsActivity.class)
+                    .putExtra(ConstantUtil.KEY_CODE,data.get(position).getCircle_id())
+                );
             }
         });
 
-        mCirclelist.setAdapter(workShopAdapter);
+        //点赞
+        workShopAdapter.setOnclick(new WorkShopASAdapter.Mtvbaidu() {
+            @Override
+            public void onclick(@NonNull int circleid, Boolean zan) {
+                presenter.UsercircleUp(circleid,zan);
+            }
+        });
+        //关注
+        workShopAdapter.setOnclick(new WorkShopASAdapter.Myguanzu() {
+            @Override
+            public void onclick(@NonNull int follow_uid) {
+                presenter.Userfollow(follow_uid);
+            }
+        });
+        //分享
+        workShopAdapter.setOnclick(new WorkShopASAdapter.Myfengxian() {
+            @Override
+            public void onclick(@NonNull int circle_id) {
+                presenter.UsercircleShare(circle_id);
+            }
+        });
+
+
 
     }
 
@@ -136,12 +151,21 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
                 if (pages!=1) {
                     pages=1;
                 }
-                data.clear();
-                initData(1,dataList.get(position).getIfication_id());
+                initData(pages,dataList.get(position).getIfication_id());
             }
         });
         refreshLayout();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!CollectionUtil.isEmpty(dataList)) {
+            initData(pages,dataList.get(CirclelabeType).getIfication_id());
+        }
+
+    }
+
     //刷新系统
     private void refreshLayout() {
         if(refreshLayout==null)return;
@@ -153,7 +177,7 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
                 refreshLayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        initData(pages,dataList.get(CirclelabeType).getIfication_id());
                         refreshLayout.finishRefresh();
                     }
                 },1000);
@@ -163,7 +187,6 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 //加载
-
                 refreshLayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -209,7 +232,65 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
         workShopAdapter.notifyDataSetChanged();
 
     }
+    //圈子点赞
+    @Override
+    public void retUsercircleUp(UserCircleUpBean bean, boolean zan) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg().toString());
+            workShopAdapter.notifyDataSetChanged();
+            return;
+        }
+        if (zan) {
+            toast(bean.getMsg());
+        }else{
+            toast("已取消");
+        }
+    }
 
+    /**
+     * 圈子关注
+     * @param bean
+     */
+    @Override
+    public void retUserfollow(UserCircleUpBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            workShopAdapter.notifyDataSetChanged();
+            return;
+        }
+        toast(bean.getMsg());
+    }
+
+    /**
+     * 圈子分享
+     * @param bean
+     */
+    @Override
+    public void retUsercircleShare(UserCircleUpBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            workShopAdapter.notifyDataSetChanged();
+            return;
+        }
+        toast(bean.getMsg());
+    }
+
+    @Override
+    public void retUsercircleDetail(UsercircleDetailBean bean) { }//废弃
+
+    @Override
+    public void retNetErr(String err) {
+        toast(err);
+    }
+
+    @Override
+    public void retUserReply(UserReplyBean bean) {  }//废弃
+
+    @Override
+    public void retMinemyUprelease(CircleListBean bean) { }//废弃
+
+    @Override
+    public void retUserCircleDel(UserReplyBean bean) {}//废弃
 
     @OnClick(R.id.img_xiaoxi_btn)
     public void onViewClicked() {

@@ -69,6 +69,7 @@
         android:textSize="@dimen/sp_10"
         />
     <FrameLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -90,8 +91,8 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="热度\n13w"
             android:textColor="#666666"
+            android:gravity="center"
             android:textSize="@dimen/sp_12"
             />
         <ImageView

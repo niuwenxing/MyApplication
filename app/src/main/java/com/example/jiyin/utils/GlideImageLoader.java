@@ -25,6 +25,8 @@ public class GlideImageLoader {
                 .setCrossFadeEnabled(true).build();
     }
 
+
+
     public static void load(Context context, String url, ImageView iv) {
 
         Glide.with(context)
@@ -102,7 +104,12 @@ public class GlideImageLoader {
     public static void load(Context context, String url, int placeHolder, ImageView iv) {
         load(context, url, placeHolder, placeHolder, iv);
     }
-
+    /**
+     * 占位图/错误图 同一张
+     */
+    public static void loadLogh(Context context, String url, ImageView iv) {
+        loadto(context,url,R.mipmap.zanwufabu,R.mipmap.zanwufabu,iv);
+    }
     /**
      * 加载图片使用默认图片
      */

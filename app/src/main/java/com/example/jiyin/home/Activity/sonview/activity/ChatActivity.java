@@ -30,6 +30,10 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 聊天界面
+ */
+
 public class ChatActivity extends JiYingActivity<NewsView, NewsPreImpl> implements NewsView {
 
 

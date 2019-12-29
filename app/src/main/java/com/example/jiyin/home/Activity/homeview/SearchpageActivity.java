@@ -2,6 +2,8 @@ package com.example.jiyin.home.Activity.homeview;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,13 +19,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.ProjectAdapter;
+import com.example.jiyin.home.Activity.adapter.SearchpagechidAdpter;
 import com.example.jiyin.home.Activity.presenter.impl.SearchpagePImpl;
 import com.example.jiyin.home.Activity.adapter.SearchpageAdpter;
 import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
+import com.example.jiyin.home.Activity.sonview.activity.MoreredMenActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ProduceDetailsActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ProjectDetailsActivity;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.StringUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
@@ -54,7 +59,7 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     TextView addBtn;
     @BindView(R.id.throw_layout)
     ThrowLayout throwLayout;
-    private SearchpageAdpter searchpageAdpter;
+    private SearchpagechidAdpter searchpageAdpter;
 
     private String contextKey;
     private ProjectAdapter objectProjectAdapter;
@@ -62,12 +67,12 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     private String nameStr="";
     private int page=1;
     private List<ClassifyIndexBean.DataBean> data=new ArrayList<>();
+    private List<FounderListBean.DataBean> data1=new ArrayList<>();
 
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_searchpage;
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +87,31 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
         if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_SHORTVIDEO_CODE)) {
 
         }
+        if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
+
+        }
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
+                    if (s.length()==0) {
+                        presenter.FounderfounderList(page,"");
+                    }
+                }
+                if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
+                    if (s.length()==0) {
+                        presenter.getClassifyDetail("",page);
+                    }
+                }
+            }
+        });
+
 
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -90,15 +120,14 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                     //点击搜索的时候隐藏软键盘
                     searchText.clearFocus();
                     hideKeyboard(searchText);
-                    if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
-                        searchpageAdpter.notifyDataSetChanged();
-
+                    if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)){
+                        nameStr=searchText.getText().toString();
+                        presenter.FounderfounderList(page,nameStr);
                     }
-                    if (StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
+                    if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
                         nameStr=searchText.getText().toString();
                         presenter.getClassifyDetail(nameStr,page);
                     }
-
                     // 在这里写搜索的操作,一般都是网络请求数据
                     return true;
                 }
@@ -112,9 +141,18 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
         super.onStart();
         //更多
         if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_MORE_CODE)) {
-//            searchpageAdpter = new SearchpageAdpter(this, objects);
-//            searchList.setAdapter(searchpageAdpter);
-
+            searchpageAdpter = new SearchpagechidAdpter(data1);
+            searchList.setAdapter(searchpageAdpter);
+            presenter.FounderfounderList(page,nameStr);
+            searchpageAdpter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                    MoreredMenActivity|
+                    startActivity(new Intent(activity, MoreredMenActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,data1.get(position).getFounder_id())
+                    );
+                }
+            });
 
         }
         //项目
@@ -168,4 +206,19 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
 
     @Override
     public void retClassifyDetailNew(ClassifyDetailBean bean) { } //废弃
+
+    /**
+     * 红人更多列表
+     * @param bean
+     */
+    @Override
+    public void retFounderfounderList(FounderListBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }
+        data1.clear();
+        data1.addAll(bean.getData());
+        searchpageAdpter.notifyDataSetChanged();
+    }
 }

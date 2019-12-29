@@ -1,5 +1,6 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +17,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.ScreationBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationBeans;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.CreationcollImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.CreationcollView;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 
@@ -83,6 +86,7 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
         presenter = new CreationcollImpl();
     }
 
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +103,37 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
                 }
             });
         }
+
+        startWebView(lpk);
+        lpk.loadUrl("http://a.gensbox.cn/jyH5/creatures.html?token="+
+                PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")+"&creation_id="+creationId);
+        lpk.addJavascriptInterface(new android() {
+            @Override
+            public void btn_seekCooperation() {// 免费报名,
+                CreationapplyforActivity.startActivity(activity,creation_id,tvSearchTextTitle.getText().toString());
+            }
+            @Override
+            public void btn_collect() {//报名金额,
+
+            }
+
+            @Override
+            public void btn_application() {//报名申请，
+
+            }
+
+            @Override
+            public void ipt_application() {
+
+            }
+
+            @Override
+            public void btn_overdue() {//活动已过期
+
+            }
+        }, "android");
+
+
         presenter.getScreationData(creationId);
 
 

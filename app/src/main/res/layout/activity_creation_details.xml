@@ -25,6 +25,7 @@
             tools:ignore="MissingConstraints" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_46"

@@ -10,6 +10,7 @@ import com.example.jiyin.common.widget.NineGVIew.NineGridView;
 import com.example.jiyin.common.widget.NineGVIew.NineGridViewAdapter;
 import com.example.jiyin.home.Activity.view.ImagePreviewActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,16 +50,12 @@ public class NineGridViewClickAdapter extends NineGridViewAdapter {
             info.imageViewX = points[0];
             info.imageViewY = points[1] - statusHeight;
         }
-
-//        Intent intent = new Intent(context, ImagePreviewActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(ImagePreviewActivity.IMAGE_INFO, (Serializable) imageInfo);
-//        bundle.putInt(ImagePreviewActivity.CURRENT_ITEM, index);
-//        intent.putExtras(bundle);
-//        context.startActivity(intent);
-//        ((Activity) context).overridePendingTransition(0, 0);
+        ArrayList<String> objects = new ArrayList<>();
+        for (ImageInfo info : imageInfo) {
+            objects.add(info.getThumbnailUrl());
+        }
         Intent intent = new Intent(context, ImagePreviewActivity.class);
-//            intent.putStringArrayListExtra("imageList", objects);
+            intent.putStringArrayListExtra("imageList", objects);
             intent.putExtra(ImagePreviewActivity.P.START_ITEM_POSITION, index);
             intent.putExtra(ImagePreviewActivity.P.START_IAMGE_POSITION, index);
             context.startActivity(intent);

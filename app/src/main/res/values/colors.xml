@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     
     <color name="white">#FFFFFF</color>
+    <color name="color0000">#00FFFFFF</color>
     <color name="colorNews">#383838</color>
     <color name="colorGray">#666666</color>
     <color name="colorCel">#656565</color>
@@ -12,6 +13,7 @@
     <color name="colorbotline">#dddddd</color>
     <color name="colorTbar">#99ffffff</color>
     <color name="colorcccc">#cccccc</color>
+    <color name="colorButtonNoClickable">#66ffffff</color>
     <color name="colorTartextTitle">#333333</color>
     <color name="colorTartext">#313131</color>
     <color name="colorScribe">#676767</color>

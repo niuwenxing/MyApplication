@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +24,7 @@ import com.example.jiyin.home.Activity.sonview.base.WorkshopMainBase;
 import com.example.jiyin.home.Activity.sonview.sonimpl.WorkRoomImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.WorkRoomView;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.LogUtils;
 
 import butterknife.BindView;
@@ -52,6 +55,8 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
     TextView mParticipate_btn;
     @BindView(R.id.tv_CustomerPhone_btn)
     TextView tv_CustomerPhone_btn;
+    @BindView(R.id.webviewvv)
+    WebView webviewvv;
 
     private int workshop_id;
 
@@ -99,6 +104,13 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
                 WorkSurfaceActivity.staSurfaceActivity(WorkDetailsActivity.this,workshop_id);
             }
         });
+
+
+        webviewvv.loadUrl("http://a.gensbox.cn/jyH5/workshop.html?token="+
+                PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")
+                +"&work_id="+workshop_id);
+        startWebView(webviewvv);
+
     }
 
 

@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -299,14 +300,12 @@ public abstract class RootActivity extends AppCompatActivity implements IBaseVie
                 }else{
                     checkCallPhonePermission = PermissionChecker.checkSelfPermission(getApplicationContext(), permissions[i]);
                 }
-
                 if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {        //未通过
                     pers.add(permissions[i]);
                 } else {                                                                    //已通过
                     passedPermissions.add(permissions[i]);
                 }
             }
-
             if (pers.isEmpty()) {                           //全部都授过权
                 listener.onPass(permissions);
                 listener.onUnPass(null);}
@@ -405,6 +404,17 @@ public abstract class RootActivity extends AppCompatActivity implements IBaseVie
         }
         return super.dispatchTouchEvent(ev);
 
+    }
+    //文本弹起输入框
+    public void show(final View view){
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.requestFocus();
+                InputMethodManager manager = ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE));
+                if (manager != null) manager.showSoftInput(view, 0);
+            }
+        }, 100);
     }
 
     private boolean isShouldHideKeyboard(View v, MotionEvent event){
@@ -512,7 +522,6 @@ public abstract class RootActivity extends AppCompatActivity implements IBaseVie
         //其他方式是否消失
         dialog.setCancelable(canCancel);
         dialog.setCanceledOnTouchOutside(canTouchOutside);
-
         dialog.show();
         return dialog;
     }

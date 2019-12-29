@@ -9,4 +9,6 @@ public abstract class HeadlinesPresenter<V extends IBaseView> extends BasePresen
     public abstract void getNewIndex(int page);//头条列表
 
     public abstract void getNewDetail(int page,int newId);//头条详情
+
+    public abstract void getNewdetail(int newId, String toString);//头条评论
 }

@@ -82,6 +82,7 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
     private List<FounderfounderBean.DataBean.RecommendBean> recommend=new ArrayList<>();
     private List<FounderfounderBean.DataBean.FounderBean> founder=new ArrayList<>();
     private FounderAdapter objectFounderAdapter;
+    private Intent intentSearchpage;
 
     @Override
     protected int attachLayoutRes() {
@@ -122,6 +123,9 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
 
         searchpageAdpter = new SearchpageAdpter(founder);
         ryCheckMoreList.setAdapter(searchpageAdpter);
+
+        intentSearchpage = new Intent(this, SearchpageActivity.class);
+        intentSearchpage.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_MORE_CODE);
 
     }
 
@@ -187,8 +191,7 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
                 finish();
                 break;
             case R.id.searchText://搜索页面
-                Intent intentSearchpage = new Intent(this, SearchpageActivity.class);
-                intentSearchpage.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_MORE_CODE);
+
                 startActivity(intentSearchpage);
                 break;
             case R.id.searech_news_btn:
@@ -197,8 +200,8 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
             case R.id.iv_topimage_btn:
 
                 break;
-            case R.id.tv_chechViewmore_btn:
-
+            case R.id.tv_chechViewmore_btn://查看更多
+                startActivity(intentSearchpage);
                 break;
             case R.id.tv_chechViewmoreMore_btn:
 

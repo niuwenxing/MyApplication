@@ -1,9 +1,11 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,11 +17,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.ZtimeIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.ZtimedetailBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.CarveouttimeImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.CarveouttimeView;
+import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.io.File;
@@ -56,7 +61,7 @@ public class CarveouttimeDasActivity extends JiYingActivity<CarveouttimeView, Ca
     @BindView(R.id.throw_layout)
     ThrowLayout throwLayout;
     @BindView(R.id.lpk)
-    TextView lpk;
+    WebView lpk;
     @BindView(R.id.image)
     ImageView image;
     @BindView(R.id.tv_CarveouttimePhone_btn)
@@ -90,6 +95,7 @@ public class CarveouttimeDasActivity extends JiYingActivity<CarveouttimeView, Ca
         presenter = new CarveouttimeImpl();
     }
 
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +105,38 @@ public class CarveouttimeDasActivity extends JiYingActivity<CarveouttimeView, Ca
         tvSearchTextTitle.setText("琢璞时间活动...");
         //id
         mZid = getIntent().getIntExtra("zid", BaseConfig.SERVER_ERR_LOGIN_OBSOLETE);
+
+
+        startWebView(lpk);
+
+        lpk.loadUrl("http://a.gensbox.cn/jyH5/recommended.html?token="+
+                PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")+"&zid="+mZid);
+        lpk.addJavascriptInterface(new android() {
+            @Override
+            public void btn_seekCooperation() {// 免费报名,
+                CarveouttimeApplyActivity.startActivity(activity,mMCzid,z_title);
+            }
+            @Override
+            public void btn_collect() {//报名金额,
+
+            }
+
+            @Override
+            public void btn_application() {//报名申请，
+
+            }
+
+            @Override
+            public void ipt_application() {
+
+            }
+
+            @Override
+            public void btn_overdue() {//活动已过期
+                toast("活动已过期");
+            }
+        }, "android");
+
 
 
         presenter.getZtimedetail(mZid);

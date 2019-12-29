@@ -103,7 +103,6 @@ public class CreationcollectionActivity extends JiYingActivity<CreationcollView,
 
         pastperiodAdapter = new PastperiodAdapter(tscreation);
 
-
         presenter.getScreationIndex(page);
 
         initView();

@@ -31,6 +31,7 @@ import com.example.jiyin.home.fragment.adapter.BaseRecyclerViewAdapter;
 import com.example.jiyin.home.fragment.adapter.CircleAdapter;
 import com.example.jiyin.home.fragment.adapter.RecyclerViewHolder;
 import com.example.jiyin.utils.GlideImageLoader;
+import com.example.rootlib.utils.CollectionUtil;
 
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import butterknife.OnClick;
 
 /**
  * <>
- * 工作坊页面
+ * 工作坊首页
  * </>
  */
 
@@ -102,6 +103,7 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
         super.onCreate(savedInstanceState);
         searchView.setVisibility(View.GONE);
         tvSearchTextTitle.setVisibility(View.VISIBLE);
+        searechNewsBtn.setVisibility(View.INVISIBLE);
         tvSearchTextTitle.setText("工作坊");
         presenter.workshoplabel();//获取标签
 
@@ -113,9 +115,11 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
         LinearLayoutManager linearmRoomList = new LinearLayoutManager(this);
         linearmRoomList.setOrientation(LinearLayoutManager.VERTICAL);
         mRoomList.setLayoutManager(linearmRoomList);
+
         circleAdapter = new WorkshopAdapter(this);
         circleAdapter.setData(data1);
         mRoomLabel.setAdapter(circleAdapter);
+
         circleAdapter.setChoiceMode(AbsRecycleAdapter.CHOICE_MODE_SINGLE);//适配器模式
         mRoomLabel.addItemDecoration(
                 new SpaceItemDecoration((int)getResources().getDimension(R.dimen.dp_7),
@@ -137,7 +141,6 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
             public void onItemClick(int position, View v) {
                 positions=position;
                 ification_id=data1.get(position).getIfication_id();
-
                 if (pages!=0) {
                     pages=0;
                 }
@@ -196,6 +199,11 @@ public class WorkshopActivity extends JiYingActivity<WorkRoomView, WorkRoomImpl>
         circleAdapter.notifyDataSetChanged();
         presenter.globaldata(pages,ification_id);//发起请求
         circleAdapter.setItemChecked(positions,true);//默认选择第一个
+
+        if (!CollectionUtil.isEmpty(data1)) {
+            initData(1,data1.get(0).getIfication_id());
+        }
+
     }
 
     /**

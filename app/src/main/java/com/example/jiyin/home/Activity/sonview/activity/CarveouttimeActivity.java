@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 琢璞时间+
+ * 琢璞时间
  */
 public class CarveouttimeActivity extends JiYingActivity<CarveouttimeView, CarveouttimeImpl> implements CarveouttimeView, RadioGroup.OnCheckedChangeListener {
 
@@ -100,6 +100,9 @@ public class CarveouttimeActivity extends JiYingActivity<CarveouttimeView, Carve
         rvCarveoutTimeList.setAdapter(screationAdapter);
 
         tscreationAdapter = new TscreationAdapter(tscreation);
+
+
+
 
         presenter.getZtimeIndex(page);
 

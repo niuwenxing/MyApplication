@@ -1,9 +1,11 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
@@ -24,13 +27,15 @@ import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.StudyAgencyImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.StudyAgencyView;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
+import com.example.rootlib.utils.LogUtils;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * <P> 研习社 报名</P>
+ * 研习社 报名</P>
  */
 public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, StudyAgencyImpl> implements StudyAgencyView {
 
@@ -100,6 +105,7 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
 
     }
 
+    @SuppressLint("JavascriptInterface")
     private void initView() {
         searchView.setVisibility(View.GONE);
         searechNewsBtn.setVisibility(View.INVISIBLE);
@@ -108,6 +114,40 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
         under_id = getIntent().getIntExtra("under_id", 1252);
 
         presenter.getUnderDetail(under_id);//研习社详情
+
+        startWebView(lpk);
+//        String url="http://a.gensbox.cn/jyH5/activities.html?token="+ PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")+ "&under_id="+under_id;
+        lpk.loadUrl("http://a.gensbox.cn/jyH5/activities.html?token="+ PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")
+            +"&under_id="+under_id
+        );
+//        LogUtils.d("URL"+url);
+
+        lpk.addJavascriptInterface(new android() {
+            @Override
+            public void btn_seekCooperation() {
+
+            }
+            @Override
+            public void btn_collect() {
+
+            }
+
+            @Override
+            public void btn_application() {
+
+            }
+
+            @Override
+            public void ipt_application() {
+
+            }
+
+            @Override
+            public void btn_overdue() {
+
+            }
+        }, "android");
+
     }
 
     @Override
@@ -150,7 +190,11 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.gobank_btn:
-                finish();
+                if(webView.canGoBack()){
+                        webView.goBack();
+                }else {
+                    finish();
+                }
                 break;
             case R.id.participate_btn:
 
@@ -162,4 +206,13 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
                 break;
         }
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && lpk.canGoBack()) {
+            lpk.goBack();//返回上个页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);//退出H5界面
+    }
+
 }

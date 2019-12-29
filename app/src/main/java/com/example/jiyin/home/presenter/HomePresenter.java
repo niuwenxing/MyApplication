@@ -9,8 +9,7 @@ import com.example.rootlib.mvp.view.IBaseView;
  * @param <V>
  */
 
-public abstract class HomePresenter<V extends IBaseLoadView> extends BasePresenter<V> {
-
+public abstract class HomePresenter<V extends IBaseView> extends BasePresenter<V> {
 
     public abstract void getIndexindex(); //获取
 

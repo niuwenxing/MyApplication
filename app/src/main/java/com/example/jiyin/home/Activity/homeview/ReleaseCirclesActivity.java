@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -297,6 +298,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
     private void UpRelease() {
         if (selectList != null && selectList.size() != 0)
             if (type.equals(ConstantUtil.CIRCLES)) {
+                showProgress();
                 presenter.UpImages(selectList).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {}
@@ -309,6 +311,7 @@ public class ReleaseCirclesActivity extends JiYingActivity<ReleaseCirclesView, R
                     }
                 });
             }else{
+                showProgress();
                 presenter.UpVoide(selectList).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {}

@@ -80,9 +80,18 @@ public class CircleListBean extends Callcode {
         private int up;
         private String time;
         private List<FilesBean> files;
+        private String circle_title;
 
         public int imageType=0;
         public int voideType=1;
+
+        public String getCircle_title() {
+            return circle_title;
+        }
+
+        public void setCircle_title(String circle_title) {
+            this.circle_title = circle_title;
+        }
 
         public int getCircle_id() {
             return circle_id;

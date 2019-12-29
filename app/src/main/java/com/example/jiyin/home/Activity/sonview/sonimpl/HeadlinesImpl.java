@@ -4,9 +4,12 @@ import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
+import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.impl.HeadlinesPresenter;
 import com.example.jiyin.home.Activity.sonview.sonview.HeadlinesView;
 import com.example.jiyin.home.UserCallManager;
+import com.example.jiyin.interactive.UserService;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 public class HeadlinesImpl extends HeadlinesPresenter<HeadlinesView> {
@@ -153,5 +156,71 @@ public class HeadlinesImpl extends HeadlinesPresenter<HeadlinesView> {
                     }
                 });
 
+    }
+
+    /**
+     * 头条 评论
+     * @param newId
+     * @param toString
+     */
+    @Override
+    public void getNewdetail(int newId, String toString) {
+        headNew=new BeanNetUnit<Toutiao>()
+                .setCall(UserCallManager.getNewdetail(newId,toString))
+                .request(new NetBeanListener<Toutiao>() {
+                    @Override
+                    public void onSuc(Toutiao bean) {
+                        if (bean != null) {
+                            v.hideExpectionPages();
+                            v.retNewdetails(bean);
+                        }else{
+                            v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
+                                @Override
+                                public void onRetry() {
+                                    getNewdetail(newId,toString);
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+                        v.showSysErrLayout(message, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                getNewdetail(newId,toString);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onLoadStart() {v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {v.showNetErrorLayout(new ThrowLayout.OnRetryListener() {
+                        @Override
+                        public void onRetry() {
+                            getNewdetail(newId,toString);
+                        }
+                    });
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+                        v.showSysErrLayout(msg, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                getNewdetail(newId,toString);
+                            }
+                        });
+                    }
+                });
     }
 }

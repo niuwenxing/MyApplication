@@ -38,10 +38,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".home.Activity.sonview.activity.ProjectDetailsActivity"></activity>
-        <activity android:name=".home.Activity.sonview.activity.HeadlinesDetailsActivity" />
-        <activity android:name=".home.Activity.sonview.activity.ProduceDetailsActivity" />
-        <activity android:name=".home.Activity.sonview.activity.TestActivity" />
+        <activity android:name=".home.Activity.sonview.activity.OnlineVideodetailsActivity"></activity>
+        <activity android:name=".home.Activity.sonview.activity.ProducedActivity" />
+        <activity android:name=".home.Activity.sonview.activity.MoreredMenActivity" />
+        <activity android:name=".home.Activity.sonview.activity.MyreleaseActivity" />
+        <activity android:name=".home.Activity.sonview.activity.MypraiseActivity" />
+        <activity android:name=".home.Activity.sonview.activity.ApplicationrecordActivity" />
+        <activity android:name=".home.Activity.sonview.activity.SetPasswordActivity" />
+        <activity android:name=".home.Activity.sonview.activity.SetPhonenumberActivity" />
+        <activity android:name=".home.Activity.sonview.activity.SetNameActivity" />
+        <activity android:name=".home.Activity.sonview.activity.MyPhotoActivity" />
+        <activity android:name=".home.Activity.sonview.activity.WorkshopdetailsActivity" />
+        <activity
+            android:name=".home.Activity.sonview.activity.WorkPoldetailsActivity"
+            android:theme="@style/AppNoTitle_Trans" />
+        <activity
+            android:name=".home.Activity.sonview.activity.ProjectDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.Activity.sonview.activity.HeadlinesDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.Activity.sonview.activity.ProduceDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.Activity.sonview.activity.TestActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".home.Activity.sonview.activity.TopVideoDetailsActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
@@ -156,7 +178,8 @@
         </provider> <!-- 入口 -->
         <activity
             android:name=".common.activity.SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

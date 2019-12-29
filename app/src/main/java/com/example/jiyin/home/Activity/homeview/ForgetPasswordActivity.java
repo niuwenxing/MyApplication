@@ -202,8 +202,6 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
     }
 
 
-
-
     /**
      * 重置倒计时，60s内只能发送一条验证码
      */

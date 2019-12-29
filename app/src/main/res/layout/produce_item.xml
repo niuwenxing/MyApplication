@@ -9,10 +9,9 @@
     <ImageView
         android:id="@+id/img_produceImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_90"
         android:background="@mipmap/dibujuxing"
-        android:maxHeight="@dimen/dp_90"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         />
 
     <TextView

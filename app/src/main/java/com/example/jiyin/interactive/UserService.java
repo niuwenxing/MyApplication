@@ -8,11 +8,15 @@ import com.example.jiyin.home.Activity.homeview.base.ImageBase;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
+import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.sonview.activity.WorkSurfaceActivity;
+import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
+import com.example.jiyin.home.Activity.sonview.base.MineAplyDosBean;
 import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
@@ -27,6 +31,9 @@ import com.example.jiyin.home.Activity.sonview.base.ScreationBeans;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.UserInfoBean;
+import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
+import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.base.WorkDetailsBase;
@@ -381,5 +388,159 @@ public interface UserService {
      */
     @POST("founder/founder")
     Call<FounderfounderBean> getFounderfounder();
+
+    /**
+     * 圈子点赞
+     * @param params
+     * @return
+     */
+    @POST("User/circleUp")
+    @FormUrlEncoded
+    Call<UserCircleUpBean> getUsercircleUp(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 圈子关注
+     * @param params
+     * @return
+     */
+    @POST("User/follow")
+    @FormUrlEncoded
+    Call<UserCircleUpBean> getUserfollow(@FieldMap  HashMap<String, String> params);
+
+    /**
+     * 圈子分享
+     * @param params
+     * @return
+     */
+    @POST("User/circleShare")
+    @FormUrlEncoded
+    Call<UserCircleUpBean> getUsercircleShare(@FieldMap  HashMap<String, String> params);
+
+    /**
+     * 圈子个人详情
+     * @param params
+     * @return
+     */
+    @POST("Mine/circleDetail")
+    @FormUrlEncoded
+    Call<UsercircleDetailBean> getUsercircleDetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 圈子详情评论
+     * @param params
+     * @return
+     */
+    @POST("User/reply")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserReply(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 个人中心
+     * @param params
+     * @return
+     */
+    @POST("Mine/info")
+    @FormUrlEncoded
+    Call<UserInfoBean> getUserInfo(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 修改头像
+     * @param params
+     * @return
+     */
+    @POST("User/avatarEdit")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserAvatarEdit(@FieldMap  HashMap<String, String> params);
+
+    /**
+     * 修改昵称
+     * @param params
+     * @return
+     */
+    @POST("User/nameEdit")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserReplyBean(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 设置手机号
+     * @param params
+     * @return
+     */
+    @POST("User/telEdit")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserTelEdit(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 修改密码
+     * @param params
+     * @return
+     */
+    @POST("User/passEdit")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserPassEdit(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 申请记录
+     * @param params
+     * @return
+     */
+    @POST("Mine/applyDos")
+    @FormUrlEncoded
+    Call<MineAplyDosBean> getMineApplyDos(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 我的赞
+     * @param params
+     * @return
+     */
+
+    @POST("Mine/myUp")
+    @FormUrlEncoded
+    Call<CircleListBean> getMinemyUp(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 我的发布
+     * @param params
+     * @return
+     */
+    @POST("Mine/myRelease")
+    @FormUrlEncoded
+    Call<CircleListBean> getMinEmyUp(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 我的发布删除
+     * @param params
+     * @return
+     */
+    @POST("User/circleDel")
+    @FormUrlEncoded
+    Call<UserReplyBean> getUserCircleDel(@FieldMap  HashMap<String, String> params);
+
+    /**
+     * 红人更多列表
+     * @param params
+     * @return
+     */
+    @POST("founder/founderList")
+    @FormUrlEncoded
+    Call<FounderListBean> getFounderList(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 研习社视频详情
+     * @param params
+     * @return
+     */
+    @POST("Agency/detail")
+    @FormUrlEncoded
+    Call<AgencyDetailBean> getAgencydetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 头条详情评论
+     * @param params
+     * @return
+     */
+    @POST("New/detail")
+    @FormUrlEncoded
+    Call<UserReplyBean> getNewdetail(@FieldMap HashMap<String, String> params);
 }
 

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".home.Activity.sonview.activity.OnlineVideodetailsActivity">
+    <include layout="@layout/navigationbar" />
+
+    <include layout="@layout/layout_common_throw"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--            <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:id="@+id/video_player"-->
+            <!--                android:layout_height="@dimen/dp_200"-->
+            <!--                tools:ignore="MissingConstraints"-->
+            <!--                />-->
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <cn.jzvd.JzvdStd
+                    android:id="@+id/video_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_180"></cn.jzvd.JzvdStd>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_9"
+                android:textColor="#ed7600"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="@dimen/dp_13"
+                android:layout_height="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Degreeofheat_str"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Degreeofheat_str"
+                app:layout_constraintTop_toTopOf="@+id/tv_Degreeofheat_str"
+                app:srcCompat="@mipmap/redu" />
+
+            <TextView
+                android:id="@+id/tv_Degreeofheat_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+            <TextView
+                android:id="@+id/tv_Label_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:textColor="#4c4c4c"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintStart_toStartOf="@+id/Video_title"
+                app:layout_constraintTop_toBottomOf="@+id/Video_title" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="简介"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/tv_Label_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Label_str" />
+
+            <TextView
+                android:id="@+id/tv_videoContent_str"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textColor="#323232"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="@+id/tv_Degreeofheat_str"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_13"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_28"
+                android:background="#ed7600"
+                app:layout_constraintStart_toStartOf="@+id/tv_videoContent_str"
+                app:layout_constraintTop_toBottomOf="@+id/tv_videoContent_str" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_6"
+                android:text="全部评论"
+                android:textColor="#fa7700"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <com.example.jiyin.common.widget.detail.CommentExpandableListView
+                android:id="@+id/expandableListView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_18"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_videoContent_str"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -33,7 +33,9 @@ import com.example.jiyin.home.Activity.sonview.activity.CarveouttimeActivity;
 import com.example.jiyin.home.Activity.sonview.activity.CommunityActivity;
 import com.example.jiyin.home.Activity.sonview.activity.CreationcollectionActivity;
 import com.example.jiyin.home.Activity.sonview.activity.HeadlinesActivity;
+import com.example.jiyin.home.Activity.sonview.activity.HeadlinesDetailsActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ProduceActivity;
+import com.example.jiyin.home.Activity.sonview.activity.ProduceDetailsActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ShoppingActivity;
 import com.example.jiyin.home.Activity.sonview.activity.StudyAgencyActivity;
 import com.example.jiyin.home.Activity.sonview.activity.StudyparticipateActivity;
@@ -180,6 +182,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
     private CoverFlowAdapter mCoverFlowAdapter;
     private TopModularAdapter topModularAdapter;
     private IndexindexBean.DataBean.AdvertBean advert;
+    private int advert_id;
 
     @Override
     protected int attachLayoutRes() {
@@ -228,13 +231,17 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 TopVideoDetailsActivity.startTopVideo(activity,videolist.get(position).getVideo_id(),videolist.get(position).getVideo_path());
             }
         });
+
     }
+
+
 
     @Override
     public void onResume() {
         super.onResume();
         presenter.getIndexindex();//获取首页数据
     }
+
 
 
     private void initRecyclerView(RecyclerView recyclerView, final CarouselLayoutManager layoutManager, final CoverFlowAdapter adapter) {
@@ -252,6 +259,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 final int position = recyclerView.getChildLayoutPosition(v);
                 final String msg = String.format(Locale.US, "Item %1$d was clicked", position);
                 Log.d("OOP", "点击了");
+                // TODO: 2019/12/29  首页轮播点击事件
 
             }
         }, recyclerView, layoutManager);
@@ -273,22 +281,6 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
         presenter = new HomePresenterImpl();
     }
 
-    @Override
-    public void onReload() {
-
-    }
-
-    @Override
-    public void onLoadFinished() {
-
-    }
-
-    @Override
-    public void onLoadAll() {
-
-    }
-
-
     @OnClick({R.id.rl_searchbar_btn, R.id.tv_news_btn, R.id.tv_check_btn, R.id.fl_menu_one_btn,
             R.id.fl_menu_two_btn, R.id.fl_menu_three_btn, R.id.fl_menu_four_btn, R.id.tv_look_btn,
             R.id.tv_topHedo_btn, R.id.img_zhoupu_img, R.id.workshops, R.id.workshops_img, R.id.img_Occupational_btn,
@@ -304,7 +296,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             case R.id.tv_news_btn://头条
                 tvnewsbtn();
                 break;
-            case R.id.tv_check_btn://查
+            case R.id.tv_check_btn://红人
                 startActivity(new Intent(getContext(), CheckActivity.class));
                 break;
             case R.id.fl_menu_two_btn://商场
@@ -328,7 +320,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             case R.id.img_zhoupu_img://工作坊
                 startActivity(new Intent(getContext(), WorkshopActivity.class));
                 break;
-            case R.id.workshops_img:
+            case R.id.workshops_img://研习社
                 startActivity(new Intent(getContext(), StudyAgencyActivity.class));
                 break;
             case R.id.ml_Creationcollection_btn://造物集
@@ -341,7 +333,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 startActivity(new Intent(getContext(), CarveouttimeActivity.class));
                 break;
             case R.id.img_Produceimage_btn://玑瑛出品
-
+                ProduceDetailsActivity.startsActvity(activity,advert_id);
                 break;
             case R.id.tv_TopProduce_btn://玑瑛出品 更多
                 startActivity(new Intent(getContext(), ProduceActivity.class));
@@ -354,6 +346,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             return;
         } else {
             // TODO: 2019/12/9 goto 新闻
+            HeadlinesDetailsActivity.startheadActivity(activity,new_id);
         }
 
     }
@@ -378,6 +371,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
         //出品
         advert = bean.getData().getAdvert();
+        advert_id = advert.getAdvert_id();
         tvProduceTitie.setText(advert.getAdvert_title());
         tvProduceContext.setText(advert.getAdvert_text());
         GlideImageLoader.load(getContext(), BaseConfig.ROOT_IMAGES_API + advert.getAdvert_path(), imgProduceimage);
@@ -392,14 +386,14 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 a1.setText(boxBean.getBox_title());
                 a2.setText(boxBean.getBox_text());
                 a3.setText(boxBean.getBox_num() + "参与");
-//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgZhoupuImg);
+                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgZhoupuImg);
             }
             if (box.size() >= 2) {
                 IndexindexBean.DataBean.BoxBean boxBean = box.get(1);
                 b1.setText(boxBean.getBox_title());
                 b2.setText(boxBean.getBox_text());
                 b3.setText(boxBean.getBox_num() + "参与");
-//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),workshopsImg);
+                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),workshopsImg);
 
 
             }
@@ -408,7 +402,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 bb1.setText(boxBean.getBox_title());
                 bb2.setText(boxBean.getBox_text());
                 bb3.setText(boxBean.getBox_num() + "参与");
-//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),mlCreationcollection_btn);
+                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),mlCreationcollection_btn);
 
 
             }
@@ -418,7 +412,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 a1Personnel.setText(boxBean.getBox_title());
                 a2Personnel.setText(boxBean.getBox_text());
                 a3personnel.setText(boxBean.getBox_num() + "参与");
-//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),img_Occupational_btn);
+                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),img_Occupational_btn);
 
 
             }
@@ -427,7 +421,7 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
                 a1Carvetime.setText(boxBean.getBox_title());
                 a2Carvetime.setText(boxBean.getBox_text());
                 a3Carvetime.setText(boxBean.getBox_num() + "参与");
-//                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgCarvetime);
+                GlideImageLoader.load(getContext(),BaseConfig.ROOT_IMAGES_API+boxBean.getBox_path(),imgCarvetime);
             }
         } else {
             viewAbb.setVisibility(View.GONE);

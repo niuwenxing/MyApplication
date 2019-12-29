@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 消息
+ * 消息首页
  */
 
 public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implements NewsView {
@@ -55,8 +55,6 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
     LinearLayout oneview;
     @BindView(R.id.status_bar_view)
     View view;
-    @BindView(R.id.ry_Chatlist)
-    SlideRecyclerView ryChatlist;
 
     @Override
     protected int attachLayoutRes() {
@@ -71,42 +69,8 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
 
     @Override
     protected void init() {
-
-        Log.i("jian","asbfojsabofhbosahfbjhabpfjaspfb");
-
         ImmersionBar.setStatusBarView(this, view);
-        ryChatlist.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        List<Integer> objects = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            objects.add(i);
-        }
 
-        SlideRecyAdapter<Integer> slideRecyAdapter = new SlideRecyAdapter(activity, objects);
-        ryChatlist.setAdapter(slideRecyAdapter);
-        ryChatlist.setNestedScrollingEnabled(false);
-        slideRecyAdapter.setOnDeleteClickListener(new SlideRecyAdapter.OnDeleteClickLister() {
-            @Override
-            public void onDeleteClick(View view, int position) {
-                objects.remove(position);
-                slideRecyAdapter.notifyDataSetChanged();
-                ryChatlist.closeMenu();
-            }
-        });
-        slideRecyAdapter.setOnClickListener(new SlideRecyAdapter.OnClickLister() {
-            @Override
-            public void onClick(View view, int position) {
-                startActivity(new Intent(getContext(), ChatActivity.class));
-            }
-        });
-
-//        InventoryAdapter.OnDeleteClickLister() {
-//            @Override
-//            public void onDeleteClick(View view, int position) {
-//                mInventories.remove(position);
-//                mInventoryAdapter.notifyDataSetChanged();
-//                recycler_view_list.closeMenu();
-//            }
-//        }
     }
 
     @Override

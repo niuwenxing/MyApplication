@@ -153,8 +153,7 @@ public class ProduceActivity extends JiYingActivity<ProduceView, ProduceImpl> im
             helper.setText(R.id.tv_produceBrief,item.getProduce_brief());
             helper.setText(R.id.tv_produceTime,getString(R.string.huodongtime)+item.getProduce_stime()+" 至 "+item.getProduce_etime());
 
-            GlideImageLoader.load(activity, BaseConfig.ROOT_IMAGES_API+item.getProduce_path(),(ImageView) helper.getView(R.id.img_produceImage));
-
+            GlideImageLoader.loadLogh(activity,BaseConfig.ROOT_IMAGES_API+item.getProduce_path(),(ImageView) helper.getView(R.id.img_produceImage));
         }
     }
 

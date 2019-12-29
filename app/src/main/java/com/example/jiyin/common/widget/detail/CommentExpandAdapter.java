@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jiyin.R;
+import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 
 import java.util.ArrayList;
@@ -91,35 +92,30 @@ public class CommentExpandAdapter extends BaseExpandableListAdapter {
         }else {
             groupHolder = (GroupHolder) convertView.getTag();
         }
-        Glide.with(context).load(commentBeanList.get(groupPosition).getAvatar())
+        Glide.with(context).load(BaseConfig.ROOT_IMAGES_API+commentBeanList.get(groupPosition).getAvatar())
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).error(R.mipmap.ic_launcher).centerCrop())
                 .into(groupHolder.logo);
         groupHolder.tv_name.setText(commentBeanList.get(groupPosition).getUsername());
+        groupHolder.tv_content.setText(commentBeanList.get(groupPosition).getStories_text());
+        groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getStories_time());
+        groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getStories_up()+"");
+        groupHolder.iv_like.setSelected(commentBeanList.get(groupPosition).getUp()==1?true:false);
 
-
-
-//        groupHolder.tv_content.setText(commentBeanList.get(groupPosition).getContent());
-//        groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getTime());
-        //是否点赞
-//        if(commentBeanList.get(groupPosition).getIfzan().equals("1")){
-//            groupHolder.iv_like.setImageResource(R.mipmap.ic_launcher);
-//        }else {
-//            groupHolder.iv_like.setImageResource(R.mipmap.ic_launcher);
-//        }
-//        groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getZan());
         groupHolder.iv_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(commentBeanList.get(groupPosition).getIfzan().equals("1")){
-//                    //groupHolder.iv_like.setImageResource(R.mipmap.zan);
-//                    commentBeanList.get(groupPosition).setIfzan("0");
-//                    commentBeanList.get(groupPosition).setZan(Integer.valueOf(commentBeanList.get(groupPosition).getZan())-1+"");
+                groupHolder.iv_like.setSelected(!groupHolder.iv_like.isSelected());
+                if(commentBeanList.get(groupPosition).getUp()==1?true:false){
+//                    groupHolder.iv_like.setImageResource(R.mipmap.zan_weidian);
+                    commentBeanList.get(groupPosition).setUp(0);
+                    commentBeanList.get(groupPosition).setStories_up(commentBeanList.get(groupPosition).getStories_up()-1);
 //
-//                }else {
-//                    //groupHolder.iv_like.setImageResource(R.mipmap.weidianzan);
-//                    commentBeanList.get(groupPosition).setIfzan("1");
-//                    commentBeanList.get(groupPosition).setZan(Integer.valueOf(commentBeanList.get(groupPosition).getZan())+1+"");
-//                }
+                }else {
+//                    groupHolder.iv_like.setImageResource(R.mipmap.zan_dianji);
+                    commentBeanList.get(groupPosition).setUp(1);
+                    commentBeanList.get(groupPosition).setStories_up(commentBeanList.get(groupPosition).getStories_up()+1);
+                }
+                groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getStories_up()+"");
 //                itemClickListener.onclick(view,commentBeanList.get(groupPosition).getCid()+"");
             }
         });

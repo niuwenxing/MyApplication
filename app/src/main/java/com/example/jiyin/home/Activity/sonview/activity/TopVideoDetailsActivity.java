@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,21 +24,25 @@ import com.example.jiyin.common.widget.detail.CommentDetailBean;
 import com.example.jiyin.common.widget.detail.CommentExpandAdapter;
 import com.example.jiyin.common.widget.detail.CommentExpandableListView;
 import com.example.jiyin.common.widget.detail.ItemIdClickListener;
-import com.example.jiyin.common.widget.detail.ReplyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.TopViewImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.TopView;
+import com.example.rootlib.utils.LogUtils;
+import com.example.rootlib.utils.StringUtil;
+import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 
 /**
- * Top 详情
+ * Top详情
  */
 
 //public class TopVideoDetailsActivity extends JiYingActivity<TopView, TopViewImpl> implements TopView {
@@ -53,11 +60,38 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     TextView tvLabelStr;
     @BindView(R.id.tv_videoContent_str)
     TextView tvVideoContentStr;
+    @BindView(R.id.gobank_btn)
+    ImageView gobankBtn;
+    @BindView(R.id.searchText)
+    EditText searchText;
+    @BindView(R.id.searchView)
+    LinearLayout searchView;
+    @BindView(R.id.tv_searchTextTitle)
+    TextView tvSearchTextTitle;
+    @BindView(R.id.searech_news_btn)
+    ImageView searechNewsBtn;
+    @BindView(R.id.searech_Shopping_btn)
+    ImageView searechShoppingBtn;
+    @BindView(R.id.add_btn)
+    TextView addBtn;
+    @BindView(R.id.throw_layout)
+    ThrowLayout throwLayout;
+    @BindView(R.id.linearLayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.imageView4)
+    ImageView imageView4;
+    @BindView(R.id.textView20)
+    TextView textView20;
+    @BindView(R.id.view)
+    View view;
+    @BindView(R.id.textView22)
+    TextView textView22;
+    @BindView(R.id.expandableListView)
+    CommentExpandableListView expandableListView;
 
 
     private int page = 1; //默认页数
 
-    private CommentExpandableListView expandableListView;
     private CommentExpandAdapter adapter;
     private List<CommentDetailBean> commentsList = new ArrayList<>();
     private int videoId;
@@ -65,15 +99,14 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     private int video_id;
     private String video_title;
     private String video_label;
-    private String video_content;
+    private String video_content="";
     private int heat_num;
     private int video_num;
     //评论
     private List<VideoDetailBean.DataBean.StoriesBean> storiesList = new ArrayList<>();
     private String video_path;
 
-    private boolean isPlay;
-    private boolean isPause;
+
 
     @Override
     protected int attachLayoutRes() {
@@ -96,10 +129,15 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        searchView.setVisibility(View.GONE);
+        searechNewsBtn.setVisibility(View.INVISIBLE);
+        tvSearchTextTitle.setVisibility(View.VISIBLE);
+        tvSearchTextTitle.setText("圈子");
+
         videoId = getIntent().getIntExtra("videoId", BaseConfig.SERVER_ERR_LOGIN_OBSOLETE);
         video_path = getIntent().getStringExtra("video_path");
 
-
+        //请求
         presenter.getVideoDetail(page, videoId);
 
         initView();
@@ -128,6 +166,7 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
         video_num = data.getVideo_num();//播放量
         storiesList.addAll(data.getStories());
 
+        tvSearchTextTitle.setText(video_title);
 
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -141,34 +180,22 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
         String proxyUrl = proxy.getProxyUrl(BaseConfig.ROOT_IMAGES_API + video_path);
         videoPlayer.setUp(proxyUrl, video_title, JzvdStd.SCREEN_NORMAL);//视频
         VideoTitle.setText(video_title);//标题
-        tvDegreeofheatStr.setText(getString(R.string.reduStr)+heat_num);
+        tvDegreeofheatStr.setText(getString(R.string.reduStr) + heat_num);
         tvLabelStr.setText(video_label);
-        tvVideoContentStr.setText(video_content);
+        if (!StringUtil.isEmpty(video_content)) {
+            tvVideoContentStr.setText(Html.fromHtml(video_content));
+        }
 
-
+        initExpandableListView();
     }
+
+    @Override
+    public void retAgencydetail(AgencyDetailBean bean) { }//废弃
 
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
-            CommentDetailBean commentDetailBean = new CommentDetailBean();
-            commentDetailBean.setCid(i);
-            commentDetailBean.setAvatar("");
-            commentDetailBean.setUsername("张" + i);
-            commentDetailBean.setContent("896asd4asd 4 as68dasd54 ");
-            commentDetailBean.setZan(i + "2");
-            commentDetailBean.setTime("2019-12-4");
-            List<ReplyDetailBean> list = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
-                ReplyDetailBean replyDetailBean = new ReplyDetailBean();
-                replyDetailBean.setUsername("李" + j);
-                replyDetailBean.setContent("笑死我了");
-                list.add(replyDetailBean);
-            }
-            commentDetailBean.setReplyList(list);
-            commentsList.add(commentDetailBean);
-        }
-        initExpandableListView();
+
+
     }
 
 
@@ -264,4 +291,8 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.gobank_btn)
+    public void onViewClicked() {
+        finish();
+    }
 }

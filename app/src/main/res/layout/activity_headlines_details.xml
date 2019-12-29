@@ -24,15 +24,16 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="match_parent">
                     <WebView
                         android:id="@+id/webviewwhity"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         tools:ignore="MissingConstraints"
                         app:layout_constraintTop_toTopOf="parent"
                         />
                     <com.example.jiyin.common.widget.detail.CommentExpandableListView
+                        android:visibility="gone"
                         android:id="@+id/expandableListView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

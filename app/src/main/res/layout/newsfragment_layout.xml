@@ -43,7 +43,7 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -145,7 +145,7 @@
                         android:layout_toRightOf="@+id/imagecomment"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="评论和@"
+                        android:text="评论"
                         android:textColor="#000000"
                         android:textSize="@dimen/sp_13"
                         android:gravity="left|center_vertical"
@@ -201,25 +201,8 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_below="@+id/oneview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="全部私信"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:gravity="left"
-                android:padding="@dimen/dp_15"
-                android:id="@+id/Newstitie"
-                />
-            <com.example.jiyin.common.widget.SlideRecyclerView
-                android:layout_below="@+id/Newstitie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ry_Chatlist"
-                />
 
 
         </RelativeLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,14 +1,21 @@
 package com.example.jiyin.common.net.manager;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.common.net.ExMultipartBody;
+import com.example.jiyin.common.net.UploadProgressListener;
 import com.example.jiyin.common.net.convertor.HttpLogInterceptor;
+import com.example.jiyin.utils.ConstantUtil;
+import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.StringUtil;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +39,7 @@ public class HttpManager {
 
     public HttpManager(){}
     public static HttpManager getInstance() {
+        Log.e("tock",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
 
         if (httpManager == null) {
             synchronized (HttpManager.class) {
@@ -101,7 +109,12 @@ public class HttpManager {
     }
     public MultipartBody  getOkhttpVoide(List<LocalMedia> listimg){
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-
+//        ExMultipartBody exMultipartBody = new ExMultipartBody(builder.build(), new UploadProgressListener() {
+//            @Override
+//            public void onProgress(long totalBytes, long remainingBytes) {
+// System.out.print((totalBytes - remainingBytes) * 100 / totalBytes + "%");
+//            }
+//        });
         if (!CollectionUtil.isEmpty(listimg)) {
             for (int i = 0; i < listimg.size(); i++) {
                 builder.addPart(
@@ -135,9 +148,6 @@ public class HttpManager {
         }
         return null;
     }
-
-
-
 
 
 }

@@ -64,16 +64,17 @@
                     android:id="@+id/tv_chechViewmore_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_checkTitle"
+                    android:layout_alignBottom="@+id/tv_checkTitle"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="-1dp"
                     android:layout_marginRight="0dp"
+                    android:layout_marginBottom="1dp"
+                    android:drawableRight="@mipmap/gengduo"
+                    android:gravity="center_vertical"
                     android:text="查看更多"
                     android:textColor="@color/colorGray"
-                    android:textSize="@dimen/sp_12"
-                    android:gravity="center_vertical"
-                    android:layout_alignBottom="@+id/tv_checkTitle"
-                    android:layout_alignTop="@+id/tv_checkTitle"
-                    android:drawableRight="@mipmap/gengduo"
-                    />
+                    android:textSize="@dimen/sp_12" />
 
 
             </RelativeLayout>
@@ -117,6 +118,7 @@
                     />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_chechViewmoreMore_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     <string name="common_exit_warn">再次点击退出</string>
 
 
-    <string name="user_validcode_sending">(%1$ds后)重新发送</string>
+    <string name="user_validcode_sending">(%1$d)重新发送</string>
     <string name="user_validcode_send">获取验证码</string>
     <string name="releasestr">发布</string>
 
@@ -16,6 +16,7 @@
     <string name="reduStr">热度\n</string>
     <string name="dummy_text">家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭家第三方姐姐发我iu阿胶饭</string>
     <string name="huodongtime">活动时间：</string>
+    <string name="select">%1$s/%2$s</string>
 
 
 </resources>

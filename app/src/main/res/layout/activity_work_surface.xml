@@ -8,6 +8,7 @@
     tools:context=".home.Activity.sonview.activity.WorkSurfaceActivity">
 
     <include layout="@layout/navigationbar"/>
+    <include layout="@layout/layout_common_throw"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

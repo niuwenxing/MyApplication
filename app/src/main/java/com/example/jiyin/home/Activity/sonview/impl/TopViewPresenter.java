@@ -13,4 +13,7 @@ public abstract class TopViewPresenter<V extends IBaseView> extends BasePresente
     public abstract void getVideoindex(int pages, int ificationId, String name);//top 视频列表
 
     public abstract void getVideoDetail(int page, int videoId);// 视频详情
+
+    public abstract void Agencydetail(int page, int videoId);//研习社详情
+
 }

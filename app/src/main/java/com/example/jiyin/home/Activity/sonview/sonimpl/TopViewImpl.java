@@ -2,6 +2,7 @@ package com.example.jiyin.home.Activity.sonview.sonimpl;
 
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
+import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.impl.TopViewPresenter;
@@ -149,6 +150,73 @@ v.hideProgress();
                                     getVideoDetail(page,videoId);
                                 }
                             });
+                    }
+                });
+
+    }
+
+    /**
+     * 研习社 视频详情
+     * @param page
+     * @param videoId
+     */
+    @Override
+    public void Agencydetail(int page, int videoId) {
+        video=new BeanNetUnit<AgencyDetailBean>()
+                .setCall(UserCallManager.getAgencydetail(page,videoId))
+                .request(new NetBeanListener<AgencyDetailBean>() {
+                    @Override
+                    public void onSuc(AgencyDetailBean bean) {
+                        if (bean.getData() != null) {
+                            v.hideExpectionPages();
+                            v.retAgencydetail(bean);
+                        }else{
+                            v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
+                                @Override
+                                public void onRetry() {
+                                    Agencydetail(page,videoId);
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+                        v.showSysErrLayout(message, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                Agencydetail(page,videoId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onLoadStart() {v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
+                        @Override
+                        public void onRetry() {
+                            Agencydetail(page,videoId);
+                        }
+                    });
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+                        v.showSysErrLayout(msg, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                Agencydetail(page,videoId);
+                            }
+                        });
                     }
                 });
 

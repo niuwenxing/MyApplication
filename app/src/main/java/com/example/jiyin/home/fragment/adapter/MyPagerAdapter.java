@@ -23,7 +23,6 @@ public class MyPagerAdapter extends OpenPagerAdapter<CirclelabelBean.DataBean> {
 
     @Override
     public Fragment getItem(int position) {
-//        FragmentViewChlid fragmentViewChlid =;
         return  new WorkshopCardFragment();
     }
 

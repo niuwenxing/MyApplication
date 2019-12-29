@@ -17,6 +17,7 @@
         android:layout_height="match_parent">
 
         <WebView
+            android:id="@+id/webviewvv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
@@ -24,6 +25,7 @@
             tools:ignore="MissingConstraints" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_46"
