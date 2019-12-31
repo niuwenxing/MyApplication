@@ -3,6 +3,7 @@ package com.example.jiyin.home.Activity.presenter.view;
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
 import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.rootlib.mvp.view.IBaseView;
@@ -29,5 +30,7 @@ public interface WorkshopView extends IBaseView {
 
     void retMinemyUprelease(CircleListBean bean);//我的发布
 
-    void retUserCircleDel(UserReplyBean bean);//我的发布 圈子删除
+    void retUserCircleDel(UserReplyBean bean,int pos);//我的发布 圈子删除
+
+    void retMinecircle(MinecircleBean.DataBean data);//圈子 用户个人中心
 }

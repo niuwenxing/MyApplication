@@ -13,7 +13,9 @@ import com.example.jiyin.common.widget.MLImageView;
 import com.example.jiyin.home.Activity.sonview.base.UserInfoBean;
 import com.example.jiyin.home.presenter.Impl.MypageImpl;
 import com.example.jiyin.home.presenter.view.MypageView;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.GlideImageLoader;
+import com.example.jiyin.utils.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,7 +83,12 @@ public class SetupActivity extends JiYingActivity {
             case R.id.phonenumber_btn://修改手机号
                 activity.startActivity(new Intent(activity,SetPhonenumberActivity.class));
                 break;
-            case R.id.address_btn:
+            case R.id.address_btn://修改地址
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"upaddress")
+
+
+                );
                 break;
             case R.id.Namegenduos://修改名称
                 activity.startActivity(new Intent(activity,SetNameActivity.class)
@@ -92,6 +99,8 @@ public class SetupActivity extends JiYingActivity {
                 activity.startActivity(new Intent(activity,SetPasswordActivity.class));
                 break;
             case R.id.logOut_btn:
+                PreferenceUtil.remove(ConstantUtil.KEY_TOKEN);
+                toast("退出成功");
                 break;
         }
     }

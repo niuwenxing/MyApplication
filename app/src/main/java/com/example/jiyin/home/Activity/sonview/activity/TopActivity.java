@@ -21,6 +21,7 @@ import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.adapter.AbsRecycleAdapter;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.TopViewImpl;
@@ -115,7 +116,6 @@ public class TopActivity extends JiYingActivity<TopView, TopViewImpl> implements
         topVlist.setAdapter(videoListAdapter);
         initView();
 
-
         videoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -127,8 +127,6 @@ public class TopActivity extends JiYingActivity<TopView, TopViewImpl> implements
                 startActivity(intent);
             }
         });
-
-
 
     }
 
@@ -191,4 +189,19 @@ public class TopActivity extends JiYingActivity<TopView, TopViewImpl> implements
 
     @Override
     public void retAgencydetail(AgencyDetailBean bean) { }//废弃
+
+    @Override
+    public void retAgencycomment(Toutiao bean) { }
+
+    @Override
+    public void retAgencyUp(Toutiao bean) { }
+
+    @Override
+    public void retVideovideoUp(Toutiao bean) { }
+
+    @Override
+    public void retVideocomment(Toutiao bean) { }
+
+    @Override
+    public void retVideoup(Toutiao bean) { }
 }

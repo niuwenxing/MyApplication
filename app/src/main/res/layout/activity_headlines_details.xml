@@ -80,13 +80,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
 
-                <CheckBox
+                <TextView
                     android:id="@+id/cb_headlineCheck_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    style="@style/mycheckbox"
+                    android:drawableLeft="@drawable/home_new_selectstop"
                     android:text="点赞"
                     android:textColor="#4d4d4d"
                     android:textSize="@dimen/sp_14"
@@ -94,13 +94,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

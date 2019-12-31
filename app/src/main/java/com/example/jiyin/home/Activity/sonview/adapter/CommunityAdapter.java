@@ -1,61 +1,32 @@
 package com.example.jiyin.home.Activity.sonview.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jiyin.R;
-import com.example.jiyin.home.Activity.sonview.activity.CommunityActivity;
+import com.example.jiyin.common.config.BaseConfig;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
+import com.example.jiyin.utils.GlideImageLoader;
 
 import java.util.List;
 
-public class CommunityAdapter<T> extends RecyclerView.Adapter<CommunityAdapter.CommunityView> {
+public class CommunityAdapter extends BaseQuickAdapter<CommunityindexBean.DataBean.ListBean, BaseViewHolder> {
 
-    Context context;
-    List<T> objects;
-    public CommunityAdapter(Context context, List<T> objects) {
-        this.context=context;
-        this.objects=objects;
 
-    }
-
-    @NonNull
-    @Override
-    public CommunityAdapter.CommunityView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View from = LayoutInflater.from(parent.getContext()).inflate(R.layout.communitylist_item,parent,false);
-        return new CommunityView(from);
+    public CommunityAdapter( @Nullable List<CommunityindexBean.DataBean.ListBean> data) {
+        super(R.layout.communitylist_item, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommunityAdapter.CommunityView holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return objects.size()+5;
-    }
-
-    public class CommunityView extends RecyclerView.ViewHolder {
-
-        private final TextView tvCommunityTitile;
-        private final TextView tvCommiunityContext;
-        private final ImageView ivImageLeft;
-        private final ImageView ivImageRight;
-
-        public CommunityView(@NonNull View itemView) {
-            super(itemView);
-            tvCommunityTitile = itemView.findViewById(R.id.tv_communityTitile);
-            tvCommiunityContext=itemView.findViewById(R.id.tv_commiunityContext);
-            ivImageLeft=itemView.findViewById(R.id.iv_imageLeft);
-            ivImageRight=itemView.findViewById(R.id.iv_imageRight);
-
-        }
+    protected void convert(@NonNull BaseViewHolder helper, CommunityindexBean.DataBean.ListBean item) {
+        helper.setText(R.id.tv_communityTitile,item.getCommunity_title());
+        GlideImageLoader.loadLogh(mContext, BaseConfig.ROOT_IMAGES_API+item.getCommunity_path(),(ImageView)helper.getView(R.id.iv_imageLeft));
+        GlideImageLoader.loadLogh(mContext, BaseConfig.ROOT_IMAGES_API+item.getCommunity_paths(),(ImageView)helper.getView(R.id.iv_imageRight));
+        helper.setText(R.id.tv_commiunityContext,item.getCommunity_vtitle());
     }
 }

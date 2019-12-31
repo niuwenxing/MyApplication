@@ -3,6 +3,7 @@ package com.example.jiyin.home.Activity.presenter.view;
 import com.example.jiyin.home.Activity.homeview.base.CodeBase;
 import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
+import com.example.jiyin.home.Activity.sonview.base.AuthregCodeBean;
 import com.example.rootlib.mvp.view.IBaseView;
 
 public interface EntranceView extends IBaseView {
@@ -11,7 +12,7 @@ public interface EntranceView extends IBaseView {
     void Code(CodeBase bean);
 
     //注册
-    void sucRegister(RegisterBase bean);
+    void sucRegister(AuthregCodeBean bean);
 
     //失败返回
     void err(String status, String message);

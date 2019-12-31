@@ -43,7 +43,6 @@
             android:maxLines="1"
             android:textSize="@dimen/sp_10"
             android:id="@+id/tv_projectTime"
-            android:text="2019-10-12"
             android:layout_marginBottom="@dimen/dp_5"
             />
 

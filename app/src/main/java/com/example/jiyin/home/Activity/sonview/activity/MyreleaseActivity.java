@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.home.Activity.homeview.base.CircleListBean;
@@ -24,6 +25,7 @@ import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
 import com.example.jiyin.home.Activity.sonview.adapter.MyreleaseAdapter;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.Activity.view.CirclePopWindow;
@@ -87,14 +89,16 @@ public class MyreleaseActivity extends JiYingActivity<WorkshopView, WorkshopImpl
 
         presenter.getMinemyUp(page);
 
-        myreleaseAdapter.setOnclick(new MyreleaseAdapter.Myguanzu() {
+        myreleaseAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onclick(@NonNull int circle_id,View view) {
-                showDiag(circle_id);
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.circl_btn:
+                        showDiag(data.get(position).getCircle_id(),position);
+                        break;
+                }
             }
         });
-
-
 
     }
 
@@ -102,7 +106,7 @@ public class MyreleaseActivity extends JiYingActivity<WorkshopView, WorkshopImpl
      * 弹窗
      */
     private Dialog dialog;
-    private void showDiag(int circle_id) {
+    private void showDiag(int circle_id,int positions) {
         if (dialog == null) {
             dialog = new Dialog(this,R.style.ActionQuanZiDialogStyle);
             View view = LayoutInflater.from(this).inflate(R.layout.dialog_myrelease,null);
@@ -110,7 +114,7 @@ public class MyreleaseActivity extends JiYingActivity<WorkshopView, WorkshopImpl
                 @Override
                 public void onClick(View view) {
                     dialog.dismiss();
-                    delete(circle_id);
+                    delete(data.get(positions).getCircle_id(),positions);
                 }
             });
             view.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
@@ -141,8 +145,9 @@ public class MyreleaseActivity extends JiYingActivity<WorkshopView, WorkshopImpl
     /**
      * 删除圈子
      */
-    private void delete(int circle_id) {
-        presenter.UserCircleDel(circle_id);
+    private void delete(int circle_id,int pos) {
+        presenter.UserCircleDel(circle_id,pos);
+
     }
 
     /**
@@ -150,16 +155,21 @@ public class MyreleaseActivity extends JiYingActivity<WorkshopView, WorkshopImpl
      * @param bean
      */
     @Override
-    public void retUserCircleDel(UserReplyBean bean) {
+    public void retUserCircleDel(UserReplyBean bean,int pos) {
         if (bean.getCode()==-1) {
             toast(bean.getMsg());
             return;
         }else{
             toast(bean.getMsg());
             //删除圈子刷新列表
-            presenter.getMinemyUp(page);
+            data.remove(pos);
+            myreleaseAdapter.notifyDataSetChanged();
+//            presenter.getMinemyUp(page);
         }
     }
+
+    @Override
+    public void retMinecircle(MinecircleBean.DataBean data) { }
 
     @Override
     public void returnLabel(List<CirclelabelBean.DataBean> data) {

@@ -1,10 +1,13 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ import androidx.annotation.NonNull;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.WorkDetailsBase;
 import com.example.jiyin.home.Activity.sonview.base.WorkProjectbase;
 import com.example.jiyin.home.Activity.sonview.base.WorkshopLabelBase;
@@ -96,6 +100,8 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
 
 
     //事件处理
+
+    @SuppressLint("JavascriptInterface")
     private void initView(int enroll) {
         mParticipate_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,11 +111,39 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
             }
         });
 
-
+        startWebView(webviewvv);
         webviewvv.loadUrl("http://a.gensbox.cn/jyH5/workshop.html?token="+
                 PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")
                 +"&work_id="+workshop_id);
-        startWebView(webviewvv);
+
+
+//        webviewvv.addJavascriptInterface(new JSInterface(),"android");
+
+        webviewvv.addJavascriptInterface(new android() {
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
+            @Override
+            public void btn_seekCooperation(String work_id,String token) {
+                WorkSurfaceActivity.staSurfaceActivity(WorkDetailsActivity.this,workshop_id);
+            }
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
+            @Override
+            public void btn_seekCooperation() {
+            }
+            @Override
+            public void btn_collect(String work_id,String token) {//报名金额,
+            }
+            @Override
+            public void btn_application() {//报名申请，
+            }
+            @Override
+            public void ipt_application() {
+            }
+            @Override
+            public void btn_overdue() {//活动已过期
+            }
+        }, "android");
 
     }
 
@@ -127,6 +161,13 @@ public class WorkDetailsActivity extends JiYingActivity<WorkRoomView, WorkRoomIm
                 break;
         }
     }
+//    private final class JSInterface{
+//        @SuppressLint("JavascriptInterface")
+//        @JavascriptInterface
+//        public void btn_seekCooperation(String work_id,String token){
+//            Toast.makeText(activity, work_id+""+token, Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     @Override

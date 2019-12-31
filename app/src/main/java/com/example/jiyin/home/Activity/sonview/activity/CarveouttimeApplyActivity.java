@@ -281,7 +281,6 @@ public class CarveouttimeApplyActivity extends JiYingActivity<CarveouttimeView, 
                 toast("上传附件异常");
                 hideProgress();
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()) {

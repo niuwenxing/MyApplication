@@ -38,7 +38,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".home.Activity.sonview.activity.OnlineVideodetailsActivity"></activity>
+        <activity android:name=".home.Activity.sonview.activity.WebVIewActivity"></activity>
+        <activity android:name=".home.Activity.sonview.activity.WorkshopenrollActivity" />
+        <activity android:name=".home.Activity.sonview.activity.NewsFansChildActivity" />
+        <activity android:name=".home.Activity.sonview.activity.OnlineVideodetailsActivity" />
         <activity android:name=".home.Activity.sonview.activity.ProducedActivity" />
         <activity android:name=".home.Activity.sonview.activity.MoreredMenActivity" />
         <activity android:name=".home.Activity.sonview.activity.MyreleaseActivity" />
@@ -139,9 +142,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".home.Activity.homeview.ForgetPasswordActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" /> <!-- 登录 -->
         <activity
             android:name=".home.Activity.homeview.SigninActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".home.Activity.sonview.activity.ProduceActivity"

@@ -6,13 +6,22 @@ public class UserInfoBean extends Callcode {
 
     /**
      * msg : success
-     * data : {"username":"11","avatar":"/upload/admin/timg.jpg","status":0}
+     * data : {"username":"11","avatar":"/upload/admin/timg.jpg","status":0,}
      * time : 1573092939
      */
 
     private String msg;
     private DataBean data;
     private int time;
+    private int tel;
+
+    public int getTel() {
+        return tel;
+    }
+
+    public void setTel(int tel) {
+        this.tel = tel;
+    }
 
     public String getMsg() {
         return msg;

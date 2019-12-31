@@ -47,6 +47,7 @@ public class CoverFlowAdapter extends RecyclerView.Adapter<CoverFlowAdapter.View
 
         holder.textString.setText(context.getString(R.string.reduStr)+list.get(position).getNew_hot());
 
+        holder.tv_introduce.setText(""+list.get(position).getNew_vice());
 
 
     }

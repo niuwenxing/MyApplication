@@ -33,15 +33,14 @@
         android:id="@+id/tv_introduce"
         android:layout_width="@dimen/dp_124"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="#383838"
-        android:textStyle="bold"
-        android:textSize="@dimen/sp_9"
-        android:gravity="left"
         android:layout_below="@+id/tv_textTitle"
-        />
+        android:layout_marginLeft="@dimen/dp_8"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:maxLines="1"
+        android:textColor="#383838"
+        android:textSize="@dimen/sp_9"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_ContextText"

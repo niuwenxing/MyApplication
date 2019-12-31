@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.android;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
@@ -35,7 +37,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 研习社 报名</P>
+ * 研习社 报名
  */
 public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, StudyAgencyImpl> implements StudyAgencyView {
 
@@ -70,6 +72,8 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
     private int underId;
     private int underType;
     private int under_id;
+    private int under_id1;
+    private int under_money;
 
 
     @Override
@@ -123,13 +127,22 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
 //        LogUtils.d("URL"+url);
 
         lpk.addJavascriptInterface(new android() {
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
+            @Override
+            public void btn_seekCooperation(String work_id,String token) {
+
+            }
+
             @Override
             public void btn_seekCooperation() {
 
             }
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
             @Override
-            public void btn_collect() {
-
+            public void btn_collect(String work_id,String token) {
+                presenter.Agencyenroll(under_id1,under_money);
             }
 
             @Override
@@ -169,6 +182,9 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
             toast(bean.getMsg().toString());
             return;
         }
+        under_id1 = bean.getData().getUnder_id();
+        under_money = bean.getData().getUnder_money();
+
         tvSearchTextTitle.setText(bean.getData().getUnder_title()+"");
 
         participateBtn.setEnabled(bean.getData().getEnroll()==1?false:true);
@@ -185,6 +201,17 @@ public class StudyparticipateActivity extends JiYingActivity<StudyAgencyView, St
 
     @Override
     public void retScreationEnroll(ScreationEnrollBean bean) { } //废弃
+
+    @Override
+    public void retAgencyenroll(PositionEnrollBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            Intent intent = new Intent(activity, WorkshopenrollActivity.class);
+            startActivity(intent);
+        }
+    }
 
     @OnClick({R.id.gobank_btn, R.id.participate_btn,R.id.tv_CustomerPhone_btn})
     public void onViewClicked(View view) {

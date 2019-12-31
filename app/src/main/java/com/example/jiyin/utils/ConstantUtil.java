@@ -27,6 +27,8 @@ public final class ConstantUtil {
     public static final String KEY_PROJECT_CODE="project";
     //更多
     public static final String KEY_MORE_CODE="more";
+    //社区
+    public static final String KEY_COMMUNITY="community";
     //短视频
     public static final String KEY_SHORTVIDEO_CODE="shortVideo";
 
@@ -52,4 +54,15 @@ public final class ConstantUtil {
     public static final String GIFICATIONID="gificationId0";
     public static final String XIFICATIONID="xificationId0";
     public static final String ZIFICATIONID="zificationId0";
+    /**
+     * 消息页面
+     */
+
+    public static final String FANS="fans";//粉丝
+    public static final String LIKES="Likes";//点赞
+    public static final String COMMENT="comment";//评论
+    public static final String OFFICIAL="Official";//官方
+
+
+
 }

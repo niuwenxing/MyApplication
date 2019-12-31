@@ -73,16 +73,16 @@
                         android:layout_marginLeft="@dimen/dp_10"/>
 
                     <TextView
+                        android:id="@+id/tv_Setup_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_21"
+                        android:drawableLeft="@mipmap/shezhi"
                         android:gravity="center"
                         android:text="设置"
-                        android:id="@+id/tv_Setup_btn"
                         android:textColor="@color/colorNews"
-                        android:textSize="@dimen/sp_16"
-                        android:layout_alignParentRight="true"
-                        android:drawableLeft="@mipmap/shezhi"
-                        android:layout_marginRight="@dimen/dp_21"/>
+                        android:textSize="@dimen/sp_13" />
 
                 </RelativeLayout>
 

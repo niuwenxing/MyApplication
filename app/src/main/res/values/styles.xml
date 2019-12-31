@@ -110,7 +110,7 @@
     </style>
 
     <style name="mycheckbox"  parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/home_new_select</item>
+        <item name="android:button">@drawable/home_new_selectstop</item>
     </style>
     <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/sp_14</item>

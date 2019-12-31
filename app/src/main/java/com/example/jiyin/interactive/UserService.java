@@ -11,12 +11,19 @@ import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.sonview.activity.WorkSurfaceActivity;
 import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.AuthregCodeBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagecommentDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagefollowDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagenewDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessageupDosBean;
 import com.example.jiyin.home.Activity.sonview.base.MineAplyDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.NewIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.NewdetailBean;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
@@ -30,6 +37,7 @@ import com.example.jiyin.home.Activity.sonview.base.ScreationBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationBeans;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.UserInfoBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
@@ -67,7 +75,7 @@ public interface UserService {
      */
     @POST("Auth/regCode")
     @FormUrlEncoded
-    Call<RegisterBase> register(@FieldMap Map<String, String> map);
+    Call<AuthregCodeBean> register(@FieldMap Map<String, String> map);
 
     /**
      * 获取验证码
@@ -542,5 +550,126 @@ public interface UserService {
     @POST("New/detail")
     @FormUrlEncoded
     Call<UserReplyBean> getNewdetail(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 粉丝列表
+     * @param params
+     * @return
+     */
+    @POST("Message/followDos")
+    @FormUrlEncoded
+    Call<MessagefollowDosBean> getMessagefollowDos(@FieldMap  HashMap<String, String> params);
+
+
+    /**
+     * 点赞列表
+     * @param params
+     * @return
+     */
+    @POST("Message/upDos")
+    @FormUrlEncoded
+    Call<MessageupDosBean> getMessageupDos(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 评论页面
+     * @param params
+     * @return
+     */
+    @POST("Message/commentDos")
+    @FormUrlEncoded
+    Call<MessagecommentDosBean> getMessageCommentDos(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 官方列表
+     * @param params
+     * @return
+     */
+    @POST("Message/newDos")
+    @FormUrlEncoded
+    Call<MessagenewDosBean> getMessagenewDos(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 消息回关
+     * @param params
+     * @return
+     */
+    @POST("Message/hConcern")
+    @FormUrlEncoded
+    Call<ReleaseBean> getMessagehConcern(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 社区页面
+     * @param params
+     * @return
+     */
+    @POST("Community/index")
+    @FormUrlEncoded
+    Call<CommunityindexBean> getCommunityindex(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 圈子个人详情
+     * @param params
+     * @return
+     */
+    @POST("Mine/circle")
+    @FormUrlEncoded
+    Call<MinecircleBean> getMinecircle(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 线下培训 报名
+     * @param params
+     * @return
+     */
+    @POST("Mine/circle")
+    @FormUrlEncoded
+    Call<PositionEnrollBean> getAgencyenroll(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 线上课堂 评论
+     * @param params
+     * @return
+     */
+    @POST("Agency/comment")
+    @FormUrlEncoded
+    Call<Toutiao> getAgencycomment(@FieldMap HashMap<String, String> params);
+
+
+    /**
+     * 线上课堂 点赞
+     * @param params
+     * @return
+     */
+    @POST("Agency/up")
+    @FormUrlEncoded
+    Call<Toutiao> getAgencyUp(@FieldMap HashMap<String, String> params);
+
+    /**
+     * top 视频点赞
+     * @param params
+     * @return
+     */
+
+    @POST("Video/videoUp")
+    @FormUrlEncoded
+    Call<Toutiao> getVideovideoUp(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 视频评论
+     * @param params
+     * @return
+     */
+    @POST("Video/comment")
+    @FormUrlEncoded
+    Call<Toutiao> getVideocomment(@FieldMap HashMap<String, String> params);
+
+    /**
+     * 评论点赞
+     * @param params
+     * @return
+     */
+    @POST("Video/up")
+    @FormUrlEncoded
+    Call<Toutiao> getVideoup(@FieldMap  HashMap<String, String> params);
 }
 

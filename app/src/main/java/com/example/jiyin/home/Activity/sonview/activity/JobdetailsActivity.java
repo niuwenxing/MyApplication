@@ -29,6 +29,8 @@ import com.example.jiyin.home.Activity.sonview.base.PositionIndexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.OccupationalImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.OccupationalVeiw;
 import com.example.jiyin.utils.ConstantUtil;
+import com.example.rootlib.utils.CollectionUtil;
+import com.example.rootlib.utils.StringUtil;
 import com.example.rootlib.view.CollapsibleTextView;
 import com.example.rootlib.widget.common.ThrowLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -165,10 +167,18 @@ public class JobdetailsActivity extends JiYingActivity<OccupationalVeiw, Occupat
         tvAddressStr.setText(data.getPosition_site());
         education = data.getEducation();//学历
         tvEducationStr.setText(education);
-        tv.setDesc(Html.fromHtml(data.getPosition_text()),TextView.BufferType.NORMAL);
-        label.addAll(data.getLabel());
+        if (!StringUtil.isEmpty(data.getPosition_text())) {
+            tv.setDesc(Html.fromHtml(data.getPosition_text()),TextView.BufferType.NORMAL);
+        }
+        if (!CollectionUtil.isEmpty(data.getLabel())) {
+            label.addAll(data.getLabel());
+        }
+
         labeltag.notifyDataSetChanged();
-        tvIntRoduceStr.setText(Html.fromHtml(data.getC_text()));
+        if (!StringUtil.isEmpty(data.getC_text())) {
+            tvIntRoduceStr.setText(Html.fromHtml(data.getC_text()));
+        }
+
 
         tvSubmissionBtn.setEnabled(data.getEnroll()==1?false:true);
         tvSubmissionBtn.setBackground(data.getEnroll()==1?getResources().getDrawable(R.drawable.fromsubmission_false)

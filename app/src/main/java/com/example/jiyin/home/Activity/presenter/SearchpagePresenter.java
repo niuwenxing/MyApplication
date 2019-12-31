@@ -11,4 +11,6 @@ public abstract class SearchpagePresenter<V extends IBaseView> extends BasePrese
 
     public abstract void FounderfounderList(int page, String nameStr);//红人更多
 
+    public abstract void Communityindex(String s, int page);
+
 }

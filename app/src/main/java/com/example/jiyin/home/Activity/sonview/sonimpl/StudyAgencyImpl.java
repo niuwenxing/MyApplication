@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
@@ -220,5 +221,51 @@ v.hideProgress();
                         });
                     }
                 });
+    }
+
+    /**
+     * 线下培训报名
+     * @param under_id1
+     * @param under_money
+     */
+    @Override
+    public void Agencyenroll(int under_id1, int under_money) {
+
+        studyagency=new BeanNetUnit<PositionEnrollBean>()
+                .setCall(UserCallManager.getAgencyenroll(under_id1,under_money))
+                .request(new NetBeanListener<PositionEnrollBean>() {
+                    @Override
+                    public void onSuc(PositionEnrollBean bean) {
+                        if (bean != null) {
+                            v.retAgencyenroll(bean);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+
+                    }
+
+                    @Override
+                    public void onLoadStart() {v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {
+
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+
+                    }
+                });
+
     }
 }

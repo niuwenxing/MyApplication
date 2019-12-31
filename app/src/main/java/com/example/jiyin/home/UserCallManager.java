@@ -3,6 +3,8 @@ package com.example.jiyin.home;
 
 
 
+import android.text.Html;
+
 import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.common.net.manager.HttpManager;
 import com.example.jiyin.interactive.UserService;
@@ -56,10 +58,9 @@ public class UserCallManager {
     public static Call getRetrieve(String phone, String code, String psd) {
         HashMap<String, String> map=new  HashMap<>();
         map.put("tel",phone);
-        map.put("code",psd);
+        map.put("code",code);
         map.put("pass",psd);
         map.put("password",psd);
-
         return HttpManager.getInstance().rep(UserService.class).getUserRetrieve(map);
     }
 
@@ -193,7 +194,7 @@ public class UserCallManager {
      */
     public static Call getcircleList(int pages, int mType) {
         HashMap<String, String> params=new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("page",String.valueOf(pages));
         params.put("ification_id",String.valueOf(mType));
         return HttpManager.getInstance().rep(UserService.class).circleList(params);
@@ -230,7 +231,7 @@ public class UserCallManager {
                                        String etTelephoneEditStr, String etWorkMailboxEditStr,
                                        String etPersonalEditStr) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("work_id",String.valueOf(workId));
         params.put("team_name",etTeamnameEditStr);
         params.put("school",etYourschoolEditStr);
@@ -282,7 +283,7 @@ public class UserCallManager {
      */
     public static Call getUnderDetail(int under_id) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("under_id",String.valueOf(under_id));
 
         return HttpManager.getInstance().rep(UserService.class).getUnderDetail(params);
@@ -332,7 +333,7 @@ public class UserCallManager {
      */
     public static Call getScreation(int creationId) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("creation_id",String.valueOf(creationId));
         return HttpManager.getInstance().rep(UserService.class).getScreationDetails(params);
     }
@@ -354,7 +355,7 @@ public class UserCallManager {
      */
     public static Call getScreationEnrolls(int creationId, String toString, String toString1, String toString2, String toString3, String toString4, String isregistereds, String toString5, String toString6, String toString7, String s) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("creation_id",String.valueOf(creationId));
         params.put("tname",toString);
         params.put("pnum",toString1);
@@ -408,7 +409,7 @@ public class UserCallManager {
      */
     public static Call getPositionDetailData(int positionId) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("position_id",String.valueOf(positionId));
         return HttpManager.getInstance().rep(UserService.class).getPositionDetail(params);
     }
@@ -434,7 +435,7 @@ public class UserCallManager {
                                              String toString4, String toString5, String toString6,
                                              String toString7, String toString8, String toString9) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("position_id",String.valueOf(positionId));
         params.put("name",toString);
         params.put("sex",isGender_btn);
@@ -470,7 +471,7 @@ public class UserCallManager {
      */
     public static Call getZtimedetail(int mZid) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("zid",String.valueOf(mZid));
         return HttpManager.getInstance().rep(UserService.class).getZtimedetail(params);
     }
@@ -498,7 +499,7 @@ public class UserCallManager {
                                       String toString6, String trim, String trim1, String toString7,
                                       String toString8, String toString9, String toString10) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("zid",String.valueOf(mZid));
         params.put("tname",toString);
         params.put("pnum",toString1);
@@ -525,7 +526,7 @@ public class UserCallManager {
      */
     public static Call getVideoDetail(int page, int videoId) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("page",String.valueOf(page));
         params.put("video_id",String.valueOf(videoId));
         return HttpManager.getInstance().rep(UserService.class).getVideoDetail(params);
@@ -578,7 +579,7 @@ public class UserCallManager {
     public static Call getNewDetail(int page,int newId) {
         HashMap<String, String> params = new HashMap<>();
         params.put("new_id",String.valueOf(newId));
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("page",String.valueOf(page));
         return HttpManager.getInstance().rep(UserService.class).getNewDetail(params);
     }
@@ -622,7 +623,7 @@ public class UserCallManager {
      */
     public static Call getUsercircleUp(int circleid) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("circle_id",String.valueOf(circleid));
         return HttpManager.getInstance().rep(UserService.class).getUsercircleUp(params);
     }
@@ -634,7 +635,7 @@ public class UserCallManager {
      */
     public static Call getUserfollow(int follow_uid) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("follow_uid",String.valueOf(follow_uid));
 
         return HttpManager.getInstance().rep(UserService.class).getUserfollow(params);
@@ -648,7 +649,7 @@ public class UserCallManager {
      */
     public static Call getUsercircleShare(int circle_id) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("circle_id",String.valueOf(circle_id));
         return HttpManager.getInstance().rep(UserService.class).getUsercircleShare(params);
     }
@@ -660,7 +661,7 @@ public class UserCallManager {
      */
     public static Call getUsercircleDetail(int circleid) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("circle_id",String.valueOf(circleid));
         return HttpManager.getInstance().rep(UserService.class).getUsercircleDetail(params);
     }
@@ -676,7 +677,7 @@ public class UserCallManager {
      */
     public static Call getUserReply(int circle_id, int to_uId, int fid, String commentStr) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("circle_id",String.valueOf(circle_id));
         params.put("comment",commentStr);
         params.put("to_uid",String.valueOf(to_uId));
@@ -691,7 +692,7 @@ public class UserCallManager {
      */
     public static Call getUserInfo() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         return HttpManager.getInstance().rep(UserService.class).getUserInfo(params);
     }
 
@@ -702,7 +703,7 @@ public class UserCallManager {
      */
     public static Call getUserAvatarEdit(String s) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("avatar",s);
 
         return HttpManager.getInstance().rep(UserService.class).getUserAvatarEdit(params);
@@ -715,7 +716,7 @@ public class UserCallManager {
      */
     public static Call getUserReplyBean(String name) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("name",name);
         return HttpManager.getInstance().rep(UserService.class).getUserReplyBean(params);
     }
@@ -728,7 +729,7 @@ public class UserCallManager {
      */
     public static Call getUserTelEdit(String phone, String code) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("tel",phone);
         params.put("code",code);
 
@@ -744,7 +745,7 @@ public class UserCallManager {
      */
     public static Call getUserPassEdit(String oldPass, String pass, String password) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("oldPass",oldPass);
         params.put("pass",pass);
         params.put("password",password);
@@ -758,7 +759,7 @@ public class UserCallManager {
      */
     public static Call getMineApplyDos() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         return HttpManager.getInstance().rep(UserService.class).getMineApplyDos(params);
     }
 
@@ -769,7 +770,7 @@ public class UserCallManager {
      */
     public static Call gettMinemyUp(int page) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("page",String.valueOf(page));
         return HttpManager.getInstance().rep(UserService.class).getMinemyUp(params);
     }
@@ -781,7 +782,7 @@ public class UserCallManager {
      */
     public static Call getMinemyUp(int page) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("page",String.valueOf(page));
         return HttpManager.getInstance().rep(UserService.class).getMinEmyUp(params);
     }
@@ -793,7 +794,7 @@ public class UserCallManager {
      */
     public static Call getUserCircleDel(int circle_id) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("id",String.valueOf(circle_id));
         return HttpManager.getInstance().rep(UserService.class).getUserCircleDel(params);
     }
@@ -819,7 +820,7 @@ public class UserCallManager {
      */
     public static Call getAgencydetail(int page, int videoId) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("online_id",String.valueOf(videoId));
         params.put("page",String.valueOf(page));
         return HttpManager.getInstance().rep(UserService.class).getAgencydetail(params);
@@ -833,11 +834,165 @@ public class UserCallManager {
      */
     public static Call getNewdetail(int newId, String toString) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("new_id",String.valueOf(newId));
         params.put("stories_text",String.valueOf(toString));
         return HttpManager.getInstance().rep(UserService.class).getNewdetail(params);
     }
+
+    /**
+     * 粉丝列表
+     * @return
+     */
+    public static Call getMessagefollowDos() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        return HttpManager.getInstance().rep(UserService.class).getMessagefollowDos(params);
+    }
+
+    /**
+     * 粉丝列表
+     * @return
+     */
+    public static Call getMessageupDos() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        return HttpManager.getInstance().rep(UserService.class).getMessageupDos(params);
+    }
+
+    /**
+     * 评论列表
+     * @return
+     */
+    public static Call getMessageCommentDos() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        return HttpManager.getInstance().rep(UserService.class).getMessageCommentDos(params);
+    }
+
+    /**
+     * 官网列表
+     * @return
+     */
+    public static Call getMessagenewDos() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        return HttpManager.getInstance().rep(UserService.class).getMessagenewDos(params);
+    }
+
+    /**
+     * 消息 粉丝回关
+     * @param follow_uid
+     * @return
+     */
+    public static Call getMessagehConcern(int follow_uid) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("follow_id",String.valueOf(follow_uid));
+        return HttpManager.getInstance().rep(UserService.class).getMessagehConcern(params);
+    }
+
+    /**
+     * 社区首页数据 列表
+     * @param name
+     * @param page
+     * @return
+     */
+    public static Call getCommunityindex(String name, int page) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("name",name);
+        params.put("page",String.valueOf(page));
+
+        return HttpManager.getInstance().rep(UserService.class).getCommunityindex(params);
+    }
+
+    public static Call getMinecircle(int circleId) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("uid",String.valueOf(circleId));
+        return HttpManager.getInstance().rep(UserService.class).getMinecircle(params);
+    }
+
+    /**
+     * 线下培训报名
+     * @param under_id1
+     * @param under_money
+     * @return
+     */
+    public static Call getAgencyenroll(int under_id1, int under_money) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("under_id",String.valueOf(under_id1));
+        params.put("enroll_money",String.valueOf(under_money));
+        return HttpManager.getInstance().rep(UserService.class).getAgencyenroll(params);
+    }
+
+    /**
+     * 线上课堂 详情评论
+     * @param online_id
+     * @param trim
+     * @return
+     */
+    public static Call getAgencycomment(int online_id, String trim) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("online_id",String.valueOf(online_id));
+        params.put("stories_text",trim);
+
+        return HttpManager.getInstance().rep(UserService.class).getAgencycomment(params);
+    }
+
+    /**
+     * 线上课堂点赞
+     * @param id
+     * @return
+     */
+    public static Call getAgencyUp(String id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("stories_id",String.valueOf(id));
+
+        return HttpManager.getInstance().rep(UserService.class).getAgencyUp(params);
+    }
+
+    /**
+     * 视频点赞
+     * @param video_id
+     * @return
+     */
+    public static Call getVideovideoUp(int video_id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("video_id",String.valueOf(video_id));
+        return HttpManager.getInstance().rep(UserService.class).getVideovideoUp(params);
+    }
+
+    /**
+     * 视频评论发表
+     * @param video_id
+     * @return
+     */
+    public static Call getVideocomment(int video_id,String comtext) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("stories_text",comtext);
+        params.put("video_id",String.valueOf(video_id));
+        return HttpManager.getInstance().rep(UserService.class).getVideocomment(params);
+    }
+
+    /**
+     * 评论点赞
+     * @param id
+     * @return
+     */
+    public static Call getVideoup(String id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
+        params.put("stories_id",String.valueOf(id));
+
+        return HttpManager.getInstance().rep(UserService.class).getVideoup(params);
+    }
+
 
     private void uploadImages(List<LocalMedia> list){
         //String str = "http://app.quanquanerapp.com/api/Common/uploadMultiPic";
@@ -883,7 +1038,7 @@ public class UserCallManager {
      */
     public static Call getFormation(int workshop_id) {
         HashMap<String, String> params=new HashMap<>();
-        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,""));
+        params.put("token",PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"00"));
         params.put("work_id",String.valueOf(workshop_id));
 
         return HttpManager.getInstance().rep(UserService.class).getFotmat(params);

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
 import com.example.jiyin.common.config.BaseConfig;
@@ -22,6 +23,7 @@ import com.example.jiyin.home.Activity.adapter.SearchpageAdpter;
 import com.example.jiyin.home.Activity.adapter.SpaceItemDecoration;
 import com.example.jiyin.home.Activity.presenter.impl.CheckPresenterImpl;
 import com.example.jiyin.home.Activity.presenter.view.CheckView;
+import com.example.jiyin.home.Activity.sonview.activity.WebVIewActivity;
 import com.example.jiyin.home.Activity.sonview.base.FounderfounderBean;
 import com.example.jiyin.home.Activity.view.ImagePreviewActivity;
 import com.example.jiyin.utils.ConstantUtil;
@@ -112,10 +114,6 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
         ryCheckMoreList.setLayoutManager(MoreLayoutManager);
         ryCheckMoreList.setNestedScrollingEnabled(false);
 
-        List<Object> objects = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            objects.add("1");
-        }
 
         objectFounderAdapter = new FounderAdapter( recommend);
         ryCheckFounderList.setAdapter(objectFounderAdapter);
@@ -126,6 +124,26 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
 
         intentSearchpage = new Intent(this, SearchpageActivity.class);
         intentSearchpage.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.KEY_MORE_CODE);
+
+        objectFounderAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"hongren")
+                        .putExtra("founder_id",recommend.get(position).getFounder_id())
+                );
+            }
+        });
+
+        searchpageAdpter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                    .putExtra(ConstantUtil.KEY_CODE,"hongren")
+                        .putExtra("founder_id",founder.get(position).getFounder_id())
+                );
+            }
+        });
 
     }
 
@@ -191,7 +209,6 @@ public class CheckActivity extends JiYingActivity<CheckView, CheckPresenterImpl>
                 finish();
                 break;
             case R.id.searchText://搜索页面
-
                 startActivity(intentSearchpage);
                 break;
             case R.id.searech_news_btn:

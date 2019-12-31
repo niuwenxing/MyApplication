@@ -12,6 +12,7 @@ import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.EntrancePresenter;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
 //import com.example.jiyin.interactive.UserCallManager;
+import com.example.jiyin.home.Activity.sonview.base.AuthregCodeBean;
 import com.example.jiyin.home.UserCallManager;
 import com.example.jiyin.interactive.UserService;
 import com.example.rootlib.utils.LogUtils;
@@ -42,11 +43,11 @@ public class EntrancePreImpl extends EntrancePresenter<EntranceView> {
     @Override
     public void userRegister(String phone, String code, String psd) {
 
-        loginUnit=new BeanNetUnit<RegisterBase>()
+        loginUnit=new BeanNetUnit<AuthregCodeBean>()
                 .setCall(UserCallManager.getRegister(phone,code,psd))
-                .request(new NetBeanListener<RegisterBase>() {
+                .request(new NetBeanListener<AuthregCodeBean>() {
                     @Override
-                    public void onSuc(RegisterBase bean) {
+                    public void onSuc(AuthregCodeBean bean) {
                         v.sucRegister(bean);
                     }
 

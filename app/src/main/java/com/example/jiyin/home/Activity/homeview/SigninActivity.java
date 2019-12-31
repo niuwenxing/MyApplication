@@ -19,6 +19,7 @@ import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.impl.EntrancePreImpl;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
+import com.example.jiyin.home.Activity.sonview.base.AuthregCodeBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.PreferenceUtil;
 import com.example.rootlib.utils.MobileCheckUtil;
@@ -190,7 +191,7 @@ public class SigninActivity extends JiYingActivity<EntranceView, EntrancePreImpl
     }
 
     @Override
-    public void sucRegister(RegisterBase bean) {
+    public void sucRegister(AuthregCodeBean bean) {
     }
 
     @Override

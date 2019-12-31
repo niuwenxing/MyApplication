@@ -16,4 +16,13 @@ public abstract class TopViewPresenter<V extends IBaseView> extends BasePresente
 
     public abstract void Agencydetail(int page, int videoId);//研习社详情
 
+    public abstract void Agencycomment(int online_id, String trim);//线上课堂 详情评论
+
+    public abstract void getAgencyUp(String id);//线上课堂 点赞
+
+    public abstract void getVideovideoUp(int video_id);//top点赞详情
+
+    public abstract void Videocomment(int video_id,String comtext);//视频评论
+
+    public abstract void getVideoup(String id);//评论点赞
 }

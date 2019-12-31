@@ -65,7 +65,7 @@ public class HeadlinesDetailsActivity extends JiYingActivity<HeadlinesView, Head
     @BindView(R.id.tv_comment_btn)
     TextView tvCommentBtn;
     @BindView(R.id.cb_headlineCheck_btn)
-    CheckBox cbHeadlineCheckBtn;
+    TextView cbHeadlineCheckBtn;
 
     private int page;
     private int newId;
@@ -108,16 +108,7 @@ public class HeadlinesDetailsActivity extends JiYingActivity<HeadlinesView, Head
     }
 
     private void initView() {
-        cbHeadlineCheckBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!cbHeadlineCheckBtn.isChecked()){
-                    cbHeadlineCheckBtn.setChecked(false);
-                }else {
-                    cbHeadlineCheckBtn.setChecked(true);
-                }
-            }
-        });
+
     }
 
     @Override

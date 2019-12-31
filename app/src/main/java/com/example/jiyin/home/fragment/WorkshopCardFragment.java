@@ -19,6 +19,7 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.Activity.view.ImagePreviewActivity;
@@ -225,7 +226,10 @@ public class WorkshopCardFragment extends JiYingFragment<WorkshopView, WorkshopI
     public void retMinemyUprelease(CircleListBean bean) { }//废弃
 
     @Override
-    public void retUserCircleDel(UserReplyBean bean) { }//废弃
+    public void retUserCircleDel(UserReplyBean bean,int pos) { }//废弃
+
+    @Override
+    public void retMinecircle(MinecircleBean.DataBean data) { }
 }
 
 

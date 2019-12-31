@@ -10,4 +10,7 @@ public abstract class StudyAgencyPresenter<V extends IBaseView> extends BasePres
     public abstract void getofflineTraining(int page);//线下培训
 
     public abstract void getUnderDetail(int under_id);//研习社 详情
+
+    public abstract void Agencyenroll(int under_id1, int under_money);//线下培训
+
 }

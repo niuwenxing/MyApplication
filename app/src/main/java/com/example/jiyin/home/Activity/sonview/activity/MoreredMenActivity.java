@@ -17,6 +17,7 @@ import com.example.jiyin.home.Activity.presenter.impl.SearchpagePImpl;
 import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.PreferenceUtil;
@@ -84,6 +85,11 @@ public class MoreredMenActivity extends JiYingActivity<SearchpageView, Searchpag
 
     @Override
     public void retFounderfounderList(FounderListBean bean) { }
+
+    @Override
+    public void retCommunityindex(CommunityindexBean bean) {
+
+    }
 
     @OnClick(R.id.gobank_btn)
     public void onViewClicked() {

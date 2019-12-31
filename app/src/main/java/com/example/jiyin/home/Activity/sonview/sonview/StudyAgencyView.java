@@ -1,6 +1,7 @@
 package com.example.jiyin.home.Activity.sonview.sonview;
 
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
@@ -15,4 +16,6 @@ public interface StudyAgencyView extends IBaseView {
     void retUnderDetailData(UnderDetailBean bean);//线下培训详情
 
     void retScreationEnroll(ScreationEnrollBean bean);//提交申请 返回
+
+    void retAgencyenroll(PositionEnrollBean bean);//报名
 }

@@ -111,20 +111,20 @@ public class MyreleaseAdapter extends BaseMultiItemQuickAdapter<CircleListBean.D
 
                     }
                 });
-
                 helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
                 helper.setText(R.id.tv_comment_str,item.getComment()+"");
                 helper.setText(R.id.tv_share_str,item.getCircle_share()+"");
                 //菜单
-                helper.getView(R.id.circl_btn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (myguanzua != null) {
-                            myguanzua.onclick(item.getCircle_id(),helper.getView(R.id.circl_btn));
-                        }
-
-                    }
-                });
+                helper.addOnClickListener(R.id.circl_btn);
+//                helper.getView(R.id.circl_btn).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (myguanzua != null) {
+//                            myguanzua.onclick(item.getCircle_id(),helper.getView(R.id.circl_btn));
+//                        }
+//
+//                    }
+//                });
 
                 break;
             case 1:
@@ -143,8 +143,8 @@ public class MyreleaseAdapter extends BaseMultiItemQuickAdapter<CircleListBean.D
                 helper.setText(R.id.tv_circleTime,item.getTime());//发布时间
                 helper.setText(R.id.tv_content, Html.fromHtml(item.getCircle_title()));//发布文本
                 //视屏
-//                Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getPath()).into((ImageView)helper.getView(R.id.image_voideFirst));
-                GlideImageLoader.loadLogh(mContext,BaseConfig.ROOT_IMAGES_API+item.getPath(),(ImageView)helper.getView(R.id.image_voideFirst));
+                Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getPath()).into((ImageView)helper.getView(R.id.image_voideFirst));
+//                GlideImageLoader.loadLogh(mContext,BaseConfig.ROOT_IMAGES_API+item.getPath(),(ImageView)helper.getView(R.id.image_voideFirst));
                 //标签
                 helper.setText(R.id.tv_Circle_type,item.getIfication_title());
                 //热度
@@ -175,15 +175,16 @@ public class MyreleaseAdapter extends BaseMultiItemQuickAdapter<CircleListBean.D
                 helper.setText(R.id.tv_comment_str,item.getComment()+"");
                 helper.setText(R.id.tv_share_str,item.getCircle_share()+"");
                 //菜单
-                helper.getView(R.id.circl_btn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (myguanzua != null) {
-                            myguanzua.onclick(item.getCircle_id(), (View)helper.getView(R.id.circl_btn));
-                        }
-
-                    }
-                });
+                helper.addOnClickListener(R.id.circl_btn);
+//                        .setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (myguanzua != null) {
+//                            myguanzua.onclick(item.getCircle_id(), (View)helper.getView(R.id.circl_btn));
+//                        }
+//
+//                    }
+//                });
                 //分享
                 helper.getView(R.id.iv_share_img).setOnClickListener(new View.OnClickListener() {
                     @Override

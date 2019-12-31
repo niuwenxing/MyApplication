@@ -106,12 +106,17 @@ public class ProduceDetailsActivity extends JiYingActivity<ProduceView, ProduceI
         lpk.loadUrl("http://a.gensbox.cn/jyH5/detailPage.html?produce_id="+produceId);
         lpk.addJavascriptInterface(new android() {
             @Override
+            public void btn_seekCooperation(String work_id,String token) {
+
+            }
+
+            @Override
             public void btn_seekCooperation() {
                 
             }
 
             @Override
-            public void btn_collect() {
+            public void btn_collect(String work_id,String token) {
 
             }
 

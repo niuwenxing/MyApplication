@@ -1,18 +1,26 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.danikula.videocache.HttpProxyCacheServer;
@@ -25,11 +33,12 @@ import com.example.jiyin.common.widget.detail.CommentExpandAdapter;
 import com.example.jiyin.common.widget.detail.CommentExpandableListView;
 import com.example.jiyin.common.widget.detail.ItemIdClickListener;
 import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.TopViewImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.TopView;
-import com.example.rootlib.utils.LogUtils;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.StringUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
 
@@ -89,6 +98,11 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     @BindView(R.id.expandableListView)
     CommentExpandableListView expandableListView;
 
+    @BindView(R.id.tv_comment_btn)
+    TextView tvCommentBtn;
+    @BindView(R.id.cb_headlineCheck_btn)
+    TextView cbHeadlineCheckBtn;
+
 
     private int page = 1; //默认页数
 
@@ -99,13 +113,12 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     private int video_id;
     private String video_title;
     private String video_label;
-    private String video_content="";
+    private String video_content = "";
     private int heat_num;
     private int video_num;
     //评论
     private List<VideoDetailBean.DataBean.StoriesBean> storiesList = new ArrayList<>();
     private String video_path;
-
 
 
     @Override
@@ -136,7 +149,6 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
 
         videoId = getIntent().getIntExtra("videoId", BaseConfig.SERVER_ERR_LOGIN_OBSOLETE);
         video_path = getIntent().getStringExtra("video_path");
-
         //请求
         presenter.getVideoDetail(page, videoId);
 
@@ -164,7 +176,12 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
         video_content = data.getVideo_content();//内容
         heat_num = data.getHeat_num();//热度
         video_num = data.getVideo_num();//播放量
-        storiesList.addAll(data.getStories());
+
+        cbHeadlineCheckBtn.setEnabled(data.getUp()==1?false:true);
+
+        if (!CollectionUtil.isEmpty(data.getStories())) {
+            storiesList.addAll(data.getStories());
+        }
 
         tvSearchTextTitle.setText(video_title);
 
@@ -190,12 +207,75 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
     }
 
     @Override
-    public void retAgencydetail(AgencyDetailBean bean) { }//废弃
+    public void retAgencydetail(AgencyDetailBean bean) {
+    }//废弃
+
+    @Override
+    public void retAgencycomment(Toutiao bean) {
+        if (bean.getCode() == -1) {
+            toast(bean.getMsg());
+            return;
+        } else {
+            toast(bean.getMsg());
+            //请求
+//            presenter.getVideoDetail(page, videoId);
+
+        }
+    }
+
+    @Override
+    public void retAgencyUp(Toutiao bean) {
+    }
+
+    /**
+     * top 点赞返回
+     * @param bean
+     */
+    @Override
+    public void retVideovideoUp(Toutiao bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            toast(bean.getMsg());
+            cbHeadlineCheckBtn.setEnabled(false );
+        }
+    }
+
+    /**
+     * 视频评论返回
+     * @param bean
+     */
+    @Override
+    public void retVideocomment(Toutiao bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            toast(bean.getMsg());
+            presenter.getVideoDetail(page, videoId);
+            etComment.setText("");
+
+        }
+    }
+
+    /**
+     * 评论点赞 返回
+     * @param bean
+     */
+    @Override
+    public void retVideoup(Toutiao bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            toast(bean.getMsg());
+            presenter.getVideoDetail(page, videoId);
+        }
+    }
 
 
     private void initData() {
-
-
     }
 
 
@@ -214,7 +294,8 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
             public void onclick(View v, String id) {
                 switch (v.getId()) {
                     case R.id.comment_item_like:
-                        adapter.notifyDataSetChanged();
+                        presenter.getVideoup(id);
+//                        adapter.notifyDataSetChanged();
                         //点赞回调
                         break;
                 }
@@ -254,6 +335,7 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
                 //toast("展开第"+groupPosition+"个分组");
             }
         });
+//        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -291,8 +373,82 @@ public class TopVideoDetailsActivity extends JiYingActivityASS<TopView, TopViewI
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.gobank_btn)
+    @OnClick()
     public void onViewClicked() {
         finish();
     }
+
+    @OnClick({R.id.gobank_btn,R.id.tv_comment_btn, R.id.cb_headlineCheck_btn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.gobank_btn:
+                finish();
+                break;
+            case R.id.tv_comment_btn:
+                showDiaconment(video_id);
+                break;
+            case R.id.cb_headlineCheck_btn:
+                presenter.getVideovideoUp(video_id);
+
+                break;
+        }
+    }
+
+    /**
+     * top视频 评论
+     * @param video_id
+     */
+    private Dialog dialog;
+    private EditText etComment;
+    private void showDiaconment(int video_id) {
+        if(dialog!=null){
+            dialog.show();
+            show(etComment);
+        }else{
+            dialog = new Dialog(this,R.style.ActionQuanZiDialogStyle);
+            View view = LayoutInflater.from(this).inflate(R.layout.sendcomment,null);
+            dialog.setContentView(view);
+            etComment = view.findViewById(R.id.et_comment);
+            view.findViewById(R.id.send_comment_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!StringUtil.isEmpty(etComment.getText().toString().trim())) {
+                        // TODO: 2019/12/29 头条评论
+                        presenter.Videocomment(video_id,etComment.getText().toString());
+                    }else{
+                        Toast.makeText(activity, "请填写评论内容", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            Window dialogwindow = dialog.getWindow();
+            if (dialogwindow == null) {
+                return;
+            }
+            dialogwindow.setGravity(Gravity.BOTTOM);
+            WindowManager.LayoutParams lp = dialogwindow.getAttributes();
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            dialogwindow.setAttributes(lp);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
+            show(etComment);
+
+        }
+
+
+
+    }
+    //文本弹起输入框
+    public void show(final View view){
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.requestFocus();
+                InputMethodManager manager = ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE));
+                if (manager != null) manager.showSoftInput(view, 0);
+            }
+        }, 100);
+    }
+
+
 }

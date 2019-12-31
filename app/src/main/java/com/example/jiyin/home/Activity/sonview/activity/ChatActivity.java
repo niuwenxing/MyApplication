@@ -13,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
+import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagecommentDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagefollowDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagenewDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessageupDosBean;
 import com.example.jiyin.home.fragment.adapter.BaseRecyclerAdapter;
 import com.example.jiyin.home.fragment.adapter.SmartViewHolder;
 import com.example.jiyin.home.presenter.Impl.NewsPreImpl;
@@ -189,6 +194,21 @@ public class ChatActivity extends JiYingActivity<NewsView, NewsPreImpl> implemen
     public void onViewClicked() {
         finish();
     }
+
+    @Override
+    public void retMessagefollowDos(MessagefollowDosBean bean) { }
+
+    @Override
+    public void retMessageupDos(MessageupDosBean bean) { }
+
+    @Override
+    public void retMessageCommentDos(MessagecommentDosBean bean) { }
+
+    @Override
+    public void retMessagenewDos(MessagenewDosBean bean) { }
+
+    @Override
+    public void retMessagehConcern(ReleaseBean bean) { }
 
     static class User {
         int avatarId;

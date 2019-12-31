@@ -2,6 +2,7 @@ package com.example.jiyin.home.Activity.presenter.view;
 
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.rootlib.mvp.view.IBaseView;
 
@@ -12,4 +13,6 @@ public interface SearchpageView extends IBaseView {
     void retClassifyDetailNew(ClassifyDetailBean bean);//项目详情
 
     void retFounderfounderList(FounderListBean bean);//红人更多
+
+    void retCommunityindex(CommunityindexBean bean);//社区搜索
 }

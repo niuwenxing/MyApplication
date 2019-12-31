@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -111,19 +112,27 @@ public class CarveouttimeDasActivity extends JiYingActivity<CarveouttimeView, Ca
 
         lpk.loadUrl("http://a.gensbox.cn/jyH5/recommended.html?token="+
                 PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")+"&zid="+mZid);
+
+
         lpk.addJavascriptInterface(new android() {
+            @Override
+            public void btn_seekCooperation(String work_id,String token) {
+
+            }
+
             @Override
             public void btn_seekCooperation() {// 免费报名,
                 CarveouttimeApplyActivity.startActivity(activity,mMCzid,z_title);
             }
             @Override
-            public void btn_collect() {//报名金额,
+            public void btn_collect(String work_id,String token) {//报名金额,
 
             }
-
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
             @Override
             public void btn_application() {//报名申请，
-
+                CarveouttimeApplyActivity.startActivity(activity,mMCzid,z_title);
             }
 
             @Override

@@ -21,6 +21,7 @@ import com.example.jiyin.utils.GlideImage;
 import com.example.jiyin.utils.GlideImageLoader;
 import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.LogUtils;
+import com.example.rootlib.utils.StringUtil;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -55,11 +56,10 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                     @Override
                     public void onClick(View v) {
                         mContext.startActivity(new Intent(mContext, WorkPoldetailsActivity.class)
-                                .putExtra(ConstantUtil.KEY_CODE,item.getCircle_id())
+                                .putExtra(ConstantUtil.KEY_CODE,item.getUid())
                         );
                     }
                 });
-
                 //头像
                 GlideImageLoader.loadLogh(mContext,BaseConfig.ROOT_IMAGES_API+item.getAvatar(),(ImageView)helper.getView(R.id.iv_imgHead));
                 helper.setText(R.id.tv_circleTime,item.getTime());//发布时间
@@ -74,7 +74,9 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                     }
                     NineGridView view = helper.getView(R.id.nineGrid);
                     NineGridView.setImageLoader(new GlideImage());
-                    view.setAdapter(new  NineGridViewClickAdapter(mContext, imageInfo));
+                    view.setAdapter(new NineGridViewClickAdapter(mContext, imageInfo));
+                }else {
+                    helper.getView(R.id.nineGrid).setVisibility(View.GONE);
                 }
                 //九宫格end
                 //标签
@@ -86,50 +88,51 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                 viewImage.setSelected(item.getUp()==1?true:false);
                 viewImage.setEnabled(item.getUp()==1?false:true);
 //                helper.addOnClickListener(R.id.iv_comment_img);//评论
-                viewImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewImage.setSelected(!viewImage.isSelected());
-                        if (viewImage.isSelected()) {
-                            item.setCircle_up(item.getCircle_up()+1);
-                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
-                            viewImage.setEnabled(false);
-                        }else{
-                            item.setCircle_up(item.getCircle_up()-1);
-                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
-                        }
-                        if (myItemClick != null) {
-                            myItemClick.onclick(item.getCircle_id(),viewImage.isSelected());
-                        }
-
-                    }
-                });
+//                viewImage.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        viewImage.setSelected(!viewImage.isSelected());
+//                        if (viewImage.isSelected()) {
+//                            item.setCircle_up(item.getCircle_up()+1);
+//                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
+//                            viewImage.setEnabled(false);
+//                        }else{
+//                            item.setCircle_up(item.getCircle_up()-1);
+//                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
+//                        }
+//                        if (myItemClick != null) {
+//                            myItemClick.onclick(item.getCircle_id(),viewImage.isSelected());
+//                        }
+//                    }
+//                });
                 //分享
-                helper.getView(R.id.iv_share_img).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (myfengxian != null) {
-                            myfengxian.onclick(item.getCircle_id());
-                        }
-                    }
-                });
+                helper.getView(R.id.iv_share_img);
+//                .setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (myfengxian != null) {
+//                            myfengxian.onclick(item.getCircle_id());
+//                        }
+//                    }
+//                });
 
                 helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
                 helper.setText(R.id.tv_comment_str,item.getComment()+"");
                 helper.setText(R.id.tv_share_str,item.getCircle_share()+"");
                 //关注
                 View view = helper.getView(R.id.circleFollow_btn);
-                if (item.getFollow()==1?true:false){
-                    view.setVisibility(View.INVISIBLE);
-                }else{
-                    view.setVisibility(View.VISIBLE);
-                }
+                view.setVisibility(View.INVISIBLE);
+//                if (item.getFollow()==1?true:false){
+//                    view.setVisibility(View.INVISIBLE);
+//                }else{
+//                    view.setVisibility(View.VISIBLE);
+//                }
 
                 helper.getView(R.id.circleFollow_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (myguanzu != null) {
-                            myguanzu.onclick(item.getUid());
+//                            myguanzu.onclick(item.getUid());
                         }
                     }
                 });
@@ -143,13 +146,19 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                     @Override
                     public void onClick(View v) {
                         mContext.startActivity(new Intent(mContext, WorkPoldetailsActivity.class)
-                                .putExtra(ConstantUtil.KEY_CODE,item.getCircle_id())
+                                .putExtra(ConstantUtil.KEY_CODE,item.getUid())
                         );
                     }
                 });
                 helper.setText(R.id.tv_circleTime,item.getTime());//发布时间
                 helper.setText(R.id.tv_content, Html.fromHtml(item.getCircle_title()));//发布文本
                 //视屏
+                if (!StringUtil.isEmpty(item.getPath()+"")) {
+                    Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getPath()).into((ImageView)helper.getView(R.id.image_voideFirst));
+                }else{
+                    helper.getView(R.id.image_voideFirst).setVisibility(View.GONE);
+                }
+
                 Glide.with(mContext).load(BaseConfig.ROOT_IMAGES_API+item.getPath()).into((ImageView)helper.getView(R.id.image_voideFirst));
                 //标签
                 helper.setText(R.id.tv_Circle_type,item.getIfication_title());
@@ -160,23 +169,23 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                 viewImages.setSelected(item.getUp()==1?true:false);
                 viewImages.setEnabled(item.getUp()==1?false:true);
 //                helper.addOnClickListener(R.id.iv_comment_img);//评论
-                viewImages.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewImages.setSelected(!viewImages.isSelected());
-                        if (viewImages.isSelected()) {
-                            item.setCircle_up(item.getCircle_up()+1);
-                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
-                            viewImages.setEnabled(false);
-                        }else{
-                            item.setCircle_up(item.getCircle_up()-1);
-                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
-                        }
-                        if (myItemClick != null) {
-                            myItemClick.onclick(item.getCircle_id(),viewImages.isSelected());
-                        }
-                    }
-                });
+//                viewImages.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        viewImages.setSelected(!viewImages.isSelected());
+//                        if (viewImages.isSelected()) {
+//                            item.setCircle_up(item.getCircle_up()+1);
+//                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
+//                            viewImages.setEnabled(false);
+//                        }else{
+//                            item.setCircle_up(item.getCircle_up()-1);
+//                            helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
+//                        }
+//                        if (myItemClick != null) {
+//                            myItemClick.onclick(item.getCircle_id(),viewImages.isSelected());
+//                        }
+//                    }
+//                });
                 helper.setText(R.id.tv_Likes_str,item.getCircle_up()+"");
                 helper.setText(R.id.tv_comment_str,item.getComment()+"");
                 helper.setText(R.id.tv_share_str,item.getCircle_share()+"");
@@ -184,24 +193,26 @@ public class WorkShopASAdapter extends BaseMultiItemQuickAdapter<CircleListBean.
                 helper.getView(R.id.circleFollow_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        myguanzu.onclick(item.getUid());
+//                        myguanzu.onclick(item.getUid());
                     }
                 });
                 //分享
-                helper.getView(R.id.iv_share_img).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (myfengxian != null) {
-                            myfengxian.onclick(item.getCircle_id());
-                        }
-                    }
-                });
+                helper.getView(R.id.iv_share_img);
+//                        .setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (myfengxian != null) {
+//                            myfengxian.onclick(item.getCircle_id());
+//                        }
+//                    }
+//                });
                 View viewa = helper.getView(R.id.circleFollow_btn);
-                if (item.getFollow()==1?true:false){
-                    viewa.setVisibility(View.INVISIBLE);
-                }else{
-                    viewa.setVisibility(View.VISIBLE);
-                }
+                viewa.setVisibility(View.INVISIBLE);
+//                if (item.getFollow()==1?true:false){
+//                    viewa.setVisibility(View.INVISIBLE);
+//                }else{
+//                    viewa.setVisibility(View.VISIBLE);
+//                }
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + helper.getItemViewType());

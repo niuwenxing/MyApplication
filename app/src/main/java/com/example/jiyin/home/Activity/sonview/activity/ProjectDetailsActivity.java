@@ -20,6 +20,7 @@ import com.example.jiyin.home.Activity.presenter.impl.SearchpagePImpl;
 import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
@@ -122,6 +123,11 @@ public class ProjectDetailsActivity extends JiYingActivity<SearchpageView, Searc
 
     @Override
     public void retFounderfounderList(FounderListBean bean) { }//废弃
+
+    @Override
+    public void retCommunityindex(CommunityindexBean bean) {
+
+    }
 
     @Override
     public void retClassifyDetail(ClassifyIndexBean bean) {

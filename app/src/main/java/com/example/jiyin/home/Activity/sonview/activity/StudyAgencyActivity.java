@@ -22,6 +22,7 @@ import com.example.jiyin.common.config.BaseConfig;
 import com.example.jiyin.home.Activity.sonview.adapter.OfflinetingAdapter;
 import com.example.jiyin.home.Activity.sonview.adapter.StudyAgencyApdpter;
 import com.example.jiyin.home.Activity.sonview.base.OfflineTrainingBean;
+import com.example.jiyin.home.Activity.sonview.base.PositionEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.ScreationEnrollBean;
 import com.example.jiyin.home.Activity.sonview.base.StudyAgencyIndexBean;
 import com.example.jiyin.home.Activity.sonview.base.UnderDetailBean;
@@ -201,6 +202,9 @@ public class StudyAgencyActivity extends JiYingActivity<StudyAgencyView, StudyAg
 
     @Override
     public void retScreationEnroll(ScreationEnrollBean bean) { }//废弃
+
+    @Override
+    public void retAgencyenroll(PositionEnrollBean bean) {}
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

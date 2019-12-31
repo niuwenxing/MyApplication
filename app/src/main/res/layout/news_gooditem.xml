@@ -13,7 +13,7 @@
 
     <com.example.jiyin.common.widget.MLImageView
         android:id="@+id/imageView2"
-        android:layout_width="@dimen/dp_31"
+        android:layout_width="@dimen/dp_1"
         android:layout_height="@dimen/dp_31"
         android:src="@mipmap/shansiqi"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -38,14 +38,18 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:layout_marginTop="@dimen/dp_3"
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:gravity="left"
         android:text="赞了您的评论"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="#000000"
         android:textSize="@dimen/sp_12"
-        android:gravity="left"
+        android:layout_marginRight="@dimen/dp_20"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 

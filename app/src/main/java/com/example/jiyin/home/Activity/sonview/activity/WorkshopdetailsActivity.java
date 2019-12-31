@@ -37,6 +37,7 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.utils.ConstantUtil;
@@ -130,6 +131,9 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
     private List<UsercircleDetailBean.DataBean.DiscussBean> discuss=new ArrayList<>();
     private int circle_id;
     private EditText etComment;
+    private int up;
+    private UsercircleDetailBean.DataBean data;
+    private int uid;
 
     @Override
     protected int attachLayoutRes() {
@@ -177,14 +181,34 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
 
     @Override
     public void retUsercircleUp(UserCircleUpBean bean, boolean zan) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            toast(bean.getMsg());
+        }
     }//废弃
 
     @Override
     public void retUserfollow(UserCircleUpBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            toast(bean.getMsg());
+        }
     }//废弃
 
     @Override
     public void retUsercircleShare(UserCircleUpBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }else{
+            data.setCircle_share(data.getCircle_share()+1);
+            tvShareStr.setText(data.getCircle_share()+"");
+            toast(bean.getMsg());
+        }
     }//废弃
 
     /**
@@ -197,8 +221,13 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
             toast(bean.getMsg());
             return;
         }
-        UsercircleDetailBean.DataBean data = bean.getData();
+        data = bean.getData();
         circle_id = data.getCircle_id();
+        up = data.getUp();
+        ivLikesImg.setSelected(up==1?true:false);
+        ivLikesImg.setEnabled(up==1?false:true);
+
+        uid = data.getUid();
 //       0图片1 视频
         if(data.getCircle_type()==0?true:false){
             if (!CollectionUtil.isEmpty(data.getFiles())) {
@@ -222,7 +251,7 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
 
         }
         //用户头像
-        GlideImageLoader.loadLogh(activity,BaseConfig.ROOT_IMAGES_API+data.getAvatar(),ivImgHead);
+        GlideImageLoader.loadLogh(activity,BaseConfig.ROOT_IMAGES_API+ data.getAvatar(),ivImgHead);
         //用户昵称
         tvUserName.setText(data.getUsername());
         //发布事件
@@ -238,7 +267,7 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
         //设置标签
         tvCircleType.setText(data.getIfication_title());
         //设置热度
-        tvCircleheat.setText(activity.getString(R.string.reduStr)+data.getCircle_hot());
+        tvCircleheat.setText(activity.getString(R.string.reduStr)+ data.getCircle_hot());
         //设置点赞
         if (data.getUp()==1?true:false){
             ivLikesImg.setSelected(true);
@@ -288,22 +317,48 @@ public class WorkshopdetailsActivity extends JiYingActivity<WorkshopView, Worksh
     public void retMinemyUprelease(CircleListBean bean) { }//废弃
 
     @Override
-    public void retUserCircleDel(UserReplyBean bean) { }//废弃
+    public void retUserCircleDel(UserReplyBean bean,int pos) { }//废弃
 
-    @OnClick({R.id.gobank_btn, R.id.circleFollow_btn, R.id.iv_Likes_img,R.id.iv_comment_img})
+    @Override
+    public void retMinecircle(MinecircleBean.DataBean data) { }
+
+    @OnClick({R.id.gobank_btn, R.id.circleFollow_btn, R.id.iv_Likes_img,R.id.iv_comment_img,R.id.iv_share_img})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.gobank_btn:
                 finish();
                 break;
             case R.id.circleFollow_btn:
+                presenter.Userfollow(uid);
                 break;
-            case R.id.iv_Likes_img:
-
+            case R.id.iv_Likes_img://点赞按钮
+                ivLikesimg(circle_id);
                 break;
             case R.id.iv_comment_img:
                 showSendcommentOn(circle_id);
                 break;
+            case R.id.iv_share_img://分享
+                ivshareimg(circle_id);
+                break;
+
+        }
+    }
+    //分享
+    private void ivshareimg(int circle_id) {
+        presenter.UsercircleShare(circle_id);
+    }
+
+    //点赞
+    private void ivLikesimg(int circle_id) {
+        ivLikesImg.setSelected(!ivLikesImg.isSelected());
+        if (ivLikesImg.isSelected()) {
+            data.setCircle_up(data.getCircle_up()+1);
+            tvLikesStr.setText(data.getCircle_up()+"");
+            ivLikesImg.setEnabled(false);
+            presenter.UsercircleUp(circleid,true);
+        }else{
+            data.setCircle_up(data.getCircle_up()-1);
+            tvLikesStr.setText(data.getCircle_up()+"");
         }
     }
 

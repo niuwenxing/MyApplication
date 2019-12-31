@@ -47,6 +47,7 @@
                         android:layout_alignRight="@+id/tv_homeTitle"
                         />
                     <TextView
+                        android:visibility="invisible"
                         android:id="@+id/tv_hoemLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_12"

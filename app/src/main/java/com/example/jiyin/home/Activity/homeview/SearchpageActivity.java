@@ -26,8 +26,11 @@ import com.example.jiyin.home.Activity.presenter.view.SearchpageView;
 import com.example.jiyin.home.Activity.sonview.activity.MoreredMenActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ProduceDetailsActivity;
 import com.example.jiyin.home.Activity.sonview.activity.ProjectDetailsActivity;
+import com.example.jiyin.home.Activity.sonview.activity.WebVIewActivity;
+import com.example.jiyin.home.Activity.sonview.adapter.CommunityAdapter;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.ClassifyIndexBean;
+import com.example.jiyin.home.Activity.sonview.base.CommunityindexBean;
 import com.example.jiyin.home.Activity.sonview.base.FounderListBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.StringUtil;
@@ -68,6 +71,8 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
     private int page=1;
     private List<ClassifyIndexBean.DataBean> data=new ArrayList<>();
     private List<FounderListBean.DataBean> data1=new ArrayList<>();
+    private List<CommunityindexBean.DataBean.ListBean> list=new ArrayList<>();
+    private CommunityAdapter communityAdapter;
 
     @Override
     protected int attachLayoutRes() {
@@ -109,6 +114,12 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                         presenter.getClassifyDetail("",page);
                     }
                 }
+                if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_COMMUNITY)) {
+                    if (s.length()==0) {
+                        presenter.Communityindex("",page);
+//                        presenter.getClassifyDetail("",page);
+                    }
+                }
             }
         });
 
@@ -127,6 +138,11 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                     if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_PROJECT_CODE)) {
                         nameStr=searchText.getText().toString();
                         presenter.getClassifyDetail(nameStr,page);
+                    }
+                    if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_COMMUNITY)) {
+                        nameStr=searchText.getText().toString();
+//                        presenter.getClassifyDetail(nameStr,page);
+                        presenter.Communityindex(nameStr,page);
                     }
                     // 在这里写搜索的操作,一般都是网络请求数据
                     return true;
@@ -148,8 +164,12 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                    MoreredMenActivity|
-                    startActivity(new Intent(activity, MoreredMenActivity.class)
-                        .putExtra(ConstantUtil.KEY_CODE,data1.get(position).getFounder_id())
+//                    startActivity(new Intent(activity, MoreredMenActivity.class)
+//                        .putExtra(ConstantUtil.KEY_CODE,data1.get(position).getFounder_id())
+//                    );
+                    startActivity(new Intent(activity, WebVIewActivity.class)
+                            .putExtra(ConstantUtil.KEY_CODE,"hongren")
+                            .putExtra("founder_id",data1.get(position).getFounder_id())
                     );
                 }
             });
@@ -163,7 +183,27 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
             objectProjectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    ProjectDetailsActivity.startProjectDetails(activity,data.get(position).getNew_id());
+//                    ProjectDetailsActivity.startProjectDetails(activity,data.get(position).getNew_id());
+                    startActivity(new Intent(activity, WebVIewActivity.class)
+                            .putExtra(ConstantUtil.KEY_CODE,"xiangmu")
+                            .putExtra("new_id",data.get(position).getNew_id())
+
+                    );
+                }
+            });
+        }
+        //社区
+        if (!StringUtil.isEmpty(contextKey)&&contextKey.equals(ConstantUtil.KEY_COMMUNITY)) {
+            communityAdapter = new CommunityAdapter(list);
+            searchList.setAdapter(communityAdapter);
+            presenter.Communityindex("",page);
+            communityAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    startActivity(new Intent(activity, WebVIewActivity.class)
+                            .putExtra(ConstantUtil.KEY_CODE,"shequ")
+                            .putExtra("community_id",list.get(position).getCommunity_id())
+                    );
                 }
             });
         }
@@ -220,5 +260,21 @@ public class SearchpageActivity extends JiYingActivity<SearchpageView, Searchpag
         data1.clear();
         data1.addAll(bean.getData());
         searchpageAdpter.notifyDataSetChanged();
+    }
+
+    /**
+     * 社区搜索
+     * @param bean
+     */
+    @Override
+    public void retCommunityindex(CommunityindexBean bean) {
+        if (bean.getCode()==-1) {
+            toast(bean.getMsg());
+            return;
+        }
+        CommunityindexBean.DataBean data = bean.getData();
+        list.clear();
+        list.addAll(data.getList());
+        communityAdapter.notifyDataSetChanged();
     }
 }

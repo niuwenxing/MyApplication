@@ -9,6 +9,7 @@ import com.example.jiyin.home.Activity.homeview.base.CirclelabelBean;
 import com.example.jiyin.home.Activity.homeview.base.UserCircleUpBean;
 import com.example.jiyin.home.Activity.presenter.WorkshopPresenter;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.UserCallManager;
@@ -536,14 +537,14 @@ v.hideProgress();
      * @param circle_id
      */
     @Override
-    public void UserCircleDel(int circle_id) {
+    public void UserCircleDel(int circle_id,int pos) {
         loginUnit=new BeanNetUnit<UserReplyBean>()
                 .setCall(UserCallManager.getUserCircleDel(circle_id))
                 .request(new NetBeanListener<UserReplyBean>() {
                     @Override
                     public void onSuc(UserReplyBean bean) {
                         if (bean != null) {
-                            v.retUserCircleDel(bean);
+                            v.retUserCircleDel(bean,pos);
                         }
                     }
 
@@ -566,6 +567,74 @@ v.hideProgress();
                     @Override
                     public void onSysErr(int httpCode, String msg) {
                         v.retNetErr("删除失败");
+                    }
+                });
+    }
+
+    /**
+     * 圈子个人 详情
+     * @param circleId
+     */
+    @Override
+    public void getMinecircle(int circleId) {
+        loginUnit =new BeanNetUnit<MinecircleBean>()
+                .setCall(UserCallManager.getMinecircle(circleId))
+                .request(new NetBeanListener<MinecircleBean>() {
+                    @Override
+                    public void onSuc(MinecircleBean bean) {
+                        if (CollectionUtil.isEmpty(bean.getData().getList())) {
+                            v.showNullMessageLayout(new ThrowLayout.OnRetryListener() {
+                                @Override
+                                public void onRetry() {
+                                    getMinecircle(circleId);
+                                }
+                            });
+                        }else{
+
+                            v.retMinecircle(bean.getData());
+                            v.hideExpectionPages();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+                        v.showSysErrLayout(message, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                getMinecircle(circleId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onLoadStart() { v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() { v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {
+                        v.showNetErrorLayout(new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                getMinecircle(circleId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+                        v.showSysErrLayout(msg, new ThrowLayout.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                getMinecircle(circleId);
+                            }
+                        });
                     }
                 });
     }

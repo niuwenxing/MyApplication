@@ -1,6 +1,7 @@
 package com.example.jiyin.home.Activity.sonview.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.jiyin.home.Activity.sonview.base.Toutiao;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.sonimpl.HeadlinesImpl;
 import com.example.jiyin.home.Activity.sonview.sonview.HeadlinesView;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.widget.common.ThrowLayout;
 
 import java.util.ArrayList;
@@ -86,7 +88,12 @@ public class HeadlinesActivity extends JiYingActivity<HeadlinesView, HeadlinesIm
         stringHeadlinesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                HeadlinesDetailsActivity.startheadActivity(activity,data.get(position).getNew_id());
+//                HeadlinesDetailsActivity.startheadActivity(activity,data.get(position).getNew_id());
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"toutiao")
+                        .putExtra("new_id",data.get(position).getNew_id())
+
+                );
             }
         });
 

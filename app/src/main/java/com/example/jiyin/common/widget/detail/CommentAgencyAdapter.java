@@ -99,7 +99,7 @@ public class CommentAgencyAdapter extends BaseExpandableListAdapter {
         groupHolder.tv_time.setText(commentBeanList.get(groupPosition).getStories_time());
         groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getStories_up()+"");
         groupHolder.iv_like.setSelected(commentBeanList.get(groupPosition).getUp()==1?true:false);
-
+        groupHolder.iv_like.setEnabled(commentBeanList.get(groupPosition).getUp()==1?false:true);
         groupHolder.iv_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,14 +108,14 @@ public class CommentAgencyAdapter extends BaseExpandableListAdapter {
 //                    groupHolder.iv_like.setImageResource(R.mipmap.zan_weidian);
                     commentBeanList.get(groupPosition).setUp(0);
                     commentBeanList.get(groupPosition).setStories_up(commentBeanList.get(groupPosition).getStories_up()-1);
-//
+
                 }else {
 //                    groupHolder.iv_like.setImageResource(R.mipmap.zan_dianji);
                     commentBeanList.get(groupPosition).setUp(1);
                     commentBeanList.get(groupPosition).setStories_up(commentBeanList.get(groupPosition).getStories_up()+1);
                 }
                 groupHolder.comment_item_like_num.setText(commentBeanList.get(groupPosition).getStories_up()+"");
-//                itemClickListener.onclick(view,commentBeanList.get(groupPosition).getCid()+"");
+                itemClickListener.onclick(view,commentBeanList.get(groupPosition).getStories_id()+"");
             }
         });
 

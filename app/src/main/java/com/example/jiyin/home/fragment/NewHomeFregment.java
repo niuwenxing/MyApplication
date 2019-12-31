@@ -41,6 +41,7 @@ import com.example.jiyin.home.Activity.sonview.activity.StudyAgencyActivity;
 import com.example.jiyin.home.Activity.sonview.activity.StudyparticipateActivity;
 import com.example.jiyin.home.Activity.sonview.activity.TopActivity;
 import com.example.jiyin.home.Activity.sonview.activity.TopVideoDetailsActivity;
+import com.example.jiyin.home.Activity.sonview.activity.WebVIewActivity;
 import com.example.jiyin.home.Activity.sonview.activity.WorkshopActivity;
 import com.example.jiyin.home.Activity.sonview.base.IndexindexBean;
 import com.example.jiyin.home.fragment.adapter.CoverFlowAdapter;
@@ -49,6 +50,7 @@ import com.example.jiyin.home.fragment.view.HomeView;
 import com.example.jiyin.home.presenter.Impl.HomePresenterImpl;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.GlideImageLoader;
+import com.example.rootlib.utils.CollectionUtil;
 import com.example.rootlib.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -346,7 +348,13 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
             return;
         } else {
             // TODO: 2019/12/9 goto 新闻
-            HeadlinesDetailsActivity.startheadActivity(activity,new_id);
+//            HeadlinesDetailsActivity.startheadActivity(activity,new_id);
+            startActivity(new Intent(activity, WebVIewActivity.class)
+                    .putExtra(ConstantUtil.KEY_CODE,"toutiao")
+                    .putExtra("new_id",new_id)
+
+            );
+
         }
 
     }
@@ -361,12 +369,16 @@ public class NewHomeFregment extends JiYingFragment<HomeView, HomePresenterImpl>
 
         //轮播
         project.clear();
-        project.addAll(bean.getData().getProject());
+        if (!CollectionUtil.isEmpty(bean.getData().getProject())) {
+            project.addAll(bean.getData().getProject());
+        }
         mCoverFlowAdapter.notifyDataSetChanged();
 
         //top视频
         videolist.clear();
-        videolist.addAll(bean.getData().getVideo());
+        if (!CollectionUtil.isEmpty(bean.getData().getVideo())) {
+            videolist.addAll(bean.getData().getVideo());
+        }
         topModularAdapter.notifyDataSetChanged();
 
         //出品

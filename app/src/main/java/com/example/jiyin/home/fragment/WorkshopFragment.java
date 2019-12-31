@@ -20,6 +20,7 @@ import com.example.jiyin.home.Activity.presenter.impl.WorkshopImpl;
 import com.example.jiyin.home.Activity.presenter.view.WorkshopView;
 import com.example.jiyin.home.Activity.sonview.activity.WorkPoldetailsActivity;
 import com.example.jiyin.home.Activity.sonview.activity.WorkshopdetailsActivity;
+import com.example.jiyin.home.Activity.sonview.base.MinecircleBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.Activity.sonview.base.UsercircleDetailBean;
 import com.example.jiyin.home.fragment.adapter.CircleAdapter;
@@ -161,7 +162,7 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
     public void onResume() {
         super.onResume();
         if (!CollectionUtil.isEmpty(dataList)) {
-            initData(pages,dataList.get(CirclelabeType).getIfication_id());
+//            initData(pages,dataList.get(CirclelabeType).getIfication_id());
         }
 
     }
@@ -290,7 +291,13 @@ public class WorkshopFragment extends JiYingFragment<WorkshopView, WorkshopImpl>
     public void retMinemyUprelease(CircleListBean bean) { }//废弃
 
     @Override
-    public void retUserCircleDel(UserReplyBean bean) {}//废弃
+    public void retUserCircleDel(UserReplyBean bean,int pos) {
+
+
+    }//废弃
+
+    @Override
+    public void retMinecircle(MinecircleBean.DataBean data) { }
 
     @OnClick(R.id.img_xiaoxi_btn)
     public void onViewClicked() {

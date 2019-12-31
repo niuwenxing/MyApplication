@@ -58,7 +58,16 @@ public class VideoDetailBean extends Callcode {
         private String video_content;
         private int heat_num;
         private int video_num;
+        private int up;
         private List<StoriesBean> stories;
+
+        public int getUp() {
+            return up;
+        }
+
+        public void setUp(int up) {
+            this.up = up;
+        }
 
         public int getVideo_id() {
             return video_id;

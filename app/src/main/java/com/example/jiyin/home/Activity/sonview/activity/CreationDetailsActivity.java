@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,27 +110,32 @@ public class CreationDetailsActivity extends JiYingActivity<CreationcollView, Cr
                 PreferenceUtil.getString(ConstantUtil.KEY_TOKEN,"")+"&creation_id="+creationId);
         lpk.addJavascriptInterface(new android() {
             @Override
+            public void btn_seekCooperation(String work_id,String token) {
+
+            }
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
+            @Override
             public void btn_seekCooperation() {// 免费报名,
                 CreationapplyforActivity.startActivity(activity,creation_id,tvSearchTextTitle.getText().toString());
             }
+            @SuppressLint("JavascriptInterface")
+            @JavascriptInterface
             @Override
-            public void btn_collect() {//报名金额,
-
+            public void btn_collect(String work_id,String token) {//报名金额,
+                CreationapplyforActivity.startActivity(activity,creation_id,tvSearchTextTitle.getText().toString());
             }
 
             @Override
             public void btn_application() {//报名申请，
-
             }
 
             @Override
             public void ipt_application() {
-
             }
 
             @Override
             public void btn_overdue() {//活动已过期
-
             }
         }, "android");
 

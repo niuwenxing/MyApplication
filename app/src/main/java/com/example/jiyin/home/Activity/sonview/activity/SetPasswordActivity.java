@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingActivity;
@@ -17,15 +18,17 @@ import com.example.jiyin.home.Activity.sonview.base.UserInfoBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.presenter.Impl.MypageImpl;
 import com.example.jiyin.home.presenter.view.MypageView;
+import com.example.jiyin.utils.GlideImageLoader;
 
 /**
  * 修改密码
  */
 
-public class SetPasswordActivity extends JiYingActivity<MypageView, MypageImpl> implements MypageView {
+public class SetPasswordActivity extends JiYingActivity<MypageView, MypageImpl> implements MypageView, View.OnClickListener {
 
     private EditText ed_old_pass,ed_new_password1,ed_new_password2;
     private Button sure;
+    private ImageView goback;
 
 
     @Override
@@ -49,6 +52,8 @@ public class SetPasswordActivity extends JiYingActivity<MypageView, MypageImpl> 
 
     private void initView(){
         ed_old_pass = findViewById(R.id.ed_old_pass);
+        goback = findViewById(R.id.goback);
+        goback.setOnClickListener(this);
         ed_new_password1 = findViewById(R.id.ed_new_password1);
         ed_new_password2 = findViewById(R.id.ed_new_password2);
         sure = findViewById(R.id.sure);
@@ -179,4 +184,9 @@ public class SetPasswordActivity extends JiYingActivity<MypageView, MypageImpl> 
 
     @Override
     public void retMinemyUp(CircleListBean bean) { }//废弃
+
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
 }

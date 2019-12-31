@@ -12,11 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.jiyin.R;
 import com.example.jiyin.common.activity.JiYingFragment;
 import com.example.jiyin.common.widget.SlideRecyclerView;
+import com.example.jiyin.home.Activity.homeview.base.ReleaseBean;
 import com.example.jiyin.home.Activity.sonview.activity.ChatActivity;
+import com.example.jiyin.home.Activity.sonview.activity.NewsFansChildActivity;
+import com.example.jiyin.home.Activity.sonview.base.MessagecommentDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagefollowDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessagenewDosBean;
+import com.example.jiyin.home.Activity.sonview.base.MessageupDosBean;
 import com.example.jiyin.home.fragment.adapter.SlideRecyAdapter;
 import com.example.jiyin.home.presenter.Impl.NewsPreImpl;
 import com.example.jiyin.home.presenter.view.NewsView;
 import com.example.jiyin.interactive.ContactsActivity;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.StatusBarUtil;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -55,6 +62,7 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
     LinearLayout oneview;
     @BindView(R.id.status_bar_view)
     View view;
+    private Intent intent;
 
     @Override
     protected int attachLayoutRes() {
@@ -70,6 +78,9 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
     @Override
     protected void init() {
         ImmersionBar.setStatusBarView(this, view);
+
+        intent = new Intent(activity, NewsFansChildActivity.class);
+
 
     }
 
@@ -95,14 +106,40 @@ public class NewsFragment extends JiYingFragment<NewsView, NewsPreImpl> implemen
             case R.id.img_contacts_btn:
                 startActivity(new Intent(getContext(), ContactsActivity.class));
                 break;
-            case R.id.rl_NewsFans_btn:
+            case R.id.rl_NewsFans_btn://粉丝
+                intent.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.FANS);
+                startActivity(intent);
                 break;
-            case R.id.rl_NewsFabulous_btn:
+            case R.id.rl_NewsFabulous_btn://点赞
+                intent.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.LIKES);
+                startActivity(intent);
                 break;
-            case R.id.rl_Newscomment_btn:
+            case R.id.rl_Newscomment_btn://评论
+                intent.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.COMMENT);
+                startActivity(intent);
                 break;
-            case R.id.rl_NewsJiYingOfficial_btn:
+            case R.id.rl_NewsJiYingOfficial_btn://玑瑛官方
+                intent.putExtra(ConstantUtil.KEY_CODE,ConstantUtil.OFFICIAL);
+                startActivity(intent);
                 break;
         }
     }
+
+
+    @Override
+    public void retMessagefollowDos(MessagefollowDosBean bean) { }
+
+    @Override
+    public void retMessageupDos(MessageupDosBean bean) { }
+
+    @Override
+    public void retMessageCommentDos(MessagecommentDosBean bean) { }
+
+    @Override
+    public void retMessagenewDos(MessagenewDosBean bean) { }
+
+    @Override
+    public void retMessagehConcern(ReleaseBean bean) { }
+
+
 }

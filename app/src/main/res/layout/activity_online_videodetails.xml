@@ -140,11 +140,22 @@
                 android:layout_marginTop="@dimen/dp_18"
                 android:divider="@null"
                 android:listSelector="@android:color/transparent"
+                app:layout_constraintBottom_toTopOf="@+id/pinglun_btn"
                 app:layout_constraintEnd_toEndOf="@+id/tv_videoContent_str"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                app:layout_constraintVertical_bias="0.0" />
 
+            <TextView
+                android:id="@+id/pinglun_btn"
+                android:paddingLeft="@dimen/dp_20"
+                android:drawableLeft="@mipmap/pingluncircle"
+                android:text="评论"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

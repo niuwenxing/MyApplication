@@ -32,6 +32,7 @@ import com.example.jiyin.home.Activity.homeview.base.LoginData;
 import com.example.jiyin.home.Activity.homeview.base.RegisterBase;
 import com.example.jiyin.home.Activity.presenter.impl.EntrancePreImpl;
 import com.example.jiyin.home.Activity.presenter.view.EntranceView;
+import com.example.jiyin.home.Activity.sonview.base.AuthregCodeBean;
 import com.example.jiyin.utils.ConstantUtil;
 import com.example.rootlib.utils.MobileCheckUtil;
 import com.example.rootlib.utils.StringUtil;
@@ -234,9 +235,12 @@ public class ForgetPasswordActivity extends JiYingActivity<EntranceView, Entranc
     }
 
     @Override
-    public void sucRegister(RegisterBase bean) {//注册
+    public void sucRegister(AuthregCodeBean bean) {//注册
+        if (bean.getCode()==-1) {
             toast(bean.getMsg());
-        if (bean.getCode()==1) {
+            finish();
+        }else{
+            toast(bean.getMsg());
             finish();
         }
     }

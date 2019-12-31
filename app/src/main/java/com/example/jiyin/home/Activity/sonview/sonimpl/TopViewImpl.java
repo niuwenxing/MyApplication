@@ -3,6 +3,7 @@ package com.example.jiyin.home.Activity.sonview.sonimpl;
 import com.example.jiyin.common.net.netlisenter.NetBeanListener;
 import com.example.jiyin.common.net.netunti.BeanNetUnit;
 import com.example.jiyin.home.Activity.sonview.base.AgencyDetailBean;
+import com.example.jiyin.home.Activity.sonview.base.Toutiao;
 import com.example.jiyin.home.Activity.sonview.base.VideoDetailBean;
 import com.example.jiyin.home.Activity.sonview.base.VideoindexBean;
 import com.example.jiyin.home.Activity.sonview.impl.TopViewPresenter;
@@ -222,5 +223,214 @@ v.hideProgress();
 
     }
 
+    /**
+     * 线下课堂 详情评论
+     * @param online_id
+     * @param trim
+     */
+    @Override
+    public void Agencycomment(int online_id, String trim) {
+        video = new BeanNetUnit<Toutiao>()
+                .setCall(UserCallManager.getAgencycomment(online_id,trim))
+                .request(new NetBeanListener<Toutiao>() {
+                    @Override
+                    public void onSuc(Toutiao bean) {
+                    v.retAgencycomment(bean);
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+
+                    }
+
+                    @Override
+                    public void onLoadStart() {v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {
+
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+
+                    }
+                });
+    }
+
+    /**
+     * 线上课堂 点赞
+     * @param id
+     */
+    @Override
+    public void getAgencyUp(String id) {
+        video = new BeanNetUnit<Toutiao>()
+                .setCall(UserCallManager.getAgencyUp(id))
+                .request(new NetBeanListener<Toutiao>() {
+                    @Override
+                    public void onSuc(Toutiao bean) {
+                        if (bean != null) {
+                            v.retAgencyUp(bean);
+                        }else{
+
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+
+                    }
+
+                    @Override
+                    public void onLoadStart() { v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {
+
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+
+                    }
+                });
+    }
+
+    /**
+     * top 点赞详情
+     * @param video_id
+     */
+    @Override
+    public void getVideovideoUp(int video_id) {
+        video = new BeanNetUnit<Toutiao>()
+                .setCall(UserCallManager.getVideovideoUp(video_id))
+                .request(new NetBeanListener<Toutiao>() {
+            @Override
+            public void onSuc(Toutiao bean) {
+                v.retVideovideoUp(bean);
+            }
+
+            @Override
+            public void onFail(int status, String message) {
+
+            }
+
+            @Override
+            public void onLoadStart() {
+
+            }
+
+            @Override
+            public void onLoadFinished() {
+
+            }
+
+            @Override
+            public void onNetErr() {
+
+            }
+
+            @Override
+            public void onSysErr(int httpCode, String msg) {
+
+            }
+        });
+    }
+
+    /**
+     * 视频评论
+     * @param video_id
+     */
+    @Override
+    public void Videocomment(int video_id,String comtext) {
+            video = new BeanNetUnit<Toutiao>()
+                    .setCall(UserCallManager.getVideocomment(video_id, comtext))
+                    .request(new NetBeanListener<Toutiao>() {
+                        @Override
+                        public void onSuc(Toutiao bean) {
+                            v.retVideocomment(bean);
+                        }
+
+                        @Override
+                        public void onFail(int status, String message) {
+
+                        }
+
+                        @Override
+                        public void onLoadStart() {v.showProgress();
+
+                        }
+
+                        @Override
+                        public void onLoadFinished() {v.hideProgress();
+
+                        }
+
+                        @Override
+                        public void onNetErr() {
+
+                        }
+
+                        @Override
+                        public void onSysErr(int httpCode, String msg) {
+
+                        }
+                    });
+    }
+
+    /**
+     * 评论点赞
+     * @param id
+     */
+    @Override
+    public void getVideoup(String id) {
+        video = new BeanNetUnit<Toutiao>()
+                .setCall(UserCallManager.getVideoup(id))
+                .request(new NetBeanListener<Toutiao>() {
+                    @Override
+                    public void onSuc(Toutiao bean) {
+                        v.retVideoup(bean);
+                    }
+
+                    @Override
+                    public void onFail(int status, String message) {
+
+                    }
+
+                    @Override
+                    public void onLoadStart() { v.showProgress();
+
+                    }
+
+                    @Override
+                    public void onLoadFinished() {v.hideProgress();
+
+                    }
+
+                    @Override
+                    public void onNetErr() {
+
+                    }
+
+                    @Override
+                    public void onSysErr(int httpCode, String msg) {
+
+                    }
+                });
+    }
 
 }

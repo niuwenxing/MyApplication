@@ -19,7 +19,6 @@
         android:id="@+id/tv_fans_name_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="天津迅飞科技"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/colorTextFans"
         />
@@ -43,6 +42,7 @@
         android:layout_marginRight="@dimen/dp_25"
         android:background="@drawable/fansbutton_bg"
         android:padding="@dimen/dp_5"
+        android:id="@+id/huguan"
         android:text="互相关注"
         android:textColor="@color/white" />
 

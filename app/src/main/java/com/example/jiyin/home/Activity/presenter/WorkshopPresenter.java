@@ -38,5 +38,7 @@ public abstract class WorkshopPresenter<V extends IBaseView> extends BasePresent
      */
     public abstract void getMinemyUp(int page);
 
-    public abstract void UserCircleDel(int circle_id);//删除圈子
+    public abstract void UserCircleDel(int circle_id,int pos);//删除圈子
+
+    public abstract void getMinecircle(int circleId);//圈子发布列表
 }

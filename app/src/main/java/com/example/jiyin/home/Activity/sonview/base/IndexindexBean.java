@@ -180,8 +180,17 @@ public class IndexindexBean extends Callcode {
 
             private int new_id;
             private String new_title;
+            private String new_vice;
             private String path;
             private int new_hot;
+
+            public String getNew_vice() {
+                return new_vice;
+            }
+
+            public void setNew_vice(String new_vice) {
+                this.new_vice = new_vice;
+            }
 
             public int getNew_id() {
                 return new_id;

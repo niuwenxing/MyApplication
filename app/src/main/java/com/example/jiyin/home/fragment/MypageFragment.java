@@ -15,11 +15,13 @@ import com.example.jiyin.home.Activity.sonview.activity.ApplicationrecordActivit
 import com.example.jiyin.home.Activity.sonview.activity.MypraiseActivity;
 import com.example.jiyin.home.Activity.sonview.activity.MyreleaseActivity;
 import com.example.jiyin.home.Activity.sonview.activity.SetupActivity;
+import com.example.jiyin.home.Activity.sonview.activity.WebVIewActivity;
 import com.example.jiyin.home.Activity.sonview.base.MineAplyDosBean;
 import com.example.jiyin.home.Activity.sonview.base.UserInfoBean;
 import com.example.jiyin.home.Activity.sonview.base.UserReplyBean;
 import com.example.jiyin.home.presenter.Impl.MypageImpl;
 import com.example.jiyin.home.presenter.view.MypageView;
+import com.example.jiyin.utils.ConstantUtil;
 import com.example.jiyin.utils.GlideImageLoader;
 import com.example.rootlib.widget.common.CommonItem;
 import com.gyf.immersionbar.ImmersionBar;
@@ -88,11 +90,19 @@ public class MypageFragment extends JiYingFragment<MypageView, MypageImpl> imple
         presenter.getUserInfo();
 
     }
-
+    public Boolean ko=false;
     @Override
     public void onResume() {
         super.onResume();
-        presenter.getUserInfo();
+        if(ko=false){
+            presenter.getUserInfo();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ko=true;
     }
 
     @OnClick({R.id.img_myImage_btn, R.id.tv_Setup_btn, R.id.tv_Myorder_btn, R.id.tv_ShoppingCart_btn, R.id.tv_Collection_btn, R.id.tv_Fabulous_btn, R.id.Applicationrecord_btn, R.id.Myrelease_btn, R.id.MyCustomer_btn, R.id.Aboutus_btn})
@@ -108,10 +118,19 @@ public class MypageFragment extends JiYingFragment<MypageView, MypageImpl> imple
                 startActivity(intent);
                 break;
             case R.id.tv_Myorder_btn://我的订单
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"wodedingdan")
+                );
                 break;
             case R.id.tv_ShoppingCart_btn://购物车
+                 startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"gouwuche")
+                );
                 break;
             case R.id.tv_Collection_btn://我的收藏
+                startActivity(new Intent(activity, WebVIewActivity.class)
+                        .putExtra(ConstantUtil.KEY_CODE,"wodeshoucan")
+                );
                 break;
             case R.id.tv_Fabulous_btn://我的赞
                 activity.startActivity(new Intent(activity, MypraiseActivity.class));
